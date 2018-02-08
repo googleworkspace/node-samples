@@ -1,0 +1,15 @@
+{
+  "name": "google-calendar-nodejs-quickstart",
+  "version": "1.0.0",
+  "description": "A simple Node.js command-line application that makes requests to the Google Calendar API.",
+  "private": true,
+  "dependencies": {
+    "googleapis": "^25.0.0",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ."
+  },
+  "license": "Apache-2.0"
+}

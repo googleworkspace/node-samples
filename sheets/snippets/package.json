@@ -1,0 +1,26 @@
+{
+  "name": "sheets-api-snippets",
+  "version": "1.0.0",
+  "description": "Code snippets for the Sheets API",
+  "private": true,
+  "scripts": {
+    "test": "./test.sh",
+    "lint": "jshint lib test"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "expect": "^1.12.2",
+    "google-auth-library": "^0.9.6",
+    "googleapis": ">12.2.0",
+    "mocha": "^3.1.0",
+    "promise": "^7.0.4"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.3"
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "mocha": true,
+    "node": true
+  }
+}
