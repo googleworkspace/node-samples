@@ -4,6 +4,15 @@ Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 
 ## APIs
 
+### Admin SDK
+
+- [Directory Quickstart](https://developers.google.com/admin-sdk/directory/v1/quickstart/nodejs)
+- [Group Migration Quickstart](https://developers.google.com/admin-sdk/groups-migration/v1/quickstart/nodejs)
+- [Group Settings Quickstart](https://developers.google.com/admin-sdk/groups-settings/quickstart/nodejs)
+- [Licensing Quickstart](https://developers.google.com/admin-sdk/licensing/v1/quickstart/nodejs)
+- [Reports Quickstart](https://developers.google.com/admin-sdk/reports/v1/quickstart/nodejs)
+- [Reseller Quickstart](https://developers.google.com/admin-sdk/reseller/v1/quickstart/nodejs)
+
 ### Apps Script
 
 - [Quickstart](https://developers.google.com/apps-script/api/quickstart/nodejs)
@@ -11,7 +20,10 @@ Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 ### Calendar
 
 - [Quickstart](https://developers.google.com/google-apps/calendar/quickstart/nodejs)
-- [Snippets](https://developers.google.com/calendar/overview)
+
+### Classroom
+
+- [Quickstart](https://developers.google.com/classroom/quickstart/nodejs)
 
 ### Drive V3
 
@@ -32,6 +44,10 @@ Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 
 - [Quickstart](https://developers.google.com/slides/quickstart/nodejs)
 - [Snippets](https://developers.google.com/slides/how-tos/overview)
+
+### Tasks
+
+- [Quickstart](https://developers.google.com/google-apps/tasks/quickstart/nodejs)
 
 ## Setup
 
