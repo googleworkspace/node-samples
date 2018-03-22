@@ -13,7 +13,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ */
+// [START quickstart]
+/**
  * @fileoverview This file is an Apps Script file that is executable on
  * script.google.com and not via Node or a web browser.
  */

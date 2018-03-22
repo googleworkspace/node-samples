@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// [START quickstart]
 const fs = require('fs');
 const readline = require('readline');
 const google = require('googleapis');
 const OAuth2Client = google.auth.OAuth2;
-
 const SCOPES = ['https://www.googleapis.com/auth/presentations.readonly'];
 const TOKEN_PATH = 'credentials.json';
 
@@ -96,3 +96,4 @@ function listSlides(auth) {
     });
   });
 }
+// [END quickstart]

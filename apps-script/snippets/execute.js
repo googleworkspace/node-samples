@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+// [START execute]
 /**
  * Call an Apps Script function to list the folders in the user's root
  * Drive folder.
@@ -71,3 +71,4 @@ function callAppsScript(auth, scriptId) { // eslint-disable-line no-unused-vars
     }
   });
 }
+// [END execute]
