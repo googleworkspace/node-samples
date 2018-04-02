@@ -18,17 +18,19 @@
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const readline = require('readline');
-const google = require('googleapis');
+const {google} = require('googleapis');
 const OAuth2Client = google.auth.OAuth2;
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 const TOKEN_PATH = 'credentials.json';
+const token = {};
 
 // Load client secrets from a local file.
-fs.readFile('client_secret.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Google Drive API.
+try{
+  const content = fs.readFileSync('client_secret.json');
   authorize(JSON.parse(content), listEvents);
-});
+}catch(err){
+  if (err) return console.log('Error loading client secret file:', err);
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
@@ -41,11 +43,13 @@ function authorize(credentials, callback) {
   const oAuth2Client = new OAuth2Client(client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) return getAccessToken(oAuth2Client, callback);
-    oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client);
-  });
+  try{
+    token = fs.readFileSync(TOKEN_PATH);
+  }catch(err){
+    return getAccessToken(oAuth2Client, callback); 
+  }
+  oAuth2Client.setCredentials(JSON.parse(token));
+  callback(oAuth2Client);
 }
 
 /**
@@ -64,16 +68,19 @@ function getAccessToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
+
   rl.question('Enter the code from that page here: ', (code) => {
     rl.close();
-    oAuth2Client.getToken(code, (err, token) => {
+      oAuth2Client.getToken(code, (err, token) => {
       if (err) return callback(err);
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) console.error(err);
-        console.log('Token stored to', TOKEN_PATH);
-      });
+      try{
+        fs.writeFileSync(TOKEN_PATH, JSON.stringify(token));
+      }catch(err){
+        console.error(err);
+      }
+      console.log('Token stored to', TOKEN_PATH);
       callback(oAuth2Client);
     });
   });
