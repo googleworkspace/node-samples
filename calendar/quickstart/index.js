@@ -25,10 +25,10 @@ const TOKEN_PATH = 'credentials.json';
 const token = {};
 
 // Load client secrets from a local file.
-try{
+try {
   const content = fs.readFileSync('client_secret.json');
   authorize(JSON.parse(content), listEvents);
-}catch(err){
+} catch (err) {
   return console.log('Error loading client secret file:', err);
 }
 
@@ -43,10 +43,10 @@ function authorize(credentials, callback) {
   const oAuth2Client = new OAuth2Client(client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
-  try{
+  try {
     token = fs.readFileSync(TOKEN_PATH);
-  }catch(err){
-    return getAccessToken(oAuth2Client, callback); 
+  } catch (err) {
+    return getAccessToken(oAuth2Client, callback);
   }
   oAuth2Client.setCredentials(JSON.parse(token));
   callback(oAuth2Client);
@@ -75,12 +75,12 @@ function getAccessToken(oAuth2Client, callback) {
       if (err) return callback(err);
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
-      try{
+      try {
         fs.writeFileSync(TOKEN_PATH, JSON.stringify(token));
-      }catch(err){
+        console.log('Token stored to', TOKEN_PATH);
+      } catch (err) {
         console.error(err);
       }
-      console.log('Token stored to', TOKEN_PATH);
       callback(oAuth2Client);
     });
   });
