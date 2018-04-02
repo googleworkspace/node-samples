@@ -29,7 +29,7 @@ try{
   const content = fs.readFileSync('client_secret.json');
   authorize(JSON.parse(content), listEvents);
 }catch(err){
-  if (err) return console.log('Error loading client secret file:', err);
+  return console.log('Error loading client secret file:', err);
 }
 
 /**
