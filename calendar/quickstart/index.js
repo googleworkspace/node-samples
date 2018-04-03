@@ -22,7 +22,6 @@ const {google} = require('googleapis');
 const OAuth2Client = google.auth.OAuth2;
 const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
 const TOKEN_PATH = 'credentials.json';
-const token = {};
 
 // Load client secrets from a local file.
 try {
@@ -40,6 +39,7 @@ try {
  */
 function authorize(credentials, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
+  const token = {};
   const oAuth2Client = new OAuth2Client(client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
@@ -68,10 +68,9 @@ function getAccessToken(oAuth2Client, callback) {
     input: process.stdin,
     output: process.stdout,
   });
-
   rl.question('Enter the code from that page here: ', (code) => {
     rl.close();
-      oAuth2Client.getToken(code, (err, token) => {
+    oAuth2Client.getToken(code, (err, token) => {
       if (err) return callback(err);
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
