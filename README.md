@@ -1,4 +1,4 @@
-# G Suite Node Samples
+# G Suite Node Samples [![Build Status](https://travis-ci.org/gsuitedevs/node-samples.svg?branch=master)](https://travis-ci.org/gsuitedevs/node-samples)
 
 Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 
