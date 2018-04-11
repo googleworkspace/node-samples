@@ -9,4 +9,4 @@ before_install:
 cache:
   directories:
   - node_modules/
-script: npm test
+script: npm run lint
