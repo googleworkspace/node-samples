@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START quickstart]
+// [START calendar_quickstart]
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const readline = require('readline');
@@ -111,4 +111,4 @@ function listEvents(auth) {
     }
   });
 }
-// [END quickstart]
+// [END calendar_quickstart]

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START quickstart]
+// [START admin_sdk_reseller_quickstart]
 var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
@@ -140,4 +140,4 @@ function listSubscriptions(auth) {
     }
   });
 }
-// [END quickstart]
+// [END admin_sdk_reseller_quickstart]

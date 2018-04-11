@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START quickstart]
+// [START gmail_quickstart]
 var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
@@ -139,4 +139,4 @@ function listLabels(auth) {
     }
   });
 }
-// [END quickstart]
+// [END gmail_quickstart]

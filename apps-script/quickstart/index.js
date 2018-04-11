@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START quickstart]
+// [START apps_script_quickstart]
 const fs = require('fs');
 const readline = require('readline');
 const google = require('googleapis');
@@ -112,4 +112,4 @@ function callAppsScript(auth) {
     });
   });
 }
-// [END quickstart]
+// [END apps_script_quickstart]

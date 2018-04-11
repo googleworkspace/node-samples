@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START quickstart]
+// [START slides_quickstart]
 const fs = require('fs');
 const readline = require('readline');
 const google = require('googleapis');
@@ -96,4 +96,4 @@ function listSlides(auth) {
     });
   });
 }
-// [END quickstart]
+// [END slides_quickstart]

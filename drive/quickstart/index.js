@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START quickstart]
+// [START drive_quickstart]
 const fs = require('fs');
 const readline = require('readline');
 const google = require('googleapis');
@@ -100,4 +100,4 @@ function listFiles(auth) {
     }
   });
 }
-// [END quickstart]
+// [END drive_quickstart]
