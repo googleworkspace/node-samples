@@ -17,7 +17,7 @@
 // [START apps_script_quickstart]
 const fs = require('fs');
 const readline = require('readline');
-const { google } = require('googleapis');
+const {google} = require('googleapis');
 const script = google.script('v1');
 const OAuth2Client = google.auth.OAuth2;
 const SCOPES = ['https://www.googleapis.com/auth/script.projects'];
