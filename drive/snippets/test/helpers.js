@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 const Promise = require('promise');
-const googleapis = require('googleapis');
+const { googleapis } = require('googleapis');
 const GoogleAuth = require('google-auth-library');
 const fs = require('fs');
 
