@@ -17,7 +17,7 @@
 // [START sheets_quickstart]
 const fs = require('fs');
 const readline = require('readline');
-const { google } = require('googleapis');
+const {google} = require('googleapis');
 const OAuth2Client = google.auth.OAuth2;
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 const TOKEN_PATH = 'credentials.json';
@@ -96,7 +96,7 @@ function listMajors(auth) {
       // Print columns A and E, which correspond to indices 0 and 4.
       rows.map((row) => {
         console.log(`${row[0]}, ${row[4]}`);
-      })
+      });
     } else {
       console.log('No data found.');
     }
