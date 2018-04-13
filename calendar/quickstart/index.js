@@ -16,7 +16,6 @@
  */
 // [START calendar_quickstart]
 const fs = require('fs');
-const mkdirp = require('mkdirp');
 const readline = require('readline');
 const {google} = require('googleapis');
 const OAuth2Client = google.auth.OAuth2;
@@ -36,6 +35,7 @@ try {
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
+ * @return {function} if error in reading credentials.json asks for a new one.
  */
 function authorize(credentials, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
