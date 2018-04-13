@@ -15,17 +15,17 @@
  * limitations under the License.
  */
 // [START tasks_quickstart]
-var fs = require('fs');
-var readline = require('readline');
-var google = require('googleapis');
-var googleAuth = require('google-auth-library');
+const fs = require('fs');
+const readline = require('readline');
+const {google} = require('googleapis');
+const GoogleAuth = require('google-auth-library');
 
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/tasks-nodejs-quickstart.json
-var SCOPES = ['https://www.googleapis.com/auth/tasks.readonly'];
-var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
+const SCOPES = ['https://www.googleapis.com/auth/tasks.readonly'];
+const TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
     process.env.USERPROFILE) + '/.credentials/';
-var TOKEN_PATH = TOKEN_DIR + 'tasks-nodejs-quickstart.json';
+const TOKEN_PATH = TOKEN_DIR + 'tasks-nodejs-quickstart.json';
 
 // Load client secrets from a local file.
 fs.readFile('client_secret.json', function processClientSecrets(err, content) {
@@ -46,11 +46,11 @@ fs.readFile('client_secret.json', function processClientSecrets(err, content) {
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials, callback) {
-  var clientSecret = credentials.installed.client_secret;
-  var clientId = credentials.installed.client_id;
-  var redirectUrl = credentials.installed.redirect_uris[0];
-  var auth = new googleAuth();
-  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+  const clientSecret = credentials.installed.client_secret;
+  const clientId = credentials.installed.client_id;
+  const redirectUrl = credentials.installed.redirect_uris[0];
+  const auth = new GoogleAuth();
+  let oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, function(err, token) {
@@ -72,14 +72,14 @@ function authorize(credentials, callback) {
  *     client.
  */
 function getNewToken(oauth2Client, callback) {
-  var authUrl = oauth2Client.generateAuthUrl({
+  const authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: SCOPES
+    scope: SCOPES,
   });
   console.log('Authorize this app by visiting this url: ', authUrl);
-  var rl = readline.createInterface({
+  const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout
+    output: process.stdout,
   });
   rl.question('Enter the code from that page here: ', function(code) {
     rl.close();
@@ -118,7 +118,7 @@ function storeToken(token) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listTaskLists(auth) {
-  var service = google.tasks('v1');
+  const service = google.tasks('v1');
   service.tasklists.list({
     auth: auth,
     maxResults: 10,
@@ -127,13 +127,13 @@ function listTaskLists(auth) {
       console.log('The API returned an error: ' + err);
       return;
     }
-    var items = response.items;
+    const items = response.items;
     if (items.length == 0) {
       console.log('No task lists found.');
     } else {
       console.log('Task lists:');
-      for (var i = 0; i < items.length; i++) {
-        var item = items[i];
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
         console.log('%s (%s)', item.title, item.id);
       }
     }
