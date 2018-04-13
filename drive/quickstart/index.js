@@ -17,7 +17,7 @@
 // [START drive_quickstart]
 const fs = require('fs');
 const readline = require('readline');
-const { google } = require('googleapis');
+const {google} = require('googleapis');
 const OAuth2Client = google.auth.OAuth2;
 const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 const TOKEN_PATH = 'credentials.json';
