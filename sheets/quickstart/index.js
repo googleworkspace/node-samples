@@ -83,7 +83,7 @@ function getNewToken(oAuth2Client, callback) {
 /**
  * Prints the names and majors of students in a sample spreadsheet:
  * @see https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- * @param {OAuth2Client} auth The authenticated Google OAuth client.
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
 function listMajors(auth) {
   const sheets = google.sheets({version: 'v4', auth});
