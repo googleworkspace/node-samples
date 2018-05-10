@@ -4,9 +4,7 @@
   "description": "A simple Node.js command-line application that makes requests to the Google Slides API.",
   "private": true,
   "dependencies": {
-    "googleapis": "^25.0.0",
-    "mkdirp": "^0.5.1",
-    "mz": "^2.7.0"
+    "googleapis": "^27.0.0"
   },
   "devDependencies": {},
   "scripts": {
