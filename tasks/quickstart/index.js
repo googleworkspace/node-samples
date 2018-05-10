@@ -19,8 +19,7 @@ const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
 
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/tasks-nodejs-quickstart.json
+// If modifying these scopes, delete credentials.json.
 const SCOPES = ['https://www.googleapis.com/auth/tasks.readonly'];
 const TOKEN_PATH = 'credentials.json';
 
@@ -92,7 +91,7 @@ function listTaskLists(auth) {
     auth: auth,
     maxResults: 10,
   }, (err, {data}) => {
-    if (err) return console.log('The API returned an error: ' + err);
+    if (err) return console.error('The API returned an error: ' + err);
     const taskLists = data.items;
     if (taskLists) {
       console.log('Task lists:');
