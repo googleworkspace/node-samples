@@ -15,12 +15,13 @@
  * limitations under the License.
  */
 // [START drive_activity_quickstart]
-var fs = require('fs');
-var readline = require('readline');
-var {google} = require('googleapis');
+const fs = require('fs');
+const readline = require('readline');
+const {google} = require('googleapis');
 
 // If modifying these scopes, delete credentials.json.
-var SCOPES = ['https://www.googleapis.com/auth/activity https://www.googleapis.com/auth/drive.metadata.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/activity',
+                'https://www.googleapis.com/auth/drive.metadata.readonly'];
 const TOKEN_PATH = 'credentials.json';
 
 // Load client secrets from a local file.
@@ -86,12 +87,11 @@ function getNewToken(oAuth2Client, callback) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listActivity(auth) {
-  var service = google.appsactivity('v1');
+  const service = google.appsactivity({version: 'v1', auth});
   service.activities.list({
-    auth: auth,
-    source: 'drive.google.com',
+    'source': 'drive.google.com',
     'drive.ancestorId': 'root',
-    pageSize: 10
+    'pageSize': 10,
   }, (err, {data}) => {
     if (err) return console.error('The API returned an error: ' + err);
     const activities = data.activities;

@@ -86,9 +86,8 @@ function getNewToken(oAuth2Client, callback) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listLabels(auth) {
-  const gmail = google.gmail('v1');
+  const gmail = google.gmail({version: 'v1', auth});
   gmail.users.labels.list({
-    auth: auth,
     userId: 'me',
   }, (err, {data}) => {
     if (err) return console.log('The API returned an error: ' + err);

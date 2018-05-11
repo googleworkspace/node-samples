@@ -18,7 +18,6 @@
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
-const script = google.script('v1');
 
 // If modifying these scopes, delete credentials.json.
 const SCOPES = ['https://www.googleapis.com/auth/script.projects'];
@@ -86,8 +85,8 @@ function getAccessToken(oAuth2Client, callback) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function callAppsScript(auth) {
+  const script = google.script({version: 'v1', auth});
   script.projects.create({
-    auth,
     resource: {
       title: 'My Script',
     },

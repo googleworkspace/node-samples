@@ -86,9 +86,8 @@ function getNewToken(oAuth2Client, callback) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listTaskLists(auth) {
-  const service = google.tasks('v1');
+  const service = google.tasks({version: 'v1', auth});
   service.tasklists.list({
-    auth: auth,
     maxResults: 10,
   }, (err, {data}) => {
     if (err) return console.error('The API returned an error: ' + err);
@@ -97,7 +96,7 @@ function listTaskLists(auth) {
       console.log('Task lists:');
       taskLists.forEach((taskList) => {
         console.log(`${taskList.title} (${taskList.id})`);
-      })
+      });
     } else {
       console.log('No task lists found.');
     }

@@ -86,9 +86,8 @@ function getNewToken(oAuth2Client, callback) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listCourses(auth) {
-  const classroom = google.classroom('v1');
+  const classroom = google.classroom({version: 'v1', auth});
   classroom.courses.list({
-    auth: auth,
     pageSize: 10,
   }, (err, {data}) => {
     if (err) return console.error('The API returned an error: ' + err);
