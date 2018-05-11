@@ -20,7 +20,7 @@
     "eslint-plugin-async-await": "0.0.0"
   },
   "scripts": {
-    "lint": "DEBUG=eslint:* ./node_modules/.bin/eslint **/*.js"
+    "lint": "eslint **/*.js"
   },
   "eslintIgnore": [
     "getFoldersUnderRoot.js",

@@ -18,7 +18,8 @@
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
-const OAuth2Client = google.auth.OAuth2;
+
+// If modifying these scopes, delete credentials.json.
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 const TOKEN_PATH = 'credentials.json';
 
@@ -37,7 +38,8 @@ fs.readFile('client_secret.json', (err, content) => {
  */
 function authorize(credentials, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
-  const oAuth2Client = new OAuth2Client(client_id, client_secret, redirect_uris[0]);
+  const oAuth2Client = new google.auth.OAuth2(
+      client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
@@ -81,7 +83,7 @@ function getNewToken(oAuth2Client, callback) {
 /**
  * Prints the names and majors of students in a sample spreadsheet:
  * @see https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- * @param {OAuth2Client} auth The authenticated Google OAuth client.
+ * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
 function listMajors(auth) {
   const sheets = google.sheets({version: 'v4', auth});
