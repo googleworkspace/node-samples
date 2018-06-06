@@ -2,7 +2,22 @@
 
 Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 
-## APIs
+| | **Apps Script** | **Calendar** | **Classroom** | **Drive V3** | **Gmail** | **Sheets** | **Slides** | **Tasks** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
+| Quickstart | [Link](https://developers.google.com/apps-script/api/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs) | [Link](https://developers.google.com/classroom/quickstart/nodejs) | [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs) | [Link](https://developers.google.com/gmail/api/quickstart/nodejs) | [Link](https://developers.google.com/sheets/api/quickstart/nodejs) | [Link](https://developers.google.com/slides/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/tasks/quickstart/nodejs) |
+| Snippets | --- | [Link](https://developers.google.com/calendar/overview) | [Link](https://developers.google.com/classroom/guides/get-started) | [Link](https://developers.google.com/drive/v3/web/about-sdk) | [Link](https://developers.google.com/gmail/api/guides/) | [Link](https://developers.google.com/sheets/api/guides/concepts) | [Link](https://developers.google.com/slides/how-tos/overview) | --- |
+
+## Sample Types
+
+#### Quickstarts
+
+In about **five minutes**, you'll have a simple Node command-line application that makes requests to a Google API.
+
+#### Guides
+
+Learn how to use functions within an API, such as creating a new Google Slide to adding values to a Google Spreadsheet.
+
+## Other APIs
 
 ### Admin SDK
 
@@ -12,42 +27,6 @@ Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 - [Licensing Quickstart](https://developers.google.com/admin-sdk/licensing/v1/quickstart/nodejs)
 - [Reports Quickstart](https://developers.google.com/admin-sdk/reports/v1/quickstart/nodejs)
 - [Reseller Quickstart](https://developers.google.com/admin-sdk/reseller/v1/quickstart/nodejs)
-
-### Apps Script
-
-- [Quickstart](https://developers.google.com/apps-script/api/quickstart/nodejs)
-
-### Calendar
-
-- [Quickstart](https://developers.google.com/google-apps/calendar/quickstart/nodejs)
-
-### Classroom
-
-- [Quickstart](https://developers.google.com/classroom/quickstart/nodejs)
-
-### Drive V3
-
-- [Quickstart](https://developers.google.com/drive/v3/web/quickstart/nodejs)
-- [Snippets](https://developers.google.com/drive/v3/web/about-sdk)
-
-### Gmail
-
-- [Quickstart](https://developers.google.com/gmail/api/quickstart/nodejs)
-- [Snippets](https://developers.google.com/gmail/api/guides/)
-
-### Sheets
-
-- [Quickstart](https://developers.google.com/sheets/api/quickstart/nodejs)
-- [Snippets](https://developers.google.com/sheets/api/guides/concepts)
-
-### Slides
-
-- [Quickstart](https://developers.google.com/slides/quickstart/nodejs)
-- [Snippets](https://developers.google.com/slides/how-tos/overview)
-
-### Tasks
-
-- [Quickstart](https://developers.google.com/google-apps/tasks/quickstart/nodejs)
 
 ## Setup
 
