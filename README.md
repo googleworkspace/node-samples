@@ -3,7 +3,7 @@
 Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 
 | | **Apps Script** | **Calendar** | **Classroom** | **Drive V3** | **Gmail** | **Sheets** | **Slides** | **Tasks** |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Quickstart | [Link](https://developers.google.com/apps-script/api/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs) | [Link](https://developers.google.com/classroom/quickstart/nodejs) | [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs) | [Link](https://developers.google.com/gmail/api/quickstart/nodejs) | [Link](https://developers.google.com/sheets/api/quickstart/nodejs) | [Link](https://developers.google.com/slides/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/tasks/quickstart/nodejs) |
 | Snippets | --- | [Link](https://developers.google.com/calendar/overview) | [Link](https://developers.google.com/classroom/guides/get-started) | [Link](https://developers.google.com/drive/v3/web/about-sdk) | [Link](https://developers.google.com/gmail/api/guides/) | [Link](https://developers.google.com/sheets/api/guides/concepts) | [Link](https://developers.google.com/slides/how-tos/overview) | --- |
 
@@ -22,9 +22,6 @@ Learn how to use functions within an API, such as creating a new Google Slide to
 ### Admin SDK
 
 - [Directory Quickstart](https://developers.google.com/admin-sdk/directory/v1/quickstart/nodejs)
-- [Group Migration Quickstart](https://developers.google.com/admin-sdk/groups-migration/v1/quickstart/nodejs)
-- [Group Settings Quickstart](https://developers.google.com/admin-sdk/groups-settings/quickstart/nodejs)
-- [Licensing Quickstart](https://developers.google.com/admin-sdk/licensing/v1/quickstart/nodejs)
 - [Reports Quickstart](https://developers.google.com/admin-sdk/reports/v1/quickstart/nodejs)
 - [Reseller Quickstart](https://developers.google.com/admin-sdk/reseller/v1/quickstart/nodejs)
 
