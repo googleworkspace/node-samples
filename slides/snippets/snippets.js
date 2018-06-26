@@ -37,7 +37,7 @@ class SlidesSnippets {
    */
   async createPresentation(title) {
     return new Promise((resolve, reject) => {
-      // [START create_presentation]
+      // [START slides_create_presentation]
       this.slidesService.presentations.create({
         title,
       }, (err, presentation) => {
@@ -46,7 +46,7 @@ class SlidesSnippets {
         resolve(presentation);
         // [END_EXCLUDE]
       });
-      // [END create_presentation]
+      // [END slides_create_presentation]
     });
   }
 
@@ -58,7 +58,7 @@ class SlidesSnippets {
    */
   async copyPresentation(presentationId, copyTitle) {
     return new Promise((resolve, reject) => {
-      // [START copy_presentation]
+      // [START slides_copy_presentation]
       let request = {
         name: copyTitle,
       };
@@ -71,7 +71,7 @@ class SlidesSnippets {
         resolve(presentationCopyId);
         // [END_EXCLUDE]
       });
-      // [END copy_presentation]
+      // [END slides_copy_presentation]
     });
   }
 
@@ -83,7 +83,7 @@ class SlidesSnippets {
    */
   async createSlide(presentationId, pageId) {
     return new Promise((resolve, reject) => {
-      // [START create_slide]
+      // [START slides_create_slide]
       let requests = [{
         createSlide: {
           objectId: pageId,
@@ -108,7 +108,7 @@ class SlidesSnippets {
         resolve(res);
         // [END_EXCLUDE]
       });
-      // [END create_slide]
+      // [END slides_create_slide]
     });
   }
 
@@ -120,7 +120,7 @@ class SlidesSnippets {
    */
   async createTextboxWithText(presentationId, pageId) {
     return new Promise((resolve, reject) => {
-      // [START create_textbox_with_text]
+      // [START slides_create_textbox_with_text]
       // Create a new square textbox, using the supplied element ID.
       let elementId = 'MyTextBox_01';
       let pt350 = {
@@ -166,7 +166,7 @@ class SlidesSnippets {
         resolve(createTextboxWithTextResponse);
         // [END_EXCLUDE]
       });
-      // [END create_textbox_with_text]
+      // [END slides_create_textbox_with_text]
     });
   }
 
@@ -182,7 +182,7 @@ class SlidesSnippets {
     return new Promise((resolve, reject) => {
       let imageUrl =
         'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
-      // [START create_image]
+      // [START slides_create_image]
       // Temporarily upload a local image file to Drive, in order to obtain a URL
       // for the image. Alternatively, you can provide the Slides service a URL of
       // an already hosted image.
@@ -227,7 +227,7 @@ class SlidesSnippets {
         resolve(createImageResponse);
         // [END_EXCLUDE]
       });
-      // [END create_image]
+      // [END slides_create_image]
     });
   }
 
@@ -239,7 +239,7 @@ class SlidesSnippets {
    */
   async textMerging(templatePresentationId, dataSpreadsheetId) {
     return new Promise((resolve, reject) => {
-      // [START text_merging]
+      // [START slides_text_merging]
       // Use the Sheets API to load data, one record per row.
       let responses = [];
       let dataRangeNotation = 'Customers!A2:M6';
@@ -322,7 +322,7 @@ class SlidesSnippets {
           });
         }
       });
-      // [END text_merging]
+      // [END slides_text_merging]
     });
   }
 
@@ -337,8 +337,7 @@ class SlidesSnippets {
     return new Promise((resolve, reject) => {
       let logoUrl = imageUrl;
       let customerGraphicUrl = imageUrl;
-
-      // [START image_merging]
+      // [START slides_image_merging]
       // Duplicate the template presentation using the Drive API.
       let copyTitle = customerName + ' presentation';
       this.driveService.files.copy({
@@ -389,7 +388,7 @@ class SlidesSnippets {
           // [END_EXCLUDE]
         });
       });
-      // [END image_merging]
+      // [END slides_image_merging]
     });
   }
 
@@ -402,7 +401,7 @@ class SlidesSnippets {
    */
   async simpleTextReplace(presentationId, shapeId, replacementText) {
     return new Promise((resolve, reject) => {
-      // [START simple_text_replace]
+      // [START slides_simple_text_replace]
       // Remove existing text in the shape, then insert new text.
       let requests = [{
         deleteText: {
@@ -430,7 +429,7 @@ class SlidesSnippets {
         resolve(batchUpdateResponse);
         // [END_EXCLUDE]
       });
-      // [END simple_text_replace]
+      // [END slides_simple_text_replace]
     });
   }
 
@@ -442,7 +441,7 @@ class SlidesSnippets {
    */
   async textStyleUpdate(presentationId, shapeId) {
     return new Promise((resolve, reject) => {
-      // [START text_style_update]
+      // [START slides_text_style_update]
       // Update the text style so that the first 5 characters are bolded
       // and italicized, the next 5 are displayed in blue 14 pt Times
       // New Roman font, and the next 5 are hyperlinked.
@@ -515,7 +514,7 @@ class SlidesSnippets {
         resolve(batchUpdateResponse);
         // [END_EXCLUDE]
       });
-      // [END text_style_update]
+      // [END slides_text_style_update]
     });
   }
 
@@ -527,7 +526,7 @@ class SlidesSnippets {
    */
   async createBulletedText(presentationId, shapeId) {
     return new Promise((resolve, reject) => {
-      // [START create_bulleted_text]
+      // [START slides_create_bulleted_text]
       // Add arrow-diamond-disc bullets to all text in the shape.
       let requests = [{
         createParagraphBullets: {
@@ -551,7 +550,7 @@ class SlidesSnippets {
         resolve(batchUpdateResponse);
         // [END_EXCLUDE]
       });
-      // [END create_bulleted_text]
+      // [END slides_create_bulleted_text]
     });
   }
 
@@ -565,7 +564,7 @@ class SlidesSnippets {
    */
   async createSheetsChart(presentationId, pageId, shapeId, sheetChartId) {
     return new Promise((resolve, reject) => {
-      // [START create_sheets_chart]
+      // [START slides_create_sheets_chart]
       // Embed a Sheets chart (indicated by the spreadsheetId and sheetChartId) onto
       // a page in the presentation. Setting the linking mode as "LINKED" allows the
       // chart to be refreshed if the Sheets version is updated.
@@ -606,7 +605,7 @@ class SlidesSnippets {
       }, (err, batchUpdateResponse) => {
         console.log(`Added a linked Sheets chart with ID: ${presentationChartId}`);
         console.log(err, batchUpdateResponse);
-        // [END create_sheets_chart]
+        // [END slides_create_sheets_chart]
         resolve(batchUpdateResponse);
       });
     });
@@ -620,7 +619,7 @@ class SlidesSnippets {
    */
   async refreshSheetsChart(presentationId, presentationChartId) {
     return new Promise((resolve, reject) => {
-      // [START refresh_sheets_chart]
+      // [START slides_refresh_sheets_chart]
       let requests = [{
         refreshSheetsChart: {
           objectId: presentationChartId,
@@ -639,7 +638,7 @@ class SlidesSnippets {
         resolve(batchUpdateResponse);
         // [END_EXCLUDE]
       });
-      // [END refresh_sheets_chart]
+      // [END slides_refresh_sheets_chart]
     });
   }
 }

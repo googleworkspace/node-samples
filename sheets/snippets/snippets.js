@@ -36,7 +36,7 @@ class SheetsSnippets {
    */
   async create(title) {
     return new Promise((resolve, reject) => {
-      // [START create]
+      // [START sheets_create]
       const resource = {
         properties: {
           title,
@@ -59,7 +59,7 @@ class SheetsSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END create]
+      // [END sheets_create]
     });
   }
 
@@ -73,7 +73,7 @@ class SheetsSnippets {
    */
   async batchUpdate(spreadsheetId, title, find, replacement) {
     return new Promise((resolve, reject) => {
-      // [START batchUpdate]
+      // [START sheets_batch_update]
       let requests = [];
       // Change the spreadsheet's title.
       requests.push({
@@ -112,7 +112,7 @@ class SheetsSnippets {
         resolve(response);
         // [END_EXCLUDE]
       });
-      // [END batchUpdate]
+      // [END sheets_batch_update]
     });
   }
 
@@ -124,7 +124,7 @@ class SheetsSnippets {
    */
   async getValues(spreadsheetId, range) {
     return new Promise((resolve, reject) => {
-      // [START getValues]
+      // [START sheets_get_values]
       this.sheetsService.spreadsheets.values.get({
         spreadsheetId,
         range,
@@ -143,7 +143,7 @@ class SheetsSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END getValues]
+      // [END sheets_get_values]
     });
   };
 
@@ -155,7 +155,7 @@ class SheetsSnippets {
    */
   async batchGetValues(spreadsheetId, _ranges) {
     return new Promise((resolve, reject) => {
-      // [START batchGetValues]
+      // [START sheets_batch_get_values]
       let ranges = [
         // Range names ...
       ];
@@ -179,7 +179,7 @@ class SheetsSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END batchGetValues]
+      // [END sheets_batch_get_values]
     });
   };
 
@@ -193,7 +193,7 @@ class SheetsSnippets {
    */
   async updateValues(spreadsheetId, range, valueInputOption, _values) {
     return new Promise((resolve, reject) => {
-      // [START updateValues]
+      // [START sheets_update_values]
       let values = [
         [
           // Cell values ...
@@ -225,7 +225,7 @@ class SheetsSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END updateValues]
+      // [END sheets_update_values]
     });
   }
 
@@ -239,7 +239,7 @@ class SheetsSnippets {
    */
   async batchUpdateValues(spreadsheetId, range, valueInputOption, _values) {
     return new Promise((resolve, reject) => {
-      // [START batchUpdateValues]
+      // [START sheets_batch_update_values]
       let values = [
         [
           // Cell values ...
@@ -275,7 +275,7 @@ class SheetsSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END batchUpdateValues]
+      // [END sheets_batch_update_values]
     });
   }
 
@@ -289,7 +289,7 @@ class SheetsSnippets {
    */
   async appendValues(spreadsheetId, range, valueInputOption, _values) {
     return new Promise((resolve, reject) => {
-      // [START appendValues]
+      // [START sheets_append_values]
       let values = [
         [
           // Cell values ...
@@ -321,7 +321,7 @@ class SheetsSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END appendValues]
+      // [END sheets_append_values]
     });
   }
 
@@ -352,7 +352,7 @@ class SheetsSnippets {
         } else {
           const sourceSheetId = response.replies[0].addSheet.properties.sheetId;
           const targetSheetId = response.replies[1].addSheet.properties.sheetId;
-          // [START pivotTable]
+          // [START sheets_pivot_table]
           const requests = [{
             updateCells: {
               rows: {
@@ -412,7 +412,7 @@ class SheetsSnippets {
               // [END_EXCLUDE]
             }
           });
-          // [END pivotTable]
+          // [END sheets_pivot_table]
         }
       });
     });
@@ -425,7 +425,7 @@ class SheetsSnippets {
    */
   conditionalFormatting(spreadsheetId) {
     return new Promise((resolve, reject) => {
-      // [START conditionalFormatting]
+      // [START sheets_conditional_formatting]
       const myRange = {
         sheetId: 0,
         startRowIndex: 1,
@@ -487,7 +487,7 @@ class SheetsSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END conditionalFormatting]
+      // [END sheets_conditional_formatting]
     });
   }
 }

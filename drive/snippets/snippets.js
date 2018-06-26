@@ -37,7 +37,7 @@ class DriveSnippets {
    */
   async uploadBasic() {
     return new Promise((resolve, reject) => {
-      // [START uploadBasic]
+      // [START drive_upload_basic]
       const resource = {
         name: 'photo.jpg',
       };
@@ -63,7 +63,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END uploadBasic]
+      // [END drive_upload_basic]
     });
   }
 
@@ -74,7 +74,7 @@ class DriveSnippets {
    */
   async uploadToFolder(realFolderId) {
     return new Promise((resolve, reject) => {
-      // [START uploadToFolder]
+      // [START drive_upload_to_folder]
       let folderId = '0BwwA4oUTeiV1TGRPeTVjaWRDY1E';
       // [START_EXCLUDE silent]
       folderId = realFolderId;
@@ -105,7 +105,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END uploadToFolder]
+      // [END drive_upload_to_folder]
     });
   }
 
@@ -115,7 +115,7 @@ class DriveSnippets {
    */
   async uploadWithConversion() {
     return new Promise((resolve, reject) => {
-      // [START uploadWithConversion]
+      // [START drive_upload_with_conversion]
       const resource = {
         name: 'My Report',
         mimeType: 'application/vnd.google-apps.spreadsheet',
@@ -142,7 +142,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END uploadWithConversion]
+      // [END drive_upload_with_conversion]
     });
   }
 
@@ -153,7 +153,7 @@ class DriveSnippets {
    */
   async exportPdf(realFileId) {
     return new Promise((resolve, reject) => {
-      // [START exportPdf]
+      // [START drive_export_pdf]
       let fileId = '1ZdR3L3qP4Bkq8noWLJHSr_iBau0DNT4Kli4SxNc2YEo';
       const dest = fs.createWriteStream('/tmp/resume.pdf');
       // [START_EXCLUDE silent]
@@ -182,7 +182,7 @@ class DriveSnippets {
             // [END_EXCLUDE]
           })
           .pipe(dest);
-      // [END exportPdf]
+      // [END drive_export_pdf]
     });
   };
 
@@ -193,7 +193,7 @@ class DriveSnippets {
    */
   async downloadFile(realFileId) {
     return new Promise((resolve, reject) => {
-      // [START downloadFile]
+      // [START drive_download_file]
       let fileId = '0BwwA4oUTeiV1UVNwOHItT0xfa2M';
       const dest = fs.createWriteStream('/tmp/photo.jpg');
       // [START_EXCLUDE silent]
@@ -222,7 +222,7 @@ class DriveSnippets {
             // [END_EXCLUDE]
           })
           .pipe(dest);
-      // [END downloadFile]
+      // [END drive_download_file]
     });
   }
 
@@ -232,7 +232,7 @@ class DriveSnippets {
    */
   async createShortcut() {
     return new Promise((resolve, reject) => {
-      // [START createShortcut]
+      // [START drive_create_shortcut]
       const resource = {
         name: 'Project plan',
         mimeType: 'application/vnd.google-apps.drive-sdk',
@@ -254,7 +254,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END createShortcut]
+      // [END drive_create_shortcut]
     });
   };
 
@@ -266,7 +266,7 @@ class DriveSnippets {
    */
   async touchFile(realFileId, realTimestamp) {
     return new Promise((resolve, reject) => {
-      // [START touchFile]
+      // [START drive_touch_file]
       let fileId = '1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ';
       const resource = {
         'modifiedTime': new Date().toISOString(),
@@ -293,7 +293,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END touchFile]
+      // [END drive_touch_file]
     });
   }
 
@@ -303,7 +303,7 @@ class DriveSnippets {
    */
   async createFolder() {
     return new Promise((resolve, reject) => {
-      // [START createFolder]
+      // [START drive_create_folder]
       this.driveService.files.create({
         resource: {
           name: 'Invoices',
@@ -324,7 +324,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END createFolder]
+      // [END drive_create_folder]
     });
   }
 
@@ -336,7 +336,7 @@ class DriveSnippets {
    */
   async moveFileToFolder(realFileId, realFolderId) {
     return new Promise((resolve, reject) => {
-      // [START moveFileToFolder]
+      // [START drive_move_file_to_folder]
       let fileId = '1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ';
       let folderId = '0BwwA4oUTeiV1TGRPeTVjaWRDY1E';
       // [START_EXCLUDE silent]
@@ -377,7 +377,7 @@ class DriveSnippets {
           });
         }
       });
-      // [END moveFileToFolder]
+      // [END drive_move_file_to_folder]
     });
   }
 
@@ -389,7 +389,7 @@ class DriveSnippets {
     let files = [];
     const driveService = this.driveService;
     return new Promise((resolve, reject) => {
-      // [START searchFiles]
+      // [START drive_search_files]
       let pageToken = null;
       // Using the NPM module 'async'
       async.doWhilst(function(callback) {
@@ -430,7 +430,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END searchFiles]
+      // [END drive_search_files]
     });
   }
 
@@ -444,7 +444,7 @@ class DriveSnippets {
   async shareFile(realFileId, realUser, realDomain) {
     return new Promise((resolve, reject) => {
       let ids = [];
-      // [START shareFile]
+      // [START drive_share_file]
       let fileId = '1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ';
       // [START_EXCLUDE silent]
       fileId = realFileId;
@@ -495,7 +495,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END shareFile]
+      // [END drive_share_file]
     });
   }
 
@@ -505,14 +505,14 @@ class DriveSnippets {
    */
   async fetchStartPageToken() {
     return new Promise((resolve, reject) => {
-      // [START fetchStartPageToken]
+      // [START drive_fetch_start_page_token]
       this.driveService.changes.getStartPageToken({}, (err, res) => {
         console.log(`Start token: ${res.startPageToken}`);
         // [START_EXCLUDE silent]
         resolve(res.startPageToken);
         // [END_EXCLUDE]
       });
-      // [END fetchStartPageToken]
+      // [END drive_fetch_start_page_token]
     });
   }
 
@@ -524,7 +524,7 @@ class DriveSnippets {
   async fetchChanges(savedStartPageToken) {
     const driveService = this.driveService;
     return new Promise((resolve, reject) => {
-      // [START fetchChanges]
+      // [START drive_fetch_changes]
       let pageToken = savedStartPageToken;
       // Using the npm module 'async'
       async.doWhilst((callback) => {
@@ -552,7 +552,7 @@ class DriveSnippets {
         resolve(newStartPageToken);
         // [END_EXCLUDE]
       });
-      // [END fetchChanges]
+      // [END drive_fetch_changes]
     });
   }
 
@@ -562,7 +562,7 @@ class DriveSnippets {
    */
   async uploadAppData() {
     return new Promise((resolve, reject) => {
-      // [START uploadAppData]
+      // [START drive_upload_app_data]
       const resource = {
         name: 'config.json',
         parents: ['appDataFolder'],
@@ -590,7 +590,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END uploadAppData]
+      // [END drive_upload_app_data]
     });
   }
 
@@ -600,7 +600,7 @@ class DriveSnippets {
    */
   async listAppData() {
     return new Promise((resolve, reject) => {
-      // [START listAppData]
+      // [START drive_list_app_data]
       this.driveService.files.list({
         spaces: 'appDataFolder',
         fields: 'nextPageToken, files(id, name)',
@@ -621,7 +621,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END listAppData]
+      // [END drive_list_app_data]
     });
   }
 
@@ -632,7 +632,7 @@ class DriveSnippets {
    */
   async fetchAppDataFolder(realFileId) {
     return new Promise((resolve, reject) => {
-      // [START fetchAppDataFolder]
+      // [START drive_fetch_app_data_folder]
       this.driveService.files.get({
         fileId: 'appDataFolder',
         fields: 'id',
@@ -650,7 +650,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END fetchAppDataFolder]
+      // [END drive_fetch_app_data_folder]
     });
   }
 
@@ -660,7 +660,7 @@ class DriveSnippets {
    */
   async createTeamDrive() {
     return new Promise((resolve, reject) => {
-      // [START createTeamDrive]
+      // [START drive_create_team_drive]
       const requestId = uuid.v4();
       this.driveService.teamdrives.create({
         resource: {
@@ -682,7 +682,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END createTeamDrive]
+      // [END drive_create_team_drive]
     });
   }
 
@@ -695,7 +695,7 @@ class DriveSnippets {
     const driveService = this.driveService;
     let teamDrives = [];
     return new Promise((resolve, reject) => {
-      // [START recoverTeamDrives]
+      // [START drive_recover_team_drives]
       let newOrganizerPermission = {
         type: 'user',
         role: 'organizer',
@@ -752,7 +752,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         }
       });
-      // [END recoverTeamDrives]
+      // [END drive_recover_team_drives]
     });
   }
 }
