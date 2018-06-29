@@ -352,7 +352,7 @@ class SheetsSnippets {
         } else {
           const sourceSheetId = response.replies[0].addSheet.properties.sheetId;
           const targetSheetId = response.replies[1].addSheet.properties.sheetId;
-          // [START sheets_pivot_table]
+          // [START sheets_pivot_tables]
           const requests = [{
             updateCells: {
               rows: {
@@ -412,7 +412,7 @@ class SheetsSnippets {
               // [END_EXCLUDE]
             }
           });
-          // [END sheets_pivot_table]
+          // [END sheets_pivot_tables]
         }
       });
     });
