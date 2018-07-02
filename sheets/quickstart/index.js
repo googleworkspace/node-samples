@@ -90,9 +90,9 @@ function listMajors(auth) {
   sheets.spreadsheets.values.get({
     spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
     range: 'Class Data!A2:E',
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
-    const rows = data.values;
+    const rows = res.data.values;
     if (rows.length) {
       console.log('Name, Major:');
       // Print columns A and E, which correspond to indices 0 and 4.

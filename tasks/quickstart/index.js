@@ -89,9 +89,9 @@ function listTaskLists(auth) {
   const service = google.tasks({version: 'v1', auth});
   service.tasklists.list({
     maxResults: 10,
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.error('The API returned an error: ' + err);
-    const taskLists = data.items;
+    const taskLists = res.data.items;
     if (taskLists) {
       console.log('Task lists:');
       taskLists.forEach((taskList) => {

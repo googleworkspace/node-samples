@@ -89,9 +89,9 @@ function listSlides(auth) {
   const slides = google.slides({version: 'v1', auth});
   slides.presentations.get({
     presentationId: '1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc',
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
-    const length = data.slides.length;
+    const length = res.data.slides.length;
     console.log('The presentation contains %s slides:', length);
     data.slides.map((slide, i) => {
       console.log(`- Slide #${i + 1} contains ${slide.pageElements.length} elements.`);

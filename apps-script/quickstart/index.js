@@ -90,10 +90,10 @@ function callAppsScript(auth) {
     resource: {
       title: 'My Script',
     },
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.log(`The API create method returned an error: ${err}`);
     script.projects.updateContent({
-      scriptId: data.scriptId,
+      scriptId: res.data.scriptId,
       auth,
       resource: {
         files: [{
@@ -107,9 +107,9 @@ function callAppsScript(auth) {
            '\"CLOUD\"}',
         }],
       },
-    }, {}, (err, {data}) => {
+    }, {}, (err, res) => {
       if (err) return console.log(`The API updateContent method returned an error: ${err}`);
-      console.log(`https://script.google.com/d/${data.scriptId}/edit`);
+      console.log(`https://script.google.com/d/${res.data.scriptId}/edit`);
     });
   });
 }

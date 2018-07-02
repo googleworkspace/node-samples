@@ -89,9 +89,9 @@ function listCourses(auth) {
   const classroom = google.classroom({version: 'v1', auth});
   classroom.courses.list({
     pageSize: 10,
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.error('The API returned an error: ' + err);
-    const courses = data.courses;
+    const courses = res.data.courses;
     if (courses && courses.length) {
       console.log('Courses:');
       courses.forEach((course) => {

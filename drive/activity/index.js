@@ -92,9 +92,9 @@ function listActivity(auth) {
     'source': 'drive.google.com',
     'drive.ancestorId': 'root',
     'pageSize': 10,
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.error('The API returned an error: ' + err);
-    const activities = data.activities;
+    const activities = res.data.activities;
     if (activities) {
       console.log('Recent activity:');
       activities.forEach((activity) => {

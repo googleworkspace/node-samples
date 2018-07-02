@@ -89,9 +89,9 @@ function listFiles(auth) {
   drive.files.list({
     pageSize: 10,
     fields: 'nextPageToken, files(id, name)',
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
-    const files = data.files;
+    const files = res.data.files;
     if (files.length) {
       console.log('Files:');
       files.map((file) => {
