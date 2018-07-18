@@ -23,12 +23,10 @@ const GoogleAuth = require('google-auth-library');
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/admin-reports_v1-nodejs-quickstart.json
 const SCOPES = ['https://www.googleapis.com/auth/admin.reports.audit.readonly'];
-const TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
-    process.env.USERPROFILE) + '/.credentials/';
-const TOKEN_PATH = TOKEN_DIR + 'admin-reports_v1-nodejs-quickstart.json';
+const TOKEN_PATH = 'token.json';
 
 // Load client secrets from a local file.
-fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+fs.readFile('credentials.json', function processClientSecrets(err, content) {
   if (err) {
     console.log('Error loading client secret file: ' + err);
     return;
