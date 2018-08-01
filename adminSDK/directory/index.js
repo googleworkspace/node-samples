@@ -112,7 +112,7 @@ function listUsers(auth) {
 
     console.log('Users:');
     users.forEach((user) => {
-      console.log('%s (%s)', user.primaryEmail, user.name.fullName);
+      console.log(`${user.primaryEmail} (${user.name.fullName})`);
     });
   });
 }

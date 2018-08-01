@@ -112,8 +112,7 @@ function listLoginEvents(auth) {
 
      console.log('Logins:');
       activities.forEach((activity) => {
-       console.log('%s: %s (%s)', activity.id.time, activity.actor.email,
-           activity.events[0].name);
+       console.log(`${ activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
      });
    });
 }
