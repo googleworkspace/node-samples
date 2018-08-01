@@ -19,7 +19,7 @@ const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
 
-// If modifying these scopes, delete credentials.json.
+// If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/admin.reports.audit.readonly'];
 const TOKEN_PATH = 'token.json';
 
@@ -105,15 +105,15 @@ function listLoginEvents(auth) {
     applicationName: 'login',
     maxResults: 10,
   }, (err, {data}) => {
-     if (err) return console.error('The API returned an error:', err.message);
+    if (err) return console.error('The API returned an error:', err.message);
 
-     const activities = data.items;
-     if (activities.length == 0) return console.log('No logins found.');
+    const activities = data.items;
+    if (activities.length == 0) return console.log('No logins found.');
 
-     console.log('Logins:');
-      activities.forEach((activity) => {
-       console.log(`${ activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
-     });
+    console.log('Logins:');
+    activities.forEach((activity) => {
+      console.log(`${ activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
+    });
    });
 }
 // [END admin_sdk_reports_quickstart]

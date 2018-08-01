@@ -19,7 +19,7 @@ const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
 
-// If modifying these scopes, delete credentials.json.
+// If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/apps.order'];
 const TOKEN_PATH = 'token.json';
 
@@ -109,9 +109,8 @@ function listSubscriptions(auth) {
     if (subscriptions.length == 0) return console.log('No subscriptions found.');
 
     console.log('Subscriptions:');
-    subscriptions.forEach((subscription) => {
-      console.log(subscription.customerId,
-          `(${subscription.skuId}, ${subscription.plan.planName})`);
+    subscriptions.forEach(({customerId, skuId, plan}) => {
+      console.log(`${customerId} (${skuId}, ${plan.planName})`);
     });
   });
 }
