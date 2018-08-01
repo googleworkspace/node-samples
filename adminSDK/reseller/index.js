@@ -19,8 +19,7 @@ const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
 
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/reseller-nodejs-quickstart.json
+// If modifying these scopes, delete credentials.json.
 const SCOPES = ['https://www.googleapis.com/auth/apps.order'];
 const TOKEN_PATH = 'token.json';
 
@@ -105,13 +104,11 @@ function listSubscriptions(auth) {
     auth: auth,
     maxResults: 10,
   }, (err, {data}) => {
-    if (err) return console.error('The API returned an error', err);
+    if (err) return console.error('The API returned an error:', err.message);
 
     const subscriptions = data.subscriptions;
-    if (subscriptions.length == 0) {
-      console.log('No subscriptions found.');
-      return;
-    }
+    if (subscriptions.length == 0) return console.log('No subscriptions found.');
+
     console.log('Subscriptions:');
     subscriptions.forEach((subscription) => {
       console.log('%s (%s, %s)', subscription.customerId, subscription.skuId,
