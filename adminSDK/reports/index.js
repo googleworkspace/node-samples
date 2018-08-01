@@ -111,7 +111,7 @@ function listLoginEvents(auth) {
     if (activities.length) {
       console.log('Logins:');
       activities.forEach((activity) => {
-        console.log(`${ activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
+        console.log(`${activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
       });
     } else {
       console.log('No logins found.');
