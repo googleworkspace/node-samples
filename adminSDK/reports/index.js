@@ -99,9 +99,8 @@ function storeToken(token) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listLoginEvents(auth) {
-  const service = google.admin('reports_v1');
+  const service = google.admin({version: 'reports_v1', auth});
   service.activities.list({
-    auth: auth,
     userKey: 'all',
     applicationName: 'login',
     maxResults: 10,

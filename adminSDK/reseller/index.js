@@ -99,9 +99,8 @@ function storeToken(token) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listSubscriptions(auth) {
-  const service = google.reseller('v1');
+  const service = google.reseller({version: 'v1', auth});
   service.subscriptions.list({
-    auth: auth,
     maxResults: 10,
   }, (err, {data}) => {
     if (err) return console.error('The API returned an error:', err.message);

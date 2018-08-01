@@ -28,7 +28,7 @@ fs.readFile('credentials.json', (err, content) => {
   if (err) return console.error('Error loading client secret file', err);
 
   // Authorize a client with the loaded credentials, then call the
-  // Reports API.
+  // Directory API.
   authorize(JSON.parse(content), listUsers);
 });
 
@@ -99,9 +99,8 @@ function storeToken(token) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 function listUsers(auth) {
-  const service = google.admin('directory_v1');
+  const service = google.admin({version: 'directory_v1', auth});
   service.users.list({
-    auth: auth,
     customer: 'my_customer',
     maxResults: 10,
     orderBy: 'email',
