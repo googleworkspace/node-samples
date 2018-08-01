@@ -111,7 +111,7 @@ function listSubscriptions(auth) {
     console.log('Subscriptions:');
     subscriptions.forEach((subscription) => {
       console.log(subscription.customerId,
-        `(${subscription.skuId}, ${subscription.plan.planName})`);
+          `(${subscription.skuId}, ${subscription.plan.planName})`);
     });
   });
 }
