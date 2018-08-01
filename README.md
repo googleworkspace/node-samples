@@ -27,7 +27,7 @@ Learn how to use functions within an API, such as creating a new Google Slide to
 
 ## Setup
 
-1. Install [Node.js v4.5.0 or greater](https://nodejs.org).
+1. Install [Node.js v6.4.0 or greater](https://nodejs.org).
 1. Clone this repository.
 1. Follow the folder README instructions to run and test samples.
 
