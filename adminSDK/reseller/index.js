@@ -110,8 +110,8 @@ function listSubscriptions(auth) {
 
     console.log('Subscriptions:');
     subscriptions.forEach((subscription) => {
-      console.log('%s (%s, %s)', subscription.customerId, subscription.skuId,
-          subscription.plan.planName);
+      console.log(subscription.customerId,
+        `(${subscription.skuId}, ${subscription.plan.planName})`);
     });
   });
 }
