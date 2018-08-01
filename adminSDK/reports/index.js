@@ -104,16 +104,18 @@ function listLoginEvents(auth) {
     userKey: 'all',
     applicationName: 'login',
     maxResults: 10,
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.error('The API returned an error:', err.message);
 
-    const activities = data.items;
-    if (activities.length == 0) return console.log('No logins found.');
-
-    console.log('Logins:');
-    activities.forEach((activity) => {
-      console.log(`${ activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
-    });
+    const activities = res.data.items;
+    if (activities.length) {
+      console.log('Logins:');
+      activities.forEach((activity) => {
+        console.log(`${ activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
+      });
+    } else {
+      console.log('No logins found.');
+    }
    });
 }
 // [END admin_sdk_reports_quickstart]

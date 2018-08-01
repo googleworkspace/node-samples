@@ -102,16 +102,18 @@ function listSubscriptions(auth) {
   const service = google.reseller({version: 'v1', auth});
   service.subscriptions.list({
     maxResults: 10,
-  }, (err, {data}) => {
+  }, (err, res) => {
     if (err) return console.error('The API returned an error:', err.message);
 
-    const subscriptions = data.subscriptions;
-    if (subscriptions.length == 0) return console.log('No subscriptions found.');
-
-    console.log('Subscriptions:');
-    subscriptions.forEach(({customerId, skuId, plan}) => {
-      console.log(`${customerId} (${skuId}, ${plan.planName})`);
-    });
+    const subscriptions = res.data.subscriptions;
+    if (subscriptions.length) {
+      console.log('Subscriptions:');
+      subscriptions.forEach(({customerId, skuId, plan}) => {
+        console.log(`${customerId} (${skuId}, ${plan.planName})`);
+      });
+    } else {
+      console.log('No subscriptions found.');
+    }
   });
 }
 // [END admin_sdk_reseller_quickstart]
