@@ -4,7 +4,7 @@ Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 
 | | **Apps&nbsp;Script** <img src="https://www.gstatic.com/images/branding/product/2x/apps_script_96dp.png" align="center" width="76px"/> | **Calendar** <img src="https://www.gstatic.com/images/branding/product/2x/calendar_96dp.png" align="left" width="96px"/>  | **Classroom** <img src="https://www.gstatic.com/images/branding/product/2x/classroom_96dp.png" align="left" width="96px"/>  | **Drive V3** <img src="https://www.gstatic.com/images/branding/product/2x/drive_96dp.png" align="left" width="96px"/>  | **Gmail** <img src="https://www.gstatic.com/images/branding/product/2x/gmail_96dp.png" align="left" width="96px"/>  | **Sheets** <img src="https://www.gstatic.com/images/branding/product/2x/sheets_96dp.png" align="left" width="96px"/>  | **Slides** <img src="https://www.gstatic.com/images/branding/product/2x/slides_96dp.png" align="left" width="96px"/>  | **Tasks** <img src="https://www.gstatic.com/images/branding/product/2x/tasks_96dp.png" align="left" width="96px"/>  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Quickstart | [Link](https://developers.google.com/apps-script/api/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs) | [Link](https://developers.google.com/classroom/quickstart/nodejs) | [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs) | [Link](https://developers.google.com/gmail/api/quickstart/nodejs) | [Link](https://developers.google.com/sheets/api/quickstart/nodejs) | [Link](https://developers.google.com/slides/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/tasks/quickstart/nodejs) |
+| Quickstart | [Link](https://developers.google.com/apps-script/api/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs) | [Link](https://developers.google.com/classroom/quickstart/nodejs) | [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs) | [Link](https://developers.google.com/gmail/api/quickstart/nodejs) | [Link](https://developers.google.com/sheets/api/quickstart/nodejs) | [Link](https://developers.google.com/slides/quickstart/nodejs) | [Link](https://developers.google.com/tasks/quickstart/nodejs) |
 | Snippets | --- | [Link](https://developers.google.com/calendar/overview) | [Link](https://developers.google.com/classroom/guides/get-started) | [Link](https://developers.google.com/drive/v3/web/about-sdk) | [Link](https://developers.google.com/gmail/api/guides/) | [Link](https://developers.google.com/sheets/api/guides/concepts) | [Link](https://developers.google.com/slides/how-tos/overview) | --- |
 
 ## Sample Types
@@ -27,7 +27,7 @@ Learn how to use functions within an API, such as creating a new Google Slide to
 
 ## Setup
 
-1. Install [Node.js v4.5.0 or greater](https://nodejs.org).
+1. Install [Node.js v6.4.0 or greater](https://nodejs.org).
 1. Clone this repository.
 1. Follow the folder README instructions to run and test samples.
 
