@@ -41,7 +41,8 @@ fs.readFile('credentials.json', (err, content) => {
  */
 function authorize(credentials, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
-  const oauth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+  const oauth2Client = new google.auth.OAuth2(
+      client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
@@ -72,8 +73,7 @@ function getNewToken(oauth2Client, callback) {
   rl.question('Enter the code from that page here: ', (code) => {
     rl.close();
     oauth2Client.getToken(code, (err, token) => {
-      if (err) return console.error('Error while trying to retrieve access token', err);
-
+      if (err) return console.error('Error retrieving access token', err);
       oauth2Client.credentials = token;
       storeToken(token);
       callback(oauth2Client);
