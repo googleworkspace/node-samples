@@ -85,7 +85,7 @@ class DriveSnippets {
       };
       const media = {
         mimeType: 'image/jpeg',
-        body: fs.createReadStream('files/photo.jpg'),
+        body: fs.createReadStream('files/photo.jpg', {highWaterMark: 200}),
       };
       this.driveService.files.create({
         resource,
