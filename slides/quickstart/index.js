@@ -93,7 +93,7 @@ function listSlides(auth) {
     if (err) return console.log('The API returned an error: ' + err);
     const length = res.data.slides.length;
     console.log('The presentation contains %s slides:', length);
-    data.slides.map((slide, i) => {
+    res.data.slides.map((slide, i) => {
       console.log(`- Slide #${i + 1} contains ${slide.pageElements.length} elements.`);
     });
   });
