@@ -101,7 +101,7 @@ function listDriveActivity(auth) {
       console.log('Recent activity:');
       activities.forEach((activity) => {
         const time = getTimeInfo(activity);
-        const action = getActionInfo(activity['primaryActionDetail']);
+        const action = getActionInfo(activity.primaryActionDetail);
         const actors = activity.actors.map(getActorInfo);
         const targets = activity.targets.map(getTargetInfo);
         console.log(`${time}: ${truncated(actors)}, ${action}, ` +
@@ -175,9 +175,9 @@ function getActionInfo(actionDetail) {
  */
 function getUserInfo(user) {
   if ('knownUser' in user) {
-    const knownUser = user['knownUser'];
-    const isMe = knownUser['isCurrentUser'] || false;
-    return isMe ? 'people/me' : knownUser['personName'];
+    const knownUser = user.knownUser;
+    const isMe = knownUser.isCurrentUser || false;
+    return isMe ? 'people/me' : knownUser.personName;
   }
   return getOneOf(user);
 }
@@ -190,7 +190,7 @@ function getUserInfo(user) {
  */
 function getActorInfo(actor) {
   if ('user' in actor) {
-    return getUserInfo(actor['user']);
+    return getUserInfo(actor.user);
   }
   return getOneOf(actor);
 }
