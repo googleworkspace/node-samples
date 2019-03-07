@@ -106,3 +106,8 @@ function listLabels(auth) {
   });
 }
 // [END gmail_quickstart]
+
+module.exports = {
+  SCOPES,
+  listLabels,
+};

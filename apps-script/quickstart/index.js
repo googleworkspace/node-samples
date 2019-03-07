@@ -117,3 +117,8 @@ function callAppsScript(auth) {
   });
 }
 // [END apps_script_api_quickstart]
+
+module.exports = {
+  SCOPES,
+  callAppsScript,
+};

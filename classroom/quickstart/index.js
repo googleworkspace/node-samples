@@ -106,3 +106,8 @@ function listCourses(auth) {
   });
 }
 // [END classroom_quickstart]
+
+module.exports = {
+  SCOPES,
+  listCourses,
+};

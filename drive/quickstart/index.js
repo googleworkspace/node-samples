@@ -106,3 +106,8 @@ function listFiles(auth) {
   });
 }
 // [END drive_quickstart]
+
+module.exports = {
+  SCOPES,
+  listFiles,
+};

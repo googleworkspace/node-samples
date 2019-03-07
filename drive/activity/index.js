@@ -115,3 +115,8 @@ function listActivity(auth) {
   });
 }
 // [END drive_activity_quickstart]
+
+module.exports = {
+  SCOPES,
+  listActivity,
+};

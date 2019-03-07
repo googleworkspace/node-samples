@@ -112,3 +112,8 @@ function listConnectionNames(auth) {
   });
 }
 // [END people_quickstart]
+
+module.exports = {
+  SCOPES,
+  listConnectionNames,
+};

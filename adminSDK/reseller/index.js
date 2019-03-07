@@ -20,7 +20,7 @@ const readline = require('readline');
 const {google} = require('googleapis');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/apps.order'];
+export const SCOPES = ['https://www.googleapis.com/auth/apps.order'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -120,3 +120,8 @@ function listSubscriptions(auth) {
   });
 }
 // [END admin_sdk_reseller_quickstart]
+
+module.exports = {
+  SCOPES,
+  listSubscriptions,
+};
