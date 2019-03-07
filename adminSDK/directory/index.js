@@ -20,7 +20,7 @@ const readline = require('readline');
 const {google} = require('googleapis');
 
 // If modifying these scopes, delete token.json.
-export const SCOPES = ['https://www.googleapis.com/auth/admin.directory.user'];
+const SCOPES = ['https://www.googleapis.com/auth/admin.directory.user'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -101,7 +101,7 @@ function storeToken(token) {
  *
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-export function listUsers(auth) {
+function listUsers(auth) {
   const service = google.admin({version: 'directory_v1', auth});
   service.users.list({
     customer: 'my_customer',
