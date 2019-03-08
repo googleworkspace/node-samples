@@ -1,5 +1,5 @@
 {
-  "name": "gsuite-node-samples",
+  "name": "@gsuite/samples",
   "version": "1.0.0",
   "description": "Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.",
   "license": "MIT",
@@ -22,6 +22,7 @@
   "scripts": {
     "lint": "eslint **/*.js"
   },
+  "main": ".",
   "eslintIgnore": [
     "getFoldersUnderRoot.js",
     "**/node_modules/**"
