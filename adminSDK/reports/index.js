@@ -122,3 +122,8 @@ function listLoginEvents(auth) {
    });
 }
 // [END admin_sdk_reports_quickstart]
+
+module.exports = {
+  SCOPES,
+  listLoginEvents,
+};

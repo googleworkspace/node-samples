@@ -106,3 +106,8 @@ function listTaskLists(auth) {
   });
 }
 // [END tasks_quickstart]
+
+module.exports = {
+  SCOPES,
+  listTaskLists,
+};

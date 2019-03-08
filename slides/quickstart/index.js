@@ -102,3 +102,8 @@ function listSlides(auth) {
   });
 }
 // [END slides_quickstart]
+
+module.exports = {
+  SCOPES,
+  listSlides,
+};

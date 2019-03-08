@@ -108,3 +108,8 @@ function listMajors(auth) {
   });
 }
 // [END sheets_quickstart]
+
+module.exports = {
+  SCOPES,
+  listMajors,
+};

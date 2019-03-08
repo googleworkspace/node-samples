@@ -122,3 +122,8 @@ function listUsers(auth) {
   });
 }
 // [END admin_sdk_directory_quickstart]
+
+module.exports = {
+  SCOPES,
+  listUsers,
+};

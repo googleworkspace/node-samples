@@ -98,3 +98,8 @@ function printDocTitle(auth) {
   });
 }
 // [END docs_quickstart]
+
+module.exports = {
+  SCOPES,
+  printDocTitle,
+};

@@ -218,3 +218,8 @@ function getTargetInfo(target) {
   return `${getOneOf(target)}:unknown`;
 }
 // [END drive_activity_v2_quickstart]
+
+module.exports = {
+  SCOPES,
+  listDriveActivity,
+};

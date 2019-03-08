@@ -120,3 +120,8 @@ function listSubscriptions(auth) {
   });
 }
 // [END admin_sdk_reseller_quickstart]
+
+module.exports = {
+  SCOPES,
+  listSubscriptions,
+};
