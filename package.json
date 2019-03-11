@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.",
   "license": "MIT",
-  "private": true,
   "author": "Grant Timmerman",
   "keywords": [
     "G Suite",
