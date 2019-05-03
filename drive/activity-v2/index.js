@@ -206,9 +206,9 @@ function getTargetInfo(target) {
     const title = target.driveItem.title || 'unknown';
     return `driveItem:"${title}"`;
   }
-  if ('teamDrive' in target) {
-    const title = target.teamDrive.title || 'unknown';
-    return `teamDrive:"${title}"`;
+  if ('drive' in target) {
+    const title = target.drive.title || 'unknown';
+    return `drive:"${title}"`;
   }
   if ('fileComment' in target) {
     const parent = target.fileComment.parent || {};
