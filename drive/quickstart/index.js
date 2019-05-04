@@ -61,6 +61,7 @@ function authorize(credentials, callback) {
 function getAccessToken(oAuth2Client, callback) {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
+    request_type: 'code',
     scope: SCOPES,
   });
   console.log('Authorize this app by visiting this url:', authUrl);
