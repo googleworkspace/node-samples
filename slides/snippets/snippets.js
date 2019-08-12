@@ -174,11 +174,9 @@ class SlidesSnippets {
    * Adds an image to a presentation.
    * @param {string} presentationId The presentation ID.
    * @param {string} pageId The presentation page ID.
-   * @param {string} imageFilePath The image file path.
-   * @param {string} imageMimetype The image MIME type.
    * @return {Promise<BatchUpdateResponse>} The batch update response.
    */
-  async createImage(presentationId, pageId, imageFilePath, imageMimetype) {
+  async createImage(presentationId, pageId) {
     return new Promise((resolve, reject) => {
       let imageUrl =
         'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
