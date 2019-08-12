@@ -85,14 +85,10 @@ describe('Presentation snippets', () => {
     expect(boxId).toExist();
   }));
   it('should create an image', mochaAsync(async () => {
-    const IMAGE_FILE_PATH = 'images/googlelogo_color_272x92dp.png';
-    const IMAGE_MIMETYPE = 'image/png';
-
     const presentationId = await helpers.createTestPresentation();
     const ids = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = ids[0];
-    const response = await snippets.createImage(presentationId, pageId, IMAGE_FILE_PATH,
-      IMAGE_MIMETYPE);
+    const response = await snippets.createImage(presentationId, pageId);
     expect(response.length).toBe(1);
     const imageId = response[0].createImage.objectId;
     expect(imageId).toExist();
