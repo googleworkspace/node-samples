@@ -1,6 +1,6 @@
-# G Suite Node Samples [![Build Status](https://travis-ci.org/gsuitedevs/node-samples.svg?branch=master)](https://travis-ci.org/gsuitedevs/node-samples)
+# Google Workspace Node Samples [![Build Status](https://travis-ci.org/gsuitedevs/node-samples.svg?branch=master)](https://travis-ci.org/gsuitedevs/node-samples)
 
-Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
+Node.js samples for [Google Workspace APIs](https://developers.google.com/workspace/) docs.
 
 | | **Apps&nbsp;Script** <img src="https://www.gstatic.com/images/branding/product/2x/apps_script_96dp.png" align="center" width="76px"/> | **Calendar** <img src="https://www.gstatic.com/images/branding/product/2x/calendar_96dp.png" align="left" width="96px"/>  | **Classroom** <img src="https://www.gstatic.com/images/branding/product/2x/classroom_96dp.png" align="left" width="96px"/>  | **Drive V3** <img src="https://www.gstatic.com/images/branding/product/2x/drive_96dp.png" align="left" width="96px"/>  | **Gmail** <img src="https://www.gstatic.com/images/branding/product/2x/gmail_96dp.png" align="left" width="96px"/>  | **Sheets** <img src="https://www.gstatic.com/images/branding/product/2x/sheets_96dp.png" align="left" width="96px"/>  | **Slides** <img src="https://www.gstatic.com/images/branding/product/2x/slides_96dp.png" align="left" width="96px"/>  | **Tasks** <img src="https://www.gstatic.com/images/branding/product/2x/tasks_96dp.png" align="left" width="96px"/>  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -11,7 +11,7 @@ Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.
 
 #### Quickstarts
 
-In about **five minutes**, you'll have a simple Node command-line application that makes requests to a Google API.
+In about **five minutes**, you'll have a simple Node command-line application that makes requests to a Google Workspace API.
 
 #### Guides
 
@@ -60,7 +60,7 @@ Some IDEs (like VS Code) will detect these lint errors within the editor.
 
 ## Node Client Library
 
-G Suite APIs use the [Google API Node.js client library](https://github.com/google/google-api-nodejs-client).
+Google Workspace APIs use the [Google API Node.js client library](https://github.com/google/google-api-nodejs-client).
 
 ## Contributing
 
