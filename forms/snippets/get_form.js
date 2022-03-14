@@ -26,7 +26,7 @@ async function runSample(query) {
   });
 
   const forms = google.forms({
-    version: 'v1beta',
+    version: 'v1',
     auth: auth
   });
 
