@@ -22,7 +22,7 @@ const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
  * Lists the names and IDs of up to 10 files.
  * @param {Googleauth} auth The Google default authenticated .
  */
-function drive_quickstart(auth) {
+function listFiles(auth) {
   const drive = google.drive({version: 'v3', auth});
   drive.files.list({
     pageSize: 10,
