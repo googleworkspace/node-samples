@@ -66,9 +66,6 @@ function batchUpdate( auth,
   // [END sheets_batch_update]
 }
 
-// replace 'id' with the required spreadsheet ID
-// replace 'title' with the title to replace the current title of the
-// spreadsheet
-// replace 'hello' with the string to be found in the spreadsheet
-// replace 'bye' with the string to replace the previous string
+// TODO - replace the spreadsheetid, title, find, and replacement place holders with your
+// values
 batchUpdate(auth, '1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'title', 'hello', 'bye');
