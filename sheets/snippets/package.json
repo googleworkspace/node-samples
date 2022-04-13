@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "expect": "^1.12.2",
-    "google-auth-library": "^0.9.6",
+    "google-auth-library": "^0.10.0",
     "googleapis": ">12.2.0",
     "mocha": "^3.1.0",
     "promise": "^7.0.4"
