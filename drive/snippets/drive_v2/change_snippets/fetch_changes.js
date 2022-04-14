@@ -14,46 +14,34 @@
  * limitations under the License.
  */
 // [START drive_fetch_changes]
-const async = require('async');
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-
-const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
 
 /**
  * Retrieve the list of changes for the currently authenticated user
- * @param {Googleauth} auth The Google default authenticated .
  * */
-function fetch_changes(auth) {
+async function fetch_changes() {
+    // Get credentials and build service
+    // TODO (developer) - Use appropriate auth mechanism for your app
+
+    const {GoogleAuth} = require('google-auth-library');
+    const {google} = require('googleapis');
+
+    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
     const service = google.drive({version: 'v2', auth});
     let pageToken;
-    async.doWhilst(function(callback) {
-        service.changes.list({
+    try {
+        const res = await service.changes.list({
             pageToken: pageToken,
             fields: '*',
-        }, function(err, res) {
-            if (err) {
-                callback(err);
-            } else {
-                // Process changes
-                res.data.items.forEach(function(change) {
-                    console.log('Change found for file:', change.fileId);
-                });
-                pageToken = res.nextPageToken;
-                callback(res.newStartPageToken);
-            }
         });
-    }, function() {
-        return !!pageToken;
-    }, function(err, newStartPageToken) {
-        if (err) {
-            console.error('The API returned an error: ' + err);
-        } else {
-            console.log(newStartPageToken),
-            console.log('Done fetching changes');
-        }
-    });
+        // Process changes
+        res.data.items.forEach(function(change) {
+            console.log('Change found for file:', change.fileId);
+            });
+        } catch (err) {
+        // TODO(developer) - Handle error
+        throw err;
+    }
 }
 // [END drive_fetch_changes]
 
-fetch_changes(auth);
+fetch_changes();

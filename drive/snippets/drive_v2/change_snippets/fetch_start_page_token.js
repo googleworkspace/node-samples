@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 // [START drive_fetch_start_page_token]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
 
-const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
 /**
  * Retrieve page token for the current state of the account
- * @param {Googleauth} auth The Google default authenticated .
  * */
-function fetch_start_page_token(auth) {
+async function fetch_start_page_token() {
+    // Get credentials and build service
+    // TODO (developer) - Use appropriate auth mechanism for your app
+
+    const {GoogleAuth} = require('google-auth-library');
+    const {google} = require('googleapis');
+
+    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
     const service = google.drive({version: 'v2', auth});
-    service.changes.getStartPageToken({},
-        function(err, res) {
-            if (err) {
-                console.error('The API returned an error: ' + err);
-                } else {
-                    console.log('Start token:', res.data.startPageToken);
-                }
-        });
+    try {
+        const res = await service.changes.getStartPageToken();
+        console.log('Start token:', res.data.startPageToken);
+    } catch (err) {
+        // TODO(developer) - Handle error
+        throw err;
+    }
 }
 // [END drive_fetch_start_page_token]
 
-fetch_start_page_token(auth);
+fetch_start_page_token();
