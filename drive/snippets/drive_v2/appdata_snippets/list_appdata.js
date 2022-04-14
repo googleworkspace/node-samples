@@ -28,14 +28,14 @@ async function list_appdata() {
     const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
     const service = google.drive({version: 'v2', auth});
     try {
-    const res = await service.files.list({
-        spaces: 'appDataFolder',
-        fields: 'nextPageToken, items(id, title)',
-        pageSize: 100,
-    });
-    res.data.items.forEach(function(file) {
-        console.log('Found file:', file.title, file.id);
-    });
+        const res = await service.files.list({
+            spaces: 'appDataFolder',
+            fields: 'nextPageToken, items(id, title)',
+            pageSize: 100,
+        });
+        res.data.items.forEach(function(file) {
+            console.log('Found file:', file.title, file.id);
+        });
     } catch (err) {
         // TODO(developer) - Handle error
         throw err;
