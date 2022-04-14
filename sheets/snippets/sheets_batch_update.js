@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START sheets_batch_update]
 
+// [START sheets_batch_update]
 /**
  * Updates the Spreadsheet title. Finds and replaces a string in the sheets.
  * @param {string} spreadsheetId The Spreadsheet to update

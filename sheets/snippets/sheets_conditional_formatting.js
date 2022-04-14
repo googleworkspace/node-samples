@@ -15,7 +15,6 @@
  */
 
 // [START sheets_conditional_formatting]
-
 /**
  * Conditionally formats a Spreadsheet.
  * @param {string} spreadsheetId A Spreadsheet ID.

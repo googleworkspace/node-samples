@@ -15,7 +15,6 @@
  */
 
 // [START sheets_get_values]
-
 /**
  * Gets cell values from a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.

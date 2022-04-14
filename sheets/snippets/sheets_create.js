@@ -15,7 +15,6 @@
  */
 
 // [START sheets_create]
-
 /**
  * Create a google spreadsheet
  * @param {string} title Spreadsheets title

@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-  // [START sheets_append_values]
-
+// [START sheets_append_values]
 /**
  * Appends values in a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.

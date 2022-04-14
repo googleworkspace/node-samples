@@ -15,7 +15,6 @@
  */
 
 // [START sheets_batch_get_values]
-
 /**
  * Batch gets cell values from a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.

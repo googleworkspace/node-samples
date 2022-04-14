@@ -15,7 +15,6 @@
  */
 
 // [START sheets_batch_update_values]
-
 /**
  * Batch Updates values in a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.

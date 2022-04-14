@@ -15,7 +15,6 @@
  */
 
 // [START sheets_update_values]
-
 /**
  * Updates values in a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
