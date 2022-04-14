@@ -28,10 +28,10 @@ async function fetch_appdata_folder() {
     const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
     const service = google.drive({version: 'v2', auth});
     try {
-    const file = await service.files.get({
-        fileId: 'appDataFolder',
-        fields: 'id',
-    });
+        const file = await service.files.get({
+            fileId: 'appDataFolder',
+            fields: 'id',
+        });
     console.log('File Id:', file.data.id);
     } catch (err) {
         // TODO(developer) - Handle error
