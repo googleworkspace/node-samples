@@ -15,35 +15,33 @@
  */
 
 // [START sheets_get_values]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-
-const auth = new GoogleAuth(
-  {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
 /**
  * Gets cell values from a Spreadsheet.
- * @param {GoogleAuth} auth The google default authentiaction
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} range The sheet range.
  */
-function getValues(auth, spreadsheetId, range) {
+async function getValues(spreadsheetId, range) {
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
+
+  const auth = new GoogleAuth(
+    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+
   const service = google.sheets({version: 'v4', auth});
-  service.spreadsheets.values.get({
-    spreadsheetId,
-    range,
-  }, (err, result) => {
-    if (err) {
-      // TODO (developer) - Handle exception
-      console.log('The API returned an error: ' + err);
-    } else {
-      const numRows = result.data.values ? result.data.values.length : 0;
-      console.log(`${numRows} rows retrieved.`);
-      return result.values;
-    }
-  });
+  try {
+    const result = await service.spreadsheets.values.get({
+      spreadsheetId,
+      range,
+    });
+    const numRows = result.data.values ? result.data.values.length : 0;
+    console.log(`${numRows} rows retrieved.`);
+  } catch (err) {
+    // TODO (developer) - Handle exception
+    throw err;
+  }
 }
 // [END sheets_get_values]
 
 // Replace the values below with desired values
-getValues(auth, '1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2');
+getValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2');

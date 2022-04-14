@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 // [START sheets_batch_update]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-
-const auth = new GoogleAuth(
-  {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
 /**
  * Updates the Spreadsheet title. Finds and replaces a string in the sheets.
- * @param {GoogleAuth} auth The google default authentication
  * @param {string} spreadsheetId The Spreadsheet to update
  * @param {string} title The new Spreadsheet title
  * @param {string} find The text to find
  * @param {string} replacement The text to replace
  */
-function batchUpdate( auth,
-  spreadsheetId, title, find, replacement) {
+async function batchUpdate(spreadsheetId, title, find, replacement) {
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
+
+  const auth = new GoogleAuth(
+    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+
   const service = google.sheets({version: 'v4', auth});
   let requests = [];
   // Change the spreadsheet's title.
@@ -51,20 +50,19 @@ function batchUpdate( auth,
   });
   // Add additional requests (operations) ...
   const batchUpdateRequest = {requests};
-  service.spreadsheets.batchUpdate({
-    spreadsheetId,
-    resource: batchUpdateRequest,
-  }, (err, response) => {
-    if (err) {
-      // TODO (developer) - Handle exception
-      console.log('The API returned an error: ' + err);
-    } else {
-      const findReplaceResponse = response.replies[1].findReplace;
-      console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
-    }
-  });
-  // [END sheets_batch_update]
+  try {
+    const response = await service.spreadsheets.batchUpdate({
+      spreadsheetId,
+      resource: batchUpdateRequest,
+    });
+    const findReplaceResponse = response.data.replies[1].findReplace;
+    console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
+  } catch (err) {
+    // TODO (developer) - Handle exception
+    throw err;
+  }
 }
+// [END sheets_batch_update]
 
 // Replace the values below with desired values
-batchUpdate(auth, '1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'title', 'hello', 'bye');
+batchUpdate('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'title', 'hello', 'bye');

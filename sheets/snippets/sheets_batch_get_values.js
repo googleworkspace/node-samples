@@ -15,19 +15,19 @@
  */
 
 // [START sheets_batch_get_values]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-
-const auth = new GoogleAuth(
-  {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
 /**
  * Batch gets cell values from a Spreadsheet.
- * @param {GoogleAuth} auth The google default authentication
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} _ranges The mock sheet range.
  */
-function batchGetValues(auth, spreadsheetId, _ranges) {
+async function batchGetValues(spreadsheetId, _ranges) {
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
+
+  const auth = new GoogleAuth(
+    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+
   const service = google.sheets({version: 'v4', auth});
   let ranges = [
     // Range names ...
@@ -35,19 +35,18 @@ function batchGetValues(auth, spreadsheetId, _ranges) {
   // [START_EXCLUDE silent]
   ranges = _ranges;
   // [END_EXCLUDE]
-  service.spreadsheets.values.batchGet({
-    spreadsheetId,
-    ranges,
-  }, (err, result) => {
-    if (err) {
-      // TODO (developer) - Handle exception
-      console.error('The API returned an error:' + err);
-    } else {
-      console.log(`${result.data.valueRanges.length} ranges retrieved.`);
-    }
-  });
+  try {
+    const result = await service.spreadsheets.values.batchGet({
+      spreadsheetId,
+      ranges,
+    });
+    console.log(`${result.data.valueRanges.length} ranges retrieved.`);
+  } catch (err) {
+    // TODO (developer) - Handle exception
+    throw err;
+  }
 }
 // [END sheets_batch_get_values]
 
 // Replace the values below with desired values
-batchGetValues(auth, '1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2');
+batchGetValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2');

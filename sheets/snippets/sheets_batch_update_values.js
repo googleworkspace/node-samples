@@ -15,21 +15,21 @@
  */
 
 // [START sheets_batch_update_values]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-
-const auth = new GoogleAuth(
-  {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
 /**
  * Batch Updates values in a Spreadsheet.
- * @param {GoogleAuth} auth The google default authentication
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} range The range of values to update.
  * @param {object} valueInputOption Value update options.
  * @param {(string[])[]} _values A 2d array of values to update.
  */
-function batchUpdateValues(auth, spreadsheetId, range, valueInputOption, _values) {
+async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values) {
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
+
+  const auth = new GoogleAuth(
+    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+
   const service = google.sheets({version: 'v4', auth});
   let values = [
     [
@@ -49,22 +49,22 @@ function batchUpdateValues(auth, spreadsheetId, range, valueInputOption, _values
     data,
     valueInputOption,
   };
-  service.spreadsheets.values.batchUpdate({
-    spreadsheetId,
-    resource,
-  }, (err, result) => {
-    if (err) {
-      // TODO (developer) - Handle exception
-      console.log('The API returned an error: ' + err);
-    } else {
-      console.log('%d cells updated.', result.data.totalUpdatedCells);
-    }
-  });
+  try {
+    const result = await service.spreadsheets.values.batchUpdate({
+      spreadsheetId,
+      resource,
+    });
+    console.log('%d cells updated.', result.data.totalUpdatedCells);
+  } catch (err) {
+    // TODO (developer) - Handle exception
+    throw err;
+  }
 }
 // [END sheets_batch_update_values]
 
 // Replace the values below with desired values
-batchUpdateValues(auth, '1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2', 'USER_ENTERED', [
+batchUpdateValues('1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2',
+  'USER_ENTERED', [
+  ['D', 'C'],
   ['A', 'B'],
-  ['C', 'D'],
 ]);

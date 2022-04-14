@@ -15,21 +15,21 @@
  */
 
 // [START sheets_update_values]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-
-const auth = new GoogleAuth(
-  {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
 /**
  * Updates values in a Spreadsheet.
- * @param {GoogleAuth} auth The google default authentication
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} range The range of values to update.
  * @param {object} valueInputOption Value update options.
  * @param {(string[])[]} _values A 2d array of values to update.
  */
-function updateValues(auth, spreadsheetId, range, valueInputOption, _values) {
+async function updateValues(spreadsheetId, range, valueInputOption, _values) {
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
+
+  const auth = new GoogleAuth(
+    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+
   const service = google.sheets({version: 'v4', auth});
   let values = [
     [
@@ -43,23 +43,23 @@ function updateValues(auth, spreadsheetId, range, valueInputOption, _values) {
   const resource = {
     values,
   };
-  service.spreadsheets.values.update({
-    spreadsheetId,
-    range,
-    valueInputOption,
-    resource,
-  }, (err, result) => {
-    if (err) {
-      // TODO (Developer) - Handle exception
-      console.error('The API returned an error:' + err);
-    } else {
-      console.log('%d cells updated.', result.data.updatedCells);
-    }
-  });
+  try {
+    const result = await service.spreadsheets.values.update({
+      spreadsheetId,
+      range,
+      valueInputOption,
+      resource,
+    });
+    console.log('%d cells updated.', result.data.updatedCells);
+  } catch (err) {
+    // TODO (Developer) - Handle exception
+    throw err;
+  }
 }
 // [END sheets_update_values]
 
-updateValues(auth, '1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2', 'USER_ENTERED', [
+updateValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
+  'USER_ENTERED', [
   ['A', 'B'],
   ['C', 'D'],
 ]);
