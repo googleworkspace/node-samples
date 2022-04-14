@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-  // [START sheets_pivot_tables]
-
+// [START sheets_pivot_tables]
 /**
  * Adds a pivot table to a spreadsheet.
  * @param {string} spreadsheetId The Spreadsheet to add the pivot table to.
