@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-// [START sheets_create]
+  // [START sheets_append_values]
 
 /**
- * Create a google spreadsheet
- * @param {string} title Spreadsheets title
+ * Appends values in a Spreadsheet.
+ * @param {string} spreadsheetId The spreadsheet ID.
+ * @param {string} range The range of values to append.
+ * @param {object} valueInputOption Value input options.
+ * @param {(string[])[]} _values A 2d array of values to append.
  */
-async function create(title) {
+async function appendValues(spreadsheetId, range, valueInputOption, _values) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
@@ -28,23 +31,35 @@ async function create(title) {
     {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
   const service = google.sheets({version: 'v4', auth});
-  const resource = {
-    properties: {
-      title,
-    },
+  let values = [
+    [
+      // Cell values ...
+    ],
+    // Additional rows ...
+  ];
+  // [START_EXCLUDE silent]
+  values = _values;
+  // [END_EXCLUDE]
+  let resource = {
+    values,
   };
   try {
-    const spreadsheet = await service.spreadsheets.create({
+    const result = await service.spreadsheets.values.append({
+      spreadsheetId,
+      range,
+      valueInputOption,
       resource,
-      fields: 'spreadsheetId',
     });
-    console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
+    console.log(`${result.data.updates.updatedCells} cells appended.`);
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
   }
 }
-// [END sheets_create]
+// [END sheets_append_values]
 
-// Replace the values below with desired values
-create('Title');
+appendValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
+  'USER_ENTERED', [
+  ['A', 'B'],
+  ['C', 'D'],
+]);
