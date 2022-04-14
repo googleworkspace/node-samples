@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 // [START drive_upload_appdata]
-const fs = require('fs');
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-
-const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
 
 /**
  * Insert a file in the application data folder and prints file Id.
- * @param {Googleauth} auth The Google default authenticated .
  * */
-function upload_appdata(auth) {
+async function upload_appdata() {
+    // Get credentials and build service
+    // TODO (developer) - Use appropriate auth mechanism for your app
+
+    const fs = require('fs');
+    const {GoogleAuth} = require('google-auth-library');
+    const {google} = require('googleapis');
+
+    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
     const service = google.drive({version: 'v2', auth});
     const fileMetadata = {
         'title': 'config.json',
@@ -36,19 +38,19 @@ function upload_appdata(auth) {
         mimeType: 'application/json',
         body: fs.createReadStream('config.json'),
     };
-    service.files.insert({
+    try {
+    const file = await service.files.insert({
         resource: fileMetadata,
         media: media,
         fields: 'id',
-    }, function(err, file) {
-        if (err) {
-            console.error('The API returned an error: ' + err);
-        } else {
-            console.log('Folder Id:', file.data.id);
-        }
     });
+    console.log('Folder Id:', file.data.id);
+    } catch (err) {
+        // TODO(developer) - Handle error
+        throw err;
+    }
 }
 // [END drive_upload_appdata]
 
-upload_appdata(auth);
+upload_appdata();
 
