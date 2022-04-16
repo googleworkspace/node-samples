@@ -14,31 +14,33 @@
  * limitations under the License.
  */
 // [START drive_list_appdata]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
 
-const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
 /**
  * List all files inserted in the application data folder
- * @param {Googleauth} auth The Google default authenticated .
  * */
-function list_appdata(auth) {
+async function list_appdata() {
+    // Get credentials and build service
+    // TODO (developer) - Use appropriate auth mechanism for your app
+
+    const {GoogleAuth} = require('google-auth-library');
+    const {google} = require('googleapis');
+
+    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
     const service = google.drive({version: 'v2', auth});
-    service.files.list({
-        spaces: 'appDataFolder',
-        fields: 'nextPageToken, items(id, title)',
-        pageSize: 100,
-    }, function(err, res) {
-        if (err) {
-            // Handle error
-            console.error('The API returned an error: ' + err);
-        } else {
-            res.data.items.forEach(function(file) {
-                console.log('Found file:', file.title, file.id);
-            });
-        }
-    });
+    try {
+        const res = await service.files.list({
+            spaces: 'appDataFolder',
+            fields: 'nextPageToken, items(id, title)',
+            pageSize: 100,
+        });
+        res.data.items.forEach(function(file) {
+            console.log('Found file:', file.title, file.id);
+        });
+    } catch (err) {
+        // TODO(developer) - Handle error
+        throw err;
+    }
 }
 // [END drive_list_appdata]
 
-list_appdata(auth);
+list_appdata();

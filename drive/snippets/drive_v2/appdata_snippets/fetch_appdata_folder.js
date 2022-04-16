@@ -14,28 +14,30 @@
  * limitations under the License.
  */
 // [START drive_fetch_appdata_folder]
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
 
-const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
 /**
  * List out application data folder and prints folder ID
- * @param {Googleauth} auth The Google default authenticated .
  * */
-function fetch_appdata_folder(auth) {
+async function fetch_appdata_folder() {
+    // Get credentials and build service
+    // TODO (developer) - Use appropriate auth mechanism for your app
+
+    const {GoogleAuth} = require('google-auth-library');
+    const {google} = require('googleapis');
+
+    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
     const service = google.drive({version: 'v2', auth});
-    service.files.get({
-        fileId: 'appDataFolder',
-        fields: 'id',
-    }, function(err, file) {
-        if (err) {
-            // Handle error
-            console.error('The API returned an error: ' + err);
-        } else {
-            console.log('File Id:', file.data.id);
-        }
-    });
+    try {
+        const file = await service.files.get({
+            fileId: 'appDataFolder',
+            fields: 'id',
+        });
+    console.log('File Id:', file.data.id);
+    } catch (err) {
+        // TODO(developer) - Handle error
+        throw err;
+    }
 }
 // [END drive_fetch_appdata_folder]
 
-fetch_appdata_folder(auth);
+fetch_appdata_folder();
