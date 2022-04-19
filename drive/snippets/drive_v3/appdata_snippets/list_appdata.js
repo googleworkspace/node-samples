@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START drive_upload_appdata]
+// [START drive_list_appdata]
 
 /**
  * List all files inserted in the application data folder
