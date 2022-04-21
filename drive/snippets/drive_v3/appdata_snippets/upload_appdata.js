@@ -37,13 +37,13 @@ async function upload_appdata() {
       body: fs.createReadStream('config.json'),
     };
     try {
-      const file = await service.files.create(
+        const file = await service.files.create(
           {
-            resource: fileMetadata,
-            media: media,
-            fields: 'id',
+              resource: fileMetadata,
+              media: media,
+              fields: 'id',
           });
-      console.log('Folder Id:', file.data.id);
+        console.log('Folder Id:', file.data.id);
       } catch (err) {
           // TODO(developer) - Handle error
           throw err;

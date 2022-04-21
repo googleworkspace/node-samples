@@ -34,7 +34,7 @@ async function fetch_appdata_folder() {
                 fileId: 'appDataFolder',
                 fields: 'id',
             });
-                console.log('File Id:', file.data.id);
+        console.log('File Id:', file.data.id);
             } catch (err) {
                 // TODO(developer) - Handle error
                 throw err;
