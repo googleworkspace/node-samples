@@ -13,34 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START drive_fetch_appdata_folder]
-
+// [START drive_upload_appdata]
 
 /**
- * List out application data folder and prints folder ID
+ * Insert a file in the application data folder and prints file Id.
  * */
-async function fetch_appdata_folder() {
+async function upload_appdata() {
     // Get credentials and build service
     // TODO (developer) - Use appropriate auth mechanism for your app
 
+    const fs = require('fs');
     const {GoogleAuth} = require('google-auth-library');
     const {google} = require('googleapis');
 
     const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
-    const service = google.drive({version: 'v3', auth});
+    const service = google.drive({version: 'v2', auth});
+    const fileMetadata = {
+        'title': 'config.json',
+        'parents': [{
+            'id': 'appDataFolder',
+        }],
+    };
+    const media = {
+        mimeType: 'application/json',
+        body: fs.createReadStream('config.json'),
+    };
     try {
-        const file = await service.files.get(
-            {
-                fileId: 'appDataFolder',
-                fields: 'id',
-            });
-        console.log('File Id:', file.data.id);
-            } catch (err) {
-                // TODO(developer) - Handle error
-                throw err;
-            }
+        const file = await service.files.insert({
+            resource: fileMetadata,
+            media: media,
+            fields: 'id',
+        });
+        console.log('Folder Id:', file.data.id);
+    } catch (err) {
+        // TODO(developer) - Handle error
+        throw err;
+    }
 }
+// [END drive_upload_appdata]
 
-// [END drive_fetch_appdata_folder]
+upload_appdata();
 
-fetch_appdata_folder();

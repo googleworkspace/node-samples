@@ -37,13 +37,13 @@ class SheetsSnippets {
   async create(title) {
     return new Promise((resolve, reject) => {
       // [START sheets_create]
-      const resource = {
+      const requestBody = {
         properties: {
           title,
         },
       };
       this.sheetsService.spreadsheets.create({
-        resource,
+        requestBody,
         fields: 'spreadsheetId',
       }, (err, spreadsheet) =>{
         if (err) {
@@ -96,7 +96,7 @@ class SheetsSnippets {
       const batchUpdateRequest = {requests};
       this.sheetsService.spreadsheets.batchUpdate({
         spreadsheetId,
-        resource: batchUpdateRequest,
+        requestBody: batchUpdateRequest,
       }, (err, response) => {
         if (err) {
           // Handle error
@@ -203,14 +203,14 @@ class SheetsSnippets {
       // [START_EXCLUDE silent]
       values = _values;
       // [END_EXCLUDE]
-      const resource = {
+      const requestBody = {
         values,
       };
       this.sheetsService.spreadsheets.values.update({
         spreadsheetId,
         range,
         valueInputOption,
-        resource,
+        requestBody,
       }, (err, result) => {
         if (err) {
           // Handle error
@@ -254,13 +254,13 @@ class SheetsSnippets {
         values,
       }];
       // Additional ranges to update ...
-      const resource = {
+      const requestBody = {
         data,
         valueInputOption,
       };
       this.sheetsService.spreadsheets.values.batchUpdate({
         spreadsheetId,
-        resource,
+        requestBody,
       }, (err, result) => {
         if (err) {
           // Handle error
@@ -299,14 +299,14 @@ class SheetsSnippets {
       // [START_EXCLUDE silent]
       values = _values;
       // [END_EXCLUDE]
-      let resource = {
+      let requestBody = {
         values,
       };
       this.sheetsService.spreadsheets.values.append({
         spreadsheetId,
         range,
         valueInputOption,
-        resource,
+        requestBody,
       }, (err, result) => {
         if (err) {
           // Handle error.
@@ -338,10 +338,10 @@ class SheetsSnippets {
       }, {
         addSheet: {},
       }];
-      const resource = {requests};
+      const requestBody = {requests};
       this.sheetsService.spreadsheets.batchUpdate({
         spreadsheetId,
-        resource,
+        requestBody,
       }, (err, response) => {
         if (err) {
           // Handle error.
@@ -393,12 +393,12 @@ class SheetsSnippets {
             },
           }];
 
-          const resource = {
+          const requestBody = {
             requests,
           };
           this.sheetsService.spreadsheets.batchUpdate({
             spreadsheetId,
-            resource,
+            requestBody,
           }, (err, response) => {
             if (err) {
               // Handle error.
@@ -467,12 +467,12 @@ class SheetsSnippets {
         },
       }];
 
-      const resource = {
+      const requestBody = {
         requests,
       };
       this.sheetsService.spreadsheets.batchUpdate({
         spreadsheetId,
-        resource,
+        requestBody,
       }, (err, response) => {
         if (err) {
           // Handle error.
