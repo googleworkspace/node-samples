@@ -2,16 +2,16 @@
 
 Node.js samples for [Google Workspace APIs](https://developers.google.com/workspace/) docs.
 
-| Quickstart| Snippets
+API| Quickstart| Snippets
 ---| ---| ---
-**Apps&nbsp;Script** <img src="https://www.gstatic.com/images/branding/product/2x/apps_script_96dp.png" align="center" width="76px"/> | [Link](https://developers.google.com/apps-script/api/quickstart/nodejs)      | ---
-**Calendar** <img src="https://www.gstatic.com/images/branding/product/2x/calendar_96dp.png" align="left" width="96px"/>              | [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs) | [Link](https://developers.google.com/calendar/overview)
-**Classroom** <img src="https://www.gstatic.com/images/branding/product/2x/classroom_96dp.png" align="left" width="96px"/>            | [Link](https://developers.google.com/classroom/quickstart/nodejs)            | [Link](https://developers.google.com/classroom/guides/get-started)
-**Drive V3** <img src="https://www.gstatic.com/images/branding/product/2x/drive_96dp.png" align="left" width="96px"/>                 | [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs)         | [Link](https://developers.google.com/drive/v3/web/about-sdk)
-**Gmail** <img src="https://www.gstatic.com/images/branding/product/2x/gmail_96dp.png" align="left" width="96px"/>                    | [Link](https://developers.google.com/gmail/api/quickstart/nodejs)            | [Link](https://developers.google.com/gmail/api/guides/)
-**Sheets** <img src="https://www.gstatic.com/images/branding/product/2x/sheets_96dp.png" align="left" width="96px"/>                  | [Link](https://developers.google.com/sheets/api/quickstart/nodejs)           | [Link](https://developers.google.com/sheets/api/guides/concepts)
-**Slides** <img src="https://www.gstatic.com/images/branding/product/2x/slides_96dp.png" align="left" width="96px"/>                  | [Link](https://developers.google.com/slides/quickstart/nodejs)               | [Link](https://developers.google.com/slides/how-tos/overview)
-**Tasks** <img src="https://www.gstatic.com/images/branding/product/2x/tasks_96dp.png" align="left" width="96px"/>                    | [Link](https://developers.google.com/tasks/quickstart/nodejs)                | ---
+**Apps&nbsp;Script**| [Link](https://developers.google.com/apps-script/api/quickstart/nodejs)| ---
+**Calendar**| [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs)| [Link](https://developers.google.com/calendar/overview)
+**Classroom**| [Link](https://developers.google.com/classroom/quickstart/nodejs)| [Link](https://developers.google.com/classroom/guides/get-started)
+**Drive V3**| [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs)| [Link](https://developers.google.com/drive/v3/web/about-sdk)
+**Gmail**| [Link](https://developers.google.com/gmail/api/quickstart/nodejs)| [Link](https://developers.google.com/gmail/api/guides/)
+**Sheets**| [Link](https://developers.google.com/sheets/api/quickstart/nodejs)| [Link](https://developers.google.com/sheets/api/guides/concepts)
+**Slides**| [Link](https://developers.google.com/slides/quickstart/nodejs)| [Link](https://developers.google.com/slides/how-tos/overview)
+**Tasks**| [Link](https://developers.google.com/tasks/quickstart/nodejs)| ---
 
 ## Sample Types
 
