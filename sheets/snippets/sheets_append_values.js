@@ -27,7 +27,7 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
   const service = google.sheets({version: 'v4', auth});
   let values = [
@@ -39,7 +39,7 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
   // [START_EXCLUDE silent]
   values = _values;
   // [END_EXCLUDE]
-  let resource = {
+  const resource = {
     values,
   };
   try {
@@ -58,7 +58,7 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
 // [END sheets_append_values]
 
 appendValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
-  'USER_ENTERED', [
-  ['A', 'B'],
-  ['C', 'D'],
-]);
+    'USER_ENTERED', [
+      ['A', 'B'],
+      ['C', 'D'],
+    ]);

@@ -40,7 +40,7 @@ class Helpers {
     return new Promise((resolve, reject) => {
       (new GoogleAuth()).getApplicationDefault((err, authClient) => {
         if (err) return reject(err);
-        let scopes = [
+        const scopes = [
           'https://www.googleapis.com/auth/drive',
           'https://www.googleapis.com/auth/spreadsheets',
         ];
@@ -85,7 +85,7 @@ class Helpers {
   createTestSpreadsheet() {
     return this.sheetsService.then((sheets) => {
       const createSpreadsheet = Promise.denodeify(sheets.spreadsheets.create)
-         .bind(sheets.spreadsheets);
+          .bind(sheets.spreadsheets);
       return createSpreadsheet({
         resource: {
           properties: {
@@ -94,10 +94,10 @@ class Helpers {
         },
         fields: 'spreadsheetId',
       })
-      .then((spreadsheet) => {
-        this.deleteFileOnCleanup(spreadsheet.spreadsheetId);
-        return spreadsheet.spreadsheetId;
-      });
+          .then((spreadsheet) => {
+            this.deleteFileOnCleanup(spreadsheet.spreadsheetId);
+            return spreadsheet.spreadsheetId;
+          });
     });
   }
 
@@ -109,7 +109,7 @@ class Helpers {
   populateValues(spreadsheetId) {
     return this.sheetsService.then((sheets) => {
       const batchUpdate = Promise.denodeify(sheets.spreadsheets.batchUpdate)
-           .bind(sheets.spreadsheets);
+          .bind(sheets.spreadsheets);
       return batchUpdate({
         spreadsheetId,
         resource: {
@@ -132,7 +132,7 @@ class Helpers {
           }],
         },
       })
-      .then(() => spreadsheetId);
+          .then(() => spreadsheetId);
     });
   }
 }

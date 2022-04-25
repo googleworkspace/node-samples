@@ -25,10 +25,10 @@ async function copyPresentation(presentationId, copyTitle) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/drive'});
+      {scopes: 'https://www.googleapis.com/auth/drive'});
 
   const service = google.drive({version: 'v2', auth});
-  let request = {
+  const request = {
     name: copyTitle,
   };
 
@@ -37,7 +37,7 @@ async function copyPresentation(presentationId, copyTitle) {
       fileId: presentationId,
       resource: request,
     });
-    let presentationCopyId = driveResponse.data.id;
+    const presentationCopyId = driveResponse.data.id;
     console.log('Created copied presentation with ID: ' + presentationCopyId);
   } catch (err) {
     // TODO (developer) - handle exception

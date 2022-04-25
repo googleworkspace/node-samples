@@ -43,9 +43,9 @@ class Helpers {
       googleAuth.getApplicationDefault((err, authClient) => {
         if (err) return reject(err);
         const scopes = [
-            'https://www.googleapis.com/auth/drive',
-            'https://www.googleapis.com/auth/presentations',
-            'https://www.googleapis.com/auth/spreadsheets',
+          'https://www.googleapis.com/auth/drive',
+          'https://www.googleapis.com/auth/presentations',
+          'https://www.googleapis.com/auth/spreadsheets',
         ];
         if (authClient.createScopedRequired &&
             authClient.createScopedRequired()) {

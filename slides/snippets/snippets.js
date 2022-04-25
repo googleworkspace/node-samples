@@ -59,14 +59,14 @@ class SlidesSnippets {
   async copyPresentation(presentationId, copyTitle) {
     return new Promise((resolve, reject) => {
       // [START slides_copy_presentation]
-      let request = {
+      const request = {
         name: copyTitle,
       };
       this.driveService.files.copy({
         fileId: presentationId,
         resource: request,
       }, (err, driveResponse) => {
-        let presentationCopyId = driveResponse.id;
+        const presentationCopyId = driveResponse.id;
         // [START_EXCLUDE silent]
         resolve(presentationCopyId);
         // [END_EXCLUDE]
@@ -84,7 +84,7 @@ class SlidesSnippets {
   async createSlide(presentationId, pageId) {
     return new Promise((resolve, reject) => {
       // [START slides_create_slide]
-      let requests = [{
+      const requests = [{
         createSlide: {
           objectId: pageId,
           insertionIndex: '1',
@@ -122,12 +122,12 @@ class SlidesSnippets {
     return new Promise((resolve, reject) => {
       // [START slides_create_textbox_with_text]
       // Create a new square textbox, using the supplied element ID.
-      let elementId = 'MyTextBox_01';
-      let pt350 = {
+      const elementId = 'MyTextBox_01';
+      const pt350 = {
         magnitude: 350,
         unit: 'PT',
       };
-      let requests = [{
+      const requests = [{
         createShape: {
           objectId: elementId,
           shapeType: 'TEXT_BOX',
@@ -160,7 +160,7 @@ class SlidesSnippets {
         presentationId,
         resource: {requests},
       }, (err, createTextboxWithTextResponse) => {
-        let createShapeResponse = createTextboxWithTextResponse.replies[0].createShape;
+        const createShapeResponse = createTextboxWithTextResponse.replies[0].createShape;
         console.log(`Created textbox with ID: ${createShapeResponse.objectId}`);
         // [START_EXCLUDE silent]
         resolve(createTextboxWithTextResponse);
@@ -178,16 +178,16 @@ class SlidesSnippets {
    */
   async createImage(presentationId, pageId) {
     return new Promise((resolve, reject) => {
-      let imageUrl =
+      const imageUrl =
         'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
       // [START slides_create_image]
       // Create a new image, using the supplied object ID, with content downloaded from imageUrl.
-      let imageId = 'MyImage_01';
-      let emu4M = {
+      const imageId = 'MyImage_01';
+      const emu4M = {
         magnitude: 4000000,
         unit: 'EMU',
       };
-      let requests = [{
+      const requests = [{
         createImage: {
           objectId: imageId,
           url: imageUrl,
@@ -213,7 +213,7 @@ class SlidesSnippets {
         presentationId,
         resource: {requests},
       }, (err, response) => {
-        let createImageResponse = response.replies;
+        const createImageResponse = response.replies;
         console.log(`Created image with ID: ${createImageResponse[0].createImage.objectId}`);
         // [START_EXCLUDE silent]
         resolve(createImageResponse);
@@ -233,25 +233,25 @@ class SlidesSnippets {
     return new Promise((resolve, reject) => {
       // [START slides_text_merging]
       // Use the Sheets API to load data, one record per row.
-      let responses = [];
-      let dataRangeNotation = 'Customers!A2:M6';
+      const responses = [];
+      const dataRangeNotation = 'Customers!A2:M6';
 
       this.sheetsService.spreadsheets.values.get({
         spreadsheetId: dataSpreadsheetId,
         range: dataRangeNotation,
       }, (err, sheetsResponse) => {
-        let values = sheetsResponse.values;
+        const values = sheetsResponse.values;
 
         // For each record, create a new merged presentation.
         for (let i = 0; i < values.length; ++i) {
-          let row = values[i];
-          let customerName = row[2]; // name in column 3
-          let caseDescription = row[5]; // case description in column 6
-          let totalPortfolio = row[11]; // total portfolio in column 12
+          const row = values[i];
+          const customerName = row[2]; // name in column 3
+          const caseDescription = row[5]; // case description in column 6
+          const totalPortfolio = row[11]; // total portfolio in column 12
 
           // Duplicate the template presentation using the Drive API.
-          let copyTitle = customerName + ' presentation';
-          let requests = {
+          const copyTitle = customerName + ' presentation';
+          const requests = {
             name: copyTitle,
           };
 
@@ -259,9 +259,9 @@ class SlidesSnippets {
             fileId: templatePresentationId,
             requests,
           }, (err, driveResponse) => {
-            let presentationCopyId = driveResponse.id;
+            const presentationCopyId = driveResponse.id;
             // Create the text merge (replaceAllText) requests for this presentation.
-            let requests = [{
+            const requests = [{
               replaceAllText: {
                 containsText: {
                   text: '{{customer-name}}',
@@ -293,7 +293,7 @@ class SlidesSnippets {
                 requests,
               },
             }, (err, batchUpdateResponse) => {
-              let result = batchUpdateResponse;
+              const result = batchUpdateResponse;
               // [START_EXCLUDE silent]
               responses.push(result.replies);
               // [END_EXCLUDE]
@@ -327,21 +327,21 @@ class SlidesSnippets {
    */
   async imageMerging(templatePresentationId, imageUrl, customerName) {
     return new Promise((resolve, reject) => {
-      let logoUrl = imageUrl;
-      let customerGraphicUrl = imageUrl;
+      const logoUrl = imageUrl;
+      const customerGraphicUrl = imageUrl;
       // [START slides_image_merging]
       // Duplicate the template presentation using the Drive API.
-      let copyTitle = customerName + ' presentation';
+      const copyTitle = customerName + ' presentation';
       this.driveService.files.copy({
         fileId: templatePresentationId,
         resource: {
           name: copyTitle,
         },
       }, (err, driveResponse) => {
-        let presentationCopyId = driveResponse.id;
+        const presentationCopyId = driveResponse.id;
 
         // Create the image merge (replaceAllShapesWithImage) requests.
-        let requests = [{
+        const requests = [{
           replaceAllShapesWithImage: {
             imageUrl: logoUrl,
             replaceMethod: 'CENTER_INSIDE',
@@ -395,7 +395,7 @@ class SlidesSnippets {
     return new Promise((resolve, reject) => {
       // [START slides_simple_text_replace]
       // Remove existing text in the shape, then insert new text.
-      let requests = [{
+      const requests = [{
         deleteText: {
           objectId: shapeId,
           textRange: {
@@ -413,8 +413,8 @@ class SlidesSnippets {
       this.slidesService.presentations.batchUpdate({
         presentationId,
         resource: {
-            requests,
-          },
+          requests,
+        },
       }, (err, batchUpdateResponse) => {
         console.log(`Replaced text in shape with ID: ${shapeId}`);
         // [START_EXCLUDE silent]
@@ -437,7 +437,7 @@ class SlidesSnippets {
       // Update the text style so that the first 5 characters are bolded
       // and italicized, the next 5 are displayed in blue 14 pt Times
       // New Roman font, and the next 5 are hyperlinked.
-      let requests = [{
+      const requests = [{
         updateTextStyle: {
           objectId: shapeId,
           textRange: {
@@ -520,7 +520,7 @@ class SlidesSnippets {
     return new Promise((resolve, reject) => {
       // [START slides_create_bulleted_text]
       // Add arrow-diamond-disc bullets to all text in the shape.
-      let requests = [{
+      const requests = [{
         createParagraphBullets: {
           objectId: shapeId,
           textRange: {
@@ -560,12 +560,12 @@ class SlidesSnippets {
       // Embed a Sheets chart (indicated by the spreadsheetId and sheetChartId) onto
       // a page in the presentation. Setting the linking mode as "LINKED" allows the
       // chart to be refreshed if the Sheets version is updated.
-      let emu4M = {
+      const emu4M = {
         magnitude: 4000000,
         unit: 'EMU',
       };
-      let presentationChartId = 'MyEmbeddedChart';
-      let requests = [{
+      const presentationChartId = 'MyEmbeddedChart';
+      const requests = [{
         createSheetsChart: {
           objectId: presentationChartId,
           spreadsheetId: shapeId,
@@ -612,7 +612,7 @@ class SlidesSnippets {
   async refreshSheetsChart(presentationId, presentationChartId) {
     return new Promise((resolve, reject) => {
       // [START slides_refresh_sheets_chart]
-      let requests = [{
+      const requests = [{
         refreshSheetsChart: {
           objectId: presentationChartId,
         },

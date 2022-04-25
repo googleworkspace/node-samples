@@ -116,7 +116,7 @@ describe('Spreadsheet snippets', () => {
       ['C', 'D'],
     ]);
     expect(result.tableRange).toBe('Sheet1!A1:J10');
-    let updates = result.updates;
+    const updates = result.updates;
     expect(updates.updatedRows).toBe(2);
     expect(updates.updatedColumns).toBe(2);
     expect(updates.updatedCells).toBe(4);
