@@ -12,11 +12,11 @@ async function textStyleUpdate(presentationId, shapeId) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/presentations'});
+      {scopes: 'https://www.googleapis.com/auth/presentations'});
 
   const service = google.slides({version: 'v1', auth});
 
-  let requests = [{
+  const requests = [{
     updateTextStyle: {
       objectId: shapeId,
       textRange: {
@@ -92,4 +92,4 @@ async function textStyleUpdate(presentationId, shapeId) {
 // [END slides_text_style_update]
 
 textStyleUpdate('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-  'MyTextBox_01');
+    'MyTextBox_01');

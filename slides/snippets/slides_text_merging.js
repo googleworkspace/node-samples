@@ -25,34 +25,34 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: ['https://www.googleapis.com/auth/presentations',
-      'https://www.googleapis.com/auth/drive',
-      'https://www.googleapis.com/auth/spreadsheet']});
+      {scopes: ['https://www.googleapis.com/auth/presentations',
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/spreadsheet']});
 
   const slidesService = google.slides({version: 'v1', auth});
   const sheetsService = google.sheets({version: 'v4', auth});
   const driveService = google.drive({version: 'v2', auth});
 
   // Use the Sheets API to load data, one record per row.
-  let responses = [];
-  let dataRangeNotation = 'Customers!A2:M6';
+  const responses = [];
+  const dataRangeNotation = 'Customers!A2:M6';
 
   try {
     const sheetsResponse = await sheetsService.spreadsheets.values.get({
       spreadsheetId: dataSpreadsheetId,
       range: dataRangeNotation,
     });
-    let values = sheetsResponse.data.values;
+    const values = sheetsResponse.data.values;
 
     // For each record, create a new merged presentation.
     for (let i = 0; i < values.length; ++i) {
-      let row = values[i];
-      let customerName = row[2]; // name in column 3
-      let caseDescription = row[5]; // case description in column 6
-      let totalPortfolio = row[11]; // total portfolio in column 12
+      const row = values[i];
+      const customerName = row[2]; // name in column 3
+      const caseDescription = row[5]; // case description in column 6
+      const totalPortfolio = row[11]; // total portfolio in column 12
 
       // Duplicate the template presentation using the Drive API.
-      let copyTitle = customerName + ' presentation';
+      const copyTitle = customerName + ' presentation';
       let requests = {
         name: copyTitle,
       };
@@ -60,9 +60,9 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
       const driveResponse = await driveService.files.copy({
         fileId: templatePresentationId,
         requests,
-    });
+      });
 
-      let presentationCopyId = driveResponse.data.id;
+      const presentationCopyId = driveResponse.data.id;
       // Create the text merge (replaceAllText) requests for this presentation.
       requests = [{
         replaceAllText: {
@@ -96,7 +96,7 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
           requests,
         },
       });
-      let result = batchUpdateResponse.data;
+      const result = batchUpdateResponse.data;
       // [START_EXCLUDE silent]
       responses.push(result.replies);
       // [END_EXCLUDE]
@@ -117,4 +117,4 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
 // [END slides_text_merging]
 
 textMerging('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-  '1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');
+    '1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');

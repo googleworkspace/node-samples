@@ -26,11 +26,11 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/presentations'});
+      {scopes: 'https://www.googleapis.com/auth/presentations'});
 
   const service = google.slides({version: 'v1', auth});
   // Remove existing text in the shape, then insert new text.
-  let requests = [{
+  const requests = [{
     deleteText: {
       objectId: shapeId,
       textRange: {
@@ -63,4 +63,4 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
 // [END slides_simple_text_replace]
 
 simpleTextReplace('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-  'MyTextBox_01', 'My_text_which_is_new');
+    'MyTextBox_01', 'My_text_which_is_new');

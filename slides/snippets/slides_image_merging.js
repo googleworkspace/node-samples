@@ -26,16 +26,16 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: ['https://www.googleapis.com/auth/presentations',
+      {scopes: ['https://www.googleapis.com/auth/presentations',
         'https://www.googleapis.com/auth/drive']});
 
   const slidesService = google.slides({version: 'v1', auth});
   const driveService = google.drive({version: 'v2', auth});
-  let logoUrl = imageUrl;
-  let customerGraphicUrl = imageUrl;
+  const logoUrl = imageUrl;
+  const customerGraphicUrl = imageUrl;
 
   // Duplicate the template presentation using the Drive API.
-  let copyTitle = customerName + ' presentation';
+  const copyTitle = customerName + ' presentation';
   try {
     const driveResponse = await driveService.files.copy({
       fileId: templatePresentationId,
@@ -43,10 +43,10 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
         name: copyTitle,
       },
     });
-    let presentationCopyId = driveResponse.data.id;
+    const presentationCopyId = driveResponse.data.id;
 
     // Create the image merge (replaceAllShapesWithImage) requests.
-    let requests = [{
+    const requests = [{
       replaceAllShapesWithImage: {
         imageUrl: logoUrl,
         replaceMethod: 'CENTER_INSIDE',
@@ -76,7 +76,7 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     let numReplacements = 0;
     for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
       numReplacements += batchUpdateResponse.data.replies[i]
-        .replaceAllShapesWithImage.occurrencesChanged;
+          .replaceAllShapesWithImage.occurrencesChanged;
     }
     console.log(`Created merged presentation with ID: ${presentationCopyId}`);
     console.log(`Replaced ${numReplacements} shapes with images.`);
@@ -88,4 +88,4 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
 }
 
 imageMerging('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-  'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+    'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
