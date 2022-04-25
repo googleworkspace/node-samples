@@ -1,6 +1,6 @@
 # Google Slides Node.js Snippets
 
-Javascript snippets from the [Google Slides API Guide](https://developers.google.com/slides/how-tos/overview).
+JavaScript snippets from the [Google Slides API Guide](https://developers.google.com/slides/how-tos/overview).
 
 ## Install
 

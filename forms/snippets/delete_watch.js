@@ -45,4 +45,4 @@ if (module === require.main) {
   runSample().catch(console.error);
 }
 module.exports = runSample;
-# [END forms_delete_watch]
+// [END forms_delete_watch]
