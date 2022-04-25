@@ -18,61 +18,53 @@
 const path = require('path');
 const google = require('@googleapis/forms');
 const {
-  authenticate
+  authenticate,
 } = require('@google-cloud/local-auth');
 
 async function runSample(query) {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
-    scopes: 'https://www.googleapis.com/auth/drive'
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
-
   const forms = google.forms({
     version: 'v1',
-    auth: authClient
+    auth: authClient,
   });
-
   const newForm = {
-    "info": {
-      "title": "Creating a new form for batchUpdate in Node"
-    }
-  }
-
-  const res1 = await forms.forms.create({
-    requestBody: newForm
+    'info': {
+      'title': 'Creating a new form for batchUpdate in Node',
+    },
+  };
+  const createResponse = await forms.forms.create({
+    requestBody: newForm,
   });
-  console.log('New formId was: ' + res1.data.formId);
-
+  console.log('New formId was: ' + createResponse.data.formId);
 
   // Request body to add video item to a Form
   const update = {
-    "requests": [{
-      "createItem": {
-        "item": {
-          "title": "Homework video",
-          "description": "Quizzes in Google Forms",
-          "videoItem": {
-            "video": {
-              "youtubeUri": "https://www.youtube.com/watch?v=Lt5HqPvM-eI"
-            }
-          }
+    'requests': [{
+      'createItem': {
+        'item': {
+          'title': 'Homework video',
+          'description': 'Quizzes in Google Forms',
+          'videoItem': {
+            'video': {
+              'youtubeUri': 'https://www.youtube.com/watch?v=Lt5HqPvM-eI',
+            },
+          },
         },
-        "location": {
-          "index": 0
-        }
-      }
-    }]
-  }
-
-
-  const res = await forms.forms.batchUpdate({
-    formId: res1.data.formId,
-    requestBody: update
+        'location': {
+          'index': 0,
+        },
+      },
+    }],
+  };
+  const updateResponse = await forms.forms.batchUpdate({
+    formId: createResponse.data.formId,
+    requestBody: update,
   });
-
-
-  console.log(res.data);
-  return res.data;
+  console.log(updateResponse.data);
+  return updateResponse.data;
 }
 
 if (module === require.main) {

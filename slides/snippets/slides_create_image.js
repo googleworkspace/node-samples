@@ -25,19 +25,19 @@ async function createImage(presentationId, pageId) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/presentations'});
+      {scopes: 'https://www.googleapis.com/auth/presentations'});
 
   const service = google.slides({version: 'v1', auth});
 
-  let imageUrl =
+  const imageUrl =
     'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
   // Create a new image, using the supplied object ID, with content downloaded from imageUrl.
-  let imageId = 'MyImage_01';
-  let emu4M = {
+  const imageId = 'MyImage_01';
+  const emu4M = {
     magnitude: 4000000,
     unit: 'EMU',
   };
-  let requests = [{
+  const requests = [{
     createImage: {
       objectId: imageId,
       url: imageUrl,
@@ -64,7 +64,7 @@ async function createImage(presentationId, pageId) {
       presentationId,
       resource: {requests},
     });
-    let createImageResponse = response.data.replies;
+    const createImageResponse = response.data.replies;
     console.log(`Created image with ID: ${createImageResponse[0].createImage.objectId}`);
   } catch (err) {
     // TODO (developer) - Handle exception

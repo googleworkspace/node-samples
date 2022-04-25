@@ -74,7 +74,7 @@ class SheetsSnippets {
   async batchUpdate(spreadsheetId, title, find, replacement) {
     return new Promise((resolve, reject) => {
       // [START sheets_batch_update]
-      let requests = [];
+      const requests = [];
       // Change the spreadsheet's title.
       requests.push({
         updateSpreadsheetProperties: {
@@ -299,7 +299,7 @@ class SheetsSnippets {
       // [START_EXCLUDE silent]
       values = _values;
       // [END_EXCLUDE]
-      let requestBody = {
+      const requestBody = {
         values,
       };
       this.sheetsService.spreadsheets.values.append({
@@ -357,31 +357,31 @@ class SheetsSnippets {
             updateCells: {
               rows: {
                 values: [{
-                    pivotTable: {
-                      source: {
-                        sheetId: sourceSheetId,
-                        startRowIndex: 0,
-                        startColumnIndex: 0,
-                        endRowIndex: 20,
-                        endColumnIndex: 7,
-                      },
-                      rows: [{
-                        sourceColumnOffset: 1,
-                        showTotals: true,
-                        sortOrder: 'ASCENDING',
-                      }],
-                      columns: [{
-                        sourceColumnOffset: 4,
-                        sortOrder: 'ASCENDING',
-                        showTotals: true,
-                      }],
-                      values: [{
-                        summarizeFunction: 'COUNTA',
-                        sourceColumnOffset: 4,
-                      }],
-                      valueLayout: 'HORIZONTAL',
+                  pivotTable: {
+                    source: {
+                      sheetId: sourceSheetId,
+                      startRowIndex: 0,
+                      startColumnIndex: 0,
+                      endRowIndex: 20,
+                      endColumnIndex: 7,
                     },
+                    rows: [{
+                      sourceColumnOffset: 1,
+                      showTotals: true,
+                      sortOrder: 'ASCENDING',
+                    }],
+                    columns: [{
+                      sourceColumnOffset: 4,
+                      sortOrder: 'ASCENDING',
+                      showTotals: true,
+                    }],
+                    values: [{
+                      summarizeFunction: 'COUNTA',
+                      sourceColumnOffset: 4,
+                    }],
+                    valueLayout: 'HORIZONTAL',
                   },
+                },
                 ],
               },
               start: {

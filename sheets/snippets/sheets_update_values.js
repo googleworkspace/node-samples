@@ -27,7 +27,7 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
   const service = google.sheets({version: 'v4', auth});
   let values = [
@@ -58,7 +58,7 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
 // [END sheets_update_values]
 
 updateValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
-  'USER_ENTERED', [
-  ['A', 'B'],
-  ['C', 'D'],
-]);
+    'USER_ENTERED', [
+      ['A', 'B'],
+      ['C', 'D'],
+    ]);

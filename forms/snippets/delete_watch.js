@@ -24,19 +24,16 @@ const watchID = '<YOUR_FORMS_WATCH_ID>';
 async function runSample(query) {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
-    scopes: 'https://www.googleapis.com/auth/drive'
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
-
   const forms = google.forms({
     version: 'v1',
-    auth: authClient
+    auth: authClient,
   });
-
   const res = await forms.forms.watches.delete({
-    formId:formID,
-    watchId: watchID
+    formId: formID,
+    watchId: watchID,
   });
-
   console.log(res.data);
   return res.data;
 }

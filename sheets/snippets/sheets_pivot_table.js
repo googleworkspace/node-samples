@@ -24,7 +24,7 @@ async function pivotTable(spreadsheetId) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
   const service = google.sheets({version: 'v4', auth});
   try {

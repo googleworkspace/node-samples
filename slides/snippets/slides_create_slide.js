@@ -25,10 +25,10 @@ async function createSlide(presentationId, pageId) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/presentations'});
+      {scopes: 'https://www.googleapis.com/auth/presentations'});
 
   const service = google.slides({version: 'v1', auth});
-  let requests = [{
+  const requests = [{
     createSlide: {
       objectId: pageId,
       insertionIndex: '1',

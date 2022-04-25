@@ -25,15 +25,15 @@ async function createTextboxWithText(presentationId, pageId) {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/presentations'});
+      {scopes: 'https://www.googleapis.com/auth/presentations'});
 
   const service = google.slides({version: 'v1', auth});
-  let elementId = 'MyTextBox_01';
-  let pt350 = {
+  const elementId = 'MyTextBox_01';
+  const pt350 = {
     magnitude: 350,
     unit: 'PT',
   };
-  let requests = [{
+  const requests = [{
     createShape: {
       objectId: elementId,
       shapeType: 'TEXT_BOX',
@@ -53,21 +53,21 @@ async function createTextboxWithText(presentationId, pageId) {
       },
     },
   },
-    // Insert text into the box, using the supplied element ID.
-    {
-      insertText: {
-        objectId: elementId,
-        insertionIndex: 0,
-        text: 'New Box Text Inserted!',
-      },
-    }];
+  // Insert text into the box, using the supplied element ID.
+  {
+    insertText: {
+      objectId: elementId,
+      insertionIndex: 0,
+      text: 'New Box Text Inserted!',
+    },
+  }];
   // Execute the request.
   try {
     const createTextboxWithTextResponse = await service.presentations.batchUpdate({
       presentationId,
       resource: {requests},
     });
-    let createShapeResponse = createTextboxWithTextResponse.data.replies[0].createShape;
+    const createShapeResponse = createTextboxWithTextResponse.data.replies[0].createShape;
     console.log(`Created textbox with ID: ${createShapeResponse.objectId}`);
   } catch (err) {
     // TODO (developer) - Handle exception
@@ -77,4 +77,4 @@ async function createTextboxWithText(presentationId, pageId) {
 // [END slides_create_textbox_with_text]
 
 createTextboxWithText('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-  'my_page_id');
+    'my_page_id');

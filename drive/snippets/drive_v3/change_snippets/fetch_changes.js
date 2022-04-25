@@ -19,31 +19,36 @@
  * Retrieve the list of changes for the currently authenticated user.
  * @param {string} savedStartPageToken page token got after executing fetch_start_page_token.js file
  **/
-async function fetch_changes(savedStartPageToken) {
-    // Get credentials and build service
-    // TODO (developer) - Use appropriate auth mechanism for your app
+async function fetchChanges(savedStartPageToken) {
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
 
-    const {GoogleAuth} = require('google-auth-library');
-    const {google} = require('googleapis');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
-    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.readonly'});
-    const service = google.drive({version: 'v3', auth});
-    try {
-        let pageToken;
-        const res = await service.changes.list({
-          pageToken: savedStartPageToken,
-          fields: '*',
-        });
-        res.data.changes.forEach((change) => {
-          console.log('change found for file: ', change.fileId);
-        });
-        pageToken = res.data.newStartPageToken;
-        console.log('start token :', pageToken);
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.readonly'});
+  const service = google.drive({version: 'v3', auth});
+  try {
+    let pageToken = savedStartPageToken;
+    do {
+      const res = await service.changes.list({
+        pageToken: savedStartPageToken,
+        fields: '*',
+      });
+      res.data.changes.forEach((change) => {
+        console.log('change found for file: ', change.fileId);
+      });
+      pageToken = res.data.newStartPageToken;
+    } while (pageToken);
   } catch (err) {
-      // TODO(developer) - Handle error
-      throw err;
+    // TODO(developer) - Handle error
+    throw err;
   }
 }
 // [END drive_fetch_changes]
 
-fetch_changes(284);
+
+module.exports = fetchChanges;
+if (module === require.main) {
+  fetchChanges();
+}

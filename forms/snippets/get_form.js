@@ -26,13 +26,11 @@ async function runSample(query) {
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/forms.body.readonly',
   });
-
   const forms = google.forms({
     version: 'v1',
-    auth: auth
+    auth: auth,
   });
-
-const res = await forms.forms.get({formId:formID});
+  const res = await forms.forms.get({formId: formID});
   console.log(res.data);
   return res.data;
 }
