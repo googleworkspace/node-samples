@@ -27,7 +27,7 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth(
-    {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
 
   const service = google.sheets({version: 'v4', auth});
   let values = [
@@ -63,7 +63,7 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
 
 // Replace the values below with desired values
 batchUpdateValues('1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2',
-  'USER_ENTERED', [
-  ['D', 'C'],
-  ['A', 'B'],
-]);
+    'USER_ENTERED', [
+      ['D', 'C'],
+      ['A', 'B'],
+    ]);

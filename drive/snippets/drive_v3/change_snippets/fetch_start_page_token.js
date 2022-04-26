@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START drive_fetch_appdata_folder]
+// [START drive_fetch_start_page_token]
 
 /**
- * List out application data folder and prints folder ID
- * */
-async function fetchAppdataFolder() {
+ * Retrieve page token for the current state of the account.
+ **/
+async function fetchStartPageToken() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -26,21 +26,20 @@ async function fetchAppdataFolder() {
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
-  const service = google.drive({version: 'v2', auth});
+  const service = google.drive({version: 'v3', auth});
   try {
-    const file = await service.files.get({
-      fileId: 'appDataFolder',
-      fields: 'id',
-    });
-    console.log('File Id:', file.data.id);
+    const res = await service.changes.getStartPageToken({});
+    const token = res.data.startPageToken;
+    console.log('start token: ', token);
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
   }
 }
-// [END drive_fetch_appdata_folder]
+// [END drive_fetch_start_page_token]
 
-module.exports = fetchAppdataFolder;
+
+module.exports = fetchStartPageToken;
 if (module === require.main) {
-  fetchAppdataFolder();
+  fetchStartPageToken();
 }
