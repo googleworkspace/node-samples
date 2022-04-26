@@ -356,7 +356,7 @@ class DriveSnippets {
           // [END_EXCLUDE]
         } else {
           // Move the file to the new folder
-          let previousParents = file.parents.join(',');
+          const previousParents = file.parents.join(',');
           this.driveService.files.update({
             fileId: fileId,
             addParents: folderId,
@@ -386,7 +386,7 @@ class DriveSnippets {
    * @return {Promise} A promise to return files.
    */
   async searchFiles() {
-    let files = [];
+    const files = [];
     const driveService = this.driveService;
     return new Promise((resolve, reject) => {
       // [START drive_search_files]
@@ -443,7 +443,7 @@ class DriveSnippets {
    */
   async shareFile(realFileId, realUser, realDomain) {
     return new Promise((resolve, reject) => {
-      let ids = [];
+      const ids = [];
       // [START drive_share_file]
       let fileId = '1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ';
       // [START_EXCLUDE silent]
@@ -693,10 +693,10 @@ class DriveSnippets {
    */
   async recoverTeamDrives(realUser) {
     const driveService = this.driveService;
-    let teamDrives = [];
+    const teamDrives = [];
     return new Promise((resolve, reject) => {
       // [START drive_recover_team_drives]
-      let newOrganizerPermission = {
+      const newOrganizerPermission = {
         type: 'user',
         role: 'organizer',
         emailAddress: 'user@example.com',

@@ -71,8 +71,8 @@ describe('Presentation snippets', () => {
   it('should create a slide', mochaAsync(async () => {
     const presentationId = await helpers.createTestPresentation();
     await helpers.addSlides(presentationId, 3, 'TITLE_AND_TWO_COLUMNS');
-    let pageId = 'my_page_id';
-    let response = await snippets.createSlide(presentationId, pageId);
+    const pageId = 'my_page_id';
+    const response = await snippets.createSlide(presentationId, pageId);
     expect(pageId).toEqual(response.replies[0].createSlide.objectId);
   }));
   it('should create a textbox with text', mochaAsync(async () => {
@@ -106,7 +106,7 @@ describe('Presentation snippets', () => {
   }));
   it('should ImageMerging', mochaAsync(async () => {
     const response = await snippets.imageMerging(TEMPLATE_PRESENTATION_ID, IMAGE_URL,
-      CUSTOMER_NAME);
+        CUSTOMER_NAME);
     const presentationId = response.presentationId;
     expect(presentationId).toExist();
     expect(2).toEqual(response.replies.length);
@@ -119,7 +119,7 @@ describe('Presentation snippets', () => {
   it('should SimpleTextReplace', mochaAsync(async () => {
     const presentationId = await helpers.createTestPresentation();
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
-    let pageId = pageIds[0];
+    const pageId = pageIds[0];
     const boxId = await helpers.createTestTextbox(presentationId, pageId);
     const response = await snippets.simpleTextReplace(presentationId, boxId, 'MY NEW TEXT');
     expect(2).toEqual(response.replies.length);
@@ -127,7 +127,7 @@ describe('Presentation snippets', () => {
   it('should TextStyleUpdate', mochaAsync(async () => {
     const presentationId = await helpers.createTestPresentation();
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
-    let pageId = pageIds[0];
+    const pageId = pageIds[0];
     const boxId = await helpers.createTestTextbox(presentationId, pageId);
     const response = await snippets.textStyleUpdate(presentationId, boxId);
     expect(3).toEqual(response.replies.length);
@@ -146,7 +146,7 @@ describe('Presentation snippets', () => {
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
     const response = await snippets.createSheetsChart(presentationId, pageId, DATA_SPREADSHEET_ID,
-      CHART_ID);
+        CHART_ID);
     expect(1).toEqual(response.replies.length);
     const chartId = response.replies[0].createSheetsChart.objectId;
     expect(chartId).toExist();
@@ -156,7 +156,7 @@ describe('Presentation snippets', () => {
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
     const sheetChartId = await helpers.createTestSheetsChart(presentationId, pageId,
-      DATA_SPREADSHEET_ID, CHART_ID);
+        DATA_SPREADSHEET_ID, CHART_ID);
     const response = await snippets.refreshSheetsChart(presentationId, sheetChartId);
     expect(1).toEqual(response.replies.length);
   }));

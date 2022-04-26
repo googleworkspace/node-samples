@@ -1,17 +1,19 @@
 module.exports = {
-    "extends": "google",
-    "parserOptions": {
-        "ecmaVersion": 8,
-        "sourceType": "module"
-    },
-    "env": {
-        "node": true,
-    },
-    "rules": {
-        "max-len": ["error", {"code": 100}],
-        "camelcase": "off", // Off for destructuring
-        "async-await/space-after-async": 2,
-        "async-await/space-after-await": 2,
-    },
-    "plugins": ["async-await"],
+  'extends': 'google',
+  'parserOptions': {
+    'ecmaVersion': 8,
+    'sourceType': 'module',
+  },
+  'env': {
+    'node': true,
+  },
+  'rules': {
+    'require-jsdoc': 'off',
+    'max-len': ['error', {'code': 100}],
+    'camelcase': ['error', {
+      'ignoreDestructuring': true,
+      'ignoreImports': true,
+      'allow': ['access_type', 'redirect_uris'],
+    }],
+  },
 };

@@ -14,14 +14,13 @@
     "API"
   ],
   "devDependencies": {
-    "eslint": "^4.17.0",
-    "eslint-config-google": "^0.9.1",
-    "eslint-plugin-async-await": "0.0.0"
+    "eslint": "^8.14.0",
+    "eslint-config-google": "^0.14"
   },
   "scripts": {
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js"
   },
-  "main": ".",
   "eslintIgnore": [
     "getFoldersUnderRoot.js",
     "**/node_modules/**"

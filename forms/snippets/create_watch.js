@@ -23,31 +23,26 @@ const formID = '<YOUR_FORM_ID>';
 async function runSample(query) {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
-    scopes: 'https://www.googleapis.com/auth/drive'
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
-
   const forms = google.forms({
     version: 'v1',
-    auth: authClient
+    auth: authClient,
   });
-
-
-const newWatch = {
-  "watch": {
-   "target": {
-      "topic": {
-         "topicName": "projects/<YOUR_TOPIC_PATH>"
-       }
+  const watchRequest = {
+    'watch': {
+      'target': {
+        'topic': {
+          'topicName': 'projects/<YOUR_TOPIC_PATH>',
+        },
+      },
+      'eventType': 'RESPONSES',
     },
-  "eventType": "RESPONSES"
-  }
-};
-
+  };
   const res = await forms.forms.watches.create({
-    formId:formID,
-    requestBody: newWatch
+    formId: formID,
+    requestBody: watchRequest,
   });
-
   console.log(res.data);
   return res.data;
 }
