@@ -19,38 +19,38 @@
  * Upload a file to the specified folder and prints file ID, folder ID
  * @param{string} realFolderId folder ID
  * */
-async function upload_to_folder(realFolderId) {
-    // Get credentials and build service
-    // TODO (developer) - Use appropriate auth mechanism for your app
+async function uploadToFolder(realFolderId) {
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
 
-    const fs = require('fs');
-    const {GoogleAuth} = require('google-auth-library');
-    const {google} = require('googleapis');
+  const fs = require('fs');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
-    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-    const service = google.drive({version: 'v2', auth});
-    folderId = realFolderId;
-    let fileMetadata = {
-        'title': 'photo.jpg',
-        'parents': [{id: folderId}],
-    };
-    let media = {
-        mimeType: 'image/jpeg',
-        body: fs.createReadStream('photo.jpg'),
-    };
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const service = google.drive({version: 'v2', auth});
+  folderId = realFolderId;
+  const fileMetadata = {
+    'title': 'photo.jpg',
+    'parents': [{id: folderId}],
+  };
+  const media = {
+    mimeType: 'image/jpeg',
+    body: fs.createReadStream('photo.jpg'),
+  };
 
-    try {
-        const file = await service.files.insert({
-            resource: fileMetadata,
-            media: media,
-            fields: 'id',
-        });
-        console.log('File Id:', file.data.id);
-    } catch (err) {
-        // TODO(developer) - Handle error
-        throw err;
-    }
+  try {
+    const file = await service.files.insert({
+      resource: fileMetadata,
+      media: media,
+      fields: 'id',
+    });
+    console.log('File Id:', file.data.id);
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
 }
 // [START drive_upload_to_folder]
 
-upload_to_folder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');
+uploadToFolder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');

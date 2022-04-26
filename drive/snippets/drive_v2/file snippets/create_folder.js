@@ -18,30 +18,30 @@
 /**
  * Create a folder and prints the folder ID
  * */
-async function create_folder() {
-    // Get credentials and build service
-    // TODO (developer) - Use appropriate auth mechanism for your app
+async function createFolder() {
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
 
-    const {GoogleAuth} = require('google-auth-library');
-    const {google} = require('googleapis');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
-    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-    const service = google.drive({version: 'v2', auth});
-    let fileMetadata = {
-     'title': 'Invoices',
-     'mimeType': 'application/vnd.google-apps.folder',
-    };
-    try {
-        const file = await service.files.insert({
-        resource: fileMetadata,
-        fields: 'id',
-      });
-       console.log('Folder Id:', file.data.id);
-    } catch (err) {
-        // TODO(developer) - Handle error
-        throw err;
-   }
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const service = google.drive({version: 'v2', auth});
+  const fileMetadata = {
+    'title': 'Invoices',
+    'mimeType': 'application/vnd.google-apps.folder',
+  };
+  try {
+    const file = await service.files.insert({
+      resource: fileMetadata,
+      fields: 'id',
+    });
+    console.log('Folder Id:', file.data.id);
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
 }
 // [END drive_create_folder]
 
-create_folder();
+createFolder();

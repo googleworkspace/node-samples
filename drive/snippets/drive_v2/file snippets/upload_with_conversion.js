@@ -18,37 +18,37 @@
 /**
  * Upload file with conversion
  * */
-async function upload_with_conversion() {
-    // Get credentials and build service
-    // TODO (developer) - Use appropriate auth mechanism for your app
+async function uploadWithConversion() {
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
 
-    const fs = require('fs');
-    const {GoogleAuth} = require('google-auth-library');
-    const {google} = require('googleapis');
+  const fs = require('fs');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
-    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-    const service = google.drive({version: 'v2', auth});
-    let fileMetadata = {
-        'title': 'My Report',
-        'mimeType': 'application/vnd.google-apps.spreadsheet',
-    };
-    let media = {
-        mimeType: 'text/csv',
-        body: fs.createReadStream('report.csv'),
-    };
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const service = google.drive({version: 'v2', auth});
+  const fileMetadata = {
+    'title': 'My Report',
+    'mimeType': 'application/vnd.google-apps.spreadsheet',
+  };
+  const media = {
+    mimeType: 'text/csv',
+    body: fs.createReadStream('report.csv'),
+  };
 
-    try {
-        const file = await service.files.insert({
-            resource: fileMetadata,
-            media: media,
-            fields: 'id',
-        });
-        console.log('File Id:', file.data.id);
-    } catch (err) {
-        // TODO(developer) - Handle error
-        throw err;
-    }
+  try {
+    const file = await service.files.insert({
+      resource: fileMetadata,
+      media: media,
+      fields: 'id',
+    });
+    console.log('File Id:', file.data.id);
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
 }
 // [END drive_upload_with_conversion]
 
-upload_with_conversion();
+uploadWithConversion();

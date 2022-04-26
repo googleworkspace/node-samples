@@ -18,35 +18,35 @@
 /**
  * Insert new file.
  * */
-async function upload_basic() {
-    // Get credentials and build service
-    // TODO (developer) - Use appropriate auth mechanism for your app
+async function uploadBasic() {
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
 
-    const fs = require('fs');
-    const {GoogleAuth} = require('google-auth-library');
-    const {google} = require('googleapis');
+  const fs = require('fs');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
-    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-    const service = google.drive({version: 'v2', auth});
-    let fileMetadata = {
-        'title': 'photo.jpg',
-    };
-    let media = {
-        mimeType: 'image/jpeg',
-        body: fs.createReadStream('photo.jpg'),
-    };
-    try {
-        const file = await service.files.insert({
-            resource: fileMetadata,
-            media: media,
-            fields: 'id',
-            });
-        console.log('File Id:', file.data.id);
-        } catch (err) {
-        // TODO(developer) - Handle error
-        throw err;
-    }
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const service = google.drive({version: 'v2', auth});
+  const fileMetadata = {
+    'title': 'photo.jpg',
+  };
+  const media = {
+    mimeType: 'image/jpeg',
+    body: fs.createReadStream('photo.jpg'),
+  };
+  try {
+    const file = await service.files.insert({
+      resource: fileMetadata,
+      media: media,
+      fields: 'id',
+    });
+    console.log('File Id:', file.data.id);
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
 }
 // [END drive_upload_Basic]
 
-upload_basic();
+uploadBasic();
