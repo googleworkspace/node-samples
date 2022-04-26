@@ -1,6 +1,6 @@
 # Google Sheets Node.js Snippets
 
-Javascript snippets from the [Google Sheets API Guide](https://developers.google.com/sheets/api/guides/concepts).
+JavaScript snippets from the [Google Sheets API Guide](https://developers.google.com/sheets/api/guides/concepts).
 
 ## Install
 

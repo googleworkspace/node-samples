@@ -119,7 +119,7 @@ function listLoginEvents(auth) {
     } else {
       console.log('No logins found.');
     }
-   });
+  });
 }
 // [END admin_sdk_reports_quickstart]
 

@@ -1,19 +1,25 @@
-# Google Workspace Node Samples [![Build Status](https://travis-ci.org/googleworkspace/node-samples.svg?branch=master)](https://travis-ci.org/googleworkspace/node-samples)
+# Google Workspace Node.js Samples [![Build Status](https://travis-ci.org/googleworkspace/node-samples.svg?branch=master)](https://travis-ci.org/googleworkspace/node-samples)
 
 Node.js samples for [Google Workspace APIs](https://developers.google.com/workspace/) docs.
 
-| | **Apps&nbsp;Script** <img src="https://www.gstatic.com/images/branding/product/2x/apps_script_96dp.png" align="center" width="76px"/> | **Calendar** <img src="https://www.gstatic.com/images/branding/product/2x/calendar_96dp.png" align="left" width="96px"/>  | **Classroom** <img src="https://www.gstatic.com/images/branding/product/2x/classroom_96dp.png" align="left" width="96px"/>  | **Drive V3** <img src="https://www.gstatic.com/images/branding/product/2x/drive_96dp.png" align="left" width="96px"/>  | **Gmail** <img src="https://www.gstatic.com/images/branding/product/2x/gmail_96dp.png" align="left" width="96px"/>  | **Sheets** <img src="https://www.gstatic.com/images/branding/product/2x/sheets_96dp.png" align="left" width="96px"/>  | **Slides** <img src="https://www.gstatic.com/images/branding/product/2x/slides_96dp.png" align="left" width="96px"/>  | **Tasks** <img src="https://www.gstatic.com/images/branding/product/2x/tasks_96dp.png" align="left" width="96px"/>  |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Quickstart | [Link](https://developers.google.com/apps-script/api/quickstart/nodejs) | [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs) | [Link](https://developers.google.com/classroom/quickstart/nodejs) | [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs) | [Link](https://developers.google.com/gmail/api/quickstart/nodejs) | [Link](https://developers.google.com/sheets/api/quickstart/nodejs) | [Link](https://developers.google.com/slides/quickstart/nodejs) | [Link](https://developers.google.com/tasks/quickstart/nodejs) |
-| Snippets | --- | [Link](https://developers.google.com/calendar/overview) | [Link](https://developers.google.com/classroom/guides/get-started) | [Link](https://developers.google.com/drive/v3/web/about-sdk) | [Link](https://developers.google.com/gmail/api/guides/) | [Link](https://developers.google.com/sheets/api/guides/concepts) | [Link](https://developers.google.com/slides/how-tos/overview) | --- |
+API| Quickstart| Snippets
+---| ---| ---
+**Apps&nbsp;Script**| [Link](https://developers.google.com/apps-script/api/quickstart/nodejs)| ---
+**Calendar**| [Link](https://developers.google.com/google-apps/calendar/quickstart/nodejs)| [Link](https://developers.google.com/calendar/overview)
+**Classroom**| [Link](https://developers.google.com/classroom/quickstart/nodejs)| [Link](https://developers.google.com/classroom/guides/get-started)
+**Drive V3**| [Link](https://developers.google.com/drive/v3/web/quickstart/nodejs)| [Link](https://developers.google.com/drive/v3/web/about-sdk)
+**Gmail**| [Link](https://developers.google.com/gmail/api/quickstart/nodejs)| [Link](https://developers.google.com/gmail/api/guides/)
+**Sheets**| [Link](https://developers.google.com/sheets/api/quickstart/nodejs)| [Link](https://developers.google.com/sheets/api/guides/concepts)
+**Slides**| [Link](https://developers.google.com/slides/quickstart/nodejs)| [Link](https://developers.google.com/slides/how-tos/overview)
+**Tasks**| [Link](https://developers.google.com/tasks/quickstart/nodejs)| ---
 
 ## Sample Types
 
-#### Quickstarts
+### Quickstarts
 
-In about **five minutes**, you'll have a simple Node command-line application that makes requests to a Google Workspace API.
+In about **five minutes**, you'll have a simple Node.js command-line application that makes requests to a Google Workspace API.
 
-#### Guides
+### Guides
 
 Learn how to use functions within an API, such as creating a new Google Slide to adding values to a Google Spreadsheet.
 
@@ -50,15 +56,15 @@ In any snippet directory, `npm run test`.
 
 ### Lint
 
-Install and run eslint. Example:
+Install and run ESLint. Example:
 
-```
+```shell
 npm run lint apps-script/**/*.js
 ```
 
 Some IDEs (like VS Code) will detect these lint errors within the editor.
 
-## Node Client Library
+## Node.js Client Library
 
 Google Workspace APIs use the [Google API Node.js client library](https://github.com/google/google-api-nodejs-client).
 

@@ -18,53 +18,45 @@
 const path = require('path');
 const google = require('@googleapis/forms');
 const {
-  authenticate
+  authenticate,
 } = require('@google-cloud/local-auth');
 
 async function runSample(query) {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
-    scopes: 'https://www.googleapis.com/auth/drive'
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
-
   const forms = google.forms({
     version: 'v1',
-    auth: authClient
+    auth: authClient,
   });
-
   const newForm = {
-    "info": {
-      "title": "Creating a new form for batchUpdate in Node"
-    }
-  }
-
-  const res1 = await forms.forms.create({
-    requestBody: newForm
+    'info': {
+      'title': 'Creating a new form for batchUpdate in Node',
+    },
+  };
+  const createResponse = await forms.forms.create({
+    requestBody: newForm,
   });
-  console.log('New formId was: ' + res1.data.formId);
-
+  console.log('New formId was: ' + createResponse.data.formId);
 
   // Request body to convert form to a quiz
-  const update = {
-    "requests": [{
-      "updateSettings": {
-        "settings": {
-          "quizSettings": {
-            "isQuiz": true
-          }
+  const updateRequest = {
+    'requests': [{
+      'updateSettings': {
+        'settings': {
+          'quizSettings': {
+            'isQuiz': true,
+          },
         },
-        "updateMask": "quizSettings.isQuiz"
-      }
-    }]
-  }
-
-
+        'updateMask': 'quizSettings.isQuiz',
+      },
+    }],
+  };
   const res = await forms.forms.batchUpdate({
-    formId: res1.data.formId,
-    requestBody: update
+    formId: createResponse.data.formId,
+    requestBody: updateRequest,
   });
-
-
   console.log(res.data);
   return res.data;
 }

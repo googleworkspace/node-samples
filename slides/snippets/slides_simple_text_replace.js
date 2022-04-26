@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-// [START slides_create_slide]
+// [START slides_simple_text_replace]
 /**
- * Creates a new slide in a presentation.
+ * Replaces text in the provided shape ID.
  * @param {string} presentationId The presentation ID.
- * @param {string} pageId The object ID for the new slide.
+ * @param {string} shapeId The shape ID to delete existing text and insert new text into.
+ * @param {string} replacementText The new replacement text.
  */
-async function createSlide(presentationId, pageId) {
+async function simpleTextReplace(presentationId, shapeId, replacementText) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
@@ -28,32 +29,38 @@ async function createSlide(presentationId, pageId) {
       {scopes: 'https://www.googleapis.com/auth/presentations'});
 
   const service = google.slides({version: 'v1', auth});
+  // Remove existing text in the shape, then insert new text.
   const requests = [{
-    createSlide: {
-      objectId: pageId,
-      insertionIndex: '1',
-      slideLayoutReference: {
-        predefinedLayout: 'TITLE_AND_TWO_COLUMNS',
+    deleteText: {
+      objectId: shapeId,
+      textRange: {
+        type: 'ALL',
       },
     },
+  }, {
+    insertText: {
+      objectId: shapeId,
+      insertionIndex: 0,
+      text: replacementText,
+    },
   }];
-  // If you wish to populate the slide with elements, add element create requests here,
-  // using the pageId.
-
-  // Execute the request.
+  // Execute the requests.
   try {
-    const res = await service.presentations.batchUpdate({
+    const batchUpdateResponse = await service.presentations.batchUpdate({
       presentationId,
       resource: {
         requests,
       },
     });
-    console.log(`Created slide with ID: ${res.data.replies[0].createSlide.objectId}`);
+    console.log(`Replaced text in shape with ID: ${shapeId}`);
+    console.log('in presentation with ID: ' +
+      batchUpdateResponse.data.presentationId);
   } catch (err) {
-    // TODO (developer) - handle exception
+    // TODO (developer) - Handle exception
     throw err;
   }
 }
-// [END slides_create_slide]
+// [END slides_simple_text_replace]
 
-createSlide('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4', 'my_page_id');
+simpleTextReplace('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
+    'MyTextBox_01', 'My_text_which_is_new');

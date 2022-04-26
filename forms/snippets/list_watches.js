@@ -23,17 +23,13 @@ const formID = '<YOUR_FORM_ID>';
 async function runSample(query) {
   const auth = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
-    scopes: 'https://www.googleapis.com/auth/forms.responses.readonly'
+    scopes: 'https://www.googleapis.com/auth/forms.responses.readonly',
   });
-
   const forms = google.forms({
     version: 'v1',
-    auth: auth
+    auth: auth,
   });
-
-
-  const res = await forms.forms.watches.list({formId:formID});
-
+  const res = await forms.forms.watches.list({formId: formID});
   console.log(res.data);
   return res.data;
 }
