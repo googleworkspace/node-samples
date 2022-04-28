@@ -51,6 +51,6 @@ async function uploadToFolder(realFolderId) {
     throw err;
   }
 }
-// [START drive_upload_to_folder]
+// [END drive_upload_to_folder]
 
 uploadToFolder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');
