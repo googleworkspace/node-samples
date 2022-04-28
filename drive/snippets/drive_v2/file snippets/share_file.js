@@ -53,12 +53,12 @@ async function shareFile(realFileId, realUser, realDomain) {
       fileId: fileId,
       fields: 'id',
     });
-    console.log('Permission ID:', res.id);
+    console.log('Permission ID:', res.data.id);
     ids.push(res.id);
   } catch (err) {
     throw err;
   }
-};
+}
 // [END drive_share_file]
 
 module.exports = shareFile;
