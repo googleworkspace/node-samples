@@ -47,6 +47,6 @@ async function uploadBasic() {
     throw err;
   }
 }
-// [END drive_upload_Basic]
+// [END drive_upload_basic]
 
 uploadBasic();
