@@ -21,6 +21,7 @@
  * @param {string} range The range of values to update.
  * @param {object} valueInputOption Value update options.
  * @param {(string[])[]} _values A 2d array of values to update.
+ * @return {obj} spreadsheet information
  */
 async function updateValues(spreadsheetId, range, valueInputOption, _values) {
   const {GoogleAuth} = require('google-auth-library');
@@ -50,6 +51,7 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
       resource,
     });
     console.log('%d cells updated.', result.data.updatedCells);
+    return result;
   } catch (err) {
     // TODO (Developer) - Handle exception
     throw err;
@@ -57,8 +59,9 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_update_values]
 
-updateValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
-    'USER_ENTERED', [
-      ['A', 'B'],
-      ['C', 'D'],
-    ]);
+// updateValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
+//   'USER_ENTERED', [
+//   ['A', 'B'],
+//   ['C', 'D'],
+// ]);
+module.exports = {updateValues};

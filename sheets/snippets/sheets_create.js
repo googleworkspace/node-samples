@@ -18,6 +18,7 @@
 /**
  * Create a google spreadsheet
  * @param {string} title Spreadsheets title
+ * @return {string} Created spreadsheets ID
  */
 async function create(title) {
   const {GoogleAuth} = require('google-auth-library');
@@ -38,6 +39,7 @@ async function create(title) {
       fields: 'spreadsheetId',
     });
     console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
+    return spreadsheet.data.spreadsheetId;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -45,5 +47,5 @@ async function create(title) {
 }
 // [END sheets_create]
 
-// Replace the values below with desired values
-create('Title');
+// create('title');
+module.exports = {create};

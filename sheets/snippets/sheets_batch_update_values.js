@@ -21,6 +21,7 @@
  * @param {string} range The range of values to update.
  * @param {object} valueInputOption Value update options.
  * @param {(string[])[]} _values A 2d array of values to update.
+ * @return {obj} spreadsheet information
  */
 async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values) {
   const {GoogleAuth} = require('google-auth-library');
@@ -54,6 +55,7 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
       resource,
     });
     console.log('%d cells updated.', result.data.totalUpdatedCells);
+    return result;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -62,8 +64,9 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
 // [END sheets_batch_update_values]
 
 // Replace the values below with desired values
-batchUpdateValues('1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2',
-    'USER_ENTERED', [
-      ['D', 'C'],
-      ['A', 'B'],
-    ]);
+// batchUpdateValues('1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2',
+//   'USER_ENTERED', [
+//   ['D', 'C'],
+//   ['A', 'B'],
+// ]);
+module.exports = {batchUpdateValues};

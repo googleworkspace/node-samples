@@ -18,6 +18,7 @@
 /**
  * Conditionally formats a Spreadsheet.
  * @param {string} spreadsheetId A Spreadsheet ID.
+ * @return {obj} spreadsheet information
  */
 async function conditionalFormatting(spreadsheetId) {
   const {GoogleAuth} = require('google-auth-library');
@@ -76,6 +77,7 @@ async function conditionalFormatting(spreadsheetId) {
       resource,
     });
     console.log(`${response.data.replies.length} cells updated.`);
+    return response;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -83,4 +85,5 @@ async function conditionalFormatting(spreadsheetId) {
 }
 // [END sheets_conditional_formatting]
 
-conditionalFormatting('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');
+// conditionalFormatting('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');
+module.exports = {conditionalFormatting};
