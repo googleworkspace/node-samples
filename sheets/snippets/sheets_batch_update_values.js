@@ -63,10 +63,4 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
 }
 // [END sheets_batch_update_values]
 
-// Replace the values below with desired values
-// batchUpdateValues('1SP6jdMywK6GhzKGHWOgAAZoJkGH2bdBKzOWT2GiacXA', 'A1:B2',
-//   'USER_ENTERED', [
-//   ['D', 'C'],
-//   ['A', 'B'],
-// ]);
 module.exports = {batchUpdateValues};

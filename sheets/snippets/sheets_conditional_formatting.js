@@ -85,5 +85,4 @@ async function conditionalFormatting(spreadsheetId) {
 }
 // [END sheets_conditional_formatting]
 
-// conditionalFormatting('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');
 module.exports = {conditionalFormatting};

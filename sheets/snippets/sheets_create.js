@@ -47,5 +47,4 @@ async function create(title) {
 }
 // [END sheets_create]
 
-// create('title');
 module.exports = {create};

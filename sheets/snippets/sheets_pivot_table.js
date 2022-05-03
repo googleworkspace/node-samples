@@ -99,5 +99,4 @@ async function pivotTable(spreadsheetId) {
 }
 // [END sheets_pivot_tables]
 
-// pivotTable('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');
 module.exports = {pivotTable};

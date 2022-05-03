@@ -49,6 +49,4 @@ async function batchGetValues(spreadsheetId, _ranges) {
 }
 // [END sheets_batch_get_values]
 
-// Replace the values below with desired values
-// batchGetValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2');
 module.exports = {batchGetValues};

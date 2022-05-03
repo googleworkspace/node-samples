@@ -66,7 +66,5 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
 }
 // [END sheets_batch_update]
 
-// Replace the values below with desired values
-// batchUpdate('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'title', 'hello', 'bye');
 module.exports = {batchUpdate};
 

@@ -59,9 +59,4 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_append_values]
 
-// appendValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
-//   'USER_ENTERED', [
-//   ['A', 'B'],
-//   ['C', 'D'],
-// ]);
 module.exports = {appendValues};

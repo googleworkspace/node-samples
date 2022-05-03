@@ -59,9 +59,4 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_update_values]
 
-// updateValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
-//   'USER_ENTERED', [
-//   ['A', 'B'],
-//   ['C', 'D'],
-// ]);
 module.exports = {updateValues};

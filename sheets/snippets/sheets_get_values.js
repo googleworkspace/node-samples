@@ -44,6 +44,4 @@ async function getValues(spreadsheetId, range) {
 }
 // [END sheets_get_values]
 
-// Replace the values below with desired values
-// getValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2');
 module.exports = {getValues};
