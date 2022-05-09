@@ -18,45 +18,31 @@
 /**
  * Download a Document file in PDF format
  * @param{string} realFileId file ID
+ * @return{obj} file status
  * */
 async function exportPdf(realFileId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const fs = require('fs');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
-  const dest = fs.createWriteStream('resume.pdf');
   fileId = realFileId;
-  const buffers = [];
 
   try {
-    await service.files.export({
+    const file = await service.files.export({
       fileId: fileId,
       mimeType: 'application/pdf',
-    }, {responseType: 'stream'},
-    function(res) {
-      res.data
-          .on('data', function(chunk) {
-            buffers.push(chunk);
-          })
-          .on('end', function() {
-            console.log('Done');
-            Buffer.concat(buffers);
-          })
-          .pipe(dest);
-    },
-    );
+    });
+    console.log(file.status);
+    return file.status;
   } catch (err) {
+    // TODO(developer) - Handle error
     throw err;
   }
 }
 // [END drive_export_pdf]
 
-module.exports = exportPdf;
-if (module=== require.main) {
-  exportPdf('1Kyer5fA4cKIJC5sBG-gXLZvx-tXl0kAkt5bZ1nmvZ6c');
-}
+exportPdf('1Kyer5fA4cKIJC5sBG-gXLZvx-tXl0kAkt5bZ1nmvZ6c');

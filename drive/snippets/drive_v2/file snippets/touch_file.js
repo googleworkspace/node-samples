@@ -19,6 +19,7 @@
  * Change the file's modification timestamp.
  * @param{string} realFileId ID of the file to change modified time
  * @param{string} realTimestamp Timestamp to override Modified date time of the file
+ * @return{obj} modified timestamp
  * */
 async function touchFile(realFileId, realTimestamp) {
   // Get credentials and build service
@@ -42,6 +43,7 @@ async function touchFile(realFileId, realTimestamp) {
       fields: 'id, modifiedDate',
     });
     console.log('Modified time:', file.data.modifiedDate);
+    return file.data.modifiedDate;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
@@ -49,9 +51,6 @@ async function touchFile(realFileId, realTimestamp) {
 };
 // [END drive_touch_file]
 
-module.exports = downloadFile;
-if (module=== require.main) {
-  touchFile('1M4xjYwPynOk5TsIWN7hcGYkFdBkPTd5F',
-      '2022-04-02T05:43:27.504Z');
-}
+touchFile('1M4xjYwPynOk5TsIWN7hcGYkFdBkPTd5F',
+    '2022-04-02T05:43:27.504Z');
 

@@ -19,6 +19,7 @@
  * Change the file's modification timestamp.
  * @param{string} realFileId Id of the file to move
  * @param{string} realFolderId Id of the folder to move
+ * @return{obj} file status
  * */
 async function moveFileToFolder(realFileId, realFolderId) {
   // Get credentials and build service
@@ -50,6 +51,7 @@ async function moveFileToFolder(realFileId, realFolderId) {
       fields: 'id, parents',
     });
     console.log(files.status);
+    return files.status;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
@@ -57,8 +59,5 @@ async function moveFileToFolder(realFileId, realFolderId) {
 }
 // [END drive_move_file_to_folder]
 
-module.exports = moveFileToFolder;
-if (module === require.main) {
-  moveFileToFolder('1dUiRSoAQKkM3a4nTPeNQWgiuau1KdQ_l',
-      '1OLuK07-PTY7yYlur84stjtnyez2jRrjE');
-}
+moveFileToFolder('1dUiRSoAQKkM3a4nTPeNQWgiuau1KdQ_l',
+    '1OLuK07-PTY7yYlur84stjtnyez2jRrjE');
