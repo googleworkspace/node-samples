@@ -18,45 +18,31 @@
 /**
  * Downloads a file
  * @param{string} realFileId file ID
+ * @return{obj} file status
  * */
 async function downloadFile(realFileId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const fs = require('fs');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
 
-  const dest = fs.createWriteStream('/tmp/photo.jpg');
   fileId = realFileId;
-  const buffers = [];
   try {
-    await service.files.get({
+    const file = await service.files.get({
       fileId: fileId,
       alt: 'media',
-    }, {responseType: 'stream'},
-    function( res) {
-      res.data
-          .on('data', function(chunk) {
-            buffers.push(chunk);
-          })
-          .on('end', function() {
-            console.log('Done');
-            Buffer.concat(buffers);
-          })
-          .pipe(dest);
-    },
-    );
+    });
+    console.log(file.status);
+    return file.status;
   } catch (err) {
+    // TODO(developer) - Handle error
     throw err;
   }
 };
 // [END drive_download_file]
 
-module.exports = downloadFile;
-if (module=== require.main) {
-  downloadFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt');
-}
+downloadFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt');
