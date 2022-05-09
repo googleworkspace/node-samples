@@ -13,15 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START drive_share_file]
+// [START drive_search_file]
 
 /**
- * Download a Document file in PDF format
- * @param{string} realFileId file ID
- * @param{string} realUser username
- * @param{string} realDomain domain
+ * Search file in drive location
  * */
-async function shareFile(realFileId, realUser, realDomain) {
+async function searchFile() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -30,39 +27,23 @@ async function shareFile(realFileId, realUser, realDomain) {
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
-
-  const ids = [];
-  fileId = realFileId;
-  const permissions = [
-    {
-      'type': 'user',
-      'role': 'writer',
-      'value': 'user@example.com',
-    }, {
-      'type': 'domain',
-      'role': 'writer',
-      'value': 'example.com',
-    },
-  ];
-  permissions[0].value = realUser;
-  permissions[1].value = realDomain;
-  // Using the NPM module 'async'
+  const files = [];
+  const pageToken = null;
   try {
-    const res = await service.permissions.insert({
-      resource: permission,
-      fileId: fileId,
-      fields: 'id',
+    const res = await service.files.list({
+      q: 'mimeType=\'image/jpeg\'',
+      fields: 'nextPageToken, items(id, title)',
+      spaces: 'drive',
+      pageToken: pageToken,
     });
-    console.log('Permission ID:', res.id);
-    ids.push(res.id);
+    Array.prototype.push.apply(files, res.items);
+    res.data.items.forEach(function(file) {
+      console.log('Found file:', file.title, file.id);
+    });
   } catch (err) {
     throw err;
   }
-};
-// [END drive_share_file]
-
-module.exports = shareFile;
-if (module=== require.main) {
-  shareFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt', 'xyz@workspacesamples.dev',
-      'workspacesamples.dev');
 }
+// [END drive_search_file]
+
+searchFile();

@@ -13,56 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START drive_share_file]
+// [START drive_upload_to_folder]
 
 /**
- * Download a Document file in PDF format
- * @param{string} realFileId file ID
- * @param{string} realUser username
- * @param{string} realDomain domain
+ * Upload a file to the specified folder and prints file ID, folder ID
+ * @param{string} realFolderId folder ID
  * */
-async function shareFile(realFileId, realUser, realDomain) {
+async function uploadToFolder(realFolderId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
+  const fs = require('fs');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
+  folderId = realFolderId;
+  const fileMetadata = {
+    'title': 'photo.jpg',
+    'parents': [{id: folderId}],
+  };
+  const media = {
+    mimeType: 'image/jpeg',
+    body: fs.createReadStream('photo.jpg'),
+  };
 
-  const ids = [];
-  fileId = realFileId;
-  const permissions = [
-    {
-      'type': 'user',
-      'role': 'writer',
-      'value': 'user@example.com',
-    }, {
-      'type': 'domain',
-      'role': 'writer',
-      'value': 'example.com',
-    },
-  ];
-  permissions[0].value = realUser;
-  permissions[1].value = realDomain;
-  // Using the NPM module 'async'
   try {
-    const res = await service.permissions.insert({
-      resource: permission,
-      fileId: fileId,
+    const file = await service.files.insert({
+      resource: fileMetadata,
+      media: media,
       fields: 'id',
     });
-    console.log('Permission ID:', res.id);
-    ids.push(res.id);
+    console.log('File Id:', file.data.id);
   } catch (err) {
+    // TODO(developer) - Handle error
     throw err;
   }
-};
-// [END drive_share_file]
-
-module.exports = shareFile;
-if (module=== require.main) {
-  shareFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt', 'xyz@workspacesamples.dev',
-      'workspacesamples.dev');
 }
+// [END drive_upload_to_folder]
+
+uploadToFolder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');

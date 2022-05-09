@@ -13,56 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START drive_share_file]
+// [START drive_upload_with_conversion]
 
 /**
- * Download a Document file in PDF format
- * @param{string} realFileId file ID
- * @param{string} realUser username
- * @param{string} realDomain domain
+ * Upload file with conversion
  * */
-async function shareFile(realFileId, realUser, realDomain) {
+async function uploadWithConversion() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
+  const fs = require('fs');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
+  const fileMetadata = {
+    'title': 'My Report',
+    'mimeType': 'application/vnd.google-apps.spreadsheet',
+  };
+  const media = {
+    mimeType: 'text/csv',
+    body: fs.createReadStream('report.csv'),
+  };
 
-  const ids = [];
-  fileId = realFileId;
-  const permissions = [
-    {
-      'type': 'user',
-      'role': 'writer',
-      'value': 'user@example.com',
-    }, {
-      'type': 'domain',
-      'role': 'writer',
-      'value': 'example.com',
-    },
-  ];
-  permissions[0].value = realUser;
-  permissions[1].value = realDomain;
-  // Using the NPM module 'async'
   try {
-    const res = await service.permissions.insert({
-      resource: permission,
-      fileId: fileId,
+    const file = await service.files.insert({
+      resource: fileMetadata,
+      media: media,
       fields: 'id',
     });
-    console.log('Permission ID:', res.id);
-    ids.push(res.id);
+    console.log('File Id:', file.data.id);
   } catch (err) {
+    // TODO(developer) - Handle error
     throw err;
   }
-};
-// [END drive_share_file]
-
-module.exports = shareFile;
-if (module=== require.main) {
-  shareFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt', 'xyz@workspacesamples.dev',
-      'workspacesamples.dev');
 }
+// [END drive_upload_with_conversion]
+
+uploadWithConversion();
