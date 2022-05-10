@@ -66,6 +66,7 @@ async function createImage(presentationId, pageId) {
     });
     const createImageResponse = response.data.replies;
     console.log(`Created image with ID: ${createImageResponse[0].createImage.objectId}`);
+    return createImageResponse;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -73,4 +74,5 @@ async function createImage(presentationId, pageId) {
 }
 // [END slides_create_image]
 
-createImage('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4', 'my_page_id');
+module.exports = {createImage};
+

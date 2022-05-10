@@ -32,6 +32,7 @@ async function createPresentation(title) {
       title,
     });
     console.log(`Created presentation with ID: ${presentation.data.presentationId}`);
+    return presentation;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -39,4 +40,5 @@ async function createPresentation(title) {
 }
 // [END slides_create_presentation]
 
-createPresentation('test');
+module.exports = {createPresentation};
+
