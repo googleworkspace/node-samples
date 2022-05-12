@@ -16,7 +16,7 @@
 // [START drive_move_file_to_folder]
 
 /**
- * Change the file's modification timestamp.
+ * Move a file to specified folder
  * @param{string} realFileId Id of the file to move
  * @param{string} realFolderId Id of the folder to move
  * @return{obj} file status
