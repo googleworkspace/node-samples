@@ -14,44 +14,18 @@
  * limitations under the License.
  */
 
-const Promise = require('promise');
 const expect = require('expect');
 const Helpers = require('./helpers');
 const SheetsBatchUpdate = require('../sheets_batch_update');
 
-const mochaAsync = (fn) => {
-  return (done) => {
-    fn.call().then(done, (err) => {
-      done(err);
-    });
-  };
-};
-
-describe('Spreadsheet sheet create snippet', () => {
+describe('Spreadsheet batch update snippet', () => {
   const helpers = new Helpers();
 
-  before((done) => {
-    Promise.all([
-      helpers.driveService,
-      helpers.sheetsService,
-    ]).then((services) => {
-      done();
-    }).catch(done);
-  });
-
-  beforeEach(() => {
-    helpers.reset();
-  });
-
-  afterEach(() => {
+  after(() => {
     helpers.cleanup();
   });
 
-  after(() => {
-    return new Promise((resolve) => setTimeout(resolve, 10));
-  });
-
-  it('should batch update a spreadsheet', mochaAsync(async () => {
+  it('should batch update a spreadsheet', (async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await SheetsBatchUpdate.batchUpdate(spreadsheetId,
