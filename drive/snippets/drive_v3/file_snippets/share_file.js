@@ -16,7 +16,7 @@
 // [START drive_share_file]
 
 /**
- * Download a Document file in PDF format
+ * Batch permission modification
  * @param{string} realFileId file ID
  * @param{string} realUser username
  * @param{string} realDomain domain
