@@ -43,6 +43,7 @@ async function searchFile() {
     });
     return res.data.files;
   } catch (err) {
+    // TODO(developer) - Handle error
     throw err;
   }
 }
