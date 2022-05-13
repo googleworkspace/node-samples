@@ -14,44 +14,18 @@
  * limitations under the License.
  */
 
-const Promise = require('promise');
 const expect = require('expect');
 const Helpers = require('./helpers');
 const SheetsCreate = require('../sheets_create');
 
-const mochaAsync = (fn) => {
-  return (done) => {
-    fn.call().then(done, (err) => {
-      done(err);
-    });
-  };
-};
-
-describe('Spreadsheet sheet create snippet', () => {
+describe('Spreadsheet create snippet', () => {
   const helpers = new Helpers();
 
-  before((done) => {
-    Promise.all([
-      helpers.driveService,
-      helpers.sheetsService,
-    ]).then((services) => {
-      done();
-    }).catch(done);
-  });
-
-  beforeEach(() => {
-    helpers.reset();
-  });
-
-  afterEach(() => {
+  after(() => {
     helpers.cleanup();
   });
 
-  after(() => {
-    return new Promise((resolve) => setTimeout(resolve, 10));
-  });
-
-  it('should create a spreadsheet', mochaAsync(async () => {
+  it('should create a spreadsheet', (async () => {
     const id = await SheetsCreate.create('Title');
     expect(id).toExist();
     helpers.deleteFileOnCleanup(id);

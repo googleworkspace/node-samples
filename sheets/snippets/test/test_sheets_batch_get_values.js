@@ -14,44 +14,18 @@
  * limitations under the License.
  */
 
-const Promise = require('promise');
 const expect = require('expect');
 const Helpers = require('./helpers');
 const SheetsBatchGetValues = require('../sheets_batch_get_values');
 
-const mochaAsync = (fn) => {
-  return (done) => {
-    fn.call().then(done, (err) => {
-      done(err);
-    });
-  };
-};
-
-describe('Spreadsheet sheet create snippet', () => {
+describe('Spreadsheet batch get values snippet', () => {
   const helpers = new Helpers();
 
-  before((done) => {
-    Promise.all([
-      helpers.driveService,
-      helpers.sheetsService,
-    ]).then((services) => {
-      done();
-    }).catch(done);
-  });
-
-  beforeEach(() => {
-    helpers.reset();
-  });
-
-  afterEach(() => {
+  after(() => {
     helpers.cleanup();
   });
 
-  after(() => {
-    return new Promise((resolve) => setTimeout(resolve, 10));
-  });
-
-  it('should batch get spreadsheet values', mochaAsync(async () => {
+  it('should batch get spreadsheet values', (async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await SheetsBatchGetValues.batchGetValues(spreadsheetId, ['A1:A3', 'B1:C1']);
