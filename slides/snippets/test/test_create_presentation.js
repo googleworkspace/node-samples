@@ -18,36 +18,14 @@ const expect = require('expect');
 const Helpers = require('./helpers');
 const SlidesCreatePresentation = require('../slides_create_presentation');
 
-const mochaAsync = (fn) => {
-  return (done) => {
-    fn.call().then(done, (err) => {
-      done(err);
-    });
-  };
-};
-
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
 
-  before((done) => {
-    Promise.all([
-      helpers.driveService,
-      helpers.slidesService,
-    ]).then((services) => {
-      done();
-    }).catch(done);
-  });
-
-  beforeEach(() => {
-    helpers.reset();
-  });
-
   after(() => {
-    helpers.cleanup();
-    return new Promise((resolve) => setTimeout(resolve, 10));
+    return helpers.cleanup();
   });
 
-  it('should create a presentation', mochaAsync(async () => {
+  it('should create a presentation', (async () => {
     const presentation = await SlidesCreatePresentation.createPresentation('Title');
     expect(presentation).toExist();
     helpers.deleteFileOnCleanup(presentation.data.presentationId);

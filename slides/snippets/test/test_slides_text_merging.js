@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,36 +19,14 @@ const SlidesTextMerging = require('../slides_text_merging');
 
 const TEMPLATE_PRESENTATION_ID = '1MmTR712m7U_kgeweE57POWwkEyWAV17AVAWjpmltmIg';
 
-const mochaAsync = (fn) => {
-  return (done) => {
-    fn.call().then(done, (err) => {
-      done(err);
-    });
-  };
-};
-
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
 
-  before((done) => {
-    Promise.all([
-      helpers.driveService,
-      helpers.slidesService,
-    ]).then((services) => {
-      done();
-    }).catch(done);
-  });
-
-  beforeEach(() => {
-    helpers.reset();
-  });
-
   after(() => {
-  //   helpers.cleanup();
-    return new Promise((resolve) => setTimeout(resolve, 10));
+    return helpers.cleanup();
   });
 
-  it('should merge text', mochaAsync(async () => {
+  it('should merge text', (async () => {
     let sheetId = await helpers.createTestSpreadsheet();
     sheetId = await helpers.populateValues(sheetId);
     const responses = await SlidesTextMerging.textMerging(TEMPLATE_PRESENTATION_ID,

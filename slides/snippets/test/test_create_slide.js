@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,36 +17,14 @@ const expect = require('expect');
 const Helpers = require('./helpers');
 const SlidesCreateSlide = require('../slides_create_slide');
 
-const mochaAsync = (fn) => {
-  return (done) => {
-    fn.call().then(done, (err) => {
-      done(err);
-    });
-  };
-};
-
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
 
-  before((done) => {
-    Promise.all([
-      helpers.driveService,
-      helpers.slidesService,
-    ]).then((services) => {
-      done();
-    }).catch(done);
-  });
-
-  beforeEach(() => {
-    helpers.reset();
-  });
-
   after(() => {
-    helpers.cleanup();
-    return new Promise((resolve) => setTimeout(resolve, 10));
+    return helpers.cleanup();
   });
 
-  it('should create a slide', mochaAsync(async () => {
+  it('should create a slide', (async () => {
     const presentationId = await helpers.createTestPresentation();
     await helpers.addSlides(presentationId, 3, 'TITLE_AND_TWO_COLUMNS');
     const pageId = 'my_page_id';
