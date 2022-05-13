@@ -22,7 +22,7 @@ describe('Spreadsheet batch update values snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
-    helpers.cleanup();
+    return helpers.cleanup();
   });
   it('should batch update spreadsheet values', (async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();

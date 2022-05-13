@@ -22,7 +22,7 @@ describe('Spreadsheet batch update snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
-    helpers.cleanup();
+    return helpers.cleanup();
   });
 
   it('should batch update a spreadsheet', (async () => {

@@ -22,7 +22,7 @@ describe('Spreadsheet pivot table snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
-    helpers.cleanup();
+    return helpers.cleanup();
   });
 
   it('should create pivot tables', (async () => {

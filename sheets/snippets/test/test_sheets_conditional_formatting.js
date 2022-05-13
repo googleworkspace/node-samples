@@ -22,7 +22,7 @@ describe('Spreadsheet conditional formatting snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
-    helpers.cleanup();
+    return helpers.cleanup();
   });
 
   it('should conditionally format', (async () => {

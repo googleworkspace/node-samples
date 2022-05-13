@@ -22,7 +22,7 @@ describe('Spreadsheet get values snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
-    helpers.cleanup();
+    return helpers.cleanup();
   });
 
   it('should get spreadsheet values', (async () => {
