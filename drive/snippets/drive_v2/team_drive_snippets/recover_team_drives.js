@@ -17,50 +17,51 @@
 
 /**
  * Find all shared team drives without an organizer and add one.
+ * @param{string} realUser user ID
  * @return{obj} page token
  * */
 async function recoverTeamDrives(realUser) {
-	// Get credentials and build service
-	// TODO (developer) - Use appropriate auth mechanism for your app
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
 
-	const {GoogleAuth} = require('google-auth-library');
-	const {google} = require('googleapis');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
-	const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-	const service = google.drive({version: 'v2', auth});
-	const drives = [];
-	const newOrganizerPermission = {
-		type: 'user',
-		role: 'organizer',
-		value: 'user@example.com',
-	};
-	newOrganizerPermission.value = realUser;
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const service = google.drive({version: 'v2', auth});
+  const drives = [];
+  const newOrganizerPermission = {
+    type: 'user',
+    role: 'organizer',
+    value: 'user@example.com',
+  };
+  newOrganizerPermission.value = realUser;
 
-	let pageToken = null;
-	try {
-		const res = await service.teamdrives.list({
-			q: 'organizerCount = 0',
-			fields: 'nextPageToken, items(id, name)',
-			useDomainAdminAccess: true,
-			pageToken: pageToken,
-		});
-		Array.prototype.push.apply(drives, res.data.items);
-		res.data.items.forEach(function(drive) {
-			console.log('Found shared drive without organizer:', drive.name, drive.id);
-			drive.permissions.insert({
-				resource: newOrganizerPermission,
-				fileId: drive.id,
-				useDomainAdminAccess: true,
-				supportsAllDrives: true,
-				fields: 'id',
-			});
-		});
-		pageToken = res.nextPageToken;
-		return !!pageToken;
-	} catch (err) {
-		// TODO(developer) - Handle error
-		throw err;
-	}
+  let pageToken = null;
+  try {
+    const res = await service.teamdrives.list({
+      q: 'organizerCount = 0',
+      fields: 'nextPageToken, items(id, name)',
+      useDomainAdminAccess: true,
+      pageToken: pageToken,
+    });
+    Array.prototype.push.apply(drives, res.data.items);
+    res.data.items.forEach(function(drive) {
+      console.log('Found shared drive without organizer:', drive.name, drive.id);
+      drive.permissions.insert({
+        resource: newOrganizerPermission,
+        fileId: drive.id,
+        useDomainAdminAccess: true,
+        supportsAllDrives: true,
+        fields: 'id',
+      });
+    });
+    pageToken = res.nextPageToken;
+    return !!pageToken;
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
 }
 // [END drive_recover_team_drives]
 

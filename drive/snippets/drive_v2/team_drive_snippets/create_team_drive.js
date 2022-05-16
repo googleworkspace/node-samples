@@ -20,32 +20,32 @@
  * @return{obj} drive Id
  * */
 async function createTeamDrive() {
-	// Get credentials and build service
-	// TODO (developer) - Use appropriate auth mechanism for your app
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
 
-	const fs = require('fs');
-	const uuid = require('uuid');
-	const {GoogleAuth} = require('google-auth-library');
-	const {google} = require('googleapis');
+  const fs = require('fs');
+  const uuid = require('uuid');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
-	const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-	const service = google.drive({version: 'v2', auth});
-	const teamDriveMetadata = {
-		'name': 'Project resources'
-	};
-	const requestId = uuid.v4();
-	try{
-		const teamDrive= await service.teamdrives.insert({
-			resource: teamDriveMetadata,
-			requestId: requestId,
-			fields: 'id'
-		});
-		console.log('Team Drive Id:', teamDrive.data.id);
-		return teamDrive.data.id
-	} catch (err){
-		// TODO(developer) - Handle error
-		throw err;
-	}
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const service = google.drive({version: 'v2', auth});
+  const teamDriveMetadata = {
+    'name': 'Project resources',
+  };
+  const requestId = uuid.v4();
+  try {
+    const teamDrive= await service.teamdrives.insert({
+      resource: teamDriveMetadata,
+      requestId: requestId,
+      fields: 'id',
+    });
+    console.log('Team Drive Id:', teamDrive.data.id);
+    return teamDrive.data.id;
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
 }
 // [END drive_create_team_drive]
 
