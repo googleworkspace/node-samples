@@ -20,10 +20,9 @@
  * @return{obj} file Id
  * */
 async function uploadWithConversion() {
+  const fs = require('fs');
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const fs = require('fs');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
