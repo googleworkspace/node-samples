@@ -17,7 +17,7 @@
 
 /**
  * Batch permission modification
- * @param{string} realFileId file ID
+ * @param{string} fileId file ID
  * @param{string} realUser username
  * @param{string} realDomain domain
  * @return{obj} permission id
