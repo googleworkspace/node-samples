@@ -17,16 +17,15 @@
 
 /**
  * Find all shared team drives without an organizer and add one.
- * @param{string} realUser user ID
+ * @param{string} userId user ID
  * @return{obj} page token
  * */
-async function recoverTeamDrives(realUser) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+async function recoverTeamDrives(userId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
   const drives = [];
@@ -35,7 +34,7 @@ async function recoverTeamDrives(realUser) {
     role: 'organizer',
     value: 'user@example.com',
   };
-  newOrganizerPermission.value = realUser;
+  newOrganizerPermission.value = userId;
 
   let pageToken = null;
   try {

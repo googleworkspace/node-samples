@@ -20,14 +20,13 @@
  * @return{obj} drive Id
  * */
 async function createTeamDrive() {
-	// Get credentials and build service
-	// TODO (developer) - Use appropriate auth mechanism for your app
-
 	const fs = require('fs');
 	const uuid = require('uuid');
 	const {GoogleAuth} = require('google-auth-library');
 	const {google} = require('googleapis');
 
+	// Get credentials and build service
+	// TODO (developer) - Use appropriate auth mechanism for your app
 	const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
 	const service = google.drive({version: 'v3', auth});
 	const teamDriveMetadata = {
