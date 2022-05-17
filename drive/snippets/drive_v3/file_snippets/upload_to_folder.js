@@ -17,20 +17,21 @@
 
 /**
  * Upload a file to the specified folder
- * @param{string} realFolderId folder ID
+ * @param{string} folderId folder ID
  * @return{obj} file Id
  * */
-async function uploadToFolder(realFolderId) {
+async function uploadToFolder(folderId) {
+  const fs = require('fs');
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const fs = require('fs');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v3', auth});
-  folderId = realFolderId;
+
+  // TODO(developer): set folder Id
+  // folderId = '1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7';
   const fileMetadata = {
     'title': 'photo.jpg',
     'parents': [{id: folderId}],
