@@ -17,19 +17,17 @@
 
 /**
  * Download a Document file in PDF format
- * @param{string} realFileId file ID
+ * @param{string} fileId file ID
  * @return{obj} file status
  * */
-async function exportPdf(realFileId) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+async function exportPdf(fileId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v3', auth});
-  fileId = realFileId;
 
   try {
     const file = await service.files.export({

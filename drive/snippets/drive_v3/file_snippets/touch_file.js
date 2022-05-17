@@ -17,24 +17,22 @@
 
 /**
  * Change the file's modification timestamp.
- * @param{string} realFileId ID of the file to change modified time
- * @param{string} realTimestamp Timestamp to override Modified date time of the file
+ * @param{string} fileId ID of the file to change modified time
+ * @param{string} Timestamp Timestamp to override Modified date time of the file
  * @return{obj} modified Timestamp
  **/
-async function touchFile(realFileId, realTimestamp) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+async function touchFile(fileId, Timestamp) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v3', auth});
   const fileMetadata = {
     'modifiedTime': new Date().toISOString(),
   };
-  fileId = realFileId;
-  fileMetadata.modifiedTime = realTimestamp;
+  fileMetadata.modifiedTime = Timestamp;
   try {
     const file = await service.files.update({
       fileId: fileId,

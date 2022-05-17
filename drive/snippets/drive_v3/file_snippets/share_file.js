@@ -17,24 +17,22 @@
 
 /**
  * Download a Document file in PDF format
- * @param{string} realFileId file ID
+ * @param{string} fileId file ID
  * @param{string} realUser username
  * @param{string} realDomain domain
  * @return{obj} permission id
  * */
-function shareFile(realFileId, realUser, realDomain) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+function shareFile(fileId, realUser, realDomain) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
   const async = require('async');
 
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v3', auth});
 
   let id;
-  fileId = realFileId;
   const permissions = [
     {
       'type': 'user',
@@ -55,11 +53,10 @@ function shareFile(realFileId, realUser, realDomain) {
         resource: permission,
         fileId: fileId,
         fields: 'id',
-      })
-          .then(function(result) {
-            id = result.data.id;
-            console.log('Permission Id:', id);
-          });
+      }).then(function(result) {
+        id = result.data.id;
+        console.log('Permission Id:', id);
+      });
     });
     return id;
   } catch (err) {
