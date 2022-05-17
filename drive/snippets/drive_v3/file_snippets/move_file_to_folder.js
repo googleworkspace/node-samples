@@ -16,22 +16,19 @@
 // [START drive_move_file_to_folder]
 
 /**
- * Move a file to specified folder
- * @param{string} realFileId Id of the file to move
- * @param{string} realFolderId Id of the folder to move
+ * Change the file's modification timestamp.
+ * @param{string} fileId Id of the file to move
+ * @param{string} folderId Id of the folder to move
  * @return{obj} file status
  * */
-async function moveFileToFolder(realFileId, realFolderId) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+async function moveFileToFolder(fileId, folderId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v3', auth});
-  fileId = realFileId;
-  folderId = realFolderId;
 
   try {
     // Retrieve the existing parents to remove
