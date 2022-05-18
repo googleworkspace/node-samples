@@ -20,7 +20,6 @@
  * @return{obj} drive Id
  * */
 async function createTeamDrive() {
-  const fs = require('fs');
   const uuid = require('uuid');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
