@@ -53,9 +53,11 @@ class Helpers {
 
   /**
    * Cleans up the test suite.
+   * @return {Promise} returns list of deletion promises
    */
   cleanup() {
-    this.filesToDelete.map((fileId) => this.driveService.files.delete({fileId}));
+    return Promise.all(this.filesToDelete.map((fileId) =>
+      this.driveService.files.delete({fileId})));
   }
 
   /**

@@ -16,23 +16,26 @@
 
 const expect = require('expect');
 const Helpers = require('./helpers');
-const SheetsBatchUpdate = require('../sheets_batch_update');
+const SheetsAppendValues = require('../sheets_append_values');
 
-describe('Spreadsheet batch update snippet', () => {
+describe('Spreadsheet append values snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should batch update a spreadsheet', (async () => {
+  it('should append values to a spreadsheet', (async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsBatchUpdate.batchUpdate(spreadsheetId,
-        'New Title', 'Hello', 'Goodbye');
-    const replies = result.data.replies;
-    expect(replies.length).toBe(2);
-    const findReplaceResponse = replies[1].findReplace;
-    expect(findReplaceResponse.occurrencesChanged).toBe(100);
+    const result = await SheetsAppendValues.appendValues(spreadsheetId, 'Sheet1', 'USER_ENTERED', [
+      ['A', 'B'],
+      ['C', 'D'],
+    ]);
+    expect(result.data.tableRange).toBe('Sheet1!A1:J10');
+    const updates = result.data.updates;
+    expect(updates.updatedRows).toBe(2);
+    expect(updates.updatedColumns).toBe(2);
+    expect(updates.updatedCells).toBe(4);
   }));
 });

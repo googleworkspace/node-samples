@@ -16,23 +16,25 @@
 
 const expect = require('expect');
 const Helpers = require('./helpers');
-const SheetsBatchUpdate = require('../sheets_batch_update');
+const SheetsBatchUpdateValues = require('../sheets_batch_update_values');
 
-describe('Spreadsheet batch update snippet', () => {
+describe('Spreadsheet batch update values snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
-
-  it('should batch update a spreadsheet', (async () => {
+  it('should batch update spreadsheet values', (async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
-    await helpers.populateValues(spreadsheetId);
-    const result = await SheetsBatchUpdate.batchUpdate(spreadsheetId,
-        'New Title', 'Hello', 'Goodbye');
-    const replies = result.data.replies;
-    expect(replies.length).toBe(2);
-    const findReplaceResponse = replies[1].findReplace;
-    expect(findReplaceResponse.occurrencesChanged).toBe(100);
+    const result = await SheetsBatchUpdateValues.batchUpdateValues(spreadsheetId,
+        'A1:B2', 'USER_ENTERED', [
+          ['A', 'B'],
+          ['C', 'D'],
+        ]);
+    const responses = result.data.responses;
+    expect(responses.length).toBe(1);
+    expect(result.data.totalUpdatedRows).toBe(2);
+    expect(result.data.totalUpdatedColumns).toBe(2);
+    expect(result.data.totalUpdatedCells).toBe(4);
   }));
 });

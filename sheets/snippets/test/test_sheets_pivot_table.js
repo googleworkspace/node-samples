@@ -16,23 +16,19 @@
 
 const expect = require('expect');
 const Helpers = require('./helpers');
-const SheetsBatchUpdate = require('../sheets_batch_update');
+const SheetsPivotTable = require('../sheets_pivot_table');
 
-describe('Spreadsheet batch update snippet', () => {
+describe('Spreadsheet pivot table snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should batch update a spreadsheet', (async () => {
+  it('should create pivot tables', (async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsBatchUpdate.batchUpdate(spreadsheetId,
-        'New Title', 'Hello', 'Goodbye');
-    const replies = result.data.replies;
-    expect(replies.length).toBe(2);
-    const findReplaceResponse = replies[1].findReplace;
-    expect(findReplaceResponse.occurrencesChanged).toBe(100);
+    const result = await SheetsPivotTable.pivotTable(spreadsheetId);
+    expect(result).toExist();
   }));
 });
