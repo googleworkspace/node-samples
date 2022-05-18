@@ -35,7 +35,7 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
 
   // Use the Sheets API to load data, one record per row.
   const responses = [];
-  const dataRangeNotation = 'Customers!A2:M6';
+  const dataRangeNotation = 'A2:M6';
 
   try {
     const sheetsResponse = await sheetsService.spreadsheets.values.get({
@@ -108,6 +108,7 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
       console.log(`Created presentation for ${customerName} with ID: ` +
         presentationCopyId);
       console.log(`Replaced ${numReplacements} text instances`);
+      return result;
     }
   } catch (err) {
     // TODO (developer) - Handle exception
@@ -116,5 +117,5 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
 }
 // [END slides_text_merging]
 
-textMerging('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-    '1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');
+module.exports = {textMerging};
+

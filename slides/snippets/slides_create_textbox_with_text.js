@@ -69,6 +69,7 @@ async function createTextboxWithText(presentationId, pageId) {
     });
     const createShapeResponse = createTextboxWithTextResponse.data.replies[0].createShape;
     console.log(`Created textbox with ID: ${createShapeResponse.objectId}`);
+    return createTextboxWithTextResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -76,5 +77,4 @@ async function createTextboxWithText(presentationId, pageId) {
 }
 // [END slides_create_textbox_with_text]
 
-createTextboxWithText('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-    'my_page_id');
+module.exports = {createTextboxWithText};

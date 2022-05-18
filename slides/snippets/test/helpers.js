@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 const Promise = require('promise');
-const googleapis = require('googleapis');
-const GoogleAuth = require('google-auth-library');
+const {google} = require('googleapis');
+const {GoogleAuth} = require('google-auth-library');
 
 /**
  * Helper functions for Google Slides
@@ -26,34 +26,18 @@ class Helpers {
    * Creates the Google API Service
    */
   constructor() {
-    const client = this.buildAuthClient();
-    this.driveService = client.then((auth) => googleapis.drive({version: 'v3', auth}));
-    this.slidesService = client.then((auth) => googleapis.slides({version: 'v1', auth}));
-    this.sheetsService = client.then((auth) => googleapis.sheets({version: 'v4', auth}));
+    const auth = new GoogleAuth(
+        {
+          scopes: [
+            'https://www.googleapis.com/auth/drive',
+            'https://www.googleapis.com/auth/presentations',
+            'https://www.googleapis.com/auth/spreadsheets',
+          ],
+        });
+    this.driveService = google.drive({version: 'v3', auth});
+    this.slidesService = google.slides({version: 'v1', auth});
+    this.sheetsService = google.sheets({version: 'v4', auth});
     this.filesToDelete = [];
-  }
-
-  /**
-   * Builds the Google Auth Client
-   * @return {Promise} A promise to return the auth client.
-   */
-  buildAuthClient() {
-    const googleAuth = new GoogleAuth();
-    return new Promise((resolve, reject) => {
-      googleAuth.getApplicationDefault((err, authClient) => {
-        if (err) return reject(err);
-        const scopes = [
-          'https://www.googleapis.com/auth/drive',
-          'https://www.googleapis.com/auth/presentations',
-          'https://www.googleapis.com/auth/spreadsheets',
-        ];
-        if (authClient.createScopedRequired &&
-            authClient.createScopedRequired()) {
-          authClient = authClient.createScoped(scopes);
-        }
-        resolve(authClient);
-      });
-    });
   }
 
   /**
@@ -73,13 +57,11 @@ class Helpers {
 
   /**
    * Cleans up the test suite.
-   * @return {Promise} A promise to return the Google API service.
+   * @return {Promise} returns a list of promises
    */
   cleanup() {
-    return this.driveService.then((drive) => {
-      const deleteFile = Promise.denodeify(drive.files.delete).bind(drive.files);
-      return this.filesToDelete.map((fileId) => deleteFile({fileId}));
-    });
+    return Promise.all(this.filesToDelete.map((fileId) =>
+      this.driveService.files.delete({fileId})));
   }
 
   /**
@@ -88,14 +70,12 @@ class Helpers {
    */
   createTestPresentation() {
     return new Promise((resolve, reject) => {
-      return this.slidesService.then((slides) => {
-        slides.presentations.create({
-          title: 'Test Preso',
-        }, (err, presentation) => {
-          if (err) return reject(err);
-          this.deleteFileOnCleanup(presentation.presentationId);
-          resolve(presentation.presentationId);
-        });
+      this.slidesService.presentations.create({
+        title: 'Test Preso',
+      }, (err, presentation) => {
+        if (err) return reject(err);
+        this.deleteFileOnCleanup(presentation.data.presentationId);
+        resolve(presentation.data.presentationId);
       });
     });
   }
@@ -122,16 +102,14 @@ class Helpers {
           },
         });
       }
-      this.slidesService.then((slides) => {
-        slides.presentations.batchUpdate({
-          presentationId,
-          resource: {
-            requests,
-          },
-        }, (err, response) => {
-          if (err) return reject(err);
-          resolve(slideIds);
-        });
+      this.slidesService.presentations.batchUpdate({
+        presentationId,
+        resource: {
+          requests,
+        },
+      }, (err, response) => {
+        if (err) return reject(err);
+        resolve(slideIds);
       });
     });
   }
@@ -175,16 +153,14 @@ class Helpers {
           text: 'New Box Text Inserted',
         },
       }];
-      this.slidesService.then((slides) => {
-        slides.presentations.batchUpdate({
-          presentationId,
-          resource: {
-            requests,
-          },
-        }, (err, createTextboxResponse) => {
-          if (err) return reject(err);
-          resolve(createTextboxResponse.replies[0].createShape.objectId);
-        });
+      slidesService.presentations.batchUpdate({
+        presentationId,
+        resource: {
+          requests,
+        },
+      }, (err, createTextboxResponse) => {
+        if (err) return reject(err);
+        resolve(createTextboxResponse.data.replies[0].createShape.objectId);
       });
     });
   }
@@ -226,18 +202,71 @@ class Helpers {
           },
         },
       }];
-      this.slidesService.then((slides) => {
-        slides.presentations.batchUpdate({
-          presentationId,
-          resource: {
-            requests,
-          },
-        }, (err, createSheetsChartResponse) => {
-          if (err) return reject(err);
-          resolve(createSheetsChartResponse.replies[0].createSheetsChart.objectId);
-        });
+
+      slidesService.presentations.batchUpdate({
+        presentationId,
+        resource: {
+          requests,
+        },
+      }, (err, createSheetsChartResponse) => {
+        if (err) return reject(err);
+        resolve(createSheetsChartResponse.replies[0].createSheetsChart.objectId);
       });
     });
+  }
+
+  /**
+   * Creates a test Spreadsheet.
+   * @return {Promise} A promise to return the Google API service.
+   */
+  createTestSpreadsheet() {
+    const createSpreadsheet = Promise.denodeify(this.sheetsService.spreadsheets.create)
+        .bind(this.sheetsService.spreadsheets);
+    return createSpreadsheet({
+      resource: {
+        properties: {
+          title: 'Test Spreadsheet',
+        },
+      },
+      fields: 'spreadsheetId',
+    })
+        .then((spreadsheet) => {
+          this.deleteFileOnCleanup(spreadsheet.data.spreadsheetId);
+          return spreadsheet.data.spreadsheetId;
+        });
+  }
+
+  /**
+   * Adds a string to a 11x11 grid of Spreadsheet cells.
+   * @param {string} spreadsheetId The spreadsheet ID.
+   * @return {Promise} A promise to return the Google API service.
+   */
+  populateValues(spreadsheetId) {
+    const batchUpdate = Promise.denodeify(this.sheetsService.spreadsheets.batchUpdate)
+        .bind(this.sheetsService.spreadsheets);
+    return batchUpdate({
+      spreadsheetId,
+      resource: {
+        requests: [{
+          repeatCell: {
+            range: {
+              sheetId: 0,
+              startRowIndex: 0,
+              endRowIndex: 15,
+              startColumnIndex: 0,
+              endColumnIndex: 15,
+            },
+            cell: {
+              userEnteredValue: {
+                stringValue: 'Hello',
+              },
+            },
+            fields: 'userEnteredValue',
+          },
+        }],
+      },
+    })
+        .then(() => spreadsheetId);
   }
 }
 
