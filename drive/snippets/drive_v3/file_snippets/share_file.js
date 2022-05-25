@@ -22,7 +22,7 @@
  * @param{string} realDomain domain
  * @return{obj} permission id
  * */
-function shareFile(fileId, realUser, realDomain) {
+function shareFile(fileId, targetUserEmail, targetDomainName) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
   const async = require('async');
@@ -37,15 +37,13 @@ function shareFile(fileId, realUser, realDomain) {
     {
       'type': 'user',
       'role': 'writer',
-      'emailAddress': 'user@example.com',
+      'emailAddress': targetUserEmail // 'user@partner.com',
     }, {
       'type': 'domain',
       'role': 'writer',
-      'domain': 'example.com',
+      'domain': targetDomainName // 'example.com',
     },
   ];
-  permissions[0].emailaddress = realUser;
-  permissions[1].domain = realDomain;
   // Using the NPM module 'async'
   try {
     async.eachSeries(permissions, function(permission) {
