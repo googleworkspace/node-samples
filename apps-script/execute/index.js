@@ -28,12 +28,12 @@ async function callAppsScript() {
 
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-  const auth = new GoogleAuth({scopes: 'https://mail.google.com/'});
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const script = google.script({version: 'v1', auth});
 
   try {
     // Make the API request. The request object is included here as 'resource'.
-    const resp = script.scripts.run({
+    const resp = await script.scripts.run({
       auth: auth,
       resource: {
         function: 'getFoldersUnderRoot',
