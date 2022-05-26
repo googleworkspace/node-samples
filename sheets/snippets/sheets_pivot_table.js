@@ -18,6 +18,7 @@
 /**
  * Adds a pivot table to a spreadsheet.
  * @param {string} spreadsheetId The Spreadsheet to add the pivot table to.
+ * @return {obj} spreadsheet information
  */
 async function pivotTable(spreadsheetId) {
   const {GoogleAuth} = require('google-auth-library');
@@ -90,6 +91,7 @@ async function pivotTable(spreadsheetId) {
       spreadsheetId,
       resource,
     });
+    return response;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -97,4 +99,4 @@ async function pivotTable(spreadsheetId) {
 }
 // [END sheets_pivot_tables]
 
-pivotTable('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE');
+module.exports = {pivotTable};
