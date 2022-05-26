@@ -13,38 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// [START drive_export_pdf]
 
-// [START sheets_create]
 /**
- * Create a google spreadsheet
- * @param {string} title Spreadsheets title
- * @return {string} Created spreadsheets ID
- */
-async function create(title) {
+ * Download a Document file in PDF format
+ * @param{string} fileId file ID
+ * @return{obj} file status
+ * */
+async function exportPdf(fileId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
+  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const service = google.drive({version: 'v3', auth});
 
-  const service = google.sheets({version: 'v4', auth});
-  const resource = {
-    properties: {
-      title,
-    },
-  };
   try {
-    const spreadsheet = await service.spreadsheets.create({
-      resource,
-      fields: 'spreadsheetId',
+    const file = await service.files.export({
+      fileId: fileId,
+      mimeType: 'application/pdf',
     });
-    console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
-    return spreadsheet.data.spreadsheetId;
+    console.log(file.status);
+    return file.status;
   } catch (err) {
-    // TODO (developer) - Handle exception
+    // TODO(developer) - Handle error
     throw err;
   }
 }
-// [END sheets_create]
+// [END drive_export_pdf]
 
-module.exports = {create};
+exportPdf('1Kyer5fA4cKIJC5sBG-gXLZvx-tXl0kAkt5bZ1nmvZ6c');

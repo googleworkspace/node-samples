@@ -21,6 +21,7 @@
  * @param {string} range The range of values to append.
  * @param {object} valueInputOption Value input options.
  * @param {(string[])[]} _values A 2d array of values to append.
+ * @return {obj} spreadsheet information
  */
 async function appendValues(spreadsheetId, range, valueInputOption, _values) {
   const {GoogleAuth} = require('google-auth-library');
@@ -50,6 +51,7 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
       resource,
     });
     console.log(`${result.data.updates.updatedCells} cells appended.`);
+    return result;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -57,8 +59,4 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_append_values]
 
-appendValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2',
-    'USER_ENTERED', [
-      ['A', 'B'],
-      ['C', 'D'],
-    ]);
+module.exports = {appendValues};
