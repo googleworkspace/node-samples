@@ -153,7 +153,7 @@ class Helpers {
           text: 'New Box Text Inserted',
         },
       }];
-      slidesService.presentations.batchUpdate({
+      this.slidesService.presentations.batchUpdate({
         presentationId,
         resource: {
           requests,
@@ -203,14 +203,15 @@ class Helpers {
         },
       }];
 
-      slidesService.presentations.batchUpdate({
+      this.slidesService.presentations.batchUpdate({
         presentationId,
         resource: {
           requests,
         },
       }, (err, createSheetsChartResponse) => {
         if (err) return reject(err);
-        resolve(createSheetsChartResponse.replies[0].createSheetsChart.objectId);
+        resolve(createSheetsChartResponse.data.replies[0].createSheetsChart
+        .objectId);
       });
     });
   }

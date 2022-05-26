@@ -80,6 +80,7 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     }
     console.log(`Created merged presentation with ID: ${presentationCopyId}`);
     console.log(`Replaced ${numReplacements} shapes with images.`);
+    return batchUpdateResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -87,5 +88,4 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
   // [END slides_image_merging]
 }
 
-imageMerging('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-    'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+module.exports = {imageMerging};
