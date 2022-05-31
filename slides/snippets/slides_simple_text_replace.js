@@ -53,8 +53,7 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
       },
     });
     console.log(`Replaced text in shape with ID: ${shapeId}`);
-    console.log('in presentation with ID: ' +
-      batchUpdateResponse.data.presentationId);
+    return batchUpdateResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -62,5 +61,4 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
 }
 // [END slides_simple_text_replace]
 
-simpleTextReplace('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-    'MyTextBox_01', 'My_text_which_is_new');
+module.exports = {simpleTextReplace};

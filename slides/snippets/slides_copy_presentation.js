@@ -39,6 +39,7 @@ async function copyPresentation(presentationId, copyTitle) {
     });
     const presentationCopyId = driveResponse.data.id;
     console.log('Created copied presentation with ID: ' + presentationCopyId);
+    return driveResponse;
   } catch (err) {
     // TODO (developer) - handle exception
     throw err;
@@ -46,4 +47,4 @@ async function copyPresentation(presentationId, copyTitle) {
 }
 // [END slides_copy_presentation]
 
-copyPresentation('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4', 'copyTest');
+module.exports = {copyPresentation};
