@@ -64,4 +64,5 @@ async function recoverDrives(realUser) {
 }
 // [END drive_recover_drives]
 
+module.exports = recoverDrives;
 recoverDrives('xyz@workspacesamples.dev');
