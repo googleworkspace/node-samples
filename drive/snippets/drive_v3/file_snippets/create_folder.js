@@ -46,4 +46,5 @@ async function createFolder() {
 }
 // [END drive_create_folder]
 
+module.exports = createFolder;
 createFolder();
