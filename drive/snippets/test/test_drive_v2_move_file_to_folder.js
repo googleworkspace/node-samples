@@ -16,8 +16,8 @@
 
 const expect = require('expect');
 const Helpers = require('./helpers');
-const createFolder = require('../drive_v2/file snippets/create_folder');
-const moveFileToFolder = require('../drive_v2/file snippets/move_file_to_folder');
+const createFolder = require('../drive_v3/file_snippets/create_folder');
+const moveFileToFolder = require('../drive_v3/file_snippets/move_file_to_folder');
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -30,8 +30,7 @@ describe('Drive snippets', () => {
     const folderId = await createFolder();
     const file = await helpers.createTestBlob();
     helpers.deleteFileOnCleanup(folderId);
-    const movedFile = await moveFileToFolder(file.data.id, folderId);
-    expect(movedFile.data.parents).toInclude(folderId);
-    expect(movedFile.data.parents.length).toEqual(1);
+    const movedFileStatus = await moveFileToFolder(file.data.id, folderId);
+    expect(movedFileStatus).toEqual(200);
   }));
 });

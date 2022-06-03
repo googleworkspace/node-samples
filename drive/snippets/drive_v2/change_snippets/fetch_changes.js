@@ -37,6 +37,7 @@ async function fetchChanges() {
     res.data.items.forEach(function(change) {
       console.log('Change found for file:', change.fileId);
     });
+    return res.data.items;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;

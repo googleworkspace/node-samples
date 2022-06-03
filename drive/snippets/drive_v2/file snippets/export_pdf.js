@@ -45,4 +45,7 @@ async function exportPdf(realFileId) {
 }
 // [END drive_export_pdf]
 
-exportPdf('1Kyer5fA4cKIJC5sBG-gXLZvx-tXl0kAkt5bZ1nmvZ6c');
+module.exports = exportPdf;
+if (module === require.main) {
+  exportPdf('1Kyer5fA4cKIJC5sBG-gXLZvx-tXl0kAkt5bZ1nmvZ6c');
+}

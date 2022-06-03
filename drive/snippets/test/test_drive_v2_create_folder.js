@@ -16,8 +16,7 @@
 
 const expect = require('expect');
 const Helpers = require('./helpers');
-const createFolder = require('../drive_v2/file snippets/create_folder');
-const uploadToFolder = require('../drive_v2/file snippets/upload_to_folder');
+const createFolder = require('../drive_v3/file_snippets/create_folder');
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -26,11 +25,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should upload to a folder', (async () => {
-    const folderId = await createFolder();
-    helpers.deleteFileOnCleanup(folderId);
-    const fileId = await uploadToFolder(folderId);
-    expect(fileId).toExist();
-    helpers.deleteFileOnCleanup(fileId);
+  it('should create a folder', (async () => {
+    const id = await createFolder();
+    expect(id).toExist();
+    helpers.deleteFileOnCleanup(id);
   }));
 });

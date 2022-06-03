@@ -36,6 +36,7 @@ async function listAppdata() {
     res.data.items.forEach(function(file) {
       console.log('Found file:', file.title, file.id);
     });
+    return res.data.items;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
