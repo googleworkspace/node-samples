@@ -64,4 +64,8 @@ async function recoverDrives(realUser) {
 }
 // [END drive_recover_drives]
 
-recoverDrives('xyz@workspacesamples.dev');
+module.exports = recoverDrives;
+if (module === require.main) {
+  recoverDrives('xyz@workspacesamples.dev');
+  ;
+}

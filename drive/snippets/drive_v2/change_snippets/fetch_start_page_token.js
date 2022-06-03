@@ -30,6 +30,7 @@ async function fetchStartPageToken() {
   try {
     const res = await service.changes.getStartPageToken();
     console.log('Start token:', res.data.startPageToken);
+    return res.data.startPageToken;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;

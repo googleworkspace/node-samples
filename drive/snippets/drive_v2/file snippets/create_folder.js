@@ -37,6 +37,7 @@ async function createFolder() {
       fields: 'id',
     });
     console.log('Folder Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
@@ -44,4 +45,7 @@ async function createFolder() {
 }
 // [END drive_create_folder]
 
-createFolder();
+module.exports = createFolder;
+if (module === require.main) {
+  createFolder();
+}
