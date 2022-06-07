@@ -33,7 +33,7 @@ async function uploadBasic() {
   };
   const media = {
     mimeType: 'image/jpeg',
-    body: fs.createReadStream('photo.jpg'),
+    body: fs.createReadStream('files/photo.jpg'),
   };
   try {
     const file = await service.files.create({
@@ -50,4 +50,7 @@ async function uploadBasic() {
 }
 // [END drive_upload_basic]
 
-uploadBasic();
+module.exports = uploadBasic;
+if (module === require.main) {
+  uploadBasic();
+}

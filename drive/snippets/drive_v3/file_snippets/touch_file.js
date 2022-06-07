@@ -48,6 +48,8 @@ async function touchFile(fileId, Timestamp) {
 };
 // [END drive_touch_file]
 
-touchFile('1M4xjYwPynOk5TsIWN7hcGYkFdBkPTd5F',
-    '2022-04-02T05:43:27.504Z');
-
+module.exports = touchFile;
+if (module === require.main) {
+  touchFile('1M4xjYwPynOk5TsIWN7hcGYkFdBkPTd5F',
+      '2022-04-02T05:43:27.504Z');
+}
