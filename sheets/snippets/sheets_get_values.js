@@ -19,6 +19,7 @@
  * Gets cell values from a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} range The sheet range.
+ * @return {obj} spreadsheet information
  */
 async function getValues(spreadsheetId, range) {
   const {GoogleAuth} = require('google-auth-library');
@@ -35,6 +36,7 @@ async function getValues(spreadsheetId, range) {
     });
     const numRows = result.data.values ? result.data.values.length : 0;
     console.log(`${numRows} rows retrieved.`);
+    return result;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -42,5 +44,4 @@ async function getValues(spreadsheetId, range) {
 }
 // [END sheets_get_values]
 
-// Replace the values below with desired values
-getValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2');
+module.exports = {getValues};

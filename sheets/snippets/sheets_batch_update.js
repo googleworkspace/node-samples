@@ -21,6 +21,7 @@
  * @param {string} title The new Spreadsheet title
  * @param {string} find The text to find
  * @param {string} replacement The text to replace
+ * @return {obj} holding the information regarding the replacement of strings
  */
 async function batchUpdate(spreadsheetId, title, find, replacement) {
   const {GoogleAuth} = require('google-auth-library');
@@ -57,6 +58,7 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
     });
     const findReplaceResponse = response.data.replies[1].findReplace;
     console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
+    return response;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -64,5 +66,5 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
 }
 // [END sheets_batch_update]
 
-// Replace the values below with desired values
-batchUpdate('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'title', 'hello', 'bye');
+module.exports = {batchUpdate};
+

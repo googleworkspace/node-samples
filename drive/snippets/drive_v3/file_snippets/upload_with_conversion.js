@@ -13,56 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// [START drive_share_file]
+// [START drive_upload_with_conversion]
 
 /**
- * Batch permission modification
- * @param{string} fileId file ID
- * @param{string} realUser username
- * @param{string} realDomain domain
- * @return{obj} permission id
+ * Upload file with conversion
+ * @return{obj} file Id
  * */
-function shareFile(fileId, targetUserEmail, targetDomainName) {
+async function uploadWithConversion() {
+  const fs = require('fs');
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
-  const async = require('async');
-
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v3', auth});
+  const fileMetadata = {
+    'title': 'My Report',
+    'mimeType': 'application/vnd.google-apps.spreadsheet',
+  };
+  const media = {
+    mimeType: 'text/csv',
+    body: fs.createReadStream('report.csv'),
+  };
 
-  let id;
-  const permissions = [
-    {
-      'type': 'user',
-      'role': 'writer',
-      'emailAddress': targetUserEmail // 'user@partner.com',
-    }, {
-      'type': 'domain',
-      'role': 'writer',
-      'domain': targetDomainName // 'example.com',
-    },
-  ];
-  // Using the NPM module 'async'
   try {
-    async.eachSeries(permissions, function(permission) {
-      service.permissions.create({
-        resource: permission,
-        fileId: fileId,
-        fields: 'id',
-      }).then(function(result) {
-        id = result.data.id;
-        console.log('Permission Id:', id);
-      });
+    const file = await service.files.create({
+      resource: fileMetadata,
+      media: media,
+      fields: 'id',
     });
-    return id;
+    console.log('File Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
   }
 }
-// [END drive_share_file]
+// [END drive_upload_with_conversion]
 
-shareFile('1h9BsKrrEup5h2xOo5OzR70vSQpixjZfw', 'xyz@workspacesamples.dev',
-    'workspacesamples.dev');
+uploadWithConversion();

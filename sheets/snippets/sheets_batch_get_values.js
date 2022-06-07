@@ -19,6 +19,7 @@
  * Batch gets cell values from a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} _ranges The mock sheet range.
+ * @return {obj} spreadsheet information
  */
 async function batchGetValues(spreadsheetId, _ranges) {
   const {GoogleAuth} = require('google-auth-library');
@@ -40,6 +41,7 @@ async function batchGetValues(spreadsheetId, _ranges) {
       ranges,
     });
     console.log(`${result.data.valueRanges.length} ranges retrieved.`);
+    return result;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -47,5 +49,4 @@ async function batchGetValues(spreadsheetId, _ranges) {
 }
 // [END sheets_batch_get_values]
 
-// Replace the values below with desired values
-batchGetValues('1uSTAkV11mnou78uRdTYcy36owjZR2mWMDAeRhXEImjE', 'A1:B2');
+module.exports = {batchGetValues};
