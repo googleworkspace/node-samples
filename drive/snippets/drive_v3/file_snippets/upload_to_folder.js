@@ -37,7 +37,7 @@ async function uploadToFolder(folderId) {
   };
   const media = {
     mimeType: 'image/jpeg',
-    body: fs.createReadStream('photo.jpg'),
+    body: fs.createReadStream('files/photo.jpg'),
   };
 
   try {
@@ -55,4 +55,7 @@ async function uploadToFolder(folderId) {
 }
 // [END drive_upload_to_folder]
 
-uploadToFolder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');
+module.exports = uploadToFolder;
+if (module === require.main) {
+  uploadToFolder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');
+}

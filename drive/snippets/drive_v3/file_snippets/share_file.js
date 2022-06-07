@@ -18,11 +18,11 @@
 /**
  * Batch permission modification
  * @param{string} fileId file ID
- * @param{string} realUser username
- * @param{string} realDomain domain
- * @return{obj} permission id
+ * @param{string} targetUserEmail username
+ * @param{string} targetDomainName domain
+ * @return{list} permission id
  * */
-function shareFile(fileId, targetUserEmail, targetDomainName) {
+async function shareFile(fileId, targetUserEmail, targetDomainName) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
   const async = require('async');
@@ -37,11 +37,11 @@ function shareFile(fileId, targetUserEmail, targetDomainName) {
     {
       'type': 'user',
       'role': 'writer',
-      'emailAddress': targetUserEmail // 'user@partner.com',
+      'emailAddress': targetUserEmail, // 'user@partner.com',
     }, {
       'type': 'domain',
       'role': 'writer',
-      'domain': targetDomainName // 'example.com',
+      'domain': targetDomainName, // 'example.com',
     },
   ];
   // Using the NPM module 'async'
@@ -64,5 +64,8 @@ function shareFile(fileId, targetUserEmail, targetDomainName) {
 }
 // [END drive_share_file]
 
-shareFile('1h9BsKrrEup5h2xOo5OzR70vSQpixjZfw', 'xyz@workspacesamples.dev',
-    'workspacesamples.dev');
+module.exports = shareFile;
+if (module === require.main) {
+  shareFile('1h9BsKrrEup5h2xOo5OzR70vSQpixjZfw', 'xyz@workspacesamples.dev',
+      'workspacesamples.dev');
+}

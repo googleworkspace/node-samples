@@ -46,4 +46,7 @@ async function searchFile() {
 }
 // [END drive_search_file]
 
-searchFile();
+module.exports = searchFile;
+if (module === require.main) {
+  searchFile();
+}

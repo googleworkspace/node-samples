@@ -45,4 +45,7 @@ async function downloadFile(realFileId) {
 };
 // [END drive_download_file]
 
-downloadFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt');
+module.exports = downloadFile;
+if (module === require.main) {
+  downloadFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt');
+}
