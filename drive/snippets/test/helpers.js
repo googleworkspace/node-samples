@@ -62,17 +62,15 @@ class Helpers {
    * @param {Media} media A media object
    * @return {Promise} A promise to return the Google API service.
    */
-  createFile(fileMetadata, media) {
-    const createFile = Promise.denodeify(this.service.files.create).bind(this.service.
-        files);
-    return createFile({
+  async createFile(fileMetadata, media) {
+    const file = await this.service.files.create({
       resource: fileMetadata,
       media,
       fields: 'id',
-    }).then((file) => {
-      this.deleteFileOnCleanup(file.data.id);
-      return file;
     });
+
+    this.deleteFileOnCleanup(file.data.id);
+    return file;
   }
 
   /**
@@ -93,13 +91,15 @@ class Helpers {
    * Uploads a test image to Google Drive.
    * @return {Promise} A promise to return the Google Drive file.
    */
-  createTestBlob() {
-    return this.createFile({
+  async createTestBlob() {
+    const file = await this.createFile({
       name: 'photo.jpg',
     }, {
       mimeType: 'image/jpeg',
       body: fs.createReadStream('files/photo.jpg'),
     });
+
+    return file;
   }
 }
 
