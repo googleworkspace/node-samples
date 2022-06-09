@@ -47,4 +47,5 @@ async function createShortcut() {
 }
 // [END drive_create_shortcut]
 
-createShortcut();
+module.exports = createShortcut;
+// createShortcut();
