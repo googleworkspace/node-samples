@@ -33,7 +33,7 @@ async function uploadWithConversion() {
   };
   const media = {
     mimeType: 'text/csv',
-    body: fs.createReadStream('report.csv'),
+    body: fs.createReadStream('files/report.csv'),
   };
 
   try {
@@ -51,4 +51,7 @@ async function uploadWithConversion() {
 }
 // [END drive_upload_with_conversion]
 
-uploadWithConversion();
+module.exports = uploadWithConversion;
+if (module === require.main) {
+  uploadWithConversion();
+}
