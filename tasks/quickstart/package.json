@@ -4,7 +4,7 @@
   "description": "A simple Node.js command-line application that makes requests to the Google Tasks API.",
   "private": true,
   "dependencies": {
-    "googleapis": "^39.0.0"
+    "googleapis": "^49.0.0"
   },
   "devDependencies": {},
   "engines": {
