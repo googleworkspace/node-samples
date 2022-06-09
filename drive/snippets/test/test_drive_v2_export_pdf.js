@@ -28,7 +28,7 @@ describe('Drive snippets', () => {
 
   it('should export a PDF', (async () => {
     const file = await helpers.createTestDocument();
-    const contentStatus = await exportPdf(file.data.id);
-    expect(content).toEqual(200);
+    const result = await exportPdf(file.data.id);
+    expect(result.status).toEqual(200);
   }));
 });

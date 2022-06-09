@@ -29,10 +29,9 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-it('should ImageMerging', (async () => {
-    const response = await SlidesImageMerging.imageMerging
-    (TEMPLATE_PRESENTATION_ID, IMAGE_URL,
-        CUSTOMER_NAME);
+  it('should ImageMerging', (async () => {
+    const response = await SlidesImageMerging.imageMerging(
+        TEMPLATE_PRESENTATION_ID, IMAGE_URL, CUSTOMER_NAME);
     const presentationId = response.presentationId;
     expect(presentationId).toExist();
     expect(2).toEqual(response.replies.length);

@@ -1,4 +1,4 @@
-///**
+// /**
 // * Copyright 2022 Google LLC
 // *
 // * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +18,8 @@ const Helpers = require('./helpers');
 const SlidesCreateSheetsChart = require('../slides_create_sheets_chart');
 
 // Replace with your test spreadsheets id and charts id
-const CHART_ID = 1337053199
-const DATA_SPREADSHEET_ID = '1yFjePIkeZ7lgtwnuTzVIHGGGPkdc5MRbp2wF3Er0xMc'
+const CHART_ID = 1337053199;
+const DATA_SPREADSHEET_ID = '1yFjePIkeZ7lgtwnuTzVIHGGGPkdc5MRbp2wF3Er0xMc';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -29,15 +29,15 @@ describe('Presentation snippets', () => {
   });
 
   it('should CreateSheetsChart', (async () => {
-      const presentationId = await helpers.createTestPresentation();
-      const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
-      const pageId = pageIds[0];
-      const response = await SlidesCreateSheetsChart.createSheetsChart(presentationId, pageId,
-      DATA_SPREADSHEET_ID,
-          CHART_ID);
-      expect(1).toEqual(response.replies.length);
-      const chartId = response.replies[0].createSheetsChart.objectId;
-      expect(chartId).toExist();
-    }));
+    const presentationId = await helpers.createTestPresentation();
+    const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
+    const pageId = pageIds[0];
+    const response = await SlidesCreateSheetsChart.createSheetsChart(presentationId, pageId,
+        DATA_SPREADSHEET_ID,
+        CHART_ID);
+    expect(1).toEqual(response.replies.length);
+    const chartId = response.replies[0].createSheetsChart.objectId;
+    expect(chartId).toExist();
+  }));
 });
 

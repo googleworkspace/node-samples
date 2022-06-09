@@ -32,12 +32,12 @@ async function exportPdf(realFileId) {
   fileId = realFileId;
 
   try {
-    const file = await service.files.export({
+    const result = await service.files.export({
       fileId: fileId,
       mimeType: 'application/pdf',
     });
-    console.log(file.status);
-    return file.status;
+    console.log(result.status);
+    return result;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
