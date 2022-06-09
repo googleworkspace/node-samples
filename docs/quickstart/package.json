@@ -4,7 +4,7 @@
   "description": "A simple Node.js command-line application that makes requests to the Docs API.",
   "private": true,
   "dependencies": {
-    "googleapis": "^37.0.0"
+    "googleapis": "^39.1.0"
   },
   "devDependencies": {},
   "engines": {
