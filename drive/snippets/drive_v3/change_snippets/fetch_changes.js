@@ -39,6 +39,7 @@ async function fetchChanges(savedStartPageToken) {
         console.log('change found for file: ', change.fileId);
       });
       pageToken = res.data.newStartPageToken;
+      return pageToken;
     } while (pageToken);
   } catch (err) {
     // TODO(developer) - Handle error

@@ -44,6 +44,7 @@ async function uploadAppdata() {
           fields: 'id',
         });
     console.log('Folder Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;

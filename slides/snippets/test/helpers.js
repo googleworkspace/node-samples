@@ -210,8 +210,7 @@ class Helpers {
         },
       }, (err, createSheetsChartResponse) => {
         if (err) return reject(err);
-        resolve(createSheetsChartResponse.data.replies[0].createSheetsChart
-        .objectId);
+        resolve(createSheetsChartResponse.data.replies[0].createSheetsChart.objectId);
       });
     });
   }
