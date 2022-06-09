@@ -71,7 +71,7 @@ async function createSheetsChart(presentationId, pageId, spreadsheetId, sheetCha
       },
     });
     console.log(`Added a linked Sheets chart with ID: ${presentationChartId}`);
-    console.log(`In presentation with ID: ${batchUpdateResponse.data.presentationId}`);
+    return batchUpdateResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -79,7 +79,4 @@ async function createSheetsChart(presentationId, pageId, spreadsheetId, sheetCha
 }
 // [END slides_create_sheets_chart]
 
-createSheetsChart('19O1aSzL0ZcQGoueHvm56bbDu60Kd0lY4KgFrQ5f3IGA',
-    'my_page_id',
-    '1yFjePIkeZ7lgtwnuTzVIHGGGPkdc5MRbp2wF3Er0xMc',
-    1337053199);
+module.exports = {createSheetsChart};

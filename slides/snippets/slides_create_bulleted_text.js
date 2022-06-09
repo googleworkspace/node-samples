@@ -49,7 +49,7 @@ async function createBulletedText(presentationId, shapeId) {
       },
     });
     console.log(`Added bullets to text in shape with ID: ${shapeId}`);
-    console.log(`In presentation with ID: ${batchUpdateResponse.data.presentationId}`);
+    return batchUpdateResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -57,5 +57,4 @@ async function createBulletedText(presentationId, shapeId) {
 }
 // [END slides_create_bulleted_text]
 
-createBulletedText('19O1aSzL0ZcQGoueHvm56bbDu60Kd0lY4KgFrQ5f3IGA',
-    'MyTextBox_01');
+module.exports = {createBulletedText};
