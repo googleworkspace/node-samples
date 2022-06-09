@@ -44,7 +44,7 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
       },
     });
     console.log(`Refreshed a linked Sheets chart with ID: ${presentationChartId}`);
-    console.log(`In presentation with ID: ${batchUpdateResponse.data.presentationId}`);
+    return batchUpdateResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exception
     throw err;
@@ -52,4 +52,4 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
 }
 // [END slides_refresh_sheets_chart]
 
-refreshSheetsChart('19O1aSzL0ZcQGoueHvm56bbDu60Kd0lY4KgFrQ5f3IGA', 'MyEmbeddedChart');
+module.exports = {refreshSheetsChart};

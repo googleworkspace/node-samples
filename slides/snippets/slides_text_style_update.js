@@ -82,8 +82,7 @@ async function textStyleUpdate(presentationId, shapeId) {
       },
     });
     console.log(`Updated the text style for shape with ID: ${shapeId}`);
-    console.log('in presentation with ID: ' +
-      batchUpdateResponse.data.presentationId);
+    return batchUpdateResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exceptions
     throw err;
@@ -91,5 +90,4 @@ async function textStyleUpdate(presentationId, shapeId) {
 }
 // [END slides_text_style_update]
 
-textStyleUpdate('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4',
-    'MyTextBox_01');
+module.exports = {textStyleUpdate};
