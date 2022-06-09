@@ -38,6 +38,7 @@ async function createShortcut() {
       fields: 'id',
     });
     console.log('File Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
@@ -45,4 +46,8 @@ async function createShortcut() {
 }
 // [END drive_create_shortcut]
 
-createShortcut();
+module.exports = createShortcut;
+if (module === require.main) {
+  createShortcut();
+}
+

@@ -33,6 +33,7 @@ async function fetchAppdataFolder() {
       fields: 'id',
     });
     console.log('File Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
