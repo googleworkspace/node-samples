@@ -49,6 +49,7 @@ async function createSlide(presentationId, pageId) {
       },
     });
     console.log(`Created slide with ID: ${res.data.replies[0].createSlide.objectId}`);
+    return res;
   } catch (err) {
     // TODO (developer) - handle exception
     throw err;
@@ -56,4 +57,5 @@ async function createSlide(presentationId, pageId) {
 }
 // [END slides_create_slide]
 
-createSlide('12zc4QWOtsJZ0weX3zFHj5O_IVRhXQYqOXjbia4hoXw4', 'my_page_id');
+module.exports = {createSlide};
+

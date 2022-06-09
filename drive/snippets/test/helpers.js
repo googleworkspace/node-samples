@@ -28,7 +28,7 @@ class Helpers {
    */
   constructor() {
     const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-    this.service = google.drive({version: 'v2', auth});
+    this.service = google.drive({version: 'v3', auth});
     this.filesToDelete = [];
   }
 
@@ -63,7 +63,8 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   async createFile(fileMetadata, media) {
-    const file = await this.service.files.create({resource: fileMetadata,
+    const file = await this.service.files.create({
+      resource: fileMetadata,
       media,
       fields: 'id',
     });
