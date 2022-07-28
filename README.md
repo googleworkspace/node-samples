@@ -1,5 +1,3 @@
-# Google Workspace Node.js Samples [![Build Status](https://travis-ci.org/googleworkspace/node-samples.svg?branch=master)](https://travis-ci.org/googleworkspace/node-samples)
-
 Node.js samples for [Google Workspace APIs](https://developers.google.com/workspace/) docs.
 
 API| Quickstart| Snippets
