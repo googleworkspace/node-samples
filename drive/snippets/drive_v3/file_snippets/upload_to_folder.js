@@ -33,7 +33,7 @@ async function uploadToFolder(folderId) {
   // folderId = '1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7';
   const fileMetadata = {
     'title': 'photo.jpg',
-    'parents': [{id: folderId}],
+    'parents': [folderId],
   };
   const media = {
     mimeType: 'image/jpeg',
