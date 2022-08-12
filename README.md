@@ -1,4 +1,4 @@
-# Node.js samples for [Google Workspace APIs](https://developers.google.com/workspace/) docs.
+# Node.js samples for [Google Workspace APIs](https://developers.google.com/workspace/) docs
 
 API| Quickstart| Snippets
 ---| ---| ---
