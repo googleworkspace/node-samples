@@ -17,7 +17,7 @@
 
 /**
  * Upload a file to the specified folder and prints file ID, folder ID
- * @param{string} realFolderId folder ID
+ * @param{string} folderId folder ID
  * */
 async function uploadToFolder(folderId) {
   // Get credentials and build service

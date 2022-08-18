@@ -17,7 +17,7 @@
 
 /**
  * Find all shared drives without an organizer and add one.
- * @param{string} realUser user ID
+ * @param{string} userEmail user ID
  * */
 async function recoverDrives(userEmail) {
   // Get credentials and build service

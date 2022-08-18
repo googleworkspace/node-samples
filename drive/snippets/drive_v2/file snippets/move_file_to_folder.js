@@ -17,8 +17,8 @@
 
 /**
  * Change the file's modification timestamp.
- * @param{string} realFileId Id of the file to move
- * @param{string} realFolderId Id of the folder to move
+ * @param{string} fileId Id of the file to move
+ * @param{string} folderId Id of the folder to move
  * @return{obj} file status
  * */
 async function moveFileToFolder(fileId, folderId) {

@@ -17,7 +17,7 @@
 
 /**
  * Downloads a file
- * @param{string} realFileId file ID
+ * @param{string} fileId file ID
  * @return{obj} file status
  * */
 async function downloadFile(fileId) {

@@ -17,8 +17,8 @@
 
 /**
  * Change the file's modification timestamp.
- * @param{string} realFileId ID of the file to change modified time
- * @param{string} realTimestamp Timestamp to override Modified date time of the file
+ * @param{string} fileId ID of the file to change modified time
+ * @param{string} timestamp Timestamp to override Modified date time of the file
  * @return{obj} modified timestamp
  * */
 async function touchFile(fileId, timestamp) {

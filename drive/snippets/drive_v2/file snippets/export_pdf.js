@@ -17,7 +17,7 @@
 
 /**
  * Download a Document file in PDF format
- * @param{string} realFileId file ID
+ * @param{string} fileId file ID
  * @return{obj} file status
  * */
 async function exportPdf(fileId) {

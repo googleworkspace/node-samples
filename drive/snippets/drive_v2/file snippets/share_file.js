@@ -17,9 +17,9 @@
 
 /**
  * Download a Document file in PDF format
- * @param{string} realFileId file ID
- * @param{string} realUser username
- * @param{string} realDomain domain
+ * @param{string} fileId file ID
+ * @param{string} targetUser username
+ * @param{string} targetDomain domain
  * */
 async function shareFile(fileId, targetUser, targetDomain) {
   // Get credentials and build service
