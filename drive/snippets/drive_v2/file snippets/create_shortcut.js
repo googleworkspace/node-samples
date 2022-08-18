@@ -47,7 +47,4 @@ async function createShortcut() {
 // [END drive_create_shortcut]
 
 module.exports = createShortcut;
-if (module === require.main) {
-  createShortcut();
-}
 

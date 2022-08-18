@@ -19,7 +19,7 @@
  * Find all shared drives without an organizer and add one.
  * @param{string} realUser user ID
  * */
-async function recoverDrives(realUser) {
+async function recoverDrives(userEmail) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -32,37 +32,35 @@ async function recoverDrives(realUser) {
   const newOrganizerPermission = {
     type: 'user',
     role: 'organizer',
-    value: 'user@example.com',
+    emailAddress: userEmail, // Example: 'user@example.com'
   };
-  newOrganizerPermission.value = realUser;
 
   let pageToken = null;
   try {
     const res = await service.drives.list({
       q: 'organizerCount = 0',
-      fields: 'nextPageToken, items(id, name)',
+      fields: 'nextPageToken, drives(id, name)',
       useDomainAdminAccess: true,
       pageToken: pageToken,
     });
     Array.prototype.push.apply(drives, res.data.items);
-    res.data.items.forEach(function(drive) {
+    for(let drive of res.data.drives) {
       console.log('Found shared drive without organizer:', drive.name, drive.id);
-      drive.permissions.create({
+      await service.permissions.create({
         resource: newOrganizerPermission,
         fileId: drive.id,
         useDomainAdminAccess: true,
         supportsAllDrives: true,
         fields: 'id',
       });
-    });
+    }
     pageToken = res.nextPageToken;
-    return !!pageToken;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
   }
+  return drives;
 }
 // [END drive_recover_drives]
 
 module.exports = recoverDrives;
-recoverDrives('xyz@workspacesamples.dev');

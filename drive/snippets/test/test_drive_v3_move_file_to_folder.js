@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const createFolder = require('../drive_v3/file_snippets/create_folder');
 const moveFileToFolder = require('../drive_v3/file_snippets/move_file_to_folder');

@@ -56,6 +56,3 @@ async function uploadToFolder(folderId) {
 // [END drive_upload_to_folder]
 
 module.exports = uploadToFolder;
-if (module === require.main) {
-  uploadToFolder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');
-}

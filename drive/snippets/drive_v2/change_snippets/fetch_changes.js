@@ -47,6 +47,3 @@ async function fetchChanges() {
 
 
 module.exports = fetchChanges;
-if (module === require.main) {
-  fetchChanges();
-}

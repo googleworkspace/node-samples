@@ -21,7 +21,7 @@
  * @param{string} realUser username
  * @param{string} realDomain domain
  * */
-async function shareFile(realFileId, realUser, realDomain) {
+async function shareFile(fileId, targetUser, targetDomain) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -31,38 +31,39 @@ async function shareFile(realFileId, realUser, realDomain) {
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
 
-  const ids = [];
-  fileId = realFileId;
+  const permissionIds = [];
   const permissions = [
     {
       'type': 'user',
       'role': 'writer',
-      'value': 'user@example.com',
+      'value': targetUser, // Example: 'user@example.com',
     }, {
       'type': 'domain',
       'role': 'writer',
-      'value': 'example.com',
+      'value': targetDomain, // Example: 'example.com',
     },
   ];
-  permissions[0].value = realUser;
-  permissions[1].value = realDomain;
-  // Using the NPM module 'async'
-  try {
-    const res = await service.permissions.insert({
-      resource: permission,
-      fileId: fileId,
-      fields: 'id',
-    });
-    console.log('Permission ID:', res.id);
-    ids.push(res.id);
-  } catch (err) {
-    throw err;
+
+  // Note: Client library does not currently support HTTP batch
+  // requests. When possible, use batched requests when inserting
+  // multiple permissions on the same item. For this sample,
+  // permissions are inserted serially.
+  for(let permission of permissions) {
+    try {
+      const result = await service.permissions.insert({
+        resource: permission,
+        fileId: fileId,
+        fields: 'id',
+      });
+      permissionIds.push(result.data.id)
+      console.log(`Inserted permission id: ${result.data.id}`);
+    } catch (err) {
+      // TODO(developer): Handle failed permissions
+      console.error(err);
+    }
   }
+  return permissionIds;
 };
 // [END drive_share_file]
 
 module.exports = shareFile;
-if (module=== require.main) {
-  shareFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt', 'xyz@workspacesamples.dev',
-      'workspacesamples.dev');
-}

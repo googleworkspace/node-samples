@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const recoverDrives = require('../drive_v3/drive_snippets/recover_drives');
 const createDrive = require('../drive_v3/drive_snippets/create_drive');
@@ -31,7 +31,7 @@ describe('Drive snippets', () => {
   it('should recover team drives', (async () => {
     await createOrphanedTeamDrive();
     const teamDrives = await recoverDrives('soheil@workspacesamples.dev');
-    expect(teamDrives.length).toExist();
+    expect(teamDrives.length).toBeDefined();
   }));
 
   /**

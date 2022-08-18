@@ -57,7 +57,3 @@ async function moveFileToFolder(fileId, folderId) {
 // [END drive_move_file_to_folder]
 
 module.exports = moveFileToFolder;
-if (module === require.main) {
-  moveFileToFolder('1dUiRSoAQKkM3a4nTPeNQWgiuau1KdQ_l',
-      '1OLuK07-PTY7yYlur84stjtnyez2jRrjE');
-}

@@ -39,8 +39,4 @@ async function fetchStartPageToken() {
 }
 // [END drive_fetch_start_page_token]
 
-
 module.exports = fetchStartPageToken;
-if (module === require.main) {
-  fetchStartPageToken();
-}

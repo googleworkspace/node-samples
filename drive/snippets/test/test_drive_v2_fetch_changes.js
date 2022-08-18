@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const fetchChanges = require('../drive_v2/change_snippets/fetch_changes');
 const fetchStartPageToken = require('../drive_v2/change_snippets/fetch_start_page_token');
@@ -30,7 +30,7 @@ describe('Drive snippets', () => {
     const startToken = await fetchStartPageToken();
     await helpers.createTestBlob();
     const token = await fetchChanges(startToken);
-    expect(token).toExist();
-    expect(token).toNotEqual(startToken);
+    expect(token).toBeDefined();
+    expect(token).not.toEqual(startToken);
   }));
 });

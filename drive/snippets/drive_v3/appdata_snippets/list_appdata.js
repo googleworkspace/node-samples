@@ -46,6 +46,3 @@ async function listAppdata() {
 // [END drive_list_appdata]
 
 module.exports = listAppdata;
-if (module===require.main) {
-  listAppdata();
-}

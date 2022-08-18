@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const uploadWithConversion = require('../drive_v3/file_snippets/upload_with_conversion');
 
@@ -30,8 +30,8 @@ describe('Drive snippets', () => {
   });
 
   it('should upload and convert a document', (async () => {
-    const id = await uploadWithConversion();
-    expect(id).toExist();
+    const id = await uploadWithConversion('../files/report.csv');
+    expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
   }));
 });

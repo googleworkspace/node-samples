@@ -49,6 +49,3 @@ async function createDrive() {
 // [END drive_create_drive]
 
 module.exports = createDrive;
-if (module === require.main) {
-  createDrive();
-}

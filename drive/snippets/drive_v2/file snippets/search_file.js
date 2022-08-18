@@ -40,10 +40,11 @@ async function searchFile() {
     res.data.items.forEach(function(file) {
       console.log('Found file:', file.title, file.id);
     });
+    return res.data.items;
   } catch (err) {
     throw err;
   }
 }
 // [END drive_search_file]
 
-searchFile();
+module.exports = searchFile;

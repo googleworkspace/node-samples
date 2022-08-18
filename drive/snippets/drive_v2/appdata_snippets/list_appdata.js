@@ -46,6 +46,3 @@ async function listAppdata() {
 
 
 module.exports = listAppdata;
-if (module === require.main) {
-  listAppdata();
-}

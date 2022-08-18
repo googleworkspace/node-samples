@@ -46,6 +46,3 @@ async function downloadFile(realFileId) {
 // [END drive_download_file]
 
 module.exports = downloadFile;
-if (module === require.main) {
-  downloadFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt');
-}

@@ -21,7 +21,7 @@
  * @param{string} realFolderId Id of the folder to move
  * @return{obj} file status
  * */
-async function moveFileToFolder(realFileId, realFolderId) {
+async function moveFileToFolder(fileId, folderId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -30,8 +30,6 @@ async function moveFileToFolder(realFileId, realFolderId) {
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
-  fileId = realFileId;
-  folderId = realFolderId;
 
   try {
     // Retrieve the existing parents to remove
@@ -60,8 +58,4 @@ async function moveFileToFolder(realFileId, realFolderId) {
 // [END drive_move_file_to_folder]
 
 module.exports = moveFileToFolder;
-if (module === require.main) {
-  moveFileToFolder('1dUiRSoAQKkM3a4nTPeNQWgiuau1KdQ_l',
-      '1OLuK07-PTY7yYlur84stjtnyez2jRrjE');
-}
 

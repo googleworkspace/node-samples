@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const uploadToFolder = require('../drive_v2/file snippets/upload_to_folder');
 const createFolder = require('../drive_v2/file snippets/create_folder');
@@ -33,8 +33,8 @@ describe('Drive snippets', () => {
   it('should upload to a folder', (async () => {
     const folderId = await createFolder();
     helpers.deleteFileOnCleanup(folderId);
-    const file = await uploadToFolder(folderId);
-    expect(file).toExist();
+    const file = await uploadToFolder(folderId, '../files/photo.jpg');
+    expect(file).toBeDefined();
     helpers.deleteFileOnCleanup(file);
   }));
 });

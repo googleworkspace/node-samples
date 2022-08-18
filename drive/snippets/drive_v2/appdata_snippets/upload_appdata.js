@@ -36,7 +36,7 @@ async function uploadAppdata() {
   };
   const media = {
     mimeType: 'application/json',
-    body: fs.createReadStream('config.json'),
+    body: fs.createReadStream('files/config.json'),
   };
   try {
     const file = await service.files.insert({
@@ -44,7 +44,7 @@ async function uploadAppdata() {
       media: media,
       fields: 'id',
     });
-    console.log('Folder Id:', file.data.id);
+    console.log('File Id:', file.data.id);
     return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
@@ -55,7 +55,4 @@ async function uploadAppdata() {
 
 
 module.exports = uploadAppdata;
-if (module === require.main) {
-  uploadAppdata();
-}
 

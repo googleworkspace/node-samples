@@ -33,7 +33,7 @@ async function uploadBasic() {
   };
   const media = {
     mimeType: 'image/jpeg',
-    body: fs.createReadStream('photo.jpg'),
+    body: fs.createReadStream('files/photo.jpg'),
   };
   try {
     const file = await service.files.insert({
@@ -42,6 +42,7 @@ async function uploadBasic() {
       fields: 'id',
     });
     console.log('File Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
@@ -49,4 +50,4 @@ async function uploadBasic() {
 }
 // [END drive_upload_basic]
 
-uploadBasic();
+module.exports = uploadBasic;

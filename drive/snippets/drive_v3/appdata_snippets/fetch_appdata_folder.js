@@ -44,6 +44,3 @@ async function fetchAppdataFolder() {
 // [END drive_fetch_appdata_folder]
 
 module.exports = fetchAppdataFolder;
-if (module===require.main) {
-  fetchAppdataFolder();
-}

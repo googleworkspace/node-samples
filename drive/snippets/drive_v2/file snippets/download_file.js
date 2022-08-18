@@ -20,7 +20,7 @@
  * @param{string} realFileId file ID
  * @return{obj} file status
  * */
-async function downloadFile(realFileId) {
+async function downloadFile(fileId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -30,7 +30,6 @@ async function downloadFile(realFileId) {
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
 
-  fileId = realFileId;
   try {
     const file = await service.files.get({
       fileId: fileId,
@@ -46,6 +45,3 @@ async function downloadFile(realFileId) {
 // [END drive_download_file]
 
 module.exports = downloadFile;
-if (module === require.main) {
-  downloadFile('1VOB_CrjAW7BVfNlfOGXLWYuQMyphmxgt');
-}

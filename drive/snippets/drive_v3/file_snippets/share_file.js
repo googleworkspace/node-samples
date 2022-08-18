@@ -25,14 +25,13 @@
 async function shareFile(fileId, targetUserEmail, targetDomainName) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
-  const async = require('async');
 
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v3', auth});
+  const permissionIds = [];
 
-  let id;
   const permissions = [
     {
       'type': 'user',
@@ -44,28 +43,26 @@ async function shareFile(fileId, targetUserEmail, targetDomainName) {
       'domain': targetDomainName, // 'example.com',
     },
   ];
-  // Using the NPM module 'async'
-  try {
-    async.eachSeries(permissions, function(permission) {
-      service.permissions.create({
+  // Note: Client library does not currently support HTTP batch
+  // requests. When possible, use batched requests when inserting
+  // multiple permissions on the same item. For this sample,
+  // permissions are inserted serially.
+  for(let permission of permissions) {
+    try {
+      const result = await service.permissions.create({
         resource: permission,
         fileId: fileId,
         fields: 'id',
-      }).then(function(result) {
-        id = result.data.id;
-        console.log('Permission Id:', id);
       });
-    });
-    return id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+      permissionIds.push(result.data.id);
+      console.log(`Inserted permission id: ${result.data.id}`);
+    } catch (err) {
+      // TODO(developer): Handle failed permissions
+      console.error(err);
+    }
   }
+  return permissionIds;
 }
 // [END drive_share_file]
 
 module.exports = shareFile;
-if (module === require.main) {
-  shareFile('1h9BsKrrEup5h2xOo5OzR70vSQpixjZfw', 'xyz@workspacesamples.dev',
-      'workspacesamples.dev');
-}

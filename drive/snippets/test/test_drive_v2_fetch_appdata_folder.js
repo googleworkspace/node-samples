@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const fetchAppdataFolder = require('../drive_v2/appdata_snippets/fetch_appdata_folder');
 
@@ -27,6 +27,6 @@ describe('Drive snippets', () => {
 
   it('should fetch the app data folder', (async () => {
     const id = await fetchAppdataFolder();
-    expect(id).toExist();
+    expect(id).toBeDefined();
   }));
 });

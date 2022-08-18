@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const createDrive = require('../drive_v2/drive_snippets/create_drive');
 
@@ -29,7 +29,7 @@ describe('Drive snippets', () => {
   // https://support.google.com/a/answer/7337635?hl=en
   it('should create a team drive', (async () => {
     const id = await createDrive();
-    expect(id).toExist();
+    expect(id).toBeDefined();
     await helpers.service.teamdrives.delete({teamDriveId: id});
   }));
 });

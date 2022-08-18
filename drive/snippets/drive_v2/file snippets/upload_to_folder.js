@@ -19,7 +19,7 @@
  * Upload a file to the specified folder and prints file ID, folder ID
  * @param{string} realFolderId folder ID
  * */
-async function uploadToFolder(realFolderId) {
+async function uploadToFolder(folderId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -29,14 +29,13 @@ async function uploadToFolder(realFolderId) {
 
   const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
   const service = google.drive({version: 'v2', auth});
-  folderId = realFolderId;
   const fileMetadata = {
     'title': 'photo.jpg',
     'parents': [{id: folderId}],
   };
   const media = {
     mimeType: 'image/jpeg',
-    body: fs.createReadStream('photo.jpg'),
+    body: fs.createReadStream('files/photo.jpg'),
   };
 
   try {
@@ -46,6 +45,7 @@ async function uploadToFolder(realFolderId) {
       fields: 'id',
     });
     console.log('File Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
@@ -53,4 +53,4 @@ async function uploadToFolder(realFolderId) {
 }
 // [END drive_upload_to_folder]
 
-uploadToFolder('1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7');
+module.exports = uploadToFolder;

@@ -21,7 +21,7 @@
  * @param{string} realTimestamp Timestamp to override Modified date time of the file
  * @return{obj} modified timestamp
  * */
-async function touchFile(realFileId, realTimestamp) {
+async function touchFile(fileId, timestamp) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -33,8 +33,7 @@ async function touchFile(realFileId, realTimestamp) {
   const fileMetadata = {
     'modifiedDate': new Date().toISOString(),
   };
-  fileId = realFileId;
-  fileMetadata.modifiedTime = realTimestamp;
+  fileMetadata.modifiedTime = timestamp;
   try {
     const file = await service.files.update({
       fileId: fileId,
@@ -51,6 +50,4 @@ async function touchFile(realFileId, realTimestamp) {
 };
 // [END drive_touch_file]
 
-touchFile('1M4xjYwPynOk5TsIWN7hcGYkFdBkPTd5F',
-    '2022-04-02T05:43:27.504Z');
-
+module.exports = touchFile;

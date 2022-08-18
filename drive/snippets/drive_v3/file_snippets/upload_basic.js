@@ -51,6 +51,3 @@ async function uploadBasic() {
 // [END drive_upload_basic]
 
 module.exports = uploadBasic;
-if (module === require.main) {
-  uploadBasic();
-}

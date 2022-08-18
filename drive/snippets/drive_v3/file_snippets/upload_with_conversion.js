@@ -52,6 +52,4 @@ async function uploadWithConversion() {
 // [END drive_upload_with_conversion]
 
 module.exports = uploadWithConversion;
-if (module === require.main) {
-  uploadWithConversion();
-}
+

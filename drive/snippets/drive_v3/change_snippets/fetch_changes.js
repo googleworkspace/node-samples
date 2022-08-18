@@ -48,8 +48,4 @@ async function fetchChanges(savedStartPageToken) {
 }
 // [END drive_fetch_changes]
 
-
 module.exports = fetchChanges;
-if (module === require.main) {
-  fetchChanges();
-}

@@ -34,7 +34,7 @@ async function uploadWithConversion() {
   };
   const media = {
     mimeType: 'text/csv',
-    body: fs.createReadStream('report.csv'),
+    body: fs.createReadStream('files/report.csv'),
   };
 
   try {
@@ -44,11 +44,11 @@ async function uploadWithConversion() {
       fields: 'id',
     });
     console.log('File Id:', file.data.id);
+    return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
   }
 }
 // [END drive_upload_with_conversion]
-
-uploadWithConversion();
+module.exports = uploadWithConversion;
