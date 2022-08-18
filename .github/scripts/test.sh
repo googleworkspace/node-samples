@@ -12,6 +12,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/secrets/default_credentials.json"
 export SERVICE_ACCOUNT_CREDENTIALS="${HOME}/secrets/service_account.json"
 
@@ -23,7 +26,7 @@ exit_code=0
 
 for dir in "${dirs[@]}"; do
   pushd "${dir}" || exit
-  npm install
+  npm ci
   npm run test --if-present
   status=$?
   if [ $status -ne 0 ]; then
