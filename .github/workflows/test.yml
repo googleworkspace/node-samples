@@ -22,6 +22,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
+        run: |
+          echo "Updating npm"
+          npm install -g npm@latest
       - name: Write test credentials
         run: |
           mkdir "${HOME}/secrets"
