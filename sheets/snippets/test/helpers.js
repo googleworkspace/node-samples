@@ -82,7 +82,7 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   async populateValues(spreadsheetId) {
-    const res = await this.sheetsService.spreadsheets.batchUpdate({
+    await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
       resource: {
         requests: [{

@@ -17,7 +17,7 @@
 
 /**
  * Find all shared drives without an organizer and add one.
- * @param{string} realUser user ID
+ * @param{string} userEmail user ID to assign ownership to
  * */
 async function recoverDrives(userEmail) {
   // Get credentials and build service
@@ -44,7 +44,7 @@ async function recoverDrives(userEmail) {
       pageToken: pageToken,
     });
     Array.prototype.push.apply(drives, res.data.items);
-    for(let drive of res.data.drives) {
+    for (const drive of res.data.drives) {
       console.log('Found shared drive without organizer:', drive.name, drive.id);
       await service.permissions.create({
         resource: newOrganizerPermission,

@@ -96,7 +96,7 @@ class Helpers {
         },
       });
     }
-    const res = await this.slidesService.presentations.batchUpdate({
+    await this.slidesService.presentations.batchUpdate({
       presentationId,
       resource: {
         requests,
@@ -193,7 +193,7 @@ class Helpers {
       presentationId,
       resource: {
         requests,
-      }
+      },
     });
     return res.data.replies[0].createSheetsChart.objectId;
   }
@@ -222,7 +222,7 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   async populateValues(spreadsheetId) {
-    const res = await this.sheetsService.spreadsheets.batchUpdate({
+    await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
       resource: {
         requests: [{

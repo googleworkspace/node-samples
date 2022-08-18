@@ -44,7 +44,7 @@ async function recoverDrives(userEmail) {
       pageToken: pageToken,
     });
     Array.prototype.push.apply(drives, res.data.items);
-    for(let drive of res.data.items) {
+    for (const drive of res.data.items) {
       console.log('Found shared drive without organizer:', drive.name, drive.id);
       await service.permissions.insert({
         resource: newOrganizerPermission,

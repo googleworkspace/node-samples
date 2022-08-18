@@ -48,14 +48,14 @@ async function shareFile(fileId, targetUser, targetDomain) {
   // requests. When possible, use batched requests when inserting
   // multiple permissions on the same item. For this sample,
   // permissions are inserted serially.
-  for(let permission of permissions) {
+  for (const permission of permissions) {
     try {
       const result = await service.permissions.insert({
         resource: permission,
         fileId: fileId,
         fields: 'id',
       });
-      permissionIds.push(result.data.id)
+      permissionIds.push(result.data.id);
       console.log(`Inserted permission id: ${result.data.id}`);
     } catch (err) {
       // TODO(developer): Handle failed permissions
