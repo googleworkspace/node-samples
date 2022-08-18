@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SlidesCreateTextboxWithText = require('../slides_create_textbox_with_text');
 
@@ -33,6 +33,6 @@ describe('Presentation snippets', () => {
         presentationId, pageId);
     expect(response.replies.length).toEqual(2);
     const boxId = response.replies[0].createShape.objectId;
-    expect(boxId).toExist();
+    expect(boxId).toBeDefined();
   }));
 });

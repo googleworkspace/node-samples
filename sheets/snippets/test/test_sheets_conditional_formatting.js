@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SheetsConditionalFormatting = require('../sheets_conditional_formatting');
 

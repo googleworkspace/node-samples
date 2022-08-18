@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SheetsPivotTable = require('../sheets_pivot_table');
 
@@ -29,6 +29,6 @@ describe('Spreadsheet pivot table snippet', () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await SheetsPivotTable.pivotTable(spreadsheetId);
-    expect(result).toExist();
+    expect(result).toBeDefined();
   }));
 });

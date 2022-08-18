@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SheetsCreate = require('../sheets_create');
 
@@ -27,7 +27,7 @@ describe('Spreadsheet create snippet', () => {
 
   it('should create a spreadsheet', (async () => {
     const id = await SheetsCreate.create('Title');
-    expect(id).toExist();
+    expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
   }));
 });

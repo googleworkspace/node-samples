@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SheetsGetValues = require('../sheets_get_values');
 

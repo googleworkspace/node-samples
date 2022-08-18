@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SlidesCreateImage = require('../slides_create_image');
 
@@ -31,7 +31,7 @@ describe('Presentation snippets', () => {
     const response = await SlidesCreateImage.createImage(presentationId, pageId);
     expect(response.length).toBe(1);
     const imageId = response[0].createImage.objectId;
-    expect(imageId).toExist();
+    expect(imageId).toBeDefined();
   }));
 });
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SlidesTextStyleUpdate = require('../slides_text_style_update');
 

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-const Promise = require('promise');
 const {GoogleAuth} = require('google-auth-library');
 const {google} = require('googleapis');
 
@@ -64,21 +63,17 @@ class Helpers {
    * Creates a test Spreadsheet.
    * @return {Promise} A promise to return the Google API service.
    */
-  createTestSpreadsheet() {
-    const createSpreadsheet = Promise.denodeify(this.sheetsService.spreadsheets.create)
-        .bind(this.sheetsService.spreadsheets);
-    return createSpreadsheet({
+  async createTestSpreadsheet() {
+    const res = await this.sheetsService.spreadsheets.create({
       resource: {
         properties: {
           title: 'Test Spreadsheet',
         },
       },
       fields: 'spreadsheetId',
-    })
-        .then((spreadsheet) => {
-          this.deleteFileOnCleanup(spreadsheet.data.spreadsheetId);
-          return spreadsheet.data.spreadsheetId;
-        });
+    });
+    this.deleteFileOnCleanup(res.data.spreadsheetId);
+    return res.data.spreadsheetId;
   }
 
   /**
@@ -86,10 +81,8 @@ class Helpers {
    * @param {string} spreadsheetId The spreadsheet ID.
    * @return {Promise} A promise to return the Google API service.
    */
-  populateValues(spreadsheetId) {
-    const batchUpdate = Promise.denodeify(this.sheetsService.spreadsheets.batchUpdate)
-        .bind(this.sheetsService.spreadsheets);
-    return batchUpdate({
+  async populateValues(spreadsheetId) {
+    const res = await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
       resource: {
         requests: [{
@@ -110,8 +103,8 @@ class Helpers {
           },
         }],
       },
-    })
-        .then(() => spreadsheetId);
+    });
+    return spreadsheetId;
   }
 }
 

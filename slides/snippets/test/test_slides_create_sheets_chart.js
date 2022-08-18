@@ -13,13 +13,13 @@
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SlidesCreateSheetsChart = require('../slides_create_sheets_chart');
 
 // Replace with your test spreadsheets id and charts id
-const CHART_ID = 1337053199;
-const DATA_SPREADSHEET_ID = '1yFjePIkeZ7lgtwnuTzVIHGGGPkdc5MRbp2wF3Er0xMc';
+const CHART_ID = 1107320627;
+const DATA_SPREADSHEET_ID = '17eqFZl_WK4WVixX8PjvjfLD77DraoFwMDXeiHB3dvuM';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -37,7 +37,7 @@ describe('Presentation snippets', () => {
         CHART_ID);
     expect(1).toEqual(response.replies.length);
     const chartId = response.replies[0].createSheetsChart.objectId;
-    expect(chartId).toExist();
+    expect(chartId).toBeDefined();
   }));
 });
 

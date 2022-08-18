@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SlidesCopyPresentation = require('../slides_copy_presentation');
 
@@ -29,7 +29,7 @@ describe('Presentation snippets', () => {
     const presentationId = await helpers.createTestPresentation();
     const copyId = await SlidesCopyPresentation.copyPresentation(presentationId, 'My' +
       ' Duplicate, Presentation');
-    expect(copyId).toExist();
+    expect(copyId).toBeDefined();
     helpers.deleteFileOnCleanup(copyId.data.id);
   }));
 });

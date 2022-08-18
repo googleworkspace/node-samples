@@ -85,7 +85,7 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     // TODO (developer) - Handle exception
     throw err;
   }
-  // [END slides_image_merging]
 }
+// [END slides_image_merging]
 
 module.exports = {imageMerging};

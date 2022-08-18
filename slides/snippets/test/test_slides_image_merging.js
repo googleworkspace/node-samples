@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const expect = require('expect');
+const {expect} = require('expect');
 const Helpers = require('./helpers');
 const SlidesImageMerging = require('../slides_image_merging');
 
@@ -33,7 +33,7 @@ describe('Presentation snippets', () => {
     const response = await SlidesImageMerging.imageMerging(
         TEMPLATE_PRESENTATION_ID, IMAGE_URL, CUSTOMER_NAME);
     const presentationId = response.presentationId;
-    expect(presentationId).toExist();
+    expect(presentationId).toBeDefined();
     expect(2).toEqual(response.replies.length);
     let numReplacements = 0;
     for (let i = 0; i < response.replies.length; ++i) {
