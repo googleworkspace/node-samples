@@ -4,10 +4,10 @@
   "description": "A simple Node.js command-line application that makes requests to the Google Classroom API.",
   "private": true,
   "dependencies": {
-    "googleapis": "^95.0.0"
+    "googleapis": "^105.0.0"
   },
   "engines": {
-    "node": ">=6.4.0"
+    "node": ">=14"
   },
   "scripts": {
     "start": "node ."
