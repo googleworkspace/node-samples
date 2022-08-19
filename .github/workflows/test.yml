@@ -16,6 +16,9 @@ name: Test
 on: [push, pull_request]
 jobs:
   test:
+    concurrency:
+      group: ${{ github.head_ref || github.ref }}
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -36,4 +39,7 @@ jobs:
           SERVICE_ACCOUNT_CREDENTIALS: ${{secrets.SNIPPETS_DELEGATED_ADMIN_SERVICE_ACCOUNT}}
           CLIENT_ID_FILE: ${{secrets.SNIPPETS_CLIENT_ID_FILE}}
       - name: Run tests
-        run: ./.github/scripts/test.sh
+        run: |
+          ./.github/scripts/test.sh
+        env:
+          GOOGLE_CLOUD_PROJECT: workspace-samples-ci
