@@ -1,7 +1,7 @@
 {
-  "name": "gmail-nodejs-quickstart",
+  "name": "google-admin-reports-nodejs-quickstart",
   "version": "1.0.0",
-  "description": "A simple Node.js command-line application that makes requests to the Gmail API.",
+  "description": "A simple Node.js command-line application that makes requests to the Google Drive API.",
   "private": true,
   "dependencies": {
     "googleapis": "^105.0.0",
