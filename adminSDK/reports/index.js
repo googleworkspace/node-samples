@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 /* eslint-disable camelcase */
-// [START admin_sdk_directory_quickstart]
+// [START admin_sdk_reports_quickstart]
 const fs = require('fs').promises;
 const path = require('path');
 const process = require('process');
