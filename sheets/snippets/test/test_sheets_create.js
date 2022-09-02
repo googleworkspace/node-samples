@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsCreate = require('../sheets_create');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const SheetsCreate = require("../sheets_create");
 
-describe('Spreadsheet create snippet', () => {
+describe("Spreadsheet create snippet", () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should create a spreadsheet', (async () => {
-    const id = await SheetsCreate.create('Title');
+  it("should create a spreadsheet", async () => {
+    const id = await SheetsCreate.create("Title");
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

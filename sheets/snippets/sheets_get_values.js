@@ -22,13 +22,14 @@
  * @return {obj} spreadsheet information
  */
 async function getValues(spreadsheetId, range) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/spreadsheet",
+  });
 
-  const service = google.sheets({version: 'v4', auth});
+  const service = google.sheets({ version: "v4", auth });
   try {
     const result = await service.spreadsheets.values.get({
       spreadsheetId,
@@ -44,4 +45,4 @@ async function getValues(spreadsheetId, range) {
 }
 // [END sheets_get_values]
 
-module.exports = {getValues};
+module.exports = { getValues };

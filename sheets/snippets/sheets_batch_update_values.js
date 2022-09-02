@@ -23,14 +23,20 @@
  * @param {(string[])[]} _values A 2d array of values to update.
  * @return {obj} spreadsheet information
  */
-async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+async function batchUpdateValues(
+  spreadsheetId,
+  range,
+  valueInputOption,
+  _values
+) {
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/spreadsheet",
+  });
 
-  const service = google.sheets({version: 'v4', auth});
+  const service = google.sheets({ version: "v4", auth });
   let values = [
     [
       // Cell values ...
@@ -40,10 +46,12 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
   // [START_EXCLUDE silent]
   values = _values;
   // [END_EXCLUDE]
-  const data = [{
-    range,
-    values,
-  }];
+  const data = [
+    {
+      range,
+      values,
+    },
+  ];
   // Additional ranges to update ...
   const resource = {
     data,
@@ -54,7 +62,7 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
       spreadsheetId,
       resource,
     });
-    console.log('%d cells updated.', result.data.totalUpdatedCells);
+    console.log("%d cells updated.", result.data.totalUpdatedCells);
     return result;
   } catch (err) {
     // TODO (developer) - Handle exception
@@ -63,4 +71,4 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
 }
 // [END sheets_batch_update_values]
 
-module.exports = {batchUpdateValues};
+module.exports = { batchUpdateValues };

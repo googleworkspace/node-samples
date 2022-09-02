@@ -22,22 +22,24 @@ async function createShortcut() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-  const service = google.drive({version: 'v2', auth});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive",
+  });
+  const service = google.drive({ version: "v2", auth });
   const fileMetadata = {
-    'title': 'Project plan',
-    'mimeType': 'application/vnd.google-apps.drive-sdk',
+    title: "Project plan",
+    mimeType: "application/vnd.google-apps.drive-sdk",
   };
 
   try {
     const file = await service.files.insert({
       resource: fileMetadata,
-      fields: 'id',
+      fields: "id",
     });
-    console.log('File Id:', file.data.id);
+    console.log("File Id:", file.data.id);
     return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
@@ -47,4 +49,3 @@ async function createShortcut() {
 // [END drive_create_shortcut]
 
 module.exports = createShortcut;
-

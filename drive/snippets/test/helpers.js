@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-const fs = require('fs');
+const { GoogleAuth } = require("google-auth-library");
+const { google } = require("googleapis");
+const fs = require("fs");
 
 /**
  * Helper functions for Google Drive
@@ -26,8 +26,10 @@ class Helpers {
    * Creates the Google API Service
    */
   constructor() {
-    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-    this.service = google.drive({version: 'v3', auth});
+    const auth = new GoogleAuth({
+      scopes: "https://www.googleapis.com/auth/drive",
+    });
+    this.service = google.drive({ version: "v3", auth });
     this.filesToDelete = [];
   }
 
@@ -51,8 +53,9 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   cleanup() {
-    return Promise.all(this.filesToDelete.map((fileId) =>
-      this.service.files.delete({fileId})));
+    return Promise.all(
+      this.filesToDelete.map((fileId) => this.service.files.delete({ fileId }))
+    );
   }
 
   /**
@@ -65,7 +68,7 @@ class Helpers {
     const file = await this.service.files.create({
       resource: fileMetadata,
       media,
-      fields: 'id',
+      fields: "id",
     });
 
     this.deleteFileOnCleanup(file.data.id);
@@ -77,13 +80,16 @@ class Helpers {
    * @return {Promise} A promise to return the Google Drive file.
    */
   createTestDocument() {
-    return this.createFile({
-      name: 'Test Document',
-      mimeType: 'application/vnd.google-apps.document',
-    }, {
-      mimeType: 'text/plain',
-      body: fs.createReadStream('files/document.txt'),
-    });
+    return this.createFile(
+      {
+        name: "Test Document",
+        mimeType: "application/vnd.google-apps.document",
+      },
+      {
+        mimeType: "text/plain",
+        body: fs.createReadStream("files/document.txt"),
+      }
+    );
   }
 
   /**
@@ -91,12 +97,15 @@ class Helpers {
    * @return {Promise} A promise to return the Google Drive file.
    */
   async createTestBlob() {
-    const file = await this.createFile({
-      name: 'photo.jpg',
-    }, {
-      mimeType: 'image/jpeg',
-      body: fs.createReadStream('files/photo.jpg'),
-    });
+    const file = await this.createFile(
+      {
+        name: "photo.jpg",
+      },
+      {
+        mimeType: "image/jpeg",
+        body: fs.createReadStream("files/photo.jpg"),
+      }
+    );
 
     return file;
   }

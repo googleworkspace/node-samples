@@ -22,30 +22,32 @@
  * @return{obj} modified Timestamp
  **/
 async function touchFile(fileId, Timestamp) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-  const service = google.drive({version: 'v3', auth});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive",
+  });
+  const service = google.drive({ version: "v3", auth });
   const fileMetadata = {
-    'modifiedTime': new Date().toISOString(),
+    modifiedTime: new Date().toISOString(),
   };
   fileMetadata.modifiedTime = Timestamp;
   try {
     const file = await service.files.update({
       fileId: fileId,
       resource: fileMetadata,
-      fields: 'id, modifiedTime',
+      fields: "id, modifiedTime",
     });
-    console.log('Modified time:', file.data.modifiedTime);
+    console.log("Modified time:", file.data.modifiedTime);
     return file.data.modifiedTime;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
   }
-};
+}
 // [END drive_touch_file]
 
 module.exports = touchFile;

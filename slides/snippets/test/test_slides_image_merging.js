@@ -13,32 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesImageMerging = require('../slides_image_merging');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const SlidesImageMerging = require("../slides_image_merging");
 
-const TEMPLATE_PRESENTATION_ID = '1MmTR712m7U_kgeweE57POWwkEyWAV17AVAWjpmltmIg';
+const TEMPLATE_PRESENTATION_ID = "1MmTR712m7U_kgeweE57POWwkEyWAV17AVAWjpmltmIg";
 const IMAGE_URL =
-    'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
-const CUSTOMER_NAME = 'Fake Customer';
+  "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png";
+const CUSTOMER_NAME = "Fake Customer";
 
-describe('Presentation snippets', () => {
+describe("Presentation snippets", () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should ImageMerging', (async () => {
+  it("should ImageMerging", async () => {
     const response = await SlidesImageMerging.imageMerging(
-        TEMPLATE_PRESENTATION_ID, IMAGE_URL, CUSTOMER_NAME);
+      TEMPLATE_PRESENTATION_ID,
+      IMAGE_URL,
+      CUSTOMER_NAME
+    );
     const presentationId = response.presentationId;
     expect(presentationId).toBeDefined();
     expect(2).toEqual(response.replies.length);
     let numReplacements = 0;
     for (let i = 0; i < response.replies.length; ++i) {
-      numReplacements += response.replies[i].replaceAllShapesWithImage.occurrencesChanged;
+      numReplacements +=
+        response.replies[i].replaceAllShapesWithImage.occurrencesChanged;
     }
     expect(2).toEqual(numReplacements);
-  }));
+  });
 });

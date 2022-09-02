@@ -23,20 +23,22 @@ async function fetchChanges(savedStartPageToken) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.readonly'});
-  const service = google.drive({version: 'v3', auth});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive.readonly",
+  });
+  const service = google.drive({ version: "v3", auth });
   try {
     let pageToken = savedStartPageToken;
     do {
       const res = await service.changes.list({
         pageToken: savedStartPageToken,
-        fields: '*',
+        fields: "*",
       });
       res.data.changes.forEach((change) => {
-        console.log('change found for file: ', change.fileId);
+        console.log("change found for file: ", change.fileId);
       });
       pageToken = res.data.newStartPageToken;
       return pageToken;

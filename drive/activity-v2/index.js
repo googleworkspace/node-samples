@@ -16,19 +16,19 @@
  */
 /* eslint-disable camelcase */
 // [START drive_activity_v2_quickstart]
-const fs = require('fs').promises;
-const path = require('path');
-const process = require('process');
-const {authenticate} = require('@google-cloud/local-auth');
-const {google} = require('googleapis');
+const fs = require("fs").promises;
+const path = require("path");
+const process = require("process");
+const { authenticate } = require("@google-cloud/local-auth");
+const { google } = require("googleapis");
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/drive.activity.readonly'];
+const SCOPES = ["https://www.googleapis.com/auth/drive.activity.readonly"];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = path.join(process.cwd(), 'token.json');
-const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
+const TOKEN_PATH = path.join(process.cwd(), "token.json");
+const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -56,7 +56,7 @@ async function saveCredentials(client) {
   const keys = JSON.parse(content);
   const key = keys.installed || keys.web;
   const payload = JSON.stringify({
-    type: 'authorized_user',
+    type: "authorized_user",
     client_id: key.client_id,
     client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
@@ -89,24 +89,25 @@ async function authorize() {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 async function listDriveActivity(auth) {
-  const service = google.driveactivity({version: 'v2', auth});
+  const service = google.driveactivity({ version: "v2", auth });
   const params = {
-    'pageSize': 10,
+    pageSize: 10,
   };
-  const res = await service.activity.query({requestBody: params});
+  const res = await service.activity.query({ requestBody: params });
   const activities = res.data.activities;
   if (!activities || activities.length === 0) {
-    console.log('No activity.');
+    console.log("No activity.");
     return;
   }
-  console.log('Recent activity:');
+  console.log("Recent activity:");
   activities.forEach((activity) => {
     const time = getTimeInfo(activity);
     const action = getActionInfo(activity.primaryActionDetail);
     const actors = activity.actors.map(getActorInfo);
     const targets = activity.targets.map(getTargetInfo);
-    console.log(`${time}: ${truncated(actors)}, ${action}, ` +
-                        `${truncated(targets)}`);
+    console.log(
+      `${time}: ${truncated(actors)}, ${action}, ` + `${truncated(targets)}`
+    );
   });
 }
 

@@ -22,20 +22,23 @@
  * @param {string} customerName A customer name used for the title
  */
 async function imageMerging(templatePresentationId, imageUrl, customerName) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: ['https://www.googleapis.com/auth/presentations',
-        'https://www.googleapis.com/auth/drive']});
+  const auth = new GoogleAuth({
+    scopes: [
+      "https://www.googleapis.com/auth/presentations",
+      "https://www.googleapis.com/auth/drive",
+    ],
+  });
 
-  const slidesService = google.slides({version: 'v1', auth});
-  const driveService = google.drive({version: 'v2', auth});
+  const slidesService = google.slides({ version: "v1", auth });
+  const driveService = google.drive({ version: "v2", auth });
   const logoUrl = imageUrl;
   const customerGraphicUrl = imageUrl;
 
   // Duplicate the template presentation using the Drive API.
-  const copyTitle = customerName + ' presentation';
+  const copyTitle = customerName + " presentation";
   try {
     const driveResponse = await driveService.files.copy({
       fileId: templatePresentationId,
@@ -46,25 +49,28 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     const presentationCopyId = driveResponse.data.id;
 
     // Create the image merge (replaceAllShapesWithImage) requests.
-    const requests = [{
-      replaceAllShapesWithImage: {
-        imageUrl: logoUrl,
-        replaceMethod: 'CENTER_INSIDE',
-        containsText: {
-          text: '{{company-logo}}',
-          matchCase: true,
+    const requests = [
+      {
+        replaceAllShapesWithImage: {
+          imageUrl: logoUrl,
+          replaceMethod: "CENTER_INSIDE",
+          containsText: {
+            text: "{{company-logo}}",
+            matchCase: true,
+          },
         },
       },
-    }, {
-      replaceAllShapesWithImage: {
-        imageUrl: customerGraphicUrl,
-        replaceMethod: 'CENTER_INSIDE',
-        containsText: {
-          text: '{{customer-graphic}}',
-          matchCase: true,
+      {
+        replaceAllShapesWithImage: {
+          imageUrl: customerGraphicUrl,
+          replaceMethod: "CENTER_INSIDE",
+          containsText: {
+            text: "{{customer-graphic}}",
+            matchCase: true,
+          },
         },
       },
-    }];
+    ];
 
     // Execute the requests for this presentation.
     const batchUpdateResponse = await slidesService.presentations.batchUpdate({
@@ -75,8 +81,9 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     });
     let numReplacements = 0;
     for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
-      numReplacements += batchUpdateResponse.data.replies[i]
-          .replaceAllShapesWithImage.occurrencesChanged;
+      numReplacements +=
+        batchUpdateResponse.data.replies[i].replaceAllShapesWithImage
+          .occurrencesChanged;
     }
     console.log(`Created merged presentation with ID: ${presentationCopyId}`);
     console.log(`Replaced ${numReplacements} shapes with images.`);
@@ -88,4 +95,4 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
 }
 // [END slides_image_merging]
 
-module.exports = {imageMerging};
+module.exports = { imageMerging };

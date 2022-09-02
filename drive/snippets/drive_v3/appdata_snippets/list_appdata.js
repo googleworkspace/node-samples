@@ -22,20 +22,21 @@ async function listAppdata() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
-  const service = google.drive({version: 'v3', auth});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive.appdata",
+  });
+  const service = google.drive({ version: "v3", auth });
   try {
-    const res = await service.files.list(
-        {
-          spaces: 'appDataFolder',
-          fields: 'nextPageToken, files(id, name)',
-          pageSize: 100,
-        });
-    res.data.files.forEach(function(file) {
-      console.log('Found file:', file.name, file.id);
+    const res = await service.files.list({
+      spaces: "appDataFolder",
+      fields: "nextPageToken, files(id, name)",
+      pageSize: 100,
+    });
+    res.data.files.forEach(function (file) {
+      console.log("Found file:", file.name, file.id);
     });
     return res.data.files;
   } catch (err) {

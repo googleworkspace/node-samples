@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const createShortcut = require('../drive_v3/file_snippets/create_shortcut');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const createShortcut = require("../drive_v3/file_snippets/create_shortcut");
 
-describe('Drive snippets', () => {
+describe("Drive snippets", () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should create a shortcut', (async () => {
+  it("should create a shortcut", async () => {
     const id = await createShortcut();
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

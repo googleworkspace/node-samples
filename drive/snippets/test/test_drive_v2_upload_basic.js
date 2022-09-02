@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const uploadBasic = require('../drive_v2/file snippets/upload_basic');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const uploadBasic = require("../drive_v2/file snippets/upload_basic");
 
-describe('Drive snippets', () => {
+describe("Drive snippets", () => {
   const helpers = new Helpers();
 
   before(() => {
@@ -29,9 +29,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should upload a photo', (async () => {
-    const id = await uploadBasic('../files/photo.jpg');
+  it("should upload a photo", async () => {
+    const id = await uploadBasic("../files/photo.jpg");
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

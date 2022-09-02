@@ -21,13 +21,14 @@
  * @return {obj} spreadsheet information
  */
 async function conditionalFormatting(spreadsheetId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/spreadsheet",
+  });
 
-  const service = google.sheets({version: 'v4', auth});
+  const service = google.sheets({ version: "v4", auth });
   const myRange = {
     sheetId: 0,
     startRowIndex: 1,
@@ -35,39 +36,42 @@ async function conditionalFormatting(spreadsheetId) {
     startColumnIndex: 0,
     endColumnIndex: 4,
   };
-  const requests = [{
-    addConditionalFormatRule: {
-      rule: {
-        ranges: [myRange],
-        booleanRule: {
-          condition: {
-            type: 'CUSTOM_FORMULA',
-            values: [{userEnteredValue: '=GT($D2,median($D$2:$D$11))'}],
-          },
-          format: {
-            textFormat: {foregroundColor: {red: 0.8}},
-          },
-        },
-      },
-      index: 0,
-    },
-  }, {
-    addConditionalFormatRule: {
-      rule: {
-        ranges: [myRange],
-        booleanRule: {
-          condition: {
-            type: 'CUSTOM_FORMULA',
-            values: [{userEnteredValue: '=LT($D2,median($D$2:$D$11))'}],
-          },
-          format: {
-            backgroundColor: {red: 1, green: 0.4, blue: 0.4},
+  const requests = [
+    {
+      addConditionalFormatRule: {
+        rule: {
+          ranges: [myRange],
+          booleanRule: {
+            condition: {
+              type: "CUSTOM_FORMULA",
+              values: [{ userEnteredValue: "=GT($D2,median($D$2:$D$11))" }],
+            },
+            format: {
+              textFormat: { foregroundColor: { red: 0.8 } },
+            },
           },
         },
+        index: 0,
       },
-      index: 0,
     },
-  }];
+    {
+      addConditionalFormatRule: {
+        rule: {
+          ranges: [myRange],
+          booleanRule: {
+            condition: {
+              type: "CUSTOM_FORMULA",
+              values: [{ userEnteredValue: "=LT($D2,median($D$2:$D$11))" }],
+            },
+            format: {
+              backgroundColor: { red: 1, green: 0.4, blue: 0.4 },
+            },
+          },
+        },
+        index: 0,
+      },
+    },
+  ];
   const resource = {
     requests,
   };
@@ -85,4 +89,4 @@ async function conditionalFormatting(spreadsheetId) {
 }
 // [END sheets_conditional_formatting]
 
-module.exports = {conditionalFormatting};
+module.exports = { conditionalFormatting };

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const shareFile = require('../drive_v2/file snippets/share_file');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const shareFile = require("../drive_v2/file snippets/share_file");
 
-describe('Drive snippets', () => {
+describe("Drive snippets", () => {
   const helpers = new Helpers();
 
   before(() => {
@@ -29,12 +29,13 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should share files', (async () => {
+  it("should share files", async () => {
     const file = await helpers.createTestBlob();
     const ids = await shareFile(
-        file.data.id,
-        'xyz@workspacesamples.dev',
-        'workspacesamples.dev');
+      file.data.id,
+      "xyz@workspacesamples.dev",
+      "workspacesamples.dev"
+    );
     expect(ids.length).toEqual(2);
-  }));
+  });
 });

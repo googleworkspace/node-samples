@@ -22,28 +22,29 @@ async function uploadAppdata() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-  const fs = require('fs');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
+  const fs = require("fs");
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
-  const service = google.drive({version: 'v3', auth});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive.appdata",
+  });
+  const service = google.drive({ version: "v3", auth });
   const fileMetadata = {
-    name: 'config.json',
-    parents: ['appDataFolder'],
+    name: "config.json",
+    parents: ["appDataFolder"],
   };
   const media = {
-    mimeType: 'application/json',
-    body: fs.createReadStream('files/config.json'),
+    mimeType: "application/json",
+    body: fs.createReadStream("files/config.json"),
   };
   try {
-    const file = await service.files.create(
-        {
-          resource: fileMetadata,
-          media: media,
-          fields: 'id',
-        });
-    console.log('File Id:', file.data.id);
+    const file = await service.files.create({
+      resource: fileMetadata,
+      media: media,
+      fields: "id",
+    });
+    console.log("File Id:", file.data.id);
     return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error
@@ -53,4 +54,3 @@ async function uploadAppdata() {
 // [END drive_upload_appdata]
 
 module.exports = uploadAppdata;
-

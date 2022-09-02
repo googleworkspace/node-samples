@@ -21,13 +21,14 @@
  * @return {string} Created spreadsheets ID
  */
 async function create(title) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/spreadsheet",
+  });
 
-  const service = google.sheets({version: 'v4', auth});
+  const service = google.sheets({ version: "v4", auth });
   const resource = {
     properties: {
       title,
@@ -36,7 +37,7 @@ async function create(title) {
   try {
     const spreadsheet = await service.spreadsheets.create({
       resource,
-      fields: 'spreadsheetId',
+      fields: "spreadsheetId",
     });
     console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
     return spreadsheet.data.spreadsheetId;
@@ -47,4 +48,4 @@ async function create(title) {
 }
 // [END sheets_create]
 
-module.exports = {create};
+module.exports = { create };

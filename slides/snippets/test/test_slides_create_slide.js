@@ -13,23 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreateSlide = require('../slides_create_slide');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const SlidesCreateSlide = require("../slides_create_slide");
 
-describe('Presentation snippets', () => {
+describe("Presentation snippets", () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should create a slide', (async () => {
+  it("should create a slide", async () => {
     const presentationId = await helpers.createTestPresentation();
-    await helpers.addSlides(presentationId, 3, 'TITLE_AND_TWO_COLUMNS');
-    const pageId = 'my_page_id';
-    const response = await SlidesCreateSlide.createSlide(presentationId, pageId);
+    await helpers.addSlides(presentationId, 3, "TITLE_AND_TWO_COLUMNS");
+    const pageId = "my_page_id";
+    const response = await SlidesCreateSlide.createSlide(
+      presentationId,
+      pageId
+    );
     expect(pageId).toEqual(response.data.replies[0].createSlide.objectId);
-  }));
+  });
 });
-

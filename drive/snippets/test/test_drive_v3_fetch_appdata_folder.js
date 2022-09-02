@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const fetchAppdataFolder = require('../drive_v3/appdata_snippets/fetch_appdata_folder');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const fetchAppdataFolder = require("../drive_v3/appdata_snippets/fetch_appdata_folder");
 
-describe('Drive snippets', () => {
+describe("Drive snippets", () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should fetch the app data folder', (async () => {
+  it("should fetch the app data folder", async () => {
     const id = await fetchAppdataFolder();
     expect(id).toBeDefined();
-  }));
+  });
 });

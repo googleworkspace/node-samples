@@ -22,23 +22,25 @@ async function searchFile() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-  const service = google.drive({version: 'v2', auth});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive",
+  });
+  const service = google.drive({ version: "v2", auth });
   const files = [];
   const pageToken = null;
   try {
     const res = await service.files.list({
-      q: 'mimeType=\'image/jpeg\'',
-      fields: 'nextPageToken, items(id, title)',
-      spaces: 'drive',
+      q: "mimeType='image/jpeg'",
+      fields: "nextPageToken, items(id, title)",
+      spaces: "drive",
       pageToken: pageToken,
     });
     Array.prototype.push.apply(files, res.items);
-    res.data.items.forEach(function(file) {
-      console.log('Found file:', file.title, file.id);
+    res.data.items.forEach(function (file) {
+      console.log("Found file:", file.title, file.id);
     });
     return res.data.items;
   } catch (err) {

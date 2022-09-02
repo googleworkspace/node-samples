@@ -22,45 +22,53 @@
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} sheetChartId The sheet's chart ID.
  */
-async function createSheetsChart(presentationId, pageId, spreadsheetId, sheetChartId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+async function createSheetsChart(
+  presentationId,
+  pageId,
+  spreadsheetId,
+  sheetChartId
+) {
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/presentations'});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/presentations",
+  });
 
-  const service = google.slides({version: 'v1', auth});
+  const service = google.slides({ version: "v1", auth });
 
   // Embed a Sheets chart (indicated by the spreadsheetId and sheetChartId) onto
   // a page in the presentation. Setting the linking mode as "LINKED" allows the
   // chart to be refreshed if the Sheets version is updated.
   const emu4M = {
     magnitude: 4000000,
-    unit: 'EMU',
+    unit: "EMU",
   };
-  const presentationChartId = 'MyEmbeddedChart';
-  const requests = [{
-    createSheetsChart: {
-      objectId: presentationChartId,
-      spreadsheetId: spreadsheetId,
-      chartId: sheetChartId,
-      linkingMode: 'LINKED',
-      elementProperties: {
-        pageObjectId: pageId,
-        size: {
-          height: emu4M,
-          width: emu4M,
-        },
-        transform: {
-          scaleX: 1,
-          scaleY: 1,
-          translateX: 100000,
-          translateY: 100000,
-          unit: 'EMU',
+  const presentationChartId = "MyEmbeddedChart";
+  const requests = [
+    {
+      createSheetsChart: {
+        objectId: presentationChartId,
+        spreadsheetId: spreadsheetId,
+        chartId: sheetChartId,
+        linkingMode: "LINKED",
+        elementProperties: {
+          pageObjectId: pageId,
+          size: {
+            height: emu4M,
+            width: emu4M,
+          },
+          transform: {
+            scaleX: 1,
+            scaleY: 1,
+            translateX: 100000,
+            translateY: 100000,
+            unit: "EMU",
+          },
         },
       },
     },
-  }];
+  ];
 
   // Execute the request.
   try {
@@ -79,4 +87,4 @@ async function createSheetsChart(presentationId, pageId, spreadsheetId, sheetCha
 }
 // [END slides_create_sheets_chart]
 
-module.exports = {createSheetsChart};
+module.exports = { createSheetsChart };

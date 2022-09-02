@@ -23,37 +23,43 @@ async function recoverDrives(userEmail) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
-  const service = google.drive({version: 'v2', auth});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive",
+  });
+  const service = google.drive({ version: "v2", auth });
   const drives = [];
   const newOrganizerPermission = {
-    type: 'user',
-    role: 'organizer',
+    type: "user",
+    role: "organizer",
     value: userEmail, // Example: 'user@example.com'
   };
 
   let pageToken = null;
   try {
     const res = await service.drives.list({
-      q: 'organizerCount = 0',
-      fields: 'nextPageToken, items(id, name)',
+      q: "organizerCount = 0",
+      fields: "nextPageToken, items(id, name)",
       useDomainAdminAccess: true,
       pageToken: pageToken,
     });
     Array.prototype.push.apply(drives, res.data.items);
     for (const drive of res.data.items) {
-      console.log('Found shared drive without organizer:', drive.name, drive.id);
+      console.log(
+        "Found shared drive without organizer:",
+        drive.name,
+        drive.id
+      );
       await service.permissions.insert({
         resource: newOrganizerPermission,
         fileId: drive.id,
         useDomainAdminAccess: true,
         supportsAllDrives: true,
-        fields: 'id',
+        fields: "id",
       });
-    };
+    }
     pageToken = res.nextPageToken;
   } catch (err) {
     // TODO(developer) - Handle error

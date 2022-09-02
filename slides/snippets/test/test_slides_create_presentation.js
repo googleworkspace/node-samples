@@ -14,20 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreatePresentation = require('../slides_create_presentation');
+const { expect } = require("expect");
+const Helpers = require("./helpers");
+const SlidesCreatePresentation = require("../slides_create_presentation");
 
-describe('Presentation snippets', () => {
+describe("Presentation snippets", () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it('should create a presentation', (async () => {
-    const presentation = await SlidesCreatePresentation.createPresentation('Title');
+  it("should create a presentation", async () => {
+    const presentation = await SlidesCreatePresentation.createPresentation(
+      "Title"
+    );
     expect(presentation).toBeDefined();
     helpers.deleteFileOnCleanup(presentation.data.presentationId);
-  }));
+  });
 });

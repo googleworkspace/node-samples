@@ -21,21 +21,24 @@
  * @param {string} dataSpreadsheetId  The data spreadsheet ID.
  */
 async function textMerging(templatePresentationId, dataSpreadsheetId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: ['https://www.googleapis.com/auth/presentations',
-        'https://www.googleapis.com/auth/drive',
-        'https://www.googleapis.com/auth/spreadsheet']});
+  const auth = new GoogleAuth({
+    scopes: [
+      "https://www.googleapis.com/auth/presentations",
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/spreadsheet",
+    ],
+  });
 
-  const slidesService = google.slides({version: 'v1', auth});
-  const sheetsService = google.sheets({version: 'v4', auth});
-  const driveService = google.drive({version: 'v2', auth});
+  const slidesService = google.slides({ version: "v1", auth });
+  const sheetsService = google.sheets({ version: "v4", auth });
+  const driveService = google.drive({ version: "v2", auth });
 
   // Use the Sheets API to load data, one record per row.
   const responses = [];
-  const dataRangeNotation = 'A2:M6';
+  const dataRangeNotation = "A2:M6";
 
   try {
     const sheetsResponse = await sheetsService.spreadsheets.values.get({
@@ -52,7 +55,7 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
       const totalPortfolio = row[11]; // total portfolio in column 12
 
       // Duplicate the template presentation using the Drive API.
-      const copyTitle = customerName + ' presentation';
+      const copyTitle = customerName + " presentation";
       let requests = {
         name: copyTitle,
       };
@@ -64,38 +67,44 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
 
       const presentationCopyId = driveResponse.data.id;
       // Create the text merge (replaceAllText) requests for this presentation.
-      requests = [{
-        replaceAllText: {
-          containsText: {
-            text: '{{customer-name}}',
-            matchCase: true,
+      requests = [
+        {
+          replaceAllText: {
+            containsText: {
+              text: "{{customer-name}}",
+              matchCase: true,
+            },
+            replaceText: customerName,
           },
-          replaceText: customerName,
         },
-      }, {
-        replaceAllText: {
-          containsText: {
-            text: '{{case-description}}',
-            matchCase: true,
+        {
+          replaceAllText: {
+            containsText: {
+              text: "{{case-description}}",
+              matchCase: true,
+            },
+            replaceText: caseDescription,
           },
-          replaceText: caseDescription,
         },
-      }, {
-        replaceAllText: {
-          containsText: {
-            text: '{{total-portfolio}}',
-            matchCase: true,
+        {
+          replaceAllText: {
+            containsText: {
+              text: "{{total-portfolio}}",
+              matchCase: true,
+            },
+            replaceText: totalPortfolio,
           },
-          replaceText: totalPortfolio,
         },
-      }];
+      ];
       // Execute the requests for this presentation.
-      const batchUpdateResponse = await slidesService.presentations.batchUpdate({
-        presentationId: presentationCopyId,
-        resource: {
-          requests,
-        },
-      });
+      const batchUpdateResponse = await slidesService.presentations.batchUpdate(
+        {
+          presentationId: presentationCopyId,
+          resource: {
+            requests,
+          },
+        }
+      );
       const result = batchUpdateResponse.data;
       // [START_EXCLUDE silent]
       responses.push(result.replies);
@@ -105,8 +114,10 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
       for (let i = 0; i < result.replies.length; ++i) {
         numReplacements += result.replies[i].replaceAllText.occurrencesChanged;
       }
-      console.log(`Created presentation for ${customerName} with ID: ` +
-        presentationCopyId);
+      console.log(
+        `Created presentation for ${customerName} with ID: ` +
+          presentationCopyId
+      );
       console.log(`Replaced ${numReplacements} text instances`);
       return result;
     }
@@ -117,5 +128,4 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
 }
 // [END slides_text_merging]
 
-module.exports = {textMerging};
-
+module.exports = { textMerging };

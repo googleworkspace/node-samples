@@ -21,13 +21,14 @@
  * @param {string} copyTitle The new title.
  */
 async function copyPresentation(presentationId, copyTitle) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/drive",
+  });
 
-  const service = google.drive({version: 'v2', auth});
+  const service = google.drive({ version: "v2", auth });
   const request = {
     name: copyTitle,
   };
@@ -38,7 +39,7 @@ async function copyPresentation(presentationId, copyTitle) {
       resource: request,
     });
     const presentationCopyId = driveResponse.data.id;
-    console.log('Created copied presentation with ID: ' + presentationCopyId);
+    console.log("Created copied presentation with ID: " + presentationCopyId);
     return driveResponse;
   } catch (err) {
     // TODO (developer) - handle exception
@@ -47,4 +48,4 @@ async function copyPresentation(presentationId, copyTitle) {
 }
 // [END slides_copy_presentation]
 
-module.exports = {copyPresentation};
+module.exports = { copyPresentation };

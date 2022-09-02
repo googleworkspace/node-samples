@@ -24,13 +24,14 @@
  * @return {obj} spreadsheet information
  */
 async function appendValues(spreadsheetId, range, valueInputOption, _values) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+  const { GoogleAuth } = require("google-auth-library");
+  const { google } = require("googleapis");
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  const auth = new GoogleAuth({
+    scopes: "https://www.googleapis.com/auth/spreadsheet",
+  });
 
-  const service = google.sheets({version: 'v4', auth});
+  const service = google.sheets({ version: "v4", auth });
   let values = [
     [
       // Cell values ...
@@ -59,4 +60,4 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_append_values]
 
-module.exports = {appendValues};
+module.exports = { appendValues };

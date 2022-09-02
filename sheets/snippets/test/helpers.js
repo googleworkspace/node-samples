@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
+const { GoogleAuth } = require("google-auth-library");
+const { google } = require("googleapis");
 
 /**
  * Helper functions for Google Sheets
@@ -25,13 +25,14 @@ class Helpers {
    * Creates the Google API Service
    */
   constructor() {
-    const auth = new GoogleAuth(
-        {scopes: [
-          'https://www.googleapis.com/auth/spreadsheet',
-          'https://www.googleapis.com/auth/drive',
-        ]});
-    this.sheetsService = google.sheets({version: 'v4', auth});
-    this.driveService = google.drive({version: 'v3', auth});
+    const auth = new GoogleAuth({
+      scopes: [
+        "https://www.googleapis.com/auth/spreadsheet",
+        "https://www.googleapis.com/auth/drive",
+      ],
+    });
+    this.sheetsService = google.sheets({ version: "v4", auth });
+    this.driveService = google.drive({ version: "v3", auth });
     this.filesToDelete = [];
   }
 
@@ -55,8 +56,11 @@ class Helpers {
    * @return {Promise} returns list of deletion promises
    */
   cleanup() {
-    return Promise.all(this.filesToDelete.map((fileId) =>
-      this.driveService.files.delete({fileId})));
+    return Promise.all(
+      this.filesToDelete.map((fileId) =>
+        this.driveService.files.delete({ fileId })
+      )
+    );
   }
 
   /**
@@ -67,10 +71,10 @@ class Helpers {
     const res = await this.sheetsService.spreadsheets.create({
       resource: {
         properties: {
-          title: 'Test Spreadsheet',
+          title: "Test Spreadsheet",
         },
       },
-      fields: 'spreadsheetId',
+      fields: "spreadsheetId",
     });
     this.deleteFileOnCleanup(res.data.spreadsheetId);
     return res.data.spreadsheetId;
@@ -85,23 +89,25 @@ class Helpers {
     await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
       resource: {
-        requests: [{
-          repeatCell: {
-            range: {
-              sheetId: 0,
-              startRowIndex: 0,
-              endRowIndex: 10,
-              startColumnIndex: 0,
-              endColumnIndex: 10,
-            },
-            cell: {
-              userEnteredValue: {
-                stringValue: 'Hello',
+        requests: [
+          {
+            repeatCell: {
+              range: {
+                sheetId: 0,
+                startRowIndex: 0,
+                endRowIndex: 10,
+                startColumnIndex: 0,
+                endColumnIndex: 10,
               },
+              cell: {
+                userEnteredValue: {
+                  stringValue: "Hello",
+                },
+              },
+              fields: "userEnteredValue",
             },
-            fields: 'userEnteredValue',
           },
-        }],
+        ],
       },
     });
     return spreadsheetId;
