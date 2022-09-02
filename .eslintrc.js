@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-module.exports = {
-  extends: 'google',
-  parserOptions: {
-    ecmaVersion: 8,
-    sourceType: 'module',
+ module.exports = {
+  'extends': 'google',
+  'parserOptions': {
+    'ecmaVersion': 8,
+    'sourceType': 'module',
   },
-  env: {
-    node: true,
+  'env': {
+    'node': true,
   },
-  rules: {
+  'rules': {
     'require-jsdoc': 'off',
-    'max-len': ['error', {code: 100}],
-    camelcase: [
-      'error',
-      {
-        ignoreDestructuring: true,
-        ignoreImports: true,
-        allow: ['access_type', 'redirect_uris'],
-      },
-    ],
+    'max-len': ['error', {'code': 100}],
+    'camelcase': ['error', {
+      'ignoreDestructuring': true,
+      'ignoreImports': true,
+      'allow': ['access_type', 'redirect_uris'],
+    }],
   },
 };
