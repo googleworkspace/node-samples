@@ -13,30 +13,30 @@
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-const { expect } = require("expect");
-const Helpers = require("./helpers");
-const SlidesCreateSheetsChart = require("../slides_create_sheets_chart");
+const {expect} = require('expect');
+const Helpers = require('./helpers');
+const SlidesCreateSheetsChart = require('../slides_create_sheets_chart');
 
 // Replace with your test spreadsheets id and charts id
 const CHART_ID = 1107320627;
-const DATA_SPREADSHEET_ID = "17eqFZl_WK4WVixX8PjvjfLD77DraoFwMDXeiHB3dvuM";
+const DATA_SPREADSHEET_ID = '17eqFZl_WK4WVixX8PjvjfLD77DraoFwMDXeiHB3dvuM';
 
-describe("Presentation snippets", () => {
+describe('Presentation snippets', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it("should CreateSheetsChart", async () => {
+  it('should CreateSheetsChart', async () => {
     const presentationId = await helpers.createTestPresentation();
-    const pageIds = await helpers.addSlides(presentationId, 1, "BLANK");
+    const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
     const response = await SlidesCreateSheetsChart.createSheetsChart(
-      presentationId,
-      pageId,
-      DATA_SPREADSHEET_ID,
-      CHART_ID
+        presentationId,
+        pageId,
+        DATA_SPREADSHEET_ID,
+        CHART_ID,
     );
     expect(1).toEqual(response.replies.length);
     const chartId = response.replies[0].createSheetsChart.objectId;

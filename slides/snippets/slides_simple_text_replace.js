@@ -22,21 +22,21 @@
  * @param {string} replacementText The new replacement text.
  */
 async function simpleTextReplace(presentationId, shapeId, replacementText) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/presentations",
+    scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
-  const service = google.slides({ version: "v1", auth });
+  const service = google.slides({version: 'v1', auth});
   // Remove existing text in the shape, then insert new text.
   const requests = [
     {
       deleteText: {
         objectId: shapeId,
         textRange: {
-          type: "ALL",
+          type: 'ALL',
         },
       },
     },
@@ -65,4 +65,4 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
 }
 // [END slides_simple_text_replace]
 
-module.exports = { simpleTextReplace };
+module.exports = {simpleTextReplace};

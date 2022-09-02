@@ -13,30 +13,30 @@
 
 // [START forms_convert_form]
 
-"use strict";
+'use strict';
 
-const path = require("path");
-const google = require("@googleapis/forms");
-const { authenticate } = require("@google-cloud/local-auth");
+const path = require('path');
+const google = require('@googleapis/forms');
+const {authenticate} = require('@google-cloud/local-auth');
 
 async function runSample(query) {
   const authClient = await authenticate({
-    keyfilePath: path.join(__dirname, "credentials.json"),
-    scopes: "https://www.googleapis.com/auth/drive",
+    keyfilePath: path.join(__dirname, 'credentials.json'),
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
   const forms = google.forms({
-    version: "v1",
+    version: 'v1',
     auth: authClient,
   });
   const newForm = {
     info: {
-      title: "Creating a new form for batchUpdate in Node",
+      title: 'Creating a new form for batchUpdate in Node',
     },
   };
   const createResponse = await forms.forms.create({
     requestBody: newForm,
   });
-  console.log("New formId was: " + createResponse.data.formId);
+  console.log('New formId was: ' + createResponse.data.formId);
 
   // Request body to convert form to a quiz
   const updateRequest = {
@@ -48,7 +48,7 @@ async function runSample(query) {
               isQuiz: true,
             },
           },
-          updateMask: "quizSettings.isQuiz",
+          updateMask: 'quizSettings.isQuiz',
         },
       },
     ],

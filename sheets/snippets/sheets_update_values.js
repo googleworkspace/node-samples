@@ -24,14 +24,14 @@
  * @return {obj} spreadsheet information
  */
 async function updateValues(spreadsheetId, range, valueInputOption, _values) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/spreadsheet",
+    scopes: 'https://www.googleapis.com/auth/spreadsheet',
   });
 
-  const service = google.sheets({ version: "v4", auth });
+  const service = google.sheets({version: 'v4', auth});
   let values = [
     [
       // Cell values ...
@@ -51,7 +51,7 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
       valueInputOption,
       resource,
     });
-    console.log("%d cells updated.", result.data.updatedCells);
+    console.log('%d cells updated.', result.data.updatedCells);
     return result;
   } catch (err) {
     // TODO (Developer) - Handle exception
@@ -60,4 +60,4 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_update_values]
 
-module.exports = { updateValues };
+module.exports = {updateValues};

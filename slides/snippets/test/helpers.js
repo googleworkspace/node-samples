@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const { google } = require("googleapis");
-const { GoogleAuth } = require("google-auth-library");
+const {google} = require('googleapis');
+const {GoogleAuth} = require('google-auth-library');
 
 /**
  * Helper functions for Google Slides
@@ -27,14 +27,14 @@ class Helpers {
   constructor() {
     const auth = new GoogleAuth({
       scopes: [
-        "https://www.googleapis.com/auth/drive",
-        "https://www.googleapis.com/auth/presentations",
-        "https://www.googleapis.com/auth/spreadsheets",
+        'https://www.googleapis.com/auth/drive',
+        'https://www.googleapis.com/auth/presentations',
+        'https://www.googleapis.com/auth/spreadsheets',
       ],
     });
-    this.driveService = google.drive({ version: "v3", auth });
-    this.slidesService = google.slides({ version: "v1", auth });
-    this.sheetsService = google.sheets({ version: "v4", auth });
+    this.driveService = google.drive({version: 'v3', auth});
+    this.slidesService = google.slides({version: 'v1', auth});
+    this.sheetsService = google.sheets({version: 'v4', auth});
     this.filesToDelete = [];
   }
 
@@ -59,9 +59,9 @@ class Helpers {
    */
   cleanup() {
     return Promise.all(
-      this.filesToDelete.map((fileId) =>
-        this.driveService.files.delete({ fileId })
-      )
+        this.filesToDelete.map((fileId) =>
+          this.driveService.files.delete({fileId}),
+        ),
     );
   }
 
@@ -71,7 +71,7 @@ class Helpers {
    */
   async createTestPresentation() {
     const res = await this.slidesService.presentations.create({
-      title: "Test Preso",
+      title: 'Test Preso',
     });
     this.deleteFileOnCleanup(res.data.presentationId);
     return res.data.presentationId;
@@ -114,16 +114,16 @@ class Helpers {
    * @return {Promise<string>} The textbox's object ID.
    */
   async createTestTextbox(presentationId, pageObjectId) {
-    const boxId = "MyTextBox_01";
+    const boxId = 'MyTextBox_01';
     const pt350 = {
       magnitude: 350,
-      unit: "PT",
+      unit: 'PT',
     };
     const requests = [
       {
         createShape: {
           objectId: boxId,
-          shapeType: "TEXT_BOX",
+          shapeType: 'TEXT_BOX',
           elementProperties: {
             pageObjectId,
             size: {
@@ -135,7 +135,7 @@ class Helpers {
               scaleY: 1,
               translateX: 350,
               translateY: 100,
-              unit: "PT",
+              unit: 'PT',
             },
           },
         },
@@ -144,7 +144,7 @@ class Helpers {
         insertText: {
           objectId: boxId,
           insertionIndex: 0,
-          text: "New Box Text Inserted",
+          text: 'New Box Text Inserted',
         },
       },
     ];
@@ -166,15 +166,15 @@ class Helpers {
    * @return {Promise<string>} The chart's object ID
    */
   async createTestSheetsChart(
-    presentationId,
-    pageId,
-    spreadsheetId,
-    sheetChartId
+      presentationId,
+      pageId,
+      spreadsheetId,
+      sheetChartId,
   ) {
-    const chartId = "MyChart_01";
+    const chartId = 'MyChart_01';
     const emu4M = {
       magnitude: 4000000,
-      unit: "EMU",
+      unit: 'EMU',
     };
     const requests = [
       {
@@ -182,7 +182,7 @@ class Helpers {
           objectId: chartId,
           spreadsheetId: spreadsheetId,
           chartId: sheetChartId,
-          linkingMode: "LINKED",
+          linkingMode: 'LINKED',
           elementProperties: {
             pageObjectId: pageId,
             size: {
@@ -194,7 +194,7 @@ class Helpers {
               scaleY: 1,
               translateX: 100000,
               translateY: 100000,
-              unit: "EMU",
+              unit: 'EMU',
             },
           },
         },
@@ -218,10 +218,10 @@ class Helpers {
     const res = await this.sheetsService.spreadsheets.create({
       resource: {
         properties: {
-          title: "Test Spreadsheet",
+          title: 'Test Spreadsheet',
         },
       },
-      fields: "spreadsheetId",
+      fields: 'spreadsheetId',
     });
 
     this.deleteFileOnCleanup(res.data.spreadsheetId);
@@ -249,10 +249,10 @@ class Helpers {
               },
               cell: {
                 userEnteredValue: {
-                  stringValue: "Hello",
+                  stringValue: 'Hello',
                 },
               },
-              fields: "userEnteredValue",
+              fields: 'userEnteredValue',
             },
           },
         ],

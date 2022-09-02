@@ -24,19 +24,19 @@
  * @return {obj} spreadsheet information
  */
 async function batchUpdateValues(
-  spreadsheetId,
-  range,
-  valueInputOption,
-  _values
+    spreadsheetId,
+    range,
+    valueInputOption,
+    _values,
 ) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/spreadsheet",
+    scopes: 'https://www.googleapis.com/auth/spreadsheet',
   });
 
-  const service = google.sheets({ version: "v4", auth });
+  const service = google.sheets({version: 'v4', auth});
   let values = [
     [
       // Cell values ...
@@ -62,7 +62,7 @@ async function batchUpdateValues(
       spreadsheetId,
       resource,
     });
-    console.log("%d cells updated.", result.data.totalUpdatedCells);
+    console.log('%d cells updated.', result.data.totalUpdatedCells);
     return result;
   } catch (err) {
     // TODO (developer) - Handle exception
@@ -71,4 +71,4 @@ async function batchUpdateValues(
 }
 // [END sheets_batch_update_values]
 
-module.exports = { batchUpdateValues };
+module.exports = {batchUpdateValues};

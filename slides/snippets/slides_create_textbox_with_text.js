@@ -21,24 +21,24 @@
  * @param {string} pageId The page to add the textbox to.
  */
 async function createTextboxWithText(presentationId, pageId) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/presentations",
+    scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
-  const service = google.slides({ version: "v1", auth });
-  const elementId = "MyTextBox_01";
+  const service = google.slides({version: 'v1', auth});
+  const elementId = 'MyTextBox_01';
   const pt350 = {
     magnitude: 350,
-    unit: "PT",
+    unit: 'PT',
   };
   const requests = [
     {
       createShape: {
         objectId: elementId,
-        shapeType: "TEXT_BOX",
+        shapeType: 'TEXT_BOX',
         elementProperties: {
           pageObjectId: pageId,
           size: {
@@ -50,7 +50,7 @@ async function createTextboxWithText(presentationId, pageId) {
             scaleY: 1,
             translateX: 350,
             translateY: 100,
-            unit: "PT",
+            unit: 'PT',
           },
         },
       },
@@ -60,7 +60,7 @@ async function createTextboxWithText(presentationId, pageId) {
       insertText: {
         objectId: elementId,
         insertionIndex: 0,
-        text: "New Box Text Inserted!",
+        text: 'New Box Text Inserted!',
       },
     },
   ];
@@ -69,7 +69,7 @@ async function createTextboxWithText(presentationId, pageId) {
     const createTextboxWithTextResponse =
       await service.presentations.batchUpdate({
         presentationId,
-        resource: { requests },
+        resource: {requests},
       });
     const createShapeResponse =
       createTextboxWithTextResponse.data.replies[0].createShape;
@@ -82,4 +82,4 @@ async function createTextboxWithText(presentationId, pageId) {
 }
 // [END slides_create_textbox_with_text]
 
-module.exports = { createTextboxWithText };
+module.exports = {createTextboxWithText};

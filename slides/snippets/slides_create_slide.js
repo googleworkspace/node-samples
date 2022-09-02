@@ -21,21 +21,21 @@
  * @param {string} pageId The object ID for the new slide.
  */
 async function createSlide(presentationId, pageId) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/presentations",
+    scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
-  const service = google.slides({ version: "v1", auth });
+  const service = google.slides({version: 'v1', auth});
   const requests = [
     {
       createSlide: {
         objectId: pageId,
-        insertionIndex: "1",
+        insertionIndex: '1',
         slideLayoutReference: {
-          predefinedLayout: "TITLE_AND_TWO_COLUMNS",
+          predefinedLayout: 'TITLE_AND_TWO_COLUMNS',
         },
       },
     },
@@ -52,7 +52,7 @@ async function createSlide(presentationId, pageId) {
       },
     });
     console.log(
-      `Created slide with ID: ${res.data.replies[0].createSlide.objectId}`
+        `Created slide with ID: ${res.data.replies[0].createSlide.objectId}`,
     );
     return res;
   } catch (err) {
@@ -62,4 +62,4 @@ async function createSlide(presentationId, pageId) {
 }
 // [END slides_create_slide]
 
-module.exports = { createSlide };
+module.exports = {createSlide};

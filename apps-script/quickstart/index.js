@@ -16,19 +16,19 @@
  */
 /* eslint-disable camelcase */
 // [START apps_script_api_quickstart]
-const fs = require("fs").promises;
-const path = require("path");
-const process = require("process");
-const { authenticate } = require("@google-cloud/local-auth");
-const { google } = require("googleapis");
+const fs = require('fs').promises;
+const path = require('path');
+const process = require('process');
+const {authenticate} = require('@google-cloud/local-auth');
+const {google} = require('googleapis');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ["https://www.googleapis.com/auth/script.projects"];
+const SCOPES = ['https://www.googleapis.com/auth/script.projects'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
+const TOKEN_PATH = path.join(process.cwd(), 'token.json');
+const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -56,7 +56,7 @@ async function saveCredentials(client) {
   const keys = JSON.parse(content);
   const key = keys.installed || keys.web;
   const payload = JSON.stringify({
-    type: "authorized_user",
+    type: 'authorized_user',
     client_id: key.client_id,
     client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
@@ -88,10 +88,10 @@ async function authorize() {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 async function callAppsScript(auth) {
-  const script = google.script({ version: "v1", auth });
+  const script = google.script({version: 'v1', auth});
   let res = await script.projects.create({
     resource: {
-      title: "My Script",
+      title: 'My Script',
     },
   });
   res = await script.projects.updateContent({
@@ -100,13 +100,13 @@ async function callAppsScript(auth) {
     resource: {
       files: [
         {
-          name: "hello",
-          type: "SERVER_JS",
+          name: 'hello',
+          type: 'SERVER_JS',
           source: 'function helloWorld() {\n  console.log("Hello, world!");\n}',
         },
         {
-          name: "appsscript",
-          type: "JSON",
+          name: 'appsscript',
+          type: 'JSON',
           source:
             '{"timeZone":"America/New_York","exceptionLogging":' + '"CLOUD"}',
         },

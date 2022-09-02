@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-const { expect } = require("expect");
-const Helpers = require("./helpers");
-const SheetsGetValues = require("../sheets_get_values");
+const {expect} = require('expect');
+const Helpers = require('./helpers');
+const SheetsGetValues = require('../sheets_get_values');
 
-describe("Spreadsheet get values snippet", () => {
+describe('Spreadsheet get values snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it("should get spreadsheet values", async () => {
+  it('should get spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsGetValues.getValues(spreadsheetId, "A1:C2");
+    const result = await SheetsGetValues.getValues(spreadsheetId, 'A1:C2');
     const values = result.data.values;
     expect(values.length).toBe(2);
     expect(values[0].length).toBe(3);

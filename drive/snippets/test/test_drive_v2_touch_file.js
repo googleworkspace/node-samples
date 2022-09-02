@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-const { expect } = require("expect");
-const Helpers = require("./helpers");
-const touchFile = require("../drive_v2/file snippets/touch_file");
+const {expect} = require('expect');
+const Helpers = require('./helpers');
+const touchFile = require('../drive_v2/file snippets/touch_file');
 
-describe("Drive snippets", () => {
+describe('Drive snippets', () => {
   const helpers = new Helpers();
 
   before(() => {
@@ -29,7 +29,7 @@ describe("Drive snippets", () => {
     return helpers.cleanup();
   });
 
-  it("should update the modified time", async () => {
+  it('should update the modified time', async () => {
     const file = await helpers.createTestBlob();
     const now = new Date().toISOString();
     const modifiedTime = await touchFile(file.data.id, now);

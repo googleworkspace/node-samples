@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-const { expect } = require("expect");
-const Helpers = require("./helpers");
-const SheetsBatchGetValues = require("../sheets_batch_get_values");
+const {expect} = require('expect');
+const Helpers = require('./helpers');
+const SheetsBatchGetValues = require('../sheets_batch_get_values');
 
-describe("Spreadsheet batch get values snippet", () => {
+describe('Spreadsheet batch get values snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it("should batch get spreadsheet values", async () => {
+  it('should batch get spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await SheetsBatchGetValues.batchGetValues(spreadsheetId, [
-      "A1:A3",
-      "B1:C1",
+      'A1:A3',
+      'B1:C1',
     ]);
     const valueRanges = result.data.valueRanges;
     expect(valueRanges.length).toBe(2);

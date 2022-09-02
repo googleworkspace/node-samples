@@ -20,31 +20,31 @@
  * @return{obj} file Id
  * */
 async function uploadWithConversion() {
-  const fs = require("fs");
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const fs = require('fs');
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/drive",
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const service = google.drive({ version: "v3", auth });
+  const service = google.drive({version: 'v3', auth});
   const fileMetadata = {
-    title: "My Report",
-    mimeType: "application/vnd.google-apps.spreadsheet",
+    title: 'My Report',
+    mimeType: 'application/vnd.google-apps.spreadsheet',
   };
   const media = {
-    mimeType: "text/csv",
-    body: fs.createReadStream("files/report.csv"),
+    mimeType: 'text/csv',
+    body: fs.createReadStream('files/report.csv'),
   };
 
   try {
     const file = await service.files.create({
       resource: fileMetadata,
       media: media,
-      fields: "id",
+      fields: 'id',
     });
-    console.log("File Id:", file.data.id);
+    console.log('File Id:', file.data.id);
     return file.data.id;
   } catch (err) {
     // TODO(developer) - Handle error

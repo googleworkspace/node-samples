@@ -25,13 +25,13 @@ async function touchFile(fileId, timestamp) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/drive",
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const service = google.drive({ version: "v2", auth });
+  const service = google.drive({version: 'v2', auth});
   const fileMetadata = {
     modifiedDate: new Date().toISOString(),
   };
@@ -41,9 +41,9 @@ async function touchFile(fileId, timestamp) {
       fileId: fileId,
       setModifiedDate: true,
       resource: fileMetadata,
-      fields: "id, modifiedDate",
+      fields: 'id, modifiedDate',
     });
-    console.log("Modified time:", file.data.modifiedDate);
+    console.log('Modified time:', file.data.modifiedDate);
     return file.data.modifiedDate;
   } catch (err) {
     // TODO(developer) - Handle error

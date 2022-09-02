@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-const { GoogleAuth } = require("google-auth-library");
-const { google } = require("googleapis");
+const {GoogleAuth} = require('google-auth-library');
+const {google} = require('googleapis');
 
 /**
  * Helper functions for Google Sheets
@@ -27,12 +27,12 @@ class Helpers {
   constructor() {
     const auth = new GoogleAuth({
       scopes: [
-        "https://www.googleapis.com/auth/spreadsheet",
-        "https://www.googleapis.com/auth/drive",
+        'https://www.googleapis.com/auth/spreadsheet',
+        'https://www.googleapis.com/auth/drive',
       ],
     });
-    this.sheetsService = google.sheets({ version: "v4", auth });
-    this.driveService = google.drive({ version: "v3", auth });
+    this.sheetsService = google.sheets({version: 'v4', auth});
+    this.driveService = google.drive({version: 'v3', auth});
     this.filesToDelete = [];
   }
 
@@ -57,9 +57,9 @@ class Helpers {
    */
   cleanup() {
     return Promise.all(
-      this.filesToDelete.map((fileId) =>
-        this.driveService.files.delete({ fileId })
-      )
+        this.filesToDelete.map((fileId) =>
+          this.driveService.files.delete({fileId}),
+        ),
     );
   }
 
@@ -71,10 +71,10 @@ class Helpers {
     const res = await this.sheetsService.spreadsheets.create({
       resource: {
         properties: {
-          title: "Test Spreadsheet",
+          title: 'Test Spreadsheet',
         },
       },
-      fields: "spreadsheetId",
+      fields: 'spreadsheetId',
     });
     this.deleteFileOnCleanup(res.data.spreadsheetId);
     return res.data.spreadsheetId;
@@ -101,10 +101,10 @@ class Helpers {
               },
               cell: {
                 userEnteredValue: {
-                  stringValue: "Hello",
+                  stringValue: 'Hello',
                 },
               },
-              fields: "userEnteredValue",
+              fields: 'userEnteredValue',
             },
           },
         ],

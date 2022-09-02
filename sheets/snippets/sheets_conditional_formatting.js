@@ -21,14 +21,14 @@
  * @return {obj} spreadsheet information
  */
 async function conditionalFormatting(spreadsheetId) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/spreadsheet",
+    scopes: 'https://www.googleapis.com/auth/spreadsheet',
   });
 
-  const service = google.sheets({ version: "v4", auth });
+  const service = google.sheets({version: 'v4', auth});
   const myRange = {
     sheetId: 0,
     startRowIndex: 1,
@@ -43,11 +43,11 @@ async function conditionalFormatting(spreadsheetId) {
           ranges: [myRange],
           booleanRule: {
             condition: {
-              type: "CUSTOM_FORMULA",
-              values: [{ userEnteredValue: "=GT($D2,median($D$2:$D$11))" }],
+              type: 'CUSTOM_FORMULA',
+              values: [{userEnteredValue: '=GT($D2,median($D$2:$D$11))'}],
             },
             format: {
-              textFormat: { foregroundColor: { red: 0.8 } },
+              textFormat: {foregroundColor: {red: 0.8}},
             },
           },
         },
@@ -60,11 +60,11 @@ async function conditionalFormatting(spreadsheetId) {
           ranges: [myRange],
           booleanRule: {
             condition: {
-              type: "CUSTOM_FORMULA",
-              values: [{ userEnteredValue: "=LT($D2,median($D$2:$D$11))" }],
+              type: 'CUSTOM_FORMULA',
+              values: [{userEnteredValue: '=LT($D2,median($D$2:$D$11))'}],
             },
             format: {
-              backgroundColor: { red: 1, green: 0.4, blue: 0.4 },
+              backgroundColor: {red: 1, green: 0.4, blue: 0.4},
             },
           },
         },
@@ -89,4 +89,4 @@ async function conditionalFormatting(spreadsheetId) {
 }
 // [END sheets_conditional_formatting]
 
-module.exports = { conditionalFormatting };
+module.exports = {conditionalFormatting};

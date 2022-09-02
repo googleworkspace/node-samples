@@ -13,24 +13,24 @@
 //
 // [START forms_retrieve_contents]
 
-"use strict";
+'use strict';
 
-const path = require("path");
-const google = require("@googleapis/forms");
-const { authenticate } = require("@google-cloud/local-auth");
+const path = require('path');
+const google = require('@googleapis/forms');
+const {authenticate} = require('@google-cloud/local-auth');
 
-const formID = "<YOUR_FORM_ID>";
+const formID = '<YOUR_FORM_ID>';
 
 async function runSample(query) {
   const auth = await authenticate({
-    keyfilePath: path.join(__dirname, "credentials.json"),
-    scopes: "https://www.googleapis.com/auth/forms.body.readonly",
+    keyfilePath: path.join(__dirname, 'credentials.json'),
+    scopes: 'https://www.googleapis.com/auth/forms.body.readonly',
   });
   const forms = google.forms({
-    version: "v1",
+    version: 'v1',
     auth: auth,
   });
-  const res = await forms.forms.get({ formId: formID });
+  const res = await forms.forms.get({formId: formID});
   console.log(res.data);
   return res.data;
 }

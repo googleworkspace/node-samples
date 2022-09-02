@@ -14,25 +14,25 @@
  * limitations under the License.
  */
 
-const { expect } = require("expect");
-const Helpers = require("./helpers");
-const SheetsBatchUpdate = require("../sheets_batch_update");
+const {expect} = require('expect');
+const Helpers = require('./helpers');
+const SheetsBatchUpdate = require('../sheets_batch_update');
 
-describe("Spreadsheet batch update snippet", () => {
+describe('Spreadsheet batch update snippet', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it("should batch update a spreadsheet", async () => {
+  it('should batch update a spreadsheet', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await SheetsBatchUpdate.batchUpdate(
-      spreadsheetId,
-      "New Title",
-      "Hello",
-      "Goodbye"
+        spreadsheetId,
+        'New Title',
+        'Hello',
+        'Goodbye',
     );
     const replies = result.data.replies;
     expect(replies.length).toBe(2);

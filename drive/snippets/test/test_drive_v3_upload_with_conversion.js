@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-const { expect } = require("expect");
-const Helpers = require("./helpers");
-const uploadWithConversion = require("../drive_v3/file_snippets/upload_with_conversion");
+const {expect} = require('expect');
+const Helpers = require('./helpers');
+const uploadWithConversion = require('../drive_v3/file_snippets/upload_with_conversion');
 
-describe("Drive snippets", () => {
+describe('Drive snippets', () => {
   const helpers = new Helpers();
 
   before(() => {
@@ -29,8 +29,8 @@ describe("Drive snippets", () => {
     return helpers.cleanup();
   });
 
-  it("should upload and convert a document", async () => {
-    const id = await uploadWithConversion("../files/report.csv");
+  it('should upload and convert a document', async () => {
+    const id = await uploadWithConversion('../files/report.csv');
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
   });

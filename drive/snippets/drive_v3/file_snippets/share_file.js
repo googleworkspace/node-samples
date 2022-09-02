@@ -23,26 +23,26 @@
  * @return{list} permission id
  * */
 async function shareFile(fileId, targetUserEmail, targetDomainName) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/drive",
+    scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const service = google.drive({ version: "v3", auth });
+  const service = google.drive({version: 'v3', auth});
   const permissionIds = [];
 
   const permissions = [
     {
-      type: "user",
-      role: "writer",
+      type: 'user',
+      role: 'writer',
       emailAddress: targetUserEmail, // 'user@partner.com',
     },
     {
-      type: "domain",
-      role: "writer",
+      type: 'domain',
+      role: 'writer',
       domain: targetDomainName, // 'example.com',
     },
   ];
@@ -55,7 +55,7 @@ async function shareFile(fileId, targetUserEmail, targetDomainName) {
       const result = await service.permissions.create({
         resource: permission,
         fileId: fileId,
-        fields: "id",
+        fields: 'id',
       });
       permissionIds.push(result.data.id);
       console.log(`Inserted permission id: ${result.data.id}`);

@@ -16,19 +16,19 @@
  */
 /* eslint-disable camelcase */
 // [START slides_quickstart]
-const fs = require("fs").promises;
-const path = require("path");
-const process = require("process");
-const { authenticate } = require("@google-cloud/local-auth");
-const { google } = require("googleapis");
+const fs = require('fs').promises;
+const path = require('path');
+const process = require('process');
+const {authenticate} = require('@google-cloud/local-auth');
+const {google} = require('googleapis');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ["https://www.googleapis.com/auth/presentations.readonly"];
+const SCOPES = ['https://www.googleapis.com/auth/presentations.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = path.join(process.cwd(), "token.json");
-const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
+const TOKEN_PATH = path.join(process.cwd(), 'token.json');
+const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -56,7 +56,7 @@ async function saveCredentials(client) {
   const keys = JSON.parse(content);
   const key = keys.installed || keys.web;
   const payload = JSON.stringify({
-    type: "authorized_user",
+    type: 'authorized_user',
     client_id: key.client_id,
     client_secret: key.client_secret,
     refresh_token: client.credentials.refresh_token,
@@ -89,19 +89,19 @@ async function authorize() {
  * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
  */
 async function listSlides(auth) {
-  const slidesApi = google.slides({ version: "v1", auth });
+  const slidesApi = google.slides({version: 'v1', auth});
   const res = await slidesApi.presentations.get({
-    presentationId: "1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc",
+    presentationId: '1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc',
   });
   const slides = res.data.slides;
   if (!slides || slides.length === 0) {
-    console.log("No slides found.");
+    console.log('No slides found.');
     return;
   }
-  console.log("The presentation contains %s slides:", slides.length);
+  console.log('The presentation contains %s slides:', slides.length);
   res.data.slides.forEach((slide, i) => {
     console.log(
-      `- Slide #${i + 1} contains ${slide.pageElements.length} elements.`
+        `- Slide #${i + 1} contains ${slide.pageElements.length} elements.`,
     );
   });
 }

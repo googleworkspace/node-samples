@@ -21,14 +21,14 @@
  * @param {string} presentationChartId The presentation's chart ID.
  */
 async function refreshSheetsChart(presentationId, presentationChartId) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/presentations",
+    scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
-  const service = google.slides({ version: "v1", auth });
+  const service = google.slides({version: 'v1', auth});
 
   const requests = [
     {
@@ -47,7 +47,7 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
       },
     });
     console.log(
-      `Refreshed a linked Sheets chart with ID: ${presentationChartId}`
+        `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
     );
     return batchUpdateResponse.data;
   } catch (err) {
@@ -57,4 +57,4 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
 }
 // [END slides_refresh_sheets_chart]
 
-module.exports = { refreshSheetsChart };
+module.exports = {refreshSheetsChart};

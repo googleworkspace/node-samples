@@ -21,14 +21,14 @@
  * @return {obj} spreadsheet information
  */
 async function pivotTable(spreadsheetId) {
-  const { GoogleAuth } = require("google-auth-library");
-  const { google } = require("googleapis");
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
-    scopes: "https://www.googleapis.com/auth/spreadsheet",
+    scopes: 'https://www.googleapis.com/auth/spreadsheet',
   });
 
-  const service = google.sheets({ version: "v4", auth });
+  const service = google.sheets({version: 'v4', auth});
   try {
     // Create two sheets for our pivot table
     let requests = [
@@ -39,7 +39,7 @@ async function pivotTable(spreadsheetId) {
         addSheet: {},
       },
     ];
-    let resource = { requests };
+    let resource = {requests};
     let response = await service.spreadsheets.batchUpdate({
       spreadsheetId,
       resource,
@@ -65,23 +65,23 @@ async function pivotTable(spreadsheetId) {
                     {
                       sourceColumnOffset: 1,
                       showTotals: true,
-                      sortOrder: "ASCENDING",
+                      sortOrder: 'ASCENDING',
                     },
                   ],
                   columns: [
                     {
                       sourceColumnOffset: 4,
-                      sortOrder: "ASCENDING",
+                      sortOrder: 'ASCENDING',
                       showTotals: true,
                     },
                   ],
                   values: [
                     {
-                      summarizeFunction: "COUNTA",
+                      summarizeFunction: 'COUNTA',
                       sourceColumnOffset: 4,
                     },
                   ],
-                  valueLayout: "HORIZONTAL",
+                  valueLayout: 'HORIZONTAL',
                 },
               },
             ],
@@ -91,7 +91,7 @@ async function pivotTable(spreadsheetId) {
             rowIndex: 0,
             columnIndex: 0,
           },
-          fields: "pivotTable",
+          fields: 'pivotTable',
         },
       },
     ];
@@ -110,4 +110,4 @@ async function pivotTable(spreadsheetId) {
 }
 // [END sheets_pivot_tables]
 
-module.exports = { pivotTable };
+module.exports = {pivotTable};

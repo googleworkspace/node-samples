@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-const { expect } = require("expect");
-const Helpers = require("./helpers");
-const createFolder = require("../drive_v3/file_snippets/create_folder");
+const {expect} = require('expect');
+const Helpers = require('./helpers');
+const createFolder = require('../drive_v3/file_snippets/create_folder');
 
-describe("Drive snippets", () => {
+describe('Drive snippets', () => {
   const helpers = new Helpers();
 
   after(() => {
     return helpers.cleanup();
   });
 
-  it("should create a folder", async () => {
+  it('should create a folder', async () => {
     const id = await createFolder();
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
