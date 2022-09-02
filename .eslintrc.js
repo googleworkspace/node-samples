@@ -15,23 +15,23 @@
  */
 
 module.exports = {
-  extends: "google",
+  extends: 'google',
   parserOptions: {
     ecmaVersion: 8,
-    sourceType: "module",
+    sourceType: 'module',
   },
   env: {
     node: true,
   },
   rules: {
-    "require-jsdoc": "off",
-    "max-len": ["error", { code: 100 }],
+    'require-jsdoc': 'off',
+    'max-len': ['error', {code: 100}],
     camelcase: [
-      "error",
+      'error',
       {
         ignoreDestructuring: true,
         ignoreImports: true,
-        allow: ["access_type", "redirect_uris"],
+        allow: ['access_type', 'redirect_uris'],
       },
     ],
   },
