@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
- module.exports = {
+module.exports = {
   'extends': 'google',
   'parserOptions': {
     'ecmaVersion': 8,
