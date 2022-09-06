@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +24,11 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should create a presentation', (async () => {
-    const presentation = await SlidesCreatePresentation.createPresentation('Title');
+  it('should create a presentation', async () => {
+    const presentation = await SlidesCreatePresentation.createPresentation(
+        'Title',
+    );
     expect(presentation).toBeDefined();
     helpers.deleteFileOnCleanup(presentation.data.presentationId);
-  }));
+  });
 });

@@ -30,11 +30,11 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should move a file', (async () => {
+  it('should move a file', async () => {
     const folderId = await createFolder();
     const file = await helpers.createTestBlob();
     helpers.deleteFileOnCleanup(folderId);
     const movedFileStatus = await moveFileToFolder(file.data.id, folderId);
     expect(movedFileStatus).toEqual(200);
-  }));
+  });
 });

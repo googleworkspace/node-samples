@@ -25,9 +25,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should create a folder', (async () => {
+  it('should create a folder', async () => {
     const id = await createFolder();
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

@@ -26,7 +26,9 @@ async function fetchChanges(savedStartPageToken) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.readonly'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive.readonly',
+  });
   const service = google.drive({version: 'v3', auth});
   try {
     let pageToken = savedStartPageToken;

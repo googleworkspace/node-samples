@@ -30,13 +30,13 @@ async function runSample(query) {
     auth: authClient,
   });
   const watchRequest = {
-    'watch': {
-      'target': {
-        'topic': {
-          'topicName': 'projects/<YOUR_TOPIC_PATH>',
+    watch: {
+      target: {
+        topic: {
+          topicName: 'projects/<YOUR_TOPIC_PATH>',
         },
       },
-      'eventType': 'RESPONSES',
+      eventType: 'RESPONSES',
     },
   };
   const res = await forms.forms.watches.create({

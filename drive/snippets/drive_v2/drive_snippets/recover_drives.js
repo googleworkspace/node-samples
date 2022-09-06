@@ -26,7 +26,9 @@ async function recoverDrives(userEmail) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
   const drives = [];
   const newOrganizerPermission = {
@@ -45,7 +47,11 @@ async function recoverDrives(userEmail) {
     });
     Array.prototype.push.apply(drives, res.data.items);
     for (const drive of res.data.items) {
-      console.log('Found shared drive without organizer:', drive.name, drive.id);
+      console.log(
+          'Found shared drive without organizer:',
+          drive.name,
+          drive.id,
+      );
       await service.permissions.insert({
         resource: newOrganizerPermission,
         fileId: drive.id,
@@ -53,7 +59,7 @@ async function recoverDrives(userEmail) {
         supportsAllDrives: true,
         fields: 'id',
       });
-    };
+    }
     pageToken = res.nextPageToken;
   } catch (err) {
     // TODO(developer) - Handle error

@@ -28,11 +28,11 @@ describe('Drive snippets', () => {
 
   // Note, you must enable creating Team Drives for your service account.
   // https://support.google.com/a/answer/7337635?hl=en
-  it('should recover team drives', (async () => {
+  it('should recover team drives', async () => {
     await createOrphanedTeamDrive();
     const teamDrives = await recoverDrives('soheil@workspacesamples.dev');
     expect(teamDrives.length).toBeDefined();
-  }));
+  });
 
   /**
    * Creates a standalone Team Drive.
@@ -53,5 +53,5 @@ describe('Drive snippets', () => {
       });
     });
     return fileId;
-  };
+  }
 });

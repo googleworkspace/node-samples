@@ -26,11 +26,13 @@ async function createShortcut() {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v3', auth});
   const fileMetadata = {
-    'title': 'Project plan',
-    'mimeType': 'application/vnd.google-apps.drive-sdk',
+    title: 'Project plan',
+    mimeType: 'application/vnd.google-apps.drive-sdk',
   };
 
   try {

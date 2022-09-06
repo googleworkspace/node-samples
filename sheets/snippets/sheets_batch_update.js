@@ -27,8 +27,9 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheets'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/spreadsheets',
+  });
 
   const service = google.sheets({version: 'v4', auth});
   const requests = [];
@@ -67,4 +68,3 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
 // [END sheets_batch_update]
 
 module.exports = {batchUpdate};
-

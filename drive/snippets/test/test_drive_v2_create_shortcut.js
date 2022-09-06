@@ -25,9 +25,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should create a shortcut', (async () => {
+  it('should create a shortcut', async () => {
     const id = await createShortcut();
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

@@ -25,14 +25,19 @@ describe('Spreadsheet update values snippet', () => {
     return helpers.cleanup();
   });
 
-  it('should update spreadsheet values', (async () => {
+  it('should update spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
-    const result = await SheetsUpdateValues.updateValues(spreadsheetId, 'A1:B2', 'USER_ENTERED', [
-      ['A', 'B'],
-      ['C', 'D'],
-    ]);
+    const result = await SheetsUpdateValues.updateValues(
+        spreadsheetId,
+        'A1:B2',
+        'USER_ENTERED',
+        [
+          ['A', 'B'],
+          ['C', 'D'],
+        ],
+    );
     expect(result.data.updatedRows).toBe(2);
     expect(result.data.updatedColumns).toBe(2);
     expect(result.data.updatedCells).toBe(4);
-  }));
+  });
 });

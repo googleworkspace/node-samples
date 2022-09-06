@@ -25,11 +25,13 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should copy a presentation', (async () => {
+  it('should copy a presentation', async () => {
     const presentationId = await helpers.createTestPresentation();
-    const copyId = await SlidesCopyPresentation.copyPresentation(presentationId, 'My' +
-      ' Duplicate, Presentation');
+    const copyId = await SlidesCopyPresentation.copyPresentation(
+        presentationId,
+        'My' + ' Duplicate, Presentation',
+    );
     expect(copyId).toBeDefined();
     helpers.deleteFileOnCleanup(copyId.data.id);
-  }));
+  });
 });

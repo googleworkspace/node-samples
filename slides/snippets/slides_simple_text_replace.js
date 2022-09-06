@@ -25,25 +25,29 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/presentations'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/presentations',
+  });
 
   const service = google.slides({version: 'v1', auth});
   // Remove existing text in the shape, then insert new text.
-  const requests = [{
-    deleteText: {
-      objectId: shapeId,
-      textRange: {
-        type: 'ALL',
+  const requests = [
+    {
+      deleteText: {
+        objectId: shapeId,
+        textRange: {
+          type: 'ALL',
+        },
       },
     },
-  }, {
-    insertText: {
-      objectId: shapeId,
-      insertionIndex: 0,
-      text: replacementText,
+    {
+      insertText: {
+        objectId: shapeId,
+        insertionIndex: 0,
+        text: replacementText,
+      },
     },
-  }];
+  ];
   // Execute the requests.
   try {
     const batchUpdateResponse = await service.presentations.batchUpdate({

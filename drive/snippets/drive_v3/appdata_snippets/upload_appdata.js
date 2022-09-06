@@ -26,7 +26,9 @@ async function uploadAppdata() {
   const {google} = require('googleapis');
   const fs = require('fs');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive.appdata',
+  });
   const service = google.drive({version: 'v3', auth});
   const fileMetadata = {
     name: 'config.json',
@@ -37,12 +39,11 @@ async function uploadAppdata() {
     body: fs.createReadStream('files/config.json'),
   };
   try {
-    const file = await service.files.create(
-        {
-          resource: fileMetadata,
-          media: media,
-          fields: 'id',
-        });
+    const file = await service.files.create({
+      resource: fileMetadata,
+      media: media,
+      fields: 'id',
+    });
     console.log('File Id:', file.data.id);
     return file.data.id;
   } catch (err) {
@@ -53,4 +54,3 @@ async function uploadAppdata() {
 // [END drive_upload_appdata]
 
 module.exports = uploadAppdata;
-

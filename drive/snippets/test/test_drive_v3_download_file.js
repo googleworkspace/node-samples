@@ -18,7 +18,6 @@ const {expect} = require('expect');
 const Helpers = require('./helpers');
 const downloadFile = require('../drive_v3/file_snippets/download_file');
 
-
 describe('Drive snippets', () => {
   const helpers = new Helpers();
 
@@ -30,9 +29,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should download a photo', (async () => {
+  it('should download a photo', async () => {
     const file = await helpers.createTestBlob();
     const status = await downloadFile(file.data.id);
     expect(status).toEqual(200);
-  }));
+  });
 });

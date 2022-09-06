@@ -17,9 +17,7 @@
 
 const path = require('path');
 const google = require('@googleapis/forms');
-const {
-  authenticate,
-} = require('@google-cloud/local-auth');
+const {authenticate} = require('@google-cloud/local-auth');
 
 async function runSample(query) {
   const authClient = await authenticate({
@@ -31,8 +29,8 @@ async function runSample(query) {
     auth: authClient,
   });
   const newForm = {
-    'info': {
-      'title': 'Creating a new form in Node',
+    info: {
+      title: 'Creating a new form in Node',
     },
   };
   const res = await forms.forms.create({

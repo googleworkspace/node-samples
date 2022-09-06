@@ -28,7 +28,9 @@ async function moveFileToFolder(fileId, folderId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
 
   try {
@@ -39,9 +41,11 @@ async function moveFileToFolder(fileId, folderId) {
     });
 
     // Move the file to the new folder
-    const previousParents = file.data.parents.map(function(parent) {
-      return parent.id;
-    }).join(',');
+    const previousParents = file.data.parents
+        .map(function(parent) {
+          return parent.id;
+        })
+        .join(',');
     const files = await service.files.update({
       fileId: fileId,
       addParents: folderId,
@@ -58,4 +62,3 @@ async function moveFileToFolder(fileId, folderId) {
 // [END drive_move_file_to_folder]
 
 module.exports = moveFileToFolder;
-

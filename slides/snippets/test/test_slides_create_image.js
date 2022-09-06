@@ -24,14 +24,16 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should create an image', (async () => {
+  it('should create an image', async () => {
     const presentationId = await helpers.createTestPresentation();
     const ids = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = ids[0];
-    const response = await SlidesCreateImage.createImage(presentationId, pageId);
+    const response = await SlidesCreateImage.createImage(
+        presentationId,
+        pageId,
+    );
     expect(response.length).toBe(1);
     const imageId = response[0].createImage.objectId;
     expect(imageId).toBeDefined();
-  }));
+  });
 });
-

@@ -24,19 +24,22 @@ async function createSlide(presentationId, pageId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/presentations'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/presentations',
+  });
 
   const service = google.slides({version: 'v1', auth});
-  const requests = [{
-    createSlide: {
-      objectId: pageId,
-      insertionIndex: '1',
-      slideLayoutReference: {
-        predefinedLayout: 'TITLE_AND_TWO_COLUMNS',
+  const requests = [
+    {
+      createSlide: {
+        objectId: pageId,
+        insertionIndex: '1',
+        slideLayoutReference: {
+          predefinedLayout: 'TITLE_AND_TWO_COLUMNS',
+        },
       },
     },
-  }];
+  ];
   // If you wish to populate the slide with elements, add element create requests here,
   // using the pageId.
 
@@ -48,7 +51,9 @@ async function createSlide(presentationId, pageId) {
         requests,
       },
     });
-    console.log(`Created slide with ID: ${res.data.replies[0].createSlide.objectId}`);
+    console.log(
+        `Created slide with ID: ${res.data.replies[0].createSlide.objectId}`,
+    );
     return res;
   } catch (err) {
     // TODO (developer) - handle exception
@@ -58,4 +63,3 @@ async function createSlide(presentationId, pageId) {
 // [END slides_create_slide]
 
 module.exports = {createSlide};
-

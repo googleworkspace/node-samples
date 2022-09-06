@@ -17,9 +17,7 @@
 
 const path = require('path');
 const google = require('@googleapis/forms');
-const {
-  authenticate,
-} = require('@google-cloud/local-auth');
+const {authenticate} = require('@google-cloud/local-auth');
 
 async function runSample(query) {
   const authClient = await authenticate({
@@ -31,8 +29,8 @@ async function runSample(query) {
     auth: authClient,
   });
   const newForm = {
-    'info': {
-      'title': 'Creating a new form for batchUpdate in Node',
+    info: {
+      title: 'Creating a new form for batchUpdate in Node',
     },
   };
   const createResponse = await forms.forms.create({
@@ -42,22 +40,24 @@ async function runSample(query) {
 
   // Request body to add video item to a Form
   const update = {
-    'requests': [{
-      'createItem': {
-        'item': {
-          'title': 'Homework video',
-          'description': 'Quizzes in Google Forms',
-          'videoItem': {
-            'video': {
-              'youtubeUri': 'https://www.youtube.com/watch?v=Lt5HqPvM-eI',
+    requests: [
+      {
+        createItem: {
+          item: {
+            title: 'Homework video',
+            description: 'Quizzes in Google Forms',
+            videoItem: {
+              video: {
+                youtubeUri: 'https://www.youtube.com/watch?v=Lt5HqPvM-eI',
+              },
             },
           },
-        },
-        'location': {
-          'index': 0,
+          location: {
+            index: 0,
+          },
         },
       },
-    }],
+    ],
   };
   const updateResponse = await forms.forms.batchUpdate({
     formId: createResponse.data.formId,

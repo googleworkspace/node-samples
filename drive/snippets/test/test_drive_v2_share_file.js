@@ -29,12 +29,13 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should share files', (async () => {
+  it('should share files', async () => {
     const file = await helpers.createTestBlob();
     const ids = await shareFile(
         file.data.id,
         'xyz@workspacesamples.dev',
-        'workspacesamples.dev');
+        'workspacesamples.dev',
+    );
     expect(ids.length).toEqual(2);
-  }));
+  });
 });

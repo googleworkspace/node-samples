@@ -26,11 +26,11 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should fetch changes', (async () => {
+  it('should fetch changes', async () => {
     const startToken = await fetchStartPageToken();
     await helpers.createTestBlob();
     const token = await fetchChanges(startToken);
     expect(token).toBeDefined();
     expect(token).not.toEqual(startToken);
-  }));
+  });
 });

@@ -25,9 +25,9 @@ describe('Spreadsheet create snippet', () => {
     return helpers.cleanup();
   });
 
-  it('should create a spreadsheet', (async () => {
+  it('should create a spreadsheet', async () => {
     const id = await SheetsCreate.create('Title');
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

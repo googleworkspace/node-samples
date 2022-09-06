@@ -24,12 +24,14 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should create a slide', (async () => {
+  it('should create a slide', async () => {
     const presentationId = await helpers.createTestPresentation();
     await helpers.addSlides(presentationId, 3, 'TITLE_AND_TWO_COLUMNS');
     const pageId = 'my_page_id';
-    const response = await SlidesCreateSlide.createSlide(presentationId, pageId);
+    const response = await SlidesCreateSlide.createSlide(
+        presentationId,
+        pageId,
+    );
     expect(pageId).toEqual(response.data.replies[0].createSlide.objectId);
-  }));
+  });
 });
-

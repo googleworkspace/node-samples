@@ -24,21 +24,24 @@ async function createBulletedText(presentationId, shapeId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/presentations'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/presentations',
+  });
 
   const service = google.slides({version: 'v1', auth});
 
   // Add arrow-diamond-disc bullets to all text in the shape.
-  const requests = [{
-    createParagraphBullets: {
-      objectId: shapeId,
-      textRange: {
-        type: 'ALL',
+  const requests = [
+    {
+      createParagraphBullets: {
+        objectId: shapeId,
+        textRange: {
+          type: 'ALL',
+        },
+        bulletPreset: 'BULLET_ARROW_DIAMOND_DISC',
       },
-      bulletPreset: 'BULLET_ARROW_DIAMOND_DISC',
     },
-  }];
+  ];
 
   // Execute the requests.
   try {

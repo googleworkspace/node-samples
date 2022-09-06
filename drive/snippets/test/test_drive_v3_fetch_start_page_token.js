@@ -25,8 +25,8 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should fetch the start page token', (async () => {
+  it('should fetch the start page token', async () => {
     const token = await fetchStartPageToken();
     expect(token).toBeDefined();
-  }));
+  });
 });

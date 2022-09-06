@@ -26,10 +26,10 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should list files', (async () => {
+  it('should list files', async () => {
     const id = await uploadAppdata('../files/config.json');
     helpers.deleteFileOnCleanup(id);
     const files = await listAppdata();
     expect(files.length).toBeDefined();
-  }));
+  });
 });

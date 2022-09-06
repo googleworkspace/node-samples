@@ -24,17 +24,21 @@ describe('Spreadsheet batch update values snippet', () => {
   after(() => {
     return helpers.cleanup();
   });
-  it('should batch update spreadsheet values', (async () => {
+  it('should batch update spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
-    const result = await SheetsBatchUpdateValues.batchUpdateValues(spreadsheetId,
-        'A1:B2', 'USER_ENTERED', [
+    const result = await SheetsBatchUpdateValues.batchUpdateValues(
+        spreadsheetId,
+        'A1:B2',
+        'USER_ENTERED',
+        [
           ['A', 'B'],
           ['C', 'D'],
-        ]);
+        ],
+    );
     const responses = result.data.responses;
     expect(responses.length).toBe(1);
     expect(result.data.totalUpdatedRows).toBe(2);
     expect(result.data.totalUpdatedColumns).toBe(2);
     expect(result.data.totalUpdatedCells).toBe(4);
-  }));
+  });
 });

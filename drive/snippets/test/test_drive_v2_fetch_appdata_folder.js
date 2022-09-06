@@ -25,8 +25,8 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should fetch the app data folder', (async () => {
+  it('should fetch the app data folder', async () => {
     const id = await fetchAppdataFolder();
     expect(id).toBeDefined();
-  }));
+  });
 });

@@ -28,19 +28,22 @@ async function shareFile(fileId, targetUser, targetDomain) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
 
   const permissionIds = [];
   const permissions = [
     {
-      'type': 'user',
-      'role': 'writer',
-      'value': targetUser, // Example: 'user@example.com',
-    }, {
-      'type': 'domain',
-      'role': 'writer',
-      'value': targetDomain, // Example: 'example.com',
+      type: 'user',
+      role: 'writer',
+      value: targetUser, // Example: 'user@example.com',
+    },
+    {
+      type: 'domain',
+      role: 'writer',
+      value: targetDomain, // Example: 'example.com',
     },
   ];
 
@@ -63,7 +66,7 @@ async function shareFile(fileId, targetUser, targetDomain) {
     }
   }
   return permissionIds;
-};
+}
 // [END drive_share_file]
 
 module.exports = shareFile;
