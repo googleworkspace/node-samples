@@ -31,7 +31,7 @@ async function createFolder() {
   });
   const service = google.drive({version: 'v3', auth});
   const fileMetadata = {
-    title: 'Invoices',
+    name: 'Invoices',
     mimeType: 'application/vnd.google-apps.folder',
   };
   try {

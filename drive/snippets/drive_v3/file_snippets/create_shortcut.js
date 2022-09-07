@@ -31,7 +31,7 @@ async function createShortcut() {
   });
   const service = google.drive({version: 'v3', auth});
   const fileMetadata = {
-    title: 'Project plan',
+    name: 'Project plan',
     mimeType: 'application/vnd.google-apps.drive-sdk',
   };
 
