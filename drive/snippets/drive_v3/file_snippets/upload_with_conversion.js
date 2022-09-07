@@ -30,7 +30,7 @@ async function uploadWithConversion() {
   });
   const service = google.drive({version: 'v3', auth});
   const fileMetadata = {
-    title: 'My Report',
+    name: 'My Report',
     mimeType: 'application/vnd.google-apps.spreadsheet',
   };
   const media = {
