@@ -27,7 +27,7 @@ class Helpers {
   constructor() {
     const auth = new GoogleAuth({
       scopes: [
-        'https://www.googleapis.com/auth/spreadsheet',
+        'https://www.googleapis.com/auth/spreadsheets',
         'https://www.googleapis.com/auth/drive',
       ],
     });
