@@ -28,7 +28,7 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
     scopes: [
       'https://www.googleapis.com/auth/presentations',
       'https://www.googleapis.com/auth/drive',
-      'https://www.googleapis.com/auth/spreadsheet',
+      'https://www.googleapis.com/auth/spreadsheets',
     ],
   });
 
