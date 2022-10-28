@@ -90,7 +90,7 @@ async function authorize() {
 async function listUsers(auth) {
   const service = google.admin({version: 'directory_v1', auth});
   const res = await service.users.list({
-    customer: 'my_customer',
+    customerId: 'my_customer',
     maxResults: 10,
     orderBy: 'email',
   });
