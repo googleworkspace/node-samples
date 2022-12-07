@@ -93,7 +93,7 @@ async function listTaskLists(auth) {
     maxResults: 10,
   });
   const taskLists = res.data.items;
-  if (taskLists || taskLists.length === 0) {
+  if (!taskLists || taskLists.length === 0) {
     console.log('No task lists found.');
     return;
   }
