@@ -26,15 +26,17 @@ async function createDrive() {
   const {google} = require('googleapis');
   const uuid = require('uuid');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v3', auth});
 
   const driveMetadata = {
-    'name': 'Project resources',
+    name: 'Project resources',
   };
   const requestId = uuid.v4();
   try {
-    const Drive= await service.drives.create({
+    const Drive = await service.drives.create({
       resource: driveMetadata,
       requestId: requestId,
       fields: 'id',

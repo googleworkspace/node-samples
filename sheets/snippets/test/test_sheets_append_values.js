@@ -25,17 +25,22 @@ describe('Spreadsheet append values snippet', () => {
     return helpers.cleanup();
   });
 
-  it('should append values to a spreadsheet', (async () => {
+  it('should append values to a spreadsheet', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsAppendValues.appendValues(spreadsheetId, 'Sheet1', 'USER_ENTERED', [
-      ['A', 'B'],
-      ['C', 'D'],
-    ]);
+    const result = await SheetsAppendValues.appendValues(
+        spreadsheetId,
+        'Sheet1',
+        'USER_ENTERED',
+        [
+          ['A', 'B'],
+          ['C', 'D'],
+        ],
+    );
     expect(result.data.tableRange).toBe('Sheet1!A1:J10');
     const updates = result.data.updates;
     expect(updates.updatedRows).toBe(2);
     expect(updates.updatedColumns).toBe(2);
     expect(updates.updatedCells).toBe(4);
-  }));
+  });
 });

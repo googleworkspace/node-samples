@@ -28,10 +28,12 @@ async function touchFile(fileId, timestamp) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
   const fileMetadata = {
-    'modifiedDate': new Date().toISOString(),
+    modifiedDate: new Date().toISOString(),
   };
   fileMetadata.modifiedTime = timestamp;
   try {
@@ -47,7 +49,7 @@ async function touchFile(fileId, timestamp) {
     // TODO(developer) - Handle error
     throw err;
   }
-};
+}
 // [END drive_touch_file]
 
 module.exports = touchFile;

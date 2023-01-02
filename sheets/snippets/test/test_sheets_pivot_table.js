@@ -25,10 +25,10 @@ describe('Spreadsheet pivot table snippet', () => {
     return helpers.cleanup();
   });
 
-  it('should create pivot tables', (async () => {
+  it('should create pivot tables', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await SheetsPivotTable.pivotTable(spreadsheetId);
     expect(result).toBeDefined();
-  }));
+  });
 });

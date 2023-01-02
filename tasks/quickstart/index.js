@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,14 +93,14 @@ async function listTaskLists(auth) {
     maxResults: 10,
   });
   const taskLists = res.data.items;
-  if (taskLists || taskLists.length === 0) {
+  if (taskLists && taskLists.length) {
+    console.log('Task lists:');
+    taskLists.forEach((taskList) => {
+      console.log(`${taskList.title} (${taskList.id})`);
+    });
+  } else {
     console.log('No task lists found.');
-    return;
   }
-  console.log('Task lists:');
-  taskLists.forEach((taskList) => {
-    console.log(`${taskList.title} (${taskList.id})`);
-  });
 }
 
 authorize().then(listTaskLists).catch(console.error);

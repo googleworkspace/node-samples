@@ -23,12 +23,18 @@
  * @param {(string[])[]} _values A 2d array of values to update.
  * @return {obj} spreadsheet information
  */
-async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values) {
+async function batchUpdateValues(
+    spreadsheetId,
+    range,
+    valueInputOption,
+    _values,
+) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/spreadsheets',
+  });
 
   const service = google.sheets({version: 'v4', auth});
   let values = [
@@ -40,10 +46,12 @@ async function batchUpdateValues(spreadsheetId, range, valueInputOption, _values
   // [START_EXCLUDE silent]
   values = _values;
   // [END_EXCLUDE]
-  const data = [{
-    range,
-    values,
-  }];
+  const data = [
+    {
+      range,
+      values,
+    },
+  ];
   // Additional ranges to update ...
   const resource = {
     data,

@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +102,9 @@ async function listLoginEvents(auth) {
 
   console.log('Logins:');
   activities.forEach((activity) => {
-    console.log(`${activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`);
+    console.log(
+        `${activity.id.time}: ${activity.actor.email} (${activity.events[0].name})`,
+    );
   });
 }
 

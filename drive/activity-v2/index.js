@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +90,7 @@ async function authorize() {
 async function listDriveActivity(auth) {
   const service = google.driveactivity({version: 'v2', auth});
   const params = {
-    'pageSize': 10,
+    pageSize: 10,
   };
   const res = await service.activity.query({requestBody: params});
   const activities = res.data.activities;
@@ -105,8 +104,9 @@ async function listDriveActivity(auth) {
     const action = getActionInfo(activity.primaryActionDetail);
     const actors = activity.actors.map(getActorInfo);
     const targets = activity.targets.map(getTargetInfo);
-    console.log(`${time}: ${truncated(actors)}, ${action}, ` +
-                        `${truncated(targets)}`);
+    console.log(
+        `${time}: ${truncated(actors)}, ${action}, ` + `${truncated(targets)}`,
+    );
   });
 }
 

@@ -30,11 +30,11 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should upload to a folder', (async () => {
+  it('should upload to a folder', async () => {
     const folderId = await createFolder();
     helpers.deleteFileOnCleanup(folderId);
     const file = await uploadToFolder(folderId, '../files/photo.jpg');
     expect(file).toBeDefined();
     helpers.deleteFileOnCleanup(file);
-  }));
+  });
 });

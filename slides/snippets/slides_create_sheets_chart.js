@@ -22,12 +22,18 @@
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} sheetChartId The sheet's chart ID.
  */
-async function createSheetsChart(presentationId, pageId, spreadsheetId, sheetChartId) {
+async function createSheetsChart(
+    presentationId,
+    pageId,
+    spreadsheetId,
+    sheetChartId,
+) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/presentations'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/presentations',
+  });
 
   const service = google.slides({version: 'v1', auth});
 
@@ -39,28 +45,30 @@ async function createSheetsChart(presentationId, pageId, spreadsheetId, sheetCha
     unit: 'EMU',
   };
   const presentationChartId = 'MyEmbeddedChart';
-  const requests = [{
-    createSheetsChart: {
-      objectId: presentationChartId,
-      spreadsheetId: spreadsheetId,
-      chartId: sheetChartId,
-      linkingMode: 'LINKED',
-      elementProperties: {
-        pageObjectId: pageId,
-        size: {
-          height: emu4M,
-          width: emu4M,
-        },
-        transform: {
-          scaleX: 1,
-          scaleY: 1,
-          translateX: 100000,
-          translateY: 100000,
-          unit: 'EMU',
+  const requests = [
+    {
+      createSheetsChart: {
+        objectId: presentationChartId,
+        spreadsheetId: spreadsheetId,
+        chartId: sheetChartId,
+        linkingMode: 'LINKED',
+        elementProperties: {
+          pageObjectId: pageId,
+          size: {
+            height: emu4M,
+            width: emu4M,
+          },
+          transform: {
+            scaleX: 1,
+            scaleY: 1,
+            translateX: 100000,
+            translateY: 100000,
+            unit: 'EMU',
+          },
         },
       },
     },
-  }];
+  ];
 
   // Execute the request.
   try {

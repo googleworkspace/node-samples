@@ -28,16 +28,18 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should CreateSheetsChart', (async () => {
+  it('should CreateSheetsChart', async () => {
     const presentationId = await helpers.createTestPresentation();
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
-    const response = await SlidesCreateSheetsChart.createSheetsChart(presentationId, pageId,
+    const response = await SlidesCreateSheetsChart.createSheetsChart(
+        presentationId,
+        pageId,
         DATA_SPREADSHEET_ID,
-        CHART_ID);
+        CHART_ID,
+    );
     expect(1).toEqual(response.replies.length);
     const chartId = response.replies[0].createSheetsChart.objectId;
     expect(chartId).toBeDefined();
-  }));
+  });
 });
-

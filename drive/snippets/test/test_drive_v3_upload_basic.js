@@ -29,9 +29,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should upload a photo', (async () => {
+  it('should upload a photo', async () => {
     const id = await uploadBasic('../files/photo.jpg');
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

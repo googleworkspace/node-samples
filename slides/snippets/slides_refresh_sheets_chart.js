@@ -24,16 +24,19 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/presentations'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/presentations',
+  });
 
   const service = google.slides({version: 'v1', auth});
 
-  const requests = [{
-    refreshSheetsChart: {
-      objectId: presentationChartId,
+  const requests = [
+    {
+      refreshSheetsChart: {
+        objectId: presentationChartId,
+      },
     },
-  }];
+  ];
 
   // Execute the request.
   try {
@@ -43,7 +46,9 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
         requests,
       },
     });
-    console.log(`Refreshed a linked Sheets chart with ID: ${presentationChartId}`);
+    console.log(
+        `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
+    );
     return batchUpdateResponse.data;
   } catch (err) {
     // TODO (developer) - Handle exception

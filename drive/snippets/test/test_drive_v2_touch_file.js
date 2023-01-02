@@ -29,10 +29,10 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should update the modified time', (async () => {
+  it('should update the modified time', async () => {
     const file = await helpers.createTestBlob();
     const now = new Date().toISOString();
     const modifiedTime = await touchFile(file.data.id, now);
     expect(modifiedTime).toEqual(now);
-  }));
+  });
 });

@@ -25,14 +25,16 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should create a textbox with text', (async () => {
+  it('should create a textbox with text', async () => {
     const presentationId = await helpers.createTestPresentation();
     const ids = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = ids[0];
     const response = await SlidesCreateTextboxWithText.createTextboxWithText(
-        presentationId, pageId);
+        presentationId,
+        pageId,
+    );
     expect(response.replies.length).toEqual(2);
     const boxId = response.replies[0].createShape.objectId;
     expect(boxId).toBeDefined();
-  }));
+  });
 });

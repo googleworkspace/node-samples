@@ -25,7 +25,9 @@ async function fetchChanges() {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
   let pageToken;
   try {
@@ -44,6 +46,5 @@ async function fetchChanges() {
   }
 }
 // [END drive_fetch_changes]
-
 
 module.exports = fetchChanges;

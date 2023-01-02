@@ -25,10 +25,12 @@ describe('Spreadsheet conditional formatting snippet', () => {
     return helpers.cleanup();
   });
 
-  it('should conditionally format', (async () => {
+  it('should conditionally format', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsConditionalFormatting.conditionalFormatting(spreadsheetId);
+    const result = await SheetsConditionalFormatting.conditionalFormatting(
+        spreadsheetId,
+    );
     expect(result.data.replies.length).toBe(2);
-  }));
+  });
 });

@@ -17,9 +17,7 @@
 
 const path = require('path');
 const google = require('@googleapis/forms');
-const {
-  authenticate,
-} = require('@google-cloud/local-auth');
+const {authenticate} = require('@google-cloud/local-auth');
 
 const formID = '<YOUR_FORM_ID>';
 

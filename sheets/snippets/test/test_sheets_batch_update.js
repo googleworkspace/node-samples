@@ -25,14 +25,18 @@ describe('Spreadsheet batch update snippet', () => {
     return helpers.cleanup();
   });
 
-  it('should batch update a spreadsheet', (async () => {
+  it('should batch update a spreadsheet', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsBatchUpdate.batchUpdate(spreadsheetId,
-        'New Title', 'Hello', 'Goodbye');
+    const result = await SheetsBatchUpdate.batchUpdate(
+        spreadsheetId,
+        'New Title',
+        'Hello',
+        'Goodbye',
+    );
     const replies = result.data.replies;
     expect(replies.length).toBe(2);
     const findReplaceResponse = replies[1].findReplace;
     expect(findReplaceResponse.occurrencesChanged).toBe(100);
-  }));
+  });
 });

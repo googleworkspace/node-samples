@@ -1,0 +1,116 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/adminSDK/directory"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/adminSDK/reports"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/adminSDK/reseller"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/apps-script/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/calendar/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/classroom/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/docs/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/drive/activity-v2"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/drive/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/drive/snippets"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/forms/snippets"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/gmail/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/people/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/sheets/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/sheets/snippets"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/slides/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/slides/snippets"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+  - package-ecosystem: "npm"
+    directory: "/tasks/quickstart"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"

@@ -27,11 +27,13 @@ async function uploadToFolder(folderId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
   const fileMetadata = {
-    'title': 'photo.jpg',
-    'parents': [{id: folderId}],
+    title: 'photo.jpg',
+    parents: [{id: folderId}],
   };
   const media = {
     mimeType: 'image/jpeg',

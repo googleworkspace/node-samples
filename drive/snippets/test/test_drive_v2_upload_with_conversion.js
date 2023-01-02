@@ -29,9 +29,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should upload and convert a document', (async () => {
+  it('should upload and convert a document', async () => {
     const id = await uploadWithConversion('../files/reports.csv');
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

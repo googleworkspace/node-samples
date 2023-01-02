@@ -26,11 +26,13 @@ async function uploadWithConversion() {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
   const fileMetadata = {
-    'title': 'My Report',
-    'mimeType': 'application/vnd.google-apps.spreadsheet',
+    title: 'My Report',
+    mimeType: 'application/vnd.google-apps.spreadsheet',
   };
   const media = {
     mimeType: 'text/csv',

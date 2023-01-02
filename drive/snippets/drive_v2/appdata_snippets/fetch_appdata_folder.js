@@ -25,7 +25,9 @@ async function fetchAppdataFolder() {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive.appdata',
+  });
   const service = google.drive({version: 'v2', auth});
   try {
     const file = await service.files.get({

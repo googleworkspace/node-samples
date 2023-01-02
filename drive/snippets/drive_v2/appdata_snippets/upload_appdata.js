@@ -26,13 +26,17 @@ async function uploadAppdata() {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive.appdata',
+  });
   const service = google.drive({version: 'v2', auth});
   const fileMetadata = {
-    'title': 'config.json',
-    'parents': [{
-      'id': 'appDataFolder',
-    }],
+    title: 'config.json',
+    parents: [
+      {
+        id: 'appDataFolder',
+      },
+    ],
   };
   const media = {
     mimeType: 'application/json',
@@ -53,6 +57,4 @@ async function uploadAppdata() {
 }
 // [END drive_upload_appdata]
 
-
 module.exports = uploadAppdata;
-

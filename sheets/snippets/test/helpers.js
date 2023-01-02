@@ -25,11 +25,12 @@ class Helpers {
    * Creates the Google API Service
    */
   constructor() {
-    const auth = new GoogleAuth(
-        {scopes: [
-          'https://www.googleapis.com/auth/spreadsheet',
-          'https://www.googleapis.com/auth/drive',
-        ]});
+    const auth = new GoogleAuth({
+      scopes: [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive',
+      ],
+    });
     this.sheetsService = google.sheets({version: 'v4', auth});
     this.driveService = google.drive({version: 'v3', auth});
     this.filesToDelete = [];
@@ -55,8 +56,11 @@ class Helpers {
    * @return {Promise} returns list of deletion promises
    */
   cleanup() {
-    return Promise.all(this.filesToDelete.map((fileId) =>
-      this.driveService.files.delete({fileId})));
+    return Promise.all(
+        this.filesToDelete.map((fileId) =>
+          this.driveService.files.delete({fileId}),
+        ),
+    );
   }
 
   /**
@@ -85,23 +89,25 @@ class Helpers {
     await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
       resource: {
-        requests: [{
-          repeatCell: {
-            range: {
-              sheetId: 0,
-              startRowIndex: 0,
-              endRowIndex: 10,
-              startColumnIndex: 0,
-              endColumnIndex: 10,
-            },
-            cell: {
-              userEnteredValue: {
-                stringValue: 'Hello',
+        requests: [
+          {
+            repeatCell: {
+              range: {
+                sheetId: 0,
+                startRowIndex: 0,
+                endRowIndex: 10,
+                startColumnIndex: 0,
+                endColumnIndex: 10,
               },
+              cell: {
+                userEnteredValue: {
+                  stringValue: 'Hello',
+                },
+              },
+              fields: 'userEnteredValue',
             },
-            fields: 'userEnteredValue',
           },
-        }],
+        ],
       },
     });
     return spreadsheetId;

@@ -26,10 +26,12 @@ async function uploadBasic() {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v2', auth});
   const fileMetadata = {
-    'title': 'photo.jpg',
+    title: 'photo.jpg',
   };
   const media = {
     mimeType: 'image/jpeg',

@@ -15,7 +15,6 @@
  */
 // [START drive_fetch_appdata_folder]
 
-
 /**
  * List out application data folder and prints folder ID
  * */
@@ -26,14 +25,15 @@ async function fetchAppdataFolder() {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive.appdata'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive.appdata',
+  });
   const service = google.drive({version: 'v3', auth});
   try {
-    const file = await service.files.get(
-        {
-          fileId: 'appDataFolder',
-          fields: 'id',
-        });
+    const file = await service.files.get({
+      fileId: 'appDataFolder',
+      fields: 'id',
+    });
     console.log('File Id:', file.data.id);
     return file.data.id;
   } catch (err) {

@@ -24,8 +24,9 @@ async function conditionalFormatting(spreadsheetId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth(
-      {scopes: 'https://www.googleapis.com/auth/spreadsheet'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/spreadsheets',
+  });
 
   const service = google.sheets({version: 'v4', auth});
   const myRange = {
@@ -35,39 +36,42 @@ async function conditionalFormatting(spreadsheetId) {
     startColumnIndex: 0,
     endColumnIndex: 4,
   };
-  const requests = [{
-    addConditionalFormatRule: {
-      rule: {
-        ranges: [myRange],
-        booleanRule: {
-          condition: {
-            type: 'CUSTOM_FORMULA',
-            values: [{userEnteredValue: '=GT($D2,median($D$2:$D$11))'}],
-          },
-          format: {
-            textFormat: {foregroundColor: {red: 0.8}},
-          },
-        },
-      },
-      index: 0,
-    },
-  }, {
-    addConditionalFormatRule: {
-      rule: {
-        ranges: [myRange],
-        booleanRule: {
-          condition: {
-            type: 'CUSTOM_FORMULA',
-            values: [{userEnteredValue: '=LT($D2,median($D$2:$D$11))'}],
-          },
-          format: {
-            backgroundColor: {red: 1, green: 0.4, blue: 0.4},
+  const requests = [
+    {
+      addConditionalFormatRule: {
+        rule: {
+          ranges: [myRange],
+          booleanRule: {
+            condition: {
+              type: 'CUSTOM_FORMULA',
+              values: [{userEnteredValue: '=GT($D2,median($D$2:$D$11))'}],
+            },
+            format: {
+              textFormat: {foregroundColor: {red: 0.8}},
+            },
           },
         },
+        index: 0,
       },
-      index: 0,
     },
-  }];
+    {
+      addConditionalFormatRule: {
+        rule: {
+          ranges: [myRange],
+          booleanRule: {
+            condition: {
+              type: 'CUSTOM_FORMULA',
+              values: [{userEnteredValue: '=LT($D2,median($D$2:$D$11))'}],
+            },
+            format: {
+              backgroundColor: {red: 1, green: 0.4, blue: 0.4},
+            },
+          },
+        },
+        index: 0,
+      },
+    },
+  ];
   const resource = {
     requests,
   };

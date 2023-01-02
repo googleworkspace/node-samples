@@ -27,7 +27,9 @@ async function downloadFile(realFileId) {
   const {GoogleAuth} = require('google-auth-library');
   const {google} = require('googleapis');
 
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v3', auth});
 
   fileId = realFileId;
@@ -42,7 +44,7 @@ async function downloadFile(realFileId) {
     // TODO(developer) - Handle error
     throw err;
   }
-};
+}
 // [END drive_download_file]
 
 module.exports = downloadFile;

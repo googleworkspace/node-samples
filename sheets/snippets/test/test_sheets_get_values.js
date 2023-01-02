@@ -25,12 +25,12 @@ describe('Spreadsheet get values snippet', () => {
     return helpers.cleanup();
   });
 
-  it('should get spreadsheet values', (async () => {
+  it('should get spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await SheetsGetValues.getValues(spreadsheetId, 'A1:C2');
     const values = result.data.values;
     expect(values.length).toBe(2);
     expect(values[0].length).toBe(3);
-  }));
+  });
 });

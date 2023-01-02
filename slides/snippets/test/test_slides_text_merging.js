@@ -26,11 +26,13 @@ describe('Presentation snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should merge text', (async () => {
+  it('should merge text', async () => {
     let sheetId = await helpers.createTestSpreadsheet();
     sheetId = await helpers.populateValues(sheetId);
-    const responses = await SlidesTextMerging.textMerging(TEMPLATE_PRESENTATION_ID,
-        sheetId);
+    const responses = await SlidesTextMerging.textMerging(
+        TEMPLATE_PRESENTATION_ID,
+        sheetId,
+    );
     // console.log(responses);
     expect(3).toEqual(responses.replies.length);
     let numReplacements = 0;
@@ -38,5 +40,5 @@ describe('Presentation snippets', () => {
       numReplacements += responses.replies[i].replaceAllText.occurrencesChanged;
     }
     expect(4).toEqual(numReplacements);
-  }));
+  });
 });

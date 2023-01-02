@@ -25,9 +25,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should upload a file', (async () => {
+  it('should upload a file', async () => {
     const id = await uploadAppdata('../files/config.json');
     expect(id).toBeDefined();
     helpers.deleteFileOnCleanup(id);
-  }));
+  });
 });

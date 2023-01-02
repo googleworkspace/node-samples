@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +99,9 @@ async function listSlides(auth) {
   }
   console.log('The presentation contains %s slides:', slides.length);
   res.data.slides.forEach((slide, i) => {
-    console.log(`- Slide #${i + 1} contains ${slide.pageElements.length} elements.`);
+    console.log(
+        `- Slide #${i + 1} contains ${slide.pageElements.length} elements.`,
+    );
   });
 }
 authorize().then(listSlides).catch(console.error);

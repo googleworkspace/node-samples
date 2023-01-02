@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +25,9 @@ class Helpers {
    * Creates the Google API Service
    */
   constructor() {
-    const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+    const auth = new GoogleAuth({
+      scopes: 'https://www.googleapis.com/auth/drive',
+    });
     this.service = google.drive({version: 'v3', auth});
     this.filesToDelete = [];
   }
@@ -51,8 +52,9 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   cleanup() {
-    return Promise.all(this.filesToDelete.map((fileId) =>
-      this.service.files.delete({fileId})));
+    return Promise.all(
+        this.filesToDelete.map((fileId) => this.service.files.delete({fileId})),
+    );
   }
 
   /**
@@ -77,13 +79,16 @@ class Helpers {
    * @return {Promise} A promise to return the Google Drive file.
    */
   createTestDocument() {
-    return this.createFile({
-      name: 'Test Document',
-      mimeType: 'application/vnd.google-apps.document',
-    }, {
-      mimeType: 'text/plain',
-      body: fs.createReadStream('files/document.txt'),
-    });
+    return this.createFile(
+        {
+          name: 'Test Document',
+          mimeType: 'application/vnd.google-apps.document',
+        },
+        {
+          mimeType: 'text/plain',
+          body: fs.createReadStream('files/document.txt'),
+        },
+    );
   }
 
   /**
@@ -91,12 +96,15 @@ class Helpers {
    * @return {Promise} A promise to return the Google Drive file.
    */
   async createTestBlob() {
-    const file = await this.createFile({
-      name: 'photo.jpg',
-    }, {
-      mimeType: 'image/jpeg',
-      body: fs.createReadStream('files/photo.jpg'),
-    });
+    const file = await this.createFile(
+        {
+          name: 'photo.jpg',
+        },
+        {
+          mimeType: 'image/jpeg',
+          body: fs.createReadStream('files/photo.jpg'),
+        },
+    );
 
     return file;
   }

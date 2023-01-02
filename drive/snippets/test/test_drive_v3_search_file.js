@@ -29,9 +29,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should search files', (async () => {
+  it('should search files', async () => {
     await helpers.createTestBlob();
     const files = await searchFiles();
     expect(files.length).toBeDefined();
-  }));
+  });
 });

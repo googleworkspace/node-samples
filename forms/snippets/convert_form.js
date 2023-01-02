@@ -17,9 +17,7 @@
 
 const path = require('path');
 const google = require('@googleapis/forms');
-const {
-  authenticate,
-} = require('@google-cloud/local-auth');
+const {authenticate} = require('@google-cloud/local-auth');
 
 async function runSample(query) {
   const authClient = await authenticate({
@@ -31,8 +29,8 @@ async function runSample(query) {
     auth: authClient,
   });
   const newForm = {
-    'info': {
-      'title': 'Creating a new form for batchUpdate in Node',
+    info: {
+      title: 'Creating a new form for batchUpdate in Node',
     },
   };
   const createResponse = await forms.forms.create({
@@ -42,16 +40,18 @@ async function runSample(query) {
 
   // Request body to convert form to a quiz
   const updateRequest = {
-    'requests': [{
-      'updateSettings': {
-        'settings': {
-          'quizSettings': {
-            'isQuiz': true,
+    requests: [
+      {
+        updateSettings: {
+          settings: {
+            quizSettings: {
+              isQuiz: true,
+            },
           },
+          updateMask: 'quizSettings.isQuiz',
         },
-        'updateMask': 'quizSettings.isQuiz',
       },
-    }],
+    ],
   };
   const res = await forms.forms.batchUpdate({
     formId: createResponse.data.formId,

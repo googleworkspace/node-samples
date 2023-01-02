@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -83,7 +82,6 @@ async function authorize() {
   return client;
 }
 
-
 /**
  * Creates a new script project, upload a file, and log the script's URL.
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
@@ -99,16 +97,19 @@ async function callAppsScript(auth) {
     scriptId: res.data.scriptId,
     auth,
     resource: {
-      files: [{
-        name: 'hello',
-        type: 'SERVER_JS',
-        source: 'function helloWorld() {\n  console.log("Hello, world!");\n}',
-      }, {
-        name: 'appsscript',
-        type: 'JSON',
-        source: '{\"timeZone\":\"America/New_York\",\"exceptionLogging\":' +
-          '\"CLOUD\"}',
-      }],
+      files: [
+        {
+          name: 'hello',
+          type: 'SERVER_JS',
+          source: 'function helloWorld() {\n  console.log("Hello, world!");\n}',
+        },
+        {
+          name: 'appsscript',
+          type: 'JSON',
+          source:
+            '{"timeZone":"America/New_York","exceptionLogging":' + '"CLOUD"}',
+        },
+      ],
     },
   });
   console.log(`https://script.google.com/d/${res.data.scriptId}/edit`);

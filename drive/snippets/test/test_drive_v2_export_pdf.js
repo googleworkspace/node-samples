@@ -18,7 +18,6 @@ const {expect} = require('expect');
 const Helpers = require('./helpers');
 const exportPdf = require('../drive_v3/file_snippets/export_pdf');
 
-
 describe('Drive snippets', () => {
   const helpers = new Helpers();
 
@@ -26,9 +25,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  it('should export a PDF', (async () => {
+  it('should export a PDF', async () => {
     const file = await helpers.createTestDocument();
     const result = await exportPdf(file.data.id);
     expect(result.status).toEqual(200);
-  }));
+  });
 });

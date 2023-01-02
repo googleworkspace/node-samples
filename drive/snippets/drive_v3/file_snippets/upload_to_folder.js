@@ -26,14 +26,16 @@ async function uploadToFolder(folderId) {
   const {google} = require('googleapis');
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-  const auth = new GoogleAuth({scopes: 'https://www.googleapis.com/auth/drive'});
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
   const service = google.drive({version: 'v3', auth});
 
   // TODO(developer): set folder Id
   // folderId = '1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7';
   const fileMetadata = {
-    'title': 'photo.jpg',
-    'parents': [folderId],
+    name: 'photo.jpg',
+    parents: [folderId],
   };
   const media = {
     mimeType: 'image/jpeg',
