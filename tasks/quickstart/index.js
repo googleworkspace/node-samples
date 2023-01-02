@@ -93,14 +93,14 @@ async function listTaskLists(auth) {
     maxResults: 10,
   });
   const taskLists = res.data.items;
-  if (taskLists || taskLists.length === 0) {
+  if (taskLists && taskLists.length) {
+    console.log('Task lists:');
+    taskLists.forEach((taskList) => {
+      console.log(`${taskList.title} (${taskList.id})`);
+    });
+  } else {
     console.log('No task lists found.');
-    return;
   }
-  console.log('Task lists:');
-  taskLists.forEach((taskList) => {
-    console.log(`${taskList.title} (${taskList.id})`);
-  });
 }
 
 authorize().then(listTaskLists).catch(console.error);
