@@ -35,7 +35,7 @@ async function createFolder() {
   };
   try {
     const file = await service.files.insert({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       fields: 'id',
     });
     console.log('Folder Id:', file.data.id);

@@ -37,7 +37,7 @@ async function createDrive() {
   const requestId = uuid.v4();
   try {
     const Drive = await service.drives.create({
-      resource: driveMetadata,
+      requestBody: driveMetadata,
       requestId: requestId,
       fields: 'id',
     });

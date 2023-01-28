@@ -65,7 +65,7 @@ async function createImage(presentationId, pageId) {
   try {
     const response = await service.presentations.batchUpdate({
       presentationId,
-      resource: {requests},
+      requestBody: {requests},
     });
     const createImageResponse = response.data.replies;
     console.log(

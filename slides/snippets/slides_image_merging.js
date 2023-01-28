@@ -42,7 +42,7 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
   try {
     const driveResponse = await driveService.files.copy({
       fileId: templatePresentationId,
-      resource: {
+      requestBody: {
         name: copyTitle,
       },
     });
@@ -75,7 +75,7 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     // Execute the requests for this presentation.
     const batchUpdateResponse = await slidesService.presentations.batchUpdate({
       presentationId: presentationCopyId,
-      resource: {
+      requestBody: {
         requests,
       },
     });

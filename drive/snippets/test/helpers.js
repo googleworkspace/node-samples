@@ -65,7 +65,7 @@ class Helpers {
    */
   async createFile(fileMetadata, media) {
     const file = await this.service.files.create({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       media,
       fields: 'id',
     });

@@ -100,7 +100,7 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
       const batchUpdateResponse = await slidesService.presentations.batchUpdate(
           {
             presentationId: presentationCopyId,
-            resource: {
+            requestBody: {
               requests,
             },
           },

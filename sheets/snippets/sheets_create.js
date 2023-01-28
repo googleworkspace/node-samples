@@ -29,14 +29,14 @@ async function create(title) {
   });
 
   const service = google.sheets({version: 'v4', auth});
-  const resource = {
+  const requestBody = {
     properties: {
       title,
     },
   };
   try {
     const spreadsheet = await service.spreadsheets.create({
-      resource,
+      requestBody,
       fields: 'spreadsheetId',
     });
     console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);

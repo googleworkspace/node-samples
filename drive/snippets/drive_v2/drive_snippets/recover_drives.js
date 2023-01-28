@@ -53,7 +53,7 @@ async function recoverDrives(userEmail) {
           drive.id,
       );
       await service.permissions.insert({
-        resource: newOrganizerPermission,
+        requestBody: newOrganizerPermission,
         fileId: drive.id,
         useDomainAdminAccess: true,
         supportsAllDrives: true,

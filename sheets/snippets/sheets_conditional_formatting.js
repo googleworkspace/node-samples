@@ -72,13 +72,13 @@ async function conditionalFormatting(spreadsheetId) {
       },
     },
   ];
-  const resource = {
+  const requestBody = {
     requests,
   };
   try {
     const response = await service.spreadsheets.batchUpdate({
       spreadsheetId,
-      resource,
+      requestBody,
     });
     console.log(`${response.data.replies.length} cells updated.`);
     return response;

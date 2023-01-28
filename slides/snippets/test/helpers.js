@@ -99,7 +99,7 @@ class Helpers {
     }
     await this.slidesService.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
@@ -149,7 +149,7 @@ class Helpers {
     ];
     const res = await this.slidesService.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
@@ -202,7 +202,7 @@ class Helpers {
 
     const res = await this.slidesService.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
@@ -215,7 +215,7 @@ class Helpers {
    */
   async createTestSpreadsheet() {
     const res = await this.sheetsService.spreadsheets.create({
-      resource: {
+      requestBody: {
         properties: {
           title: 'Test Spreadsheet',
         },
@@ -235,7 +235,7 @@ class Helpers {
   async populateValues(spreadsheetId) {
     await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
-      resource: {
+      requestBody: {
         requests: [
           {
             repeatCell: {

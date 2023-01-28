@@ -40,7 +40,7 @@ async function uploadWithConversion() {
 
   try {
     const file = await service.files.create({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       media: media,
       fields: 'id',
     });

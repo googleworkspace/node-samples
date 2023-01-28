@@ -39,10 +39,10 @@ async function pivotTable(spreadsheetId) {
         addSheet: {},
       },
     ];
-    let resource = {requests};
+    let requestBody = {requests};
     let response = await service.spreadsheets.batchUpdate({
       spreadsheetId,
-      resource,
+      requestBody,
     });
     const sourceSheetId = response.data.replies[0].addSheet.properties.sheetId;
     const targetSheetId = response.data.replies[1].addSheet.properties.sheetId;
@@ -95,12 +95,12 @@ async function pivotTable(spreadsheetId) {
         },
       },
     ];
-    resource = {
+    requestBody = {
       requests,
     };
     response = service.spreadsheets.batchUpdate({
       spreadsheetId,
-      resource,
+      requestBody,
     });
     return response;
   } catch (err) {

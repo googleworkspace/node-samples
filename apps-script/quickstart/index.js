@@ -89,14 +89,14 @@ async function authorize() {
 async function callAppsScript(auth) {
   const script = google.script({version: 'v1', auth});
   let res = await script.projects.create({
-    resource: {
+    requestBody: {
       title: 'My Script',
     },
   });
   res = await script.projects.updateContent({
     scriptId: res.data.scriptId,
     auth,
-    resource: {
+    requestBody: {
       files: [
         {
           name: 'hello',

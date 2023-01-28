@@ -33,10 +33,10 @@ async function callAppsScript() {
   const script = google.script({version: 'v1', auth});
 
   try {
-    // Make the API request. The request object is included here as 'resource'.
+    // Make the API request. The request object is included here as 'requestBody'.
     const resp = await script.scripts.run({
       auth: auth,
-      resource: {
+      requestBody: {
         function: 'getFoldersUnderRoot',
       },
       scriptId: scriptId,

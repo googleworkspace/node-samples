@@ -41,7 +41,7 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
   // [START_EXCLUDE silent]
   values = _values;
   // [END_EXCLUDE]
-  const resource = {
+  const requestBody = {
     values,
   };
   try {
@@ -49,7 +49,7 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
       spreadsheetId,
       range,
       valueInputOption,
-      resource,
+      requestBody,
     });
     console.log('%d cells updated.', result.data.updatedCells);
     return result;

@@ -53,7 +53,7 @@ async function shareFile(fileId, targetUserEmail, targetDomainName) {
   for (const permission of permissions) {
     try {
       const result = await service.permissions.create({
-        resource: permission,
+        requestBody: permission,
         fileId: fileId,
         fields: 'id',
       });

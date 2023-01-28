@@ -44,7 +44,7 @@ async function uploadAppdata() {
   };
   try {
     const file = await service.files.insert({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       media: media,
       fields: 'id',
     });
