@@ -30,7 +30,7 @@ async function uploadBasic() {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const service = google.drive({version: 'v3', auth});
-  const fileMetadata = {
+  const requestBody = {
     name: 'photo.jpg',
     fields: 'id',
   };
