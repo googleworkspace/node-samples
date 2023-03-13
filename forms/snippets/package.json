@@ -9,6 +9,6 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "googleapis": "^105.0.0"
+    "googleapis": "^112.0.0"
   }
 }
