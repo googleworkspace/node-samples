@@ -4,7 +4,7 @@
   "description": "A simple Node.js command-line application that makes requests to the Google Drive API.",
   "private": true,
   "dependencies": {
-    "@google-cloud/local-auth": "^2.1.0",
+    "@google-cloud/local-auth": "^2.1.1",
     "googleapis": "^105.0.0"
   },
   "devDependencies": {},
