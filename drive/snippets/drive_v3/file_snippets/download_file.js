@@ -32,7 +32,7 @@ async function downloadFile(realFileId) {
   });
   const service = google.drive({version: 'v3', auth});
 
-  fileId = realFileId;
+  const fileId = realFileId;
   try {
     const file = await service.files.get({
       fileId: fileId,
