@@ -1,0 +1,14 @@
+{
+  "name": "sheets-api-snippets",
+  "version": "1.0.0",
+  "description": "Code snippets for the Sheets API",
+  "private": true,
+  "scripts": {},
+  "engines": {
+    "node": ">=14"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "googleapis": "^105.0.0"
+  }
+}

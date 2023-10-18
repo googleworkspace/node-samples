@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const Promise = require('promise');
-const googleapis = require('googleapis');
-const GoogleAuth = require('google-auth-library');
+
+const {GoogleAuth} = require('google-auth-library');
+const {google} = require('googleapis');
 
 /**
  * Helper functions for Google Sheets
@@ -26,31 +25,15 @@ class Helpers {
    * Creates the Google API Service
    */
   constructor() {
-    const client = this.buildAuthClient();
-    this.sheetsService = client.then((auth) => googleapis.sheets({version: 'v4', auth}));
-    this.driveService = client.then((auth) => googleapis.drive({version: 'v3', auth}));
-    this.filesToDelete = [];
-  }
-
-  /**
-   * Builds the Google Auth Client
-   * @return {Promise} A promise to return the auth client.
-   */
-  buildAuthClient() {
-    return new Promise((resolve, reject) => {
-      (new GoogleAuth()).getApplicationDefault((err, authClient) => {
-        if (err) return reject(err);
-        let scopes = [
-          'https://www.googleapis.com/auth/drive',
-          'https://www.googleapis.com/auth/spreadsheets',
-        ];
-        if (authClient.createScopedRequired &&
-            authClient.createScopedRequired()) {
-          authClient = authClient.createScoped(scopes);
-        };
-        resolve(authClient);
-      });
+    const auth = new GoogleAuth({
+      scopes: [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive',
+      ],
     });
+    this.sheetsService = google.sheets({version: 'v4', auth});
+    this.driveService = google.drive({version: 'v3', auth});
+    this.filesToDelete = [];
   }
 
   /**
@@ -70,35 +53,31 @@ class Helpers {
 
   /**
    * Cleans up the test suite.
-   * @return {Promise} A promise to return the Google API service.
+   * @return {Promise} returns list of deletion promises
    */
   cleanup() {
-    return this.driveService.then((drive) => {
-      this.filesToDelete.map((fileId) => drive.files.delete({fileId}));
-    });
+    return Promise.all(
+        this.filesToDelete.map((fileId) =>
+          this.driveService.files.delete({fileId}),
+        ),
+    );
   }
 
   /**
    * Creates a test Spreadsheet.
    * @return {Promise} A promise to return the Google API service.
    */
-  createTestSpreadsheet() {
-    return this.sheetsService.then((sheets) => {
-      const createSpreadsheet = Promise.denodeify(sheets.spreadsheets.create)
-         .bind(sheets.spreadsheets);
-      return createSpreadsheet({
-        resource: {
-          properties: {
-            title: 'Test Spreadsheet',
-          },
+  async createTestSpreadsheet() {
+    const res = await this.sheetsService.spreadsheets.create({
+      resource: {
+        properties: {
+          title: 'Test Spreadsheet',
         },
-        fields: 'spreadsheetId',
-      })
-      .then((spreadsheet) => {
-        this.deleteFileOnCleanup(spreadsheet.spreadsheetId);
-        return spreadsheet.spreadsheetId;
-      });
+      },
+      fields: 'spreadsheetId',
     });
+    this.deleteFileOnCleanup(res.data.spreadsheetId);
+    return res.data.spreadsheetId;
   }
 
   /**
@@ -106,14 +85,12 @@ class Helpers {
    * @param {string} spreadsheetId The spreadsheet ID.
    * @return {Promise} A promise to return the Google API service.
    */
-  populateValues(spreadsheetId) {
-    return this.sheetsService.then((sheets) => {
-      const batchUpdate = Promise.denodeify(sheets.spreadsheets.batchUpdate)
-           .bind(sheets.spreadsheets);
-      return batchUpdate({
-        spreadsheetId,
-        resource: {
-          requests: [{
+  async populateValues(spreadsheetId) {
+    await this.sheetsService.spreadsheets.batchUpdate({
+      spreadsheetId,
+      resource: {
+        requests: [
+          {
             repeatCell: {
               range: {
                 sheetId: 0,
@@ -129,11 +106,11 @@ class Helpers {
               },
               fields: 'userEnteredValue',
             },
-          }],
-        },
-      })
-      .then(() => spreadsheetId);
+          },
+        ],
+      },
     });
+    return spreadsheetId;
   }
 }
 

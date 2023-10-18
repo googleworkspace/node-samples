@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const Promise = require('promise');
-const {googleapis} = require('googleapis');
-const GoogleAuth = require('google-auth-library');
+const {GoogleAuth} = require('google-auth-library');
+const {google} = require('googleapis');
 const fs = require('fs');
 
 /**
@@ -27,30 +25,11 @@ class Helpers {
    * Creates the Google API Service
    */
   constructor() {
-    const client = this.buildAuthClient();
-    this.service = client.then((auth) => googleapis.drive({version: 'v3', auth}));
-    this.filesToDelete = [];
-  }
-
-  /**
-   * Builds the Google Auth Service.
-   * @return {Promise} A promise to return the Google API service.
-   */
-  buildAuthClient() {
-    return new Promise((resolve, reject) => {
-      (new GoogleAuth()).getApplicationDefault((err, authClient) => {
-        if (err) return reject(err);
-        const scopes = [
-          'https://www.googleapis.com/auth/drive',
-          'https://www.googleapis.com/auth/drive.appdata',
-        ];
-        if (authClient.createScopedRequired &&
-            authClient.createScopedRequired()) {
-          authClient = authClient.createScoped(scopes);
-        }
-        resolve(authClient);
-      });
+    const auth = new GoogleAuth({
+      scopes: 'https://www.googleapis.com/auth/drive',
     });
+    this.service = google.drive({version: 'v3', auth});
+    this.filesToDelete = [];
   }
 
   /**
@@ -73,13 +52,9 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   cleanup() {
-    return this.service.then((drive) => {
-      const deleteFile = Promise.denodeify(drive.files.delete).bind(drive.files);
-      return this.filesToDelete.map((id) => {
-        console.log('Cleaning up file', id);
-        return deleteFile({fileId: id});
-      });
-    });
+    return Promise.all(
+        this.filesToDelete.map((fileId) => this.service.files.delete({fileId})),
+    );
   }
 
   /**
@@ -88,18 +63,15 @@ class Helpers {
    * @param {Media} media A media object
    * @return {Promise} A promise to return the Google API service.
    */
-  createFile(fileMetadata, media) {
-    return this.service.then((drive) => {
-      const createFile = Promise.denodeify(drive.files.create).bind(drive.files);
-      return createFile({
-        resource: fileMetadata,
-        media,
-        fields: 'id',
-      }).then((file) => {
-        this.deleteFileOnCleanup(file.id);
-        return file;
-      });
+  async createFile(fileMetadata, media) {
+    const file = await this.service.files.create({
+      resource: fileMetadata,
+      media,
+      fields: 'id',
     });
+
+    this.deleteFileOnCleanup(file.data.id);
+    return file;
   }
 
   /**
@@ -107,26 +79,34 @@ class Helpers {
    * @return {Promise} A promise to return the Google Drive file.
    */
   createTestDocument() {
-    return this.createFile({
-      name: 'Test Document',
-      mimeType: 'application/vnd.google-apps.document',
-    }, {
-      mimeType: 'text/plain',
-      body: fs.createReadStream('files/document.txt'),
-    });
+    return this.createFile(
+        {
+          name: 'Test Document',
+          mimeType: 'application/vnd.google-apps.document',
+        },
+        {
+          mimeType: 'text/plain',
+          body: fs.createReadStream('files/document.txt'),
+        },
+    );
   }
 
   /**
    * Uploads a test image to Google Drive.
    * @return {Promise} A promise to return the Google Drive file.
    */
-  createTestBlob() {
-    return this.createFile({
-      name: 'photo.jpg',
-    }, {
-      mimeType: 'image/jpeg',
-      body: fs.createReadStream('files/photo.jpg'),
-    });
+  async createTestBlob() {
+    const file = await this.createFile(
+        {
+          name: 'photo.jpg',
+        },
+        {
+          mimeType: 'image/jpeg',
+          body: fs.createReadStream('files/photo.jpg'),
+        },
+    );
+
+    return file;
   }
 }
 

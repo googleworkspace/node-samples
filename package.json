@@ -1,9 +1,8 @@
 {
-  "name": "gsuite-node-samples",
+  "name": "@gsuite/samples",
   "version": "1.0.0",
   "description": "Node.js samples for [G Suite API](https://developers.google.com/gsuite/) docs.",
   "license": "MIT",
-  "private": true,
   "author": "Grant Timmerman",
   "keywords": [
     "G Suite",
@@ -15,12 +14,12 @@
     "API"
   ],
   "devDependencies": {
-    "eslint": "^4.17.0",
-    "eslint-config-google": "^0.9.1",
-    "eslint-plugin-async-await": "0.0.0"
+    "eslint": "^8.14.0",
+    "eslint-config-google": "^0.14"
   },
   "scripts": {
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js"
   },
   "eslintIgnore": [
     "getFoldersUnderRoot.js",

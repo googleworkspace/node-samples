@@ -1,6 +1,5 @@
 /**
- * @license
- * Copyright Google Inc.
+ * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +15,32 @@
  */
 // [START apps_script_api_execute]
 /**
- * Call an Apps Script function to list the folders in the user's root
- * Drive folder.
+ * Call an Apps Script function to list the folders in the user's root Drive
+ * folder.
  *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
-function callAppsScript(auth) { // eslint-disable-line no-unused-vars
-  const scriptId = 'ENTER_YOUR_SCRIPT_ID_HERE';
-  const script = google.script('v1');
+async function callAppsScript() {
+  const scriptId = '1xGOh6wCm7hlIVSVPKm0y_dL-YqetspS5DEVmMzaxd_6AAvI-_u8DSgBT';
 
-  // Make the API request. The request object is included here as 'resource'.
-  script.scripts.run({
-    auth: auth,
-    resource: {
-      function: 'getFoldersUnderRoot',
-    },
-    scriptId: scriptId,
-  }, function(err, resp) {
-    if (err) {
-      // The API encountered a problem before the script started executing.
-      console.log('The API returned an error: ' + err);
-      return;
-    }
+  const {GoogleAuth} = require('google-auth-library');
+  const {google} = require('googleapis');
+
+  // Get credentials and build service
+  // TODO (developer) - Use appropriate auth mechanism for your app
+  const auth = new GoogleAuth({
+    scopes: 'https://www.googleapis.com/auth/drive',
+  });
+  const script = google.script({version: 'v1', auth});
+
+  try {
+    // Make the API request. The request object is included here as 'resource'.
+    const resp = await script.scripts.run({
+      auth: auth,
+      resource: {
+        function: 'getFoldersUnderRoot',
+      },
+      scriptId: scriptId,
+    });
     if (resp.error) {
       // The API executed, but the script returned an error.
 
@@ -70,6 +73,11 @@ function callAppsScript(auth) { // eslint-disable-line no-unused-vars
         });
       }
     }
-  });
+  } catch (err) {
+    // TODO(developer) - Handle error
+    throw err;
+  }
 }
 // [END apps_script_api_execute]
+
+callAppsScript();
