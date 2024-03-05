@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Google LLC
+ * Copyright 2024 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 /* eslint-disable camelcase */
-// [START docs_quickstart]
+// [START meet_quickstart]
 const fs = require('fs').promises;
 const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
-const {google} = require('googleapis');
+const {SpacesServiceClient} = require('@google-apps/meet').v2;
+const { auth } = require('google-auth-library');
 
 // If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
+const SCOPES = ['https://www.googleapis.com/auth/meetings.space.created'];
+
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
@@ -38,8 +40,9 @@ async function loadSavedCredentialsIfExist() {
   try {
     const content = await fs.readFile(TOKEN_PATH);
     const credentials = JSON.parse(content);
-    return google.auth.fromJSON(credentials);
+    return auth.fromJSON(credentials);
   } catch (err) {
+    console.log(err);
     return null;
   }
 }
@@ -83,17 +86,21 @@ async function authorize() {
 }
 
 /**
- * Prints the title of a sample doc:
- * https://docs.google.com/document/d/195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE/edit
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth 2.0 client.
+ * Creates a new meeting space.
+ * @param {OAuth2Client} authClient An authorized OAuth2 client.
  */
-async function printDocTitle(auth) {
-  const docs = google.docs({version: 'v1', auth});
-  const res = await docs.documents.get({
-    documentId: '195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE',
+async function createSpace(authClient) {
+  const meetClient = new SpacesServiceClient({
+    authClient: authClient
   });
-  console.log(`The title of the document is: ${res.data.title}`);
+  // Construct request
+  const request = {
+  };
+
+  // Run request
+  const response = await meetClient.createSpace(request);
+  console.log(`Meet URL: ${response[0].meetingUri}`);
 }
 
-authorize().then(printDocTitle).catch(console.error);
-// [END docs_quickstart]
+authorize().then(createSpace).catch(console.error);
+// [END meet_quickstart]

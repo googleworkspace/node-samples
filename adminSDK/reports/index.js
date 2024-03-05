@@ -45,7 +45,7 @@ async function loadSavedCredentialsIfExist() {
 }
 
 /**
- * Serializes credentials to a file comptible with GoogleAUth.fromJSON.
+ * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
  * @param {OAuth2Client} client
  * @return {Promise<void>}
