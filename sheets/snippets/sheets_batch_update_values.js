@@ -53,14 +53,14 @@ async function batchUpdateValues(
     },
   ];
   // Additional ranges to update ...
-  const resource = {
+  const requestBody = {
     data,
     valueInputOption,
   };
   try {
     const result = await service.spreadsheets.values.batchUpdate({
       spreadsheetId,
-      resource,
+      requestBody,
     });
     console.log('%d cells updated.', result.data.totalUpdatedCells);
     return result;

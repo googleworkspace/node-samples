@@ -36,7 +36,7 @@ async function copyPresentation(presentationId, copyTitle) {
   try {
     const driveResponse = await service.files.copy({
       fileId: presentationId,
-      resource: request,
+      requestBody: request,
     });
     const presentationCopyId = driveResponse.data.id;
     console.log('Created copied presentation with ID: ' + presentationCopyId);

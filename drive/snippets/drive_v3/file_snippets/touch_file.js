@@ -38,7 +38,7 @@ async function touchFile(fileId, Timestamp) {
   try {
     const file = await service.files.update({
       fileId: fileId,
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       fields: 'id, modifiedTime',
     });
     console.log('Modified time:', file.data.modifiedTime);

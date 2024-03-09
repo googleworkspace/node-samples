@@ -37,7 +37,7 @@ async function createShortcut() {
 
   try {
     const file = await service.files.create({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       fields: 'id',
     });
     console.log('File Id:', file.data.id);
