@@ -11,7 +11,7 @@
     "expect": "^29.2.1",
     "google-auth-library": "^8.2.0",
     "googleapis": "^105.0.0",
-    "mocha": "^10.0.0",
+    "mocha": "^10.3.0",
     "uuid": "^8.3.2"
   }
 }
