@@ -44,7 +44,7 @@ async function uploadToFolder(folderId) {
 
   try {
     const file = await service.files.create({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       media: media,
       fields: 'id',
     });
