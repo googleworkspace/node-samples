@@ -1,6 +1,6 @@
 # Google Chat API - Cloud Client library samples
 
-## Setup
+## Set up
 
 1. Add `service_account.json` and/or `client_secrets.json` to the current
    folder depending on the credentials used by the samples to run:
