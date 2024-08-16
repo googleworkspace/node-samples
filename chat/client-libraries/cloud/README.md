@@ -17,5 +17,5 @@
 
 Execute `npm run replace-with-the-sample-file.js` wih the sample file path of the sample.
 
-For example, to run the sample `create-message-app-cred`, your should run
+For example, to run the sample `create-message-app-cred`, you should run
 `npm run create-message-app-cred.js`.
