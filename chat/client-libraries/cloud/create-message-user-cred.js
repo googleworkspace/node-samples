@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME here.
-    parent: 'spaces/goXth0AAAAE',
+    parent: 'spaces/SPACE_NAME',
     message: {
       text: '👋🌎 Hello world!' +
             'Text messages can contain things like:\n\n' +
