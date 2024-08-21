@@ -29,8 +29,17 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME here.
-    parent: 'spaces/SPACE_NAME',
-    message: { text: 'Hello with user credential!' }
+    parent: 'spaces/goXth0AAAAE',
+    message: {
+      text: '👋🌎 Hello world!' +
+            'Text messages can contain things like:\n\n' +
+            '* Hyperlinks 🔗\n' +
+            '* Emojis 😄🎉\n' +
+            '* Mentions of other Chat users `@` \n\n' +
+            'For details, see the ' +
+            '<https://developers.google.com/workspace/chat/format-messages' +
+            '|Chat API developer documentation>.'
+    }
   };
 
   // Make the request
