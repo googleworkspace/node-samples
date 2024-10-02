@@ -15,6 +15,7 @@
   },
   "scripts": {
     "create-membership-user-cred-for-app.js": "node ./create-membership-user-cred-for-app.js",
+    "create-membership-user-cred-for-group.js": "node ./create-membership-user-cred-for-group.js",
     "create-membership-user-cred.js": "node ./create-membership-user-cred.js",
     "create-message-app-cred.js": "node ./create-message-app-cred.js",
     "create-message-user-cred-at-mention.js": "node ./create-message-user-cred-at-mention.js",
