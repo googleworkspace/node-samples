@@ -39,7 +39,7 @@ async function main() {
     },
     updateMask: {
       // The field paths to update.
-      paths: ['lastReadTime']
+      paths: ['last_read_time']
     }
   };
 

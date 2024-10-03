@@ -35,7 +35,10 @@ async function main() {
     },
     // The field paths to update. Separate multiple values with commas or use
     // `*` to update all field paths.
-    updateMask: 'text'
+    updateMask: {
+      // The field paths to update.
+      paths: ['text']
+    }
   };
 
   // Make the request

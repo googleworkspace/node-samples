@@ -29,11 +29,18 @@ async function main() {
     message: {
       // Replace SPACE_NAME and MESSAGE_NAME here
       name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME',
-      text: 'Updated with app credential!'
+      text: 'Text updated with app credential!',
+      cardsV2 : [{ card: { header: {
+        title: 'Card updated with app credential!',
+        imageUrl: 'https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/info/default/24px.svg'
+      }}}]
     },
     // The field paths to update. Separate multiple values with commas or use
     // `*` to update all field paths.
-    updateMask: 'text'
+    updateMask: {
+      // The field paths to update.
+      paths: ['text', 'cards_v2']
+    }
   };
 
   // Make the request
