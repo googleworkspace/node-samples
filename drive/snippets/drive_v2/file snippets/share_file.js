@@ -54,7 +54,7 @@ async function shareFile(fileId, targetUser, targetDomain) {
   for (const permission of permissions) {
     try {
       const result = await service.permissions.insert({
-        resource: permission,
+        requestBody: permission,
         fileId: fileId,
         fields: 'id',
       });
