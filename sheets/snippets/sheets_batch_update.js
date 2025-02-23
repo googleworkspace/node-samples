@@ -55,7 +55,7 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
   try {
     const response = await service.spreadsheets.batchUpdate({
       spreadsheetId,
-      resource: batchUpdateRequest,
+      requestBody: batchUpdateRequest,
     });
     const findReplaceResponse = response.data.replies[1].findReplace;
     console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
