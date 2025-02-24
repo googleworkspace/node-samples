@@ -7,7 +7,7 @@
     "open": "^8.4.2",
     "server-destroy": "^1.0.1",
     "google-auth-library": "^9.10.0",
-    "@google-apps/chat": "^0.7.0",
+    "@google-apps/chat": "/usr/local/google/home/huojun/Downloads/chat-v1-nodejs/google-apps-chat-0.1.0.tgz",
     "@grpc/grpc-js": "^1.10.9"
   },
   "engines": {
@@ -40,6 +40,7 @@
     "get-message-user-cred.js": "node ./get-message-user-cred.js",
     "get-space-app-cred.js": "node ./get-space-app-cred.js",
     "get-space-event-user-cred.js": "node ./get-space-event-user-cred.js",
+    "get-space-notification-setting-user-cred.js": "node ./get-space-notification-setting-user-cred.js",
     "get-space-user-cred.js": "node ./get-space-user-cred.js",
     "get-space-read-state-user-cred.js": "node ./get-space-read-state-user-cred.js",
     "get-thread-read-state-user-cred.js": "node ./get-thread-read-state-user-cred.js",
@@ -47,6 +48,7 @@
     "update-membership-user-cred.js": "node ./update-membership-user-cred.js",
     "update-message-app-cred.js": "node ./update-message-app-cred.js",
     "update-message-user-cred.js": "node ./update-message-user-cred.js",
+    "update-space-notification-setting-user-cred.js": "node ./update-space-notification-setting-user-cred.js",
     "update-space-read-state-user-cred.js": "node ./update-space-read-state-user-cred.js",
     "update-space-user-cred.js": "node ./update-space-user-cred.js",
     "list-memberships-app-cred.js": "node ./list-memberships-app-cred.js",
