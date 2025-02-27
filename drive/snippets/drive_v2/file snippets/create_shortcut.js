@@ -36,7 +36,7 @@ async function createShortcut() {
 
   try {
     const file = await service.files.insert({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       fields: 'id',
     });
     console.log('File Id:', file.data.id);
