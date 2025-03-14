@@ -30,7 +30,7 @@ async function createPresentation(title) {
   const service = google.slides({version: 'v1', auth});
   try {
     const presentation = await service.presentations.create({
-      title,
+      title: title,
     });
     console.log(
         `Created presentation with ID: ${presentation.data.presentationId}`,
