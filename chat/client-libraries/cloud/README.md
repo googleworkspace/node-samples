@@ -2,13 +2,13 @@
 
 ## Set up
 
-1. Add `service_account.json` and/or `client_secrets.json` to the current
+1. Add `service_account.json` and/or `credentials.json` to the current
    folder depending on the credentials used by the samples to run:
 
    1. `service_account.json` for
       [app credentials](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
 
-   1. `client_secrets.json` for
+   1. `credentials.json` for
       [user credentials](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
 
 1. Execute `npm install`
