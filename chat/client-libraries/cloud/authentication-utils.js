@@ -29,7 +29,7 @@ const SERVICE_ACCOUNT_FILE = './service_account.json';
 const APP_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.bot'];
 
 // User authentication
-const CLIENT_SECRETS_FILE = './client_secrets.json';
+const CLIENT_SECRETS_FILE = './credentials.json';
 const CLIENT_SECRETS = JSON.parse(await readFile(
     new URL(CLIENT_SECRETS_FILE, import.meta.url)
 )).web;
