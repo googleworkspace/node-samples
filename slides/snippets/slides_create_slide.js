@@ -47,7 +47,7 @@ async function createSlide(presentationId, pageId) {
   try {
     const res = await service.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
