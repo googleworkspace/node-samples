@@ -28,9 +28,9 @@ async function main() {
   const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
 
   // Replace FILENAME here.
-const filename = 'FILENAME'
-// Read Custom emoji file content into base64 encoded string
-const fileContent = fs.readFileSync(filename, {encoding: 'base64'})
+  const filename = 'FILENAME'
+  // Read Custom emoji file content into base64 encoded string
+  const fileContent = fs.readFileSync(filename, {encoding: 'base64'})
 
   // Initialize request argument(s)
   const request = {

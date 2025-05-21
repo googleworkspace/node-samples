@@ -36,7 +36,7 @@
     "find-dm-space-app-cred.js": "node ./find-dm-space-app-cred.js",
     "find-dm-space-user-cred.js": "node ./find-dm-space-user-cred.js",
     "get-attachment-app-cred.js": "node ./get-attachment-app-cred.js",
-    "get-custom-emoji-user-cred.js": "node ./delete-custom-emoji-user-cred.js",
+    "get-custom-emoji-user-cred.js": "node ./get-custom-emoji-user-cred.js",
     "get-membership-app-cred.js": "node ./get-membership-app-cred.js",
     "get-membership-user-cred.js": "node ./get-membership-user-cred.js",
     "get-message-app-cred.js": "node ./get-message-app-cred.js",
