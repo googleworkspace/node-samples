@@ -18,6 +18,7 @@
 // [START chat_create_custom_emoji_user_cred]
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
+import fs from 'fs';
 
 const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.customemojis'];
 
@@ -26,16 +27,19 @@ async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
 
+  // Replace FILENAME here.
+const filename = 'FILENAME'
+// Read Custom emoji file content into base64 encoded string
+const fileContent = fs.readFileSync(filename, {encoding: 'base64'})
+
   // Initialize request argument(s)
   const request = {
     custom_emoji: {
       // Replace EMOJI_NAME here.
       emoji_name: ":EMOJI_NAME:",
       payload: {
-        // Replace FILE_CONTENT here.
-        file_content: "FILE_CONTENT",
-        // Replace FILENAME here.
-        filename: "FILENAME",
+        file_content: fileContent,
+        filename: filename,
       }
     }
   };
