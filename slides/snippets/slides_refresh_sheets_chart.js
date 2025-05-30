@@ -42,7 +42,7 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
   try {
     const batchUpdateResponse = await service.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });

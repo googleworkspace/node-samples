@@ -98,7 +98,7 @@ async function textStyleUpdate(presentationId, shapeId) {
   try {
     const batchUpdateResponse = await service.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });

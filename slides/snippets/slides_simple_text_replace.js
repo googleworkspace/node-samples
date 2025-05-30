@@ -52,7 +52,7 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
   try {
     const batchUpdateResponse = await service.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
