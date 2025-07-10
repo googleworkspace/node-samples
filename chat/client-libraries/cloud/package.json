@@ -4,16 +4,17 @@
   "description": "Samples that use the Cloud client library to call the Google Chat API.",
   "type": "module",
   "dependencies": {
-    "open": "^8.4.2",
+    "open": "^10.1.2",
     "server-destroy": "^1.0.1",
-    "google-auth-library": "^9.10.0",
-    "@google-apps/chat": "^0.7.0",
-    "@grpc/grpc-js": "^1.10.9"
+    "google-auth-library": "^10.1.0",
+    "@google-apps/chat": "^0.16.0",
+    "@grpc/grpc-js": "^1.13.4"
   },
   "engines": {
     "node": ">=14"
   },
   "scripts": {
+    "create-custom-emoji-user-cred.js": "node ./create-custom-emoji-user-cred.js",
     "create-membership-user-cred-for-app.js": "node ./create-membership-user-cred-for-app.js",
     "create-membership-user-cred-for-group.js": "node ./create-membership-user-cred-for-group.js",
     "create-membership-user-cred.js": "node ./create-membership-user-cred.js",
@@ -26,6 +27,7 @@
     "create-message-user-cred.js": "node ./create-message-user-cred.js",
     "create-reaction-user-cred.js": "node ./create-reaction-user-cred.js",
     "create-space-user-cred.js": "node ./create-space-user-cred.js",
+    "delete-custom-emoji-user-cred.js": "node ./delete-custom-emoji-user-cred.js",
     "delete-membership-user-cred.js": "node ./delete-membership-user-cred.js",
     "delete-message-app-cred.js": "node ./delete-message-app-cred.js",
     "delete-message-user-cred.js": "node ./delete-message-user-cred.js",
@@ -34,6 +36,7 @@
     "find-dm-space-app-cred.js": "node ./find-dm-space-app-cred.js",
     "find-dm-space-user-cred.js": "node ./find-dm-space-user-cred.js",
     "get-attachment-app-cred.js": "node ./get-attachment-app-cred.js",
+    "get-custom-emoji-user-cred.js": "node ./get-custom-emoji-user-cred.js",
     "get-membership-app-cred.js": "node ./get-membership-app-cred.js",
     "get-membership-user-cred.js": "node ./get-membership-user-cred.js",
     "get-message-app-cred.js": "node ./get-message-app-cred.js",
@@ -51,6 +54,7 @@
     "update-space-notification-setting-user-cred.js": "node ./update-space-notification-setting-user-cred.js",
     "update-space-read-state-user-cred.js": "node ./update-space-read-state-user-cred.js",
     "update-space-user-cred.js": "node ./update-space-user-cred.js",
+    "list-custom-emojis-user-cred.js": "node ./list-custom-emojis-user-cred.js",
     "list-memberships-app-cred.js": "node ./list-memberships-app-cred.js",
     "list-memberships-user-cred.js": "node ./list-memberships-user-cred.js",
     "list-messages-user-cred.js": "node ./list-messages-user-cred.js",
