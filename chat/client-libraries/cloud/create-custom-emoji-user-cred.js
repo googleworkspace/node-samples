@@ -36,7 +36,7 @@ async function main() {
   const request = {
     custom_emoji: {
       // TODO(developer): Replace EMOJI_NAME here.
-      emoji_name: ":EMOJI_NAME:",
+      emoji_name: "EMOJI_NAME",
       payload: {
         file_content: fileContent,
         filename: filename,
