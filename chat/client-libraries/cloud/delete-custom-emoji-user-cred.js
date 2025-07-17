@@ -28,8 +28,8 @@ async function main() {
 
   // Initialize request argument(s)
   const request = {
-    // TODO(developer): Replace CUSTOM_EMOJI_ID here.
-    name: 'customEmojis/CUSTOM_EMOJI_ID'
+    // TODO(developer): Replace EMOJI_NAME here.
+    name: 'customEmojis/EMOJI_NAME'
   };
 
   // Make the request
