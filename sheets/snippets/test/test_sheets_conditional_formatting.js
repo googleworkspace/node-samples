@@ -15,7 +15,7 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SheetsConditionalFormatting from '../sheets_conditional_formatting.js';
 
 describe('Spreadsheet conditional formatting snippet', () => {

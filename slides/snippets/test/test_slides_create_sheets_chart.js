@@ -14,7 +14,7 @@
 // * limitations under the License.
 // */
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SlidesCreateSheetsChart from '../slides_create_sheets_chart.js';
 
 // Replace with your test spreadsheets id and charts id

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SlidesTextStyleUpdate from '../slides_text_style_update.js';
 
 describe('Presentation snippets', () => {

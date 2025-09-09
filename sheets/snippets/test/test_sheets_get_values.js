@@ -15,7 +15,7 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SheetsGetValues from '../sheets_get_values.js';
 
 describe('Spreadsheet get values snippet', () => {

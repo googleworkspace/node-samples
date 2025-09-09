@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SlidesCreateSlide from '../slides_create_slide.js';
 
 describe('Presentation snippets', () => {

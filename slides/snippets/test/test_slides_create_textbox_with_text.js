@@ -15,7 +15,7 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SlidesCreateTextboxWithText from '../slides_create_textbox_with_text.js';
 
 describe('Presentation snippets', () => {

@@ -15,7 +15,7 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SlidesCopyPresentation from '../slides_copy_presentation.js';
 
 describe('Presentation snippets', () => {

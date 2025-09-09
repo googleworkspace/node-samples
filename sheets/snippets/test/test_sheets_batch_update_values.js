@@ -15,7 +15,7 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SheetsBatchUpdateValues from '../sheets_batch_update_values.js';
 
 describe('Spreadsheet batch update values snippet', () => {

@@ -15,7 +15,7 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import uploadAppdata from '../drive_v3/appdata_snippets/upload_appdata';
 
 describe('Drive snippets', () => {

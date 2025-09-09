@@ -15,7 +15,7 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers';
+import Helpers from './helpers.js';
 import SheetsAppendValues from '../sheets_append_values.js';
 
 describe('Spreadsheet append values snippet', () => {
