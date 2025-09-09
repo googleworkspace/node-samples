@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsBatchUpdate = require('../sheets_batch_update');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SheetsBatchUpdate from '../sheets_batch_update.js';
 
 describe('Spreadsheet batch update snippet', () => {
   const helpers = new Helpers();

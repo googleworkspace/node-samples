@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesSimpleTextReplace = require('../slides_simple_text_replace');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SlidesSimpleTextReplace from '../slides_simple_text_replace.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();

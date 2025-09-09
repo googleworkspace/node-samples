@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsPivotTable = require('../sheets_pivot_table');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SheetsPivotTable from '../sheets_pivot_table.js';
 
 describe('Spreadsheet pivot table snippet', () => {
   const helpers = new Helpers();

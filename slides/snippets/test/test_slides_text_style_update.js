@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesTextStyleUpdate = require('../slides_text_style_update');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SlidesTextStyleUpdate from '../slides_text_style_update.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();

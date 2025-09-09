@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCopyPresentation = require('../slides_copy_presentation');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SlidesCopyPresentation from '../slides_copy_presentation.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();

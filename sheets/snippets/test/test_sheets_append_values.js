@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsAppendValues = require('../sheets_append_values');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SheetsAppendValues from '../sheets_append_values.js';
 
 describe('Spreadsheet append values snippet', () => {
   const helpers = new Helpers();

@@ -13,9 +13,9 @@
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreateSheetsChart = require('../slides_create_sheets_chart');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SlidesCreateSheetsChart from '../slides_create_sheets_chart.js';
 
 // Replace with your test spreadsheets id and charts id
 const CHART_ID = 1107320627;

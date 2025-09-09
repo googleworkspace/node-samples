@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreateTextboxWithText = require('../slides_create_textbox_with_text');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SlidesCreateTextboxWithText from '../slides_create_textbox_with_text.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();

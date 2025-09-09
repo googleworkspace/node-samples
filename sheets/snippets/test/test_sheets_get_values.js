@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsGetValues = require('../sheets_get_values');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SheetsGetValues from '../sheets_get_values.js';
 
 describe('Spreadsheet get values snippet', () => {
   const helpers = new Helpers();

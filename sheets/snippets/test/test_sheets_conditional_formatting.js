@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsConditionalFormatting = require('../sheets_conditional_formatting');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SheetsConditionalFormatting from '../sheets_conditional_formatting.js';
 
 describe('Spreadsheet conditional formatting snippet', () => {
   const helpers = new Helpers();

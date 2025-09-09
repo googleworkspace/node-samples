@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsUpdateValues = require('../sheets_update_values');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SheetsUpdateValues from '../sheets_update_values.js';
 
 describe('Spreadsheet update values snippet', () => {
   const helpers = new Helpers();

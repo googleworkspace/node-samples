@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Helper functions for Google Sheets
@@ -114,4 +114,4 @@ class Helpers {
   }
 }
 
-module.exports = Helpers;
+export default Helpers;

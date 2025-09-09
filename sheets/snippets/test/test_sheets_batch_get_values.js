@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsBatchGetValues = require('../sheets_batch_get_values');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SheetsBatchGetValues from '../sheets_batch_get_values.js';
 
 describe('Spreadsheet batch get values snippet', () => {
   const helpers = new Helpers();

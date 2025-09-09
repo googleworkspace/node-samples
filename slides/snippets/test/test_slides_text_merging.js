@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesTextMerging = require('../slides_text_merging');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SlidesTextMerging from '../slides_text_merging.js';
 
 const TEMPLATE_PRESENTATION_ID = '1MmTR712m7U_kgeweE57POWwkEyWAV17AVAWjpmltmIg';
 

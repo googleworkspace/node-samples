@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreateBulletedText = require('../slides_create_bulleted_text');
+import {expect} from 'expect';
+import Helpers from './helpers';
+import SlidesCreateBulletedText from '../slides_create_bulleted_text.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
