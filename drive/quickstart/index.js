@@ -15,7 +15,7 @@
  */
 /* eslint-disable camelcase */
 // [START drive_quickstart]
-import {promises as fs} from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import process from 'process';
 import {authenticate} from '@google-cloud/local-auth';
