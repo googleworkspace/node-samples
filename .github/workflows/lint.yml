@@ -29,8 +29,9 @@ jobs:
         with:
           fetch-depth: 0
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
-      - run: npm ci
-      - run: npm run lint
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      - run: pnpm i
+      - run: pnpm lint
       - uses: github/super-linter/slim@v4.9.0
         if: always()
         env:

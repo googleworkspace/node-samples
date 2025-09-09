@@ -22,3 +22,4 @@ client_secret.json
 application_credentials.json
 credentials.json
 token.json
+.turbo

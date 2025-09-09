@@ -1,0 +1,6 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "test": {}
+  }
+}

@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "sheets-api-snippets",
+  "name": "forms-api-snippets",
   "version": "1.0.0",
   "description": "Code snippets for the Sheets API",
   "private": true,
