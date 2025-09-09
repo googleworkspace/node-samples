@@ -17,7 +17,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   lint:
     concurrency:
-      group: ${{ github.head_ref || github.ref }}
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}-${{ github.head_ref || github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-20.04
     steps:
