@@ -16,7 +16,7 @@
 'use strict';
 
 import path from 'path';
-import {forms as googleForms} from '@googleapis/forms';
+import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
 async function addItem() {
@@ -24,7 +24,7 @@ async function addItem() {
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = googleForms({
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
@@ -33,7 +33,7 @@ async function addItem() {
       title: 'Creating a new form for batchUpdate in Node',
     },
   };
-  const createResponse = await forms.forms.create({
+  const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
   console.log('New formId was: ' + createResponse.data.formId);
@@ -59,7 +59,7 @@ async function addItem() {
       },
     ],
   };
-  const updateResponse = await forms.forms.batchUpdate({
+  const updateResponse = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: update,
   });

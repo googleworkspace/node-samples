@@ -16,7 +16,7 @@
 'use strict';
 
 import path from 'path';
-import {forms as googleForms} from '@googleapis/forms';
+import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
 const formID = '<YOUR_FORM_ID>';
@@ -27,11 +27,11 @@ async function getSingleResponse() {
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/forms.responses.readonly',
   });
-  const forms = googleForms({
+  const formsClient = forms({
     version: 'v1',
     auth: auth,
   });
-  const res = await forms.forms.responses.get({
+  const res = await formsClient.forms.responses.get({
     formId: formID,
     responseId: responseID,
   });

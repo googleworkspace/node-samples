@@ -15,7 +15,7 @@
 'use strict';
 
 import path from 'path';
-import {forms as googleForms} from '@googleapis/forms';
+import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
 const formID = '<YOUR_FORM_ID>';
@@ -25,7 +25,7 @@ async function createWatch() {
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = googleForms({
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
@@ -39,7 +39,7 @@ async function createWatch() {
       eventType: 'RESPONSES',
     },
   };
-  const res = await forms.forms.watches.create({
+  const res = await formsClient.forms.watches.create({
     formId: formID,
     requestBody: watchRequest,
   });

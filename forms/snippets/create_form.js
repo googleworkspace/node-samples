@@ -16,7 +16,7 @@
 'use strict';
 
 import path from 'path';
-import {forms as googleForms} from '@googleapis/forms';
+import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
 async function createForm() {
@@ -24,7 +24,7 @@ async function createForm() {
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = googleForms({
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
@@ -33,7 +33,7 @@ async function createForm() {
       title: 'Creating a new form in Node',
     },
   };
-  const res = await forms.forms.create({
+  const res = await formsClient.forms.create({
     requestBody: newForm,
   });
   console.log(res.data);

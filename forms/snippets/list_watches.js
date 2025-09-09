@@ -15,7 +15,7 @@
 'use strict';
 
 import path from 'path';
-import {forms as googleForms} from '@googleapis/forms';
+import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
 const formID = '<YOUR_FORM_ID>';
@@ -25,11 +25,11 @@ async function listWatches() {
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/forms.responses.readonly',
   });
-  const forms = googleForms({
+  const formsClient = forms({
     version: 'v1',
     auth: auth,
   });
-  const res = await forms.forms.watches.list({formId: formID});
+  const res = await formsClient.forms.watches.list({formId: formID});
   console.log(res.data);
   return res.data;
 }
