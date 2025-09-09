@@ -13,11 +13,15 @@
 # limitations under the License.
 
 name: Test
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 jobs:
   test:
     concurrency:
-      group: ${{ github.head_ref || github.ref }}
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}-${{ github.head_ref || github.ref }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
