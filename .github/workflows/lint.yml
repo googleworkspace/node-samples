@@ -23,15 +23,13 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}-${{ github.head_ref || github.ref }}
       cancel-in-progress: true
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.0.0
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - run: npm install
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+      - run: npm ci
       - run: npm run lint
       - uses: github/super-linter/slim@v4.9.0
         if: always()

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const searchFiles = require('../drive_v2/file snippets/search_file');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {searchFile} from '../drive_v2/file snippets/search_file.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -31,7 +31,7 @@ describe('Drive snippets', () => {
 
   it('should search files', async () => {
     await helpers.createTestBlob();
-    const files = await searchFiles();
+    const files = await searchFile();
     expect(files.length).toBeGreaterThan(0);
   });
 });

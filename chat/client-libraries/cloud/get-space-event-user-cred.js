@@ -30,7 +30,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME and SPACE_EVENT_NAME here
-    name: 'spaces/SPACE_NAME/spaceEvents/SPACE_EVENT_NAME'
+    name: 'spaces/SPACE_NAME/spaceEvents/SPACE_EVENT_NAME',
   };
 
   // Make the request

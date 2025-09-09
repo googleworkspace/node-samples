@@ -27,7 +27,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace USER_NAME here
-    name: 'users/USER_NAME'
+    name: 'users/USER_NAME',
   };
 
   // Make the request

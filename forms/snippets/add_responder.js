@@ -10,17 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_add_responder]
-'use strict';
-
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
-
-// TODO: Replace with your form ID (fileId) and responder's email
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
-const YOUR_RESPONDER_EMAIL = 'user@example.com';
+import path from 'path';
+import {drive} from '@googleapis/drive';
+import {authenticate} from '@google-cloud/local-auth';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
@@ -31,11 +25,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
  * @param {string} formId The ID of the form.
  * @param {string} email The email of the responder.
  */
-async function runSample(formId, email) {
-  if (!formId || !email) {
-    console.log('Form ID and responder email are required.');
-    return;
-  }
+async function addResponder(formId, email) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -55,7 +45,7 @@ async function runSample(formId, email) {
       fileId: formId,
       requestBody: permissionBody,
       fields: 'id,emailAddress,role,type,view',
-      sendNotificationEmail: false,  // Optional
+      sendNotificationEmail: false, // Optional
     });
     console.log('Responder added:', res.data);
   } catch (err) {
@@ -63,8 +53,6 @@ async function runSample(formId, email) {
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID, YOUR_RESPONDER_EMAIL).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_add_responder]
+
+export {addResponder};

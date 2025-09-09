@@ -32,15 +32,15 @@ async function main() {
     space: {
       spaceType: 'SPACE',
       // Replace DISPLAY_NAME here.
-      displayName: 'DISPLAY_NAME'
+      displayName: 'DISPLAY_NAME',
     },
     memberships: [{
       member: {
         // Replace USER_NAME here.
         name: 'users/USER_NAME',
-        type: 'HUMAN'
-      }
-    }]
+        type: 'HUMAN',
+      },
+    }],
   };
 
   // Make the request

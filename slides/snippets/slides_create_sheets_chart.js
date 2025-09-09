@@ -15,6 +15,9 @@
  */
 
 // [START slides_create_sheets_chart]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Embeds a Sheets chart onto a page in a presentation.
  * @param {string} presentationId The presentation ID.
@@ -28,9 +31,6 @@ async function createSheetsChart(
     spreadsheetId,
     sheetChartId,
 ) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
@@ -87,4 +87,4 @@ async function createSheetsChart(
 }
 // [END slides_create_sheets_chart]
 
-module.exports = {createSheetsChart};
+export {createSheetsChart};

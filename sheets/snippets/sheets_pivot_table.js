@@ -15,15 +15,15 @@
  */
 
 // [START sheets_pivot_tables]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Adds a pivot table to a spreadsheet.
  * @param {string} spreadsheetId The Spreadsheet to add the pivot table to.
  * @return {obj} spreadsheet information
  */
 async function pivotTable(spreadsheetId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
@@ -110,4 +110,4 @@ async function pivotTable(spreadsheetId) {
 }
 // [END sheets_pivot_tables]
 
-module.exports = {pivotTable};
+export {pivotTable};

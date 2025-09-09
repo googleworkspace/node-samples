@@ -28,7 +28,7 @@ async function main() {
 
   // Initialize request argument(s), replace the SPACE_NAME with an actual space name.
   const request = {
-    name : 'users/me/spaces/SPACE_NAME/spaceNotificationSetting'
+    name: 'users/me/spaces/SPACE_NAME/spaceNotificationSetting',
   };
 
   // Make the request

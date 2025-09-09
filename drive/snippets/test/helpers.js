@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-const fs = require('fs');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+import fs from 'fs';
 
 /**
  * Helper functions for Google Drive
@@ -110,4 +110,4 @@ class Helpers {
   }
 }
 
-module.exports = Helpers;
+export {Helpers};

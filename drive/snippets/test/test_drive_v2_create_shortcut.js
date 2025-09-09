@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const createShortcut = require('../drive_v2/file snippets/create_shortcut');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {createShortcut} from '../drive_v2/file snippets/create_shortcut.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

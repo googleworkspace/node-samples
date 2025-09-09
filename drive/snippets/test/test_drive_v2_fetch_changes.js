@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const fetchChanges = require('../drive_v2/change_snippets/fetch_changes');
-const fetchStartPageToken = require('../drive_v2/change_snippets/fetch_start_page_token');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {fetchChanges} from '../drive_v2/change_snippets/fetch_changes.js';
+import {fetchStartPageToken} from '../drive_v2/change_snippets/fetch_start_page_token.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

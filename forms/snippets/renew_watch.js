@@ -12,25 +12,23 @@
 // limitations under the License.
 
 // [START forms_renew_watch]
-'use strict';
-
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const formID = '<YOUR_FORM_ID>';
 const watchID = '<YOUR_FORMS_WATCH_ID>';
 
-async function runSample(query) {
+async function renewWatch() {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
-  const res = await forms.forms.watches.renew({
+  const res = await formsClient.forms.watches.renew({
     formId: formID,
     watchId: watchID,
   });
@@ -38,8 +36,6 @@ async function runSample(query) {
   return res.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-module.exports = runSample;
 // [END forms_renew_watch]
+
+export {renewWatch};

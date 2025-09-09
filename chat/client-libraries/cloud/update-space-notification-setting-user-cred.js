@@ -19,21 +19,25 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.users.spacesettings'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.users.spacesettings',
+];
 
 // This sample shows how to update the space notification setting for the calling user
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+      USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s), replace the SPACE_NAME with an actual space name.
   const request = {
-    spaceNotificationSetting : {
-    	name : 'users/me/spaces/SPACE_NAME/spaceNotificationSetting',
-    	notificationSetting : 'ALL',
-    	muteSetting : 'UNMUTED'
+    spaceNotificationSetting: {
+      name: 'users/me/spaces/SPACE_NAME/spaceNotificationSetting',
+      notificationSetting: 'ALL',
+      muteSetting: 'UNMUTED',
     },
-    updateMask : { paths: ['notification_setting','mute_setting']}
+    updateMask: {paths: ['notification_setting', 'mute_setting']},
   };
 
   // Make the request

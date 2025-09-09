@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const createFolder = require('../drive_v3/file_snippets/create_folder');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {createFolder} from '../drive_v3/file_snippets/create_folder.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreateTextboxWithText = require('../slides_create_textbox_with_text');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {createTextboxWithText} from '../slides_create_textbox_with_text.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -29,7 +29,7 @@ describe('Presentation snippets', () => {
     const presentationId = await helpers.createTestPresentation();
     const ids = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = ids[0];
-    const response = await SlidesCreateTextboxWithText.createTextboxWithText(
+    const response = await createTextboxWithText(
         presentationId,
         pageId,
     );

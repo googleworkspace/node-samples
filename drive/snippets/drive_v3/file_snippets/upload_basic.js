@@ -19,11 +19,11 @@
  * Insert new file.
  * @return{obj} file Id
  * */
-async function uploadBasic() {
-  const fs = require('fs');
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import fs from 'fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
+async function uploadBasic() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -52,4 +52,4 @@ async function uploadBasic() {
 }
 // [END drive_upload_basic]
 
-module.exports = uploadBasic;
+export {uploadBasic};

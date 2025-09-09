@@ -30,16 +30,16 @@ const APP_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.bot'];
 
 // User authentication
 const CLIENT_SECRETS_FILE = './credentials.json';
-const CLIENT_SECRETS = JSON.parse(await readFile(
-    new URL(CLIENT_SECRETS_FILE, import.meta.url)
-)).web;
+const CLIENT_SECRETS = JSON.parse(
+    await readFile(new URL(CLIENT_SECRETS_FILE, import.meta.url)),
+).web;
 
 /**
  * Create a new Chat service client with application credentials.
  *
- * @returns {ChatServiceClient} The resulting client for the Chat service
+ * @return {ChatServiceClient} The resulting client for the Chat service
  */
-export function createClientWithAppCredentials () {
+export function createClientWithAppCredentials() {
   // For more information on app authentication, see
   // https://developers.google.com/workspace/chat/authenticate-authorize-chat-app
   return new ChatServiceClient({
@@ -51,10 +51,10 @@ export function createClientWithAppCredentials () {
 /**
  * Create a new Chat service client with user credentials and scopes.
  *
- * @param {!string[]} scopes Required scopes for the desired API requests
- * @returns {Promise<ChatServiceClient>} The resulting client for the Chat service
+ * @param {Array<string>} scopes Required scopes for the desired API requests
+ * @return {Promise<ChatServiceClient>} The resulting client for the Chat service
  */
-export async function createClientWithUserCredentials (scopes) {
+export async function createClientWithUserCredentials(scopes) {
   // For more information on user authentication, see
   // https://developers.google.com/workspace/chat/authenticate-authorize-chat-user
   return new ChatServiceClient({
@@ -66,16 +66,16 @@ export async function createClientWithUserCredentials (scopes) {
 /**
  * Create a new OAuth2 client and go through the OAuth2 flow.
  *
- * @param {!string[]} scopes Required scopes for the desired API requests
- * @returns {Promise<OAuth2Client>} The resulting Google OAuth2 client
+ * @param {Array<string>} scopes Required scopes for the desired API requests
+ * @return {Promise<OAuth2Client>} The resulting Google OAuth2 client
  */
 function getAuthenticatedUserOAuth2Client(scopes) {
   return new Promise((resolve, reject) => {
     // Create a client based on client secrets
     const oAuth2Client = new OAuth2Client(
-      CLIENT_SECRETS.client_id,
-      CLIENT_SECRETS.client_secret,
-      CLIENT_SECRETS.redirect_uris[0]
+        CLIENT_SECRETS.client_id,
+        CLIENT_SECRETS.client_secret,
+        CLIENT_SECRETS.redirect_uris[0],
     );
 
     // Generate the URL to use for consent
@@ -85,28 +85,32 @@ function getAuthenticatedUserOAuth2Client(scopes) {
     });
 
     // Open an HTTP server to accept the OAuth2 callback
-    const server = http.createServer(async (request, response) => {
-      try {
-        if (request.url.indexOf('/oauth2callback') > -1) {
-          // Acquire the code and close the server.
-          const queryString =
-            new url.URL(request.url, 'http://localhost:3000').searchParams;
-          const code = queryString.get('code');
-          response.end('Done!');
-          server.destroy();
-          // Acquire the tokens
-          const r = await oAuth2Client.getToken(code);
-          // Update credentials of the OAuth2 client.
-          oAuth2Client.setCredentials(r.tokens);
-          resolve(oAuth2Client);
-        }
-      } catch (e) {
-        reject(e);
-      }
-    }).listen(3000, () => {
-      // Open default browser and start the flow
-      open(authorizeUrl, {wait: false}).then(cp => cp.unref());
-    });
+    const server = http
+        .createServer(async (request, response) => {
+          try {
+            if (request.url.indexOf('/oauth2callback') > -1) {
+            // Acquire the code and close the server.
+              const queryString = new url.URL(
+                  request.url,
+                  'http://localhost:3000',
+              ).searchParams;
+              const code = queryString.get('code');
+              response.end('Done!');
+              server.destroy();
+              // Acquire the tokens
+              const r = await oAuth2Client.getToken(code);
+              // Update credentials of the OAuth2 client.
+              oAuth2Client.setCredentials(r.tokens);
+              resolve(oAuth2Client);
+            }
+          } catch (e) {
+            reject(e);
+          }
+        })
+        .listen(3000, () => {
+        // Open default browser and start the flow
+          open(authorizeUrl, {wait: false}).then((cp) => cp.unref());
+        });
     destroyer(server);
   });
 }

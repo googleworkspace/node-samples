@@ -10,16 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_publish_form]
-'use strict';
-
-const path = require('path');
-const {forms} = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
-
-// TODO: Replace with your Form ID
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
+import path from 'path';
+import {forms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
@@ -29,7 +24,7 @@ const SCOPES = 'https://www.googleapis.com/auth/forms.body';
  *
  * @param {string} formIdToPublish The ID of the form to publish.
  */
-async function runSample(formIdToPublish) {
+async function publishForm(formIdToPublish) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -46,7 +41,7 @@ async function runSample(formIdToPublish) {
         isPublished: true,
         isAcceptingResponses: true,
       },
-    }
+    },
   };
 
   try {
@@ -60,8 +55,6 @@ async function runSample(formIdToPublish) {
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_publish_form]
+
+export {publishForm};

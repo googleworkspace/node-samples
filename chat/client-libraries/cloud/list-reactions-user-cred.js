@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME and MESSAGE_NAME here.
-    parent: 'spaces/SPACE_NAME/messages/MESSAGE_NAME'
+    parent: 'spaces/SPACE_NAME/messages/MESSAGE_NAME',
   };
 
   // Make the request

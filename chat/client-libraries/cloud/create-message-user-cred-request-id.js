@@ -33,7 +33,7 @@ async function main() {
     // Specifying an existing request ID returns the message created with
     // that ID instead of creating a new message
     requestId: 'REQUEST_ID',
-    message: { text: 'Hello with user credential!' }
+    message: {text: 'Hello with user credential!'},
   };
 
   // Make the request

@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Filter spaces by space type (SPACE or GROUP_CHAT or DIRECT_MESSAGE)
-    filter: 'space_type = "SPACE"'
+    filter: 'space_type = "SPACE"',
   };
 
   // Make the request

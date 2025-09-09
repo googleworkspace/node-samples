@@ -10,21 +10,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_add_item]
+import path from 'path';
+import {forms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
-'use strict';
-
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
-
-async function runSample(query) {
+async function addItem() {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
@@ -33,7 +30,7 @@ async function runSample(query) {
       title: 'Creating a new form for batchUpdate in Node',
     },
   };
-  const createResponse = await forms.forms.create({
+  const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
   console.log('New formId was: ' + createResponse.data.formId);
@@ -59,7 +56,7 @@ async function runSample(query) {
       },
     ],
   };
-  const updateResponse = await forms.forms.batchUpdate({
+  const updateResponse = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: update,
   });
@@ -67,9 +64,6 @@ async function runSample(query) {
   return updateResponse.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-module.exports = runSample;
-
 // [END forms_add_item]
+
+export {addItem};

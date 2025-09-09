@@ -10,16 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_stop_accepting_responses]
-'use strict';
-
-const {authenticate} = require('@google-cloud/local-auth');
-const {forms} = require('@googleapis/forms');
-const path = require('path');
-
-// TODO: Replace with your form ID
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
+import path from 'path';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
@@ -29,7 +24,7 @@ const SCOPES = 'https://www.googleapis.com/auth/forms.body';
  *
  * @param {string} formId The ID of the form.
  */
-async function runSample(formId) {
+async function stopAcceptingResponses(formId) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -43,10 +38,10 @@ async function runSample(formId) {
   const setPublishSettingsRequest = {
     publishSettings: {
       publishState: {
-        isPublished: true,  // Keep it published (or ensure it is if it wasn't)
-        isAcceptingResponses: false,  // Stop accepting responses
+        isPublished: true, // Keep it published (or ensure it is if it wasn't)
+        isAcceptingResponses: false, // Stop accepting responses
       },
-    }
+    },
   };
 
   try {
@@ -60,8 +55,6 @@ async function runSample(formId) {
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_stop_accepting_responses]
+
+export {stopAcceptingResponses};

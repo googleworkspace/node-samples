@@ -15,12 +15,12 @@
  */
 /* eslint-disable camelcase */
 // [START meet_quickstart]
-const fs = require('fs').promises;
-const path = require('path');
-const process = require('process');
-const {authenticate} = require('@google-cloud/local-auth');
-const {SpacesServiceClient} = require('@google-apps/meet').v2;
-const { auth } = require('google-auth-library');
+import fs from 'fs/promises';
+import path from 'path';
+import process from 'process';
+import {authenticate} from '@google-cloud/local-auth';
+import {SpacesServiceClient} from '@google-apps/meet';
+import {auth} from 'google-auth-library';
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/meetings.space.created'];
@@ -91,7 +91,7 @@ async function authorize() {
  */
 async function createSpace(authClient) {
   const meetClient = new SpacesServiceClient({
-    authClient: authClient
+    authClient: authClient,
   });
   // Construct request
   const request = {

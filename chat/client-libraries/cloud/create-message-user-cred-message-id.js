@@ -33,7 +33,7 @@ async function main() {
     // Message id lets chat apps get, update or delete a message without needing
     // to store the system assigned ID in the message's resource name
     messageId: 'client-MESSAGE-ID',
-    message: { text: 'Hello with user credential!' }
+    message: {text: 'Hello with user credential!'},
   };
 
   // Make the request

@@ -32,8 +32,8 @@ async function main() {
     parent: 'spaces/SPACE_NAME/messages/MESSAGE_NAME',
     reaction: {
       // A standard emoji represented by a unicode string.
-      emoji: { unicode: '😀' }
-    }
+      emoji: {unicode: '😀'},
+    },
   };
 
   // Make the request

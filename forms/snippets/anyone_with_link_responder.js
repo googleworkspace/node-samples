@@ -10,19 +10,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
-'use strict';
-
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
-
-// TODO: Replace with your form ID (fileId) and responder's email
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
+import path from 'path';
+import {drive} from '@googleapis/drive';
+import {authenticate} from '@google-cloud/local-auth';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
-
 
 // [START forms_is_anyone_with_link_responder_js]
 /**
@@ -51,8 +44,11 @@ async function isAnyoneWithLinkResponder(formId) {
       console.log(`No permissions found for form ID: ${formId}`);
     } else {
       for (const permission of permissions) {
-        if (permission.type === 'anyone' && permission.view === 'published' &&
-            permission.role === 'reader') {
+        if (
+          permission.type === 'anyone' &&
+          permission.view === 'published' &&
+          permission.role === 'reader'
+        ) {
           anyoneWithLinkResponder = true;
           break;
         }
@@ -60,19 +56,22 @@ async function isAnyoneWithLinkResponder(formId) {
     }
 
     if (anyoneWithLinkResponder) {
-      console.log(`Form '${
-          formId}' IS configured for 'Anyone with the link' to respond.`);
+      console.log(
+          `Form '${formId}' IS configured for 'Anyone with the link' to respond.`,
+      );
     } else {
-      console.log(`Form '${
-          formId}' is NOT configured for 'Anyone with the link' to respond.`);
+      console.log(
+          `Form '${formId}' is NOT configured for 'Anyone with the link' to respond.`,
+      );
     }
   } catch (err) {
     console.error(
-        'Error checking "anyone with link" permission:', err.message || err);
+        'Error checking "anyone with link" permission:',
+        err.message || err,
+    );
   }
 }
 // [END forms_is_anyone_with_link_responder_js]
-
 
 // [START forms_set_anyone_with_link_responder_js]
 /**
@@ -90,7 +89,7 @@ async function setAnyoneWithLinkResponder(formId) {
 
   const permissionBody = {
     type: 'anyone',
-    view: 'published',  // Key for making it a responder setting
+    view: 'published', // Key for making it a responder setting
     role: 'reader',
   };
 
@@ -98,17 +97,19 @@ async function setAnyoneWithLinkResponder(formId) {
     const res = await driveService.permissions.create({
       fileId: formId,
       requestBody: permissionBody,
-      fields: 'id',  // Request only needed fields
+      fields: 'id', // Request only needed fields
     });
-    console.log(`'Anyone with the link can respond' permission set for form '${
-        formId}'. Permission ID: ${res.data.id}`);
+    console.log(
+        `'Anyone with the link can respond' permission set for form '${formId}'. Permission ID: ${res.data.id}`,
+    );
   } catch (err) {
     console.error(
-        'Error setting "anyone with link" permission:', err.message || err);
+        'Error setting "anyone with link" permission:',
+        err.message || err,
+    );
   }
 }
 // [END forms_set_anyone_with_link_responder_js]
-
 
 // [START forms_remove_anyone_with_link_responder_js]
 /**
@@ -134,8 +135,11 @@ async function removeAnyoneWithLinkResponder(formId) {
 
     const permissions = res.data.permissions || [];
     for (const permission of permissions) {
-      if (permission.type === 'anyone' && permission.role === 'reader' &&
-          permission.view === 'published') {
+      if (
+        permission.type === 'anyone' &&
+        permission.role === 'reader' &&
+        permission.view === 'published'
+      ) {
         permissionIdToDelete = permission.id;
         break;
       }
@@ -147,25 +151,24 @@ async function removeAnyoneWithLinkResponder(formId) {
         permissionId: permissionIdToDelete,
       });
       console.log(
-          `Successfully removed 'Anyone with the link' permission (ID: ${
-              permissionIdToDelete}) from form '${formId}'.`);
+          `Successfully removed 'Anyone with the link' permission (ID: ${permissionIdToDelete}) from form '${formId}'.`,
+      );
     } else {
       console.log(
-          `'Anyone with the link can respond' permission not found for form '${
-              formId}'. Nothing to remove.`);
+          `'Anyone with the link can respond' permission not found for form '${formId}'. Nothing to remove.`,
+      );
     }
   } catch (err) {
     console.error(
-        'Error removing "anyone with link" permission:', err.message || err);
+        'Error removing "anyone with link" permission:',
+        err.message || err,
+    );
   }
 }
 // [END forms_remove_anyone_with_link_responder_js]
 
-if (module === require.main) {
-  isAnyoneWithLinkResponder(YOUR_FORM_ID).catch(console.error);
-}
-module.exports = {
+export {
   isAnyoneWithLinkResponder,
   setAnyoneWithLinkResponder,
-  removeAnyoneWithLinkResponder
+  removeAnyoneWithLinkResponder,
 };

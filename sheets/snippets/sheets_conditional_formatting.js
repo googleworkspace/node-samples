@@ -15,15 +15,15 @@
  */
 
 // [START sheets_conditional_formatting]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Conditionally formats a Spreadsheet.
  * @param {string} spreadsheetId A Spreadsheet ID.
  * @return {obj} spreadsheet information
  */
 async function conditionalFormatting(spreadsheetId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
@@ -89,4 +89,4 @@ async function conditionalFormatting(spreadsheetId) {
 }
 // [END sheets_conditional_formatting]
 
-module.exports = {conditionalFormatting};
+export {conditionalFormatting};

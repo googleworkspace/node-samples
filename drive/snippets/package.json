@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "drive-api-v3-snippets",
   "version": "1.0.0",
   "description": "",

@@ -35,9 +35,9 @@ async function main() {
         // Replace USER_NAME here
         name: 'users/USER_NAME',
         // User type for the membership
-        type: 'HUMAN'
-      }
-    }
+        type: 'HUMAN',
+      },
+    },
   };
 
   // Make the request

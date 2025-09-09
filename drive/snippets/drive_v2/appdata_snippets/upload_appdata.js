@@ -18,13 +18,13 @@
 /**
  * Insert a file in the application data folder and prints file Id.
  * */
+import fs from 'fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function uploadAppdata() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const fs = require('fs');
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive.appdata',
@@ -57,4 +57,4 @@ async function uploadAppdata() {
 }
 // [END drive_upload_appdata]
 
-module.exports = uploadAppdata;
+export {uploadAppdata};

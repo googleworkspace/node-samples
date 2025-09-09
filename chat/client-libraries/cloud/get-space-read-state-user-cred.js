@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME here
-    name: 'users/me/spaces/SPACE_NAME/spaceReadState'
+    name: 'users/me/spaces/SPACE_NAME/spaceReadState',
   };
 
   // Make the request

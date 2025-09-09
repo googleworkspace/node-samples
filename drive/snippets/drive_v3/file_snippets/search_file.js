@@ -19,10 +19,10 @@
  * Search file in drive location
  * @return{obj} data file
  * */
-async function searchFile() {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
+async function searchFile() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -48,4 +48,4 @@ async function searchFile() {
 }
 // [END drive_search_file]
 
-module.exports = searchFile;
+export {searchFile};

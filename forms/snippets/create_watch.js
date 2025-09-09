@@ -12,20 +12,18 @@
 // limitations under the License.
 
 // [START forms_create_watch]
-'use strict';
-
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {forms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
 const formID = '<YOUR_FORM_ID>';
 
-async function runSample(query) {
+async function createWatch() {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
@@ -39,7 +37,7 @@ async function runSample(query) {
       eventType: 'RESPONSES',
     },
   };
-  const res = await forms.forms.watches.create({
+  const res = await formsClient.forms.watches.create({
     formId: formID,
     requestBody: watchRequest,
   });
@@ -47,8 +45,6 @@ async function runSample(query) {
   return res.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-module.exports = runSample;
 // [END forms_create_watch]
+
+export {createWatch};

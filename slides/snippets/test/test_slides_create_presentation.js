@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreatePresentation = require('../slides_create_presentation');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {createPresentation} from '../slides_create_presentation.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -25,7 +25,7 @@ describe('Presentation snippets', () => {
   });
 
   it('should create a presentation', async () => {
-    const presentation = await SlidesCreatePresentation.createPresentation(
+    const presentation = await createPresentation(
         'Title',
     );
     expect(presentation).toBeDefined();

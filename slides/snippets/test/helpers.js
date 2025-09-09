@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {google} = require('googleapis');
-const {GoogleAuth} = require('google-auth-library');
+import {google} from 'googleapis';
+import {GoogleAuth} from 'google-auth-library';
 
 /**
  * Helper functions for Google Slides
@@ -261,4 +261,4 @@ class Helpers {
   }
 }
 
-module.exports = Helpers;
+export {Helpers};

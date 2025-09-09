@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const recoverDrives = require('../drive_v2/drive_snippets/recover_drives');
-const createDrive = require('../drive_v2/drive_snippets/create_drive');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {recoverDrives} from '../drive_v2/drive_snippets/recover_drives.js';
+import {createDrive} from '../drive_v2/drive_snippets/create_drive.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

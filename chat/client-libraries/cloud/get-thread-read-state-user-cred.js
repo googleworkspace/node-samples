@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME and THREAD_NAME here
-    name: 'users/me/spaces/SPACE_NAME/threads/THREAD_NAME/threadReadState'
+    name: 'users/me/spaces/SPACE_NAME/threads/THREAD_NAME/threadReadState',
   };
 
   // Make the request

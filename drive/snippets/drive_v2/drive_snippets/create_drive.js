@@ -18,13 +18,13 @@
 /**
  * Create a drive.
  * */
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+import {v4 as uuid} from 'uuid';
+
 async function createDrive() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-  const uuid = require('uuid');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -34,7 +34,7 @@ async function createDrive() {
   const driveMetadata = {
     name: 'Project resources',
   };
-  const requestId = uuid.v4();
+  const requestId = uuid();
   try {
     const Drive = await service.drives.insert({
       resource: driveMetadata,
@@ -50,4 +50,4 @@ async function createDrive() {
 }
 // [END drive_create_drive]
 
-module.exports = createDrive;
+export {createDrive};

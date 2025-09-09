@@ -15,15 +15,15 @@
  */
 
 // [START slides_text_merging]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Adds data from a spreadsheet to a template presentation.
  * @param {string} templatePresentationId The template presentation ID.
  * @param {string} dataSpreadsheetId  The data spreadsheet ID.
  */
 async function textMerging(templatePresentationId, dataSpreadsheetId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: [
       'https://www.googleapis.com/auth/presentations',
@@ -128,4 +128,4 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
 }
 // [END slides_text_merging]
 
-module.exports = {textMerging};
+export {textMerging};

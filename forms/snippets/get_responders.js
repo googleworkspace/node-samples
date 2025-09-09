@@ -10,16 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_get_responders]
-'use strict';
-
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
-
-// TODO: Replace with your form ID
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
+import path from 'path';
+import {drive} from '@googleapis/drive';
+import {authenticate} from '@google-cloud/local-auth';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
@@ -29,7 +24,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
  *
  * @param {string} formId The ID of the form.
  */
-async function runSample(formId, email) {
+async function getResponders(formId) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -59,8 +54,6 @@ async function runSample(formId, email) {
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_get_responders]
+
+export {getResponders};

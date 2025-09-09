@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "google-admin-directory-nodejs-quickstart",
   "version": "1.0.0",
   "description": "A simple Node.js command-line application that makes requests to the Google Drive API.",

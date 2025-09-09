@@ -38,8 +38,8 @@ async function main() {
             '* Mentions of other Chat users `@` \n\n' +
             'For details, see the ' +
             '<https://developers.google.com/workspace/chat/format-messages' +
-            '|Chat API developer documentation>.'
-    }
+            '|Chat API developer documentation>.',
+    },
   };
 
   // Make the request

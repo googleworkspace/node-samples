@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesImageMerging = require('../slides_image_merging');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {imageMerging} from '../slides_image_merging.js';
 
 const TEMPLATE_PRESENTATION_ID = '1MmTR712m7U_kgeweE57POWwkEyWAV17AVAWjpmltmIg';
 const IMAGE_URL =
@@ -30,7 +30,7 @@ describe('Presentation snippets', () => {
   });
 
   it('should ImageMerging', async () => {
-    const response = await SlidesImageMerging.imageMerging(
+    const response = await imageMerging(
         TEMPLATE_PRESENTATION_ID,
         IMAGE_URL,
         CUSTOMER_NAME,

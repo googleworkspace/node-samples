@@ -15,6 +15,9 @@
  */
 
 // [START slides_text_style_update]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Updates text style for a specific presentation's shape ID.
  * @param {string} presentationId The presentation ID.
@@ -24,9 +27,6 @@ async function textStyleUpdate(presentationId, shapeId) {
   // Update the text style so that the first 5 characters are bolded
   // and italicized, the next 5 are displayed in blue 14 pt Times
   // New Roman font, and the next 5 are hyperlinked.
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
@@ -111,4 +111,4 @@ async function textStyleUpdate(presentationId, shapeId) {
 }
 // [END slides_text_style_update]
 
-module.exports = {textStyleUpdate};
+export {textStyleUpdate};

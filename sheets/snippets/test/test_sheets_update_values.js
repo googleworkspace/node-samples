@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsUpdateValues = require('../sheets_update_values');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {updateValues} from '../sheets_update_values.js';
 
 describe('Spreadsheet update values snippet', () => {
   const helpers = new Helpers();
@@ -27,7 +27,7 @@ describe('Spreadsheet update values snippet', () => {
 
   it('should update spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
-    const result = await SheetsUpdateValues.updateValues(
+    const result = await updateValues(
         spreadsheetId,
         'A1:B2',
         'USER_ENTERED',

@@ -10,28 +10,25 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_retrieve_single_response]
-
-'use strict';
-
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {forms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
 const formID = '<YOUR_FORM_ID>';
 const responseID = '<YOUR_RESPONSE_ID>';
 
-async function runSample(query) {
+async function getSingleResponse() {
   const auth = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/forms.responses.readonly',
   });
-  const forms = google.forms({
+  const formsClient = forms({
     version: 'v1',
     auth: auth,
   });
-  const res = await forms.forms.responses.get({
+  const res = await formsClient.forms.responses.get({
     formId: formID,
     responseId: responseID,
   });
@@ -39,9 +36,6 @@ async function runSample(query) {
   return res.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-module.exports = runSample;
-
 // [END forms_retrieve_single_response]
+
+export {getSingleResponse};

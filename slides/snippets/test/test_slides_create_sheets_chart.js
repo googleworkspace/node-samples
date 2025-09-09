@@ -13,9 +13,9 @@
 // * See the License for the specific language governing permissions and
 // * limitations under the License.
 // */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreateSheetsChart = require('../slides_create_sheets_chart');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {createSheetsChart} from '../slides_create_sheets_chart.js';
 
 // Replace with your test spreadsheets id and charts id
 const CHART_ID = 1107320627;
@@ -32,7 +32,7 @@ describe('Presentation snippets', () => {
     const presentationId = await helpers.createTestPresentation();
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
-    const response = await SlidesCreateSheetsChart.createSheetsChart(
+    const response = await createSheetsChart(
         presentationId,
         pageId,
         DATA_SPREADSHEET_ID,

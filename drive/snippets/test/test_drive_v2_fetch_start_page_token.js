@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const fetchStartPageToken = require('../drive_v2/change_snippets/fetch_start_page_token');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {fetchStartPageToken} from '../drive_v2/change_snippets/fetch_start_page_token.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

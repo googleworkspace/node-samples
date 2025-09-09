@@ -19,13 +19,13 @@
  * Upload a file to the specified folder and prints file ID, folder ID
  * @param{string} folderId folder ID
  * */
+import fs from 'fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function uploadToFolder(folderId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const fs = require('fs');
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -55,4 +55,4 @@ async function uploadToFolder(folderId) {
 }
 // [END drive_upload_to_folder]
 
-module.exports = uploadToFolder;
+export {uploadToFolder};

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesSimpleTextReplace = require('../slides_simple_text_replace');
+import {expect} from 'expect';
+import {Helpers} from './helpers.js';
+import {simpleTextReplace} from '../slides_simple_text_replace.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -29,7 +29,7 @@ describe('Presentation snippets', () => {
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
     const boxId = await helpers.createTestTextbox(presentationId, pageId);
-    const response = await SlidesSimpleTextReplace.simpleTextReplace(
+    const response = await simpleTextReplace(
         presentationId,
         boxId,
         'MY NEW TEXT',

@@ -15,6 +15,9 @@
  */
 
 // [START sheets_batch_update]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Updates the Spreadsheet title. Finds and replaces a string in the sheets.
  * @param {string} spreadsheetId The Spreadsheet to update
@@ -24,9 +27,6 @@
  * @return {obj} holding the information regarding the replacement of strings
  */
 async function batchUpdate(spreadsheetId, title, find, replacement) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
@@ -67,4 +67,4 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
 }
 // [END sheets_batch_update]
 
-module.exports = {batchUpdate};
+export {batchUpdate};

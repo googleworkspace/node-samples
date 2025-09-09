@@ -21,10 +21,10 @@
  * @param{string} Timestamp Timestamp to override Modified date time of the file
  * @return{obj} modified Timestamp
  **/
-async function touchFile(fileId, Timestamp) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
+async function touchFile(fileId, Timestamp) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -50,4 +50,4 @@ async function touchFile(fileId, Timestamp) {
 }
 // [END drive_touch_file]
 
-module.exports = touchFile;
+export {touchFile};

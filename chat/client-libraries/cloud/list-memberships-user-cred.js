@@ -32,7 +32,7 @@ async function main() {
     parent: 'spaces/SPACE_NAME',
     // Filter membership by type (HUMAN or BOT) or role (ROLE_MEMBER or
     // ROLE_MANAGER)
-    filter: 'member.type = "HUMAN"'
+    filter: 'member.type = "HUMAN"',
   };
 
   // Make the request

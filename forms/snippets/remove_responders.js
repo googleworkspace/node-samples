@@ -10,17 +10,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_remove_responder]
-'use strict';
-
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
-
-// TODO: Replace with your form ID (fileId) and responder's email
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
-const YOUR_RESPONDER_EMAIL = 'responder-to-remove@example.com';
+import path from 'path';
+import {drive} from '@googleapis/drive';
+import {authenticate} from '@google-cloud/local-auth';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
@@ -31,7 +25,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
  * @param {string} formId The ID of the form.
  * @param {string} email The email of the responder.
  */
-async function runSample(formId, email) {
+async function removeResponders(formId, email) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -58,8 +52,7 @@ async function runSample(formId, email) {
         permissionId: permissionId,
       });
       console.log(`Responder with permission ID '${
-          permissionId}' removed successfully.`);
-
+        permissionId}' removed successfully.`);
     } else {
       console.log('Responder not found for the specified form');
     }
@@ -68,8 +61,6 @@ async function runSample(formId, email) {
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID, YOUR_RESPONDER_EMAIL).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_remove_responder]
+
+export {removeResponders};

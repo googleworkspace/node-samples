@@ -31,14 +31,14 @@ async function main() {
     message: {
       // Replace SPACE_NAME and MESSAGE_NAME here
       name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME',
-      text: 'Updated with user credential!'
+      text: 'Updated with user credential!',
     },
     // The field paths to update. Separate multiple values with commas or use
     // `*` to update all field paths.
     updateMask: {
       // The field paths to update.
-      paths: ['text']
-    }
+      paths: ['text'],
+    },
   };
 
   // Make the request

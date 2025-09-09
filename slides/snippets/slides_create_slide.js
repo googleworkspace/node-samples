@@ -15,15 +15,15 @@
  */
 
 // [START slides_create_slide]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Creates a new slide in a presentation.
  * @param {string} presentationId The presentation ID.
  * @param {string} pageId The object ID for the new slide.
  */
 async function createSlide(presentationId, pageId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
@@ -62,4 +62,4 @@ async function createSlide(presentationId, pageId) {
 }
 // [END slides_create_slide]
 
-module.exports = {createSlide};
+export {createSlide};

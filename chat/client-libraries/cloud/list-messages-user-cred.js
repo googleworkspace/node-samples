@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME here
-    parent: 'spaces/SPACE_NAME'
+    parent: 'spaces/SPACE_NAME',
   };
 
   // Make the request

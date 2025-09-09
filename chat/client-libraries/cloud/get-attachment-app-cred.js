@@ -27,7 +27,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME, MESSAGE_NAME, and ATTACHMENT_NAME here
-    name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME/attachments/ATTACHMENT_NAME'
+    name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME/attachments/ATTACHMENT_NAME',
   };
 
   // Make the request

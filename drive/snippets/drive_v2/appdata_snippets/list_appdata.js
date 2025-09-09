@@ -18,12 +18,12 @@
 /**
  * List all files inserted in the application data folder
  * */
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function listAppdata() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive.appdata',
@@ -46,4 +46,4 @@ async function listAppdata() {
 }
 // [END drive_list_appdata]
 
-module.exports = listAppdata;
+export {listAppdata};

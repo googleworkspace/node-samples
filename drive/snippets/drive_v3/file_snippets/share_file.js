@@ -22,10 +22,10 @@
  * @param{string} targetDomainName domain
  * @return{list} permission id
  * */
-async function shareFile(fileId, targetUserEmail, targetDomainName) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
+async function shareFile(fileId, targetUserEmail, targetDomainName) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -68,4 +68,4 @@ async function shareFile(fileId, targetUserEmail, targetDomainName) {
 }
 // [END drive_share_file]
 
-module.exports = shareFile;
+export {shareFile};
