@@ -10,10 +10,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
-// [START forms_get_responders]
-'use strict';
 
+// [START forms_get_responders]
 import path from 'path';
 import {drive} from '@googleapis/drive';
 import {authenticate} from '@google-cloud/local-auth';

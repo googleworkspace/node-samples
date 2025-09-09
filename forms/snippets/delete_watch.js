@@ -12,8 +12,6 @@
 // limitations under the License.
 
 // [START forms_delete_watch]
-'use strict';
-
 import path from 'path';
 import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
