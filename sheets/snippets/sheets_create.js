@@ -15,15 +15,15 @@
  */
 
 // [START sheets_create]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Create a google spreadsheet
  * @param {string} title Spreadsheets title
  * @return {string} Created spreadsheets ID
  */
 async function create(title) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });

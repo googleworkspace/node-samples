@@ -15,6 +15,9 @@
  */
 
 // [START slides_simple_text_replace]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Replaces text in the provided shape ID.
  * @param {string} presentationId The presentation ID.
@@ -22,9 +25,6 @@
  * @param {string} replacementText The new replacement text.
  */
 async function simpleTextReplace(presentationId, shapeId, replacementText) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });

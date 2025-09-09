@@ -18,7 +18,7 @@
 // [START chat_create_message_user_cred_thread_name]
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
-const {MessageReplyOption} = require('@google-apps/chat').protos.google.chat.v1.CreateMessageRequest;
+import {protos} from '@google-apps/chat';
 
 const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.messages.create'];
 
@@ -33,7 +33,7 @@ async function main() {
     parent: 'spaces/SPACE_NAME',
     // Creates the message as a reply to the thread specified by thread.name
     // If it fails, the message starts a new thread instead
-    messageReplyOption: MessageReplyOption.REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD,
+    messageReplyOption: protos.google.chat.v1.CreateMessageRequest.MessageReplyOption.REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD,
     message: {
       text: 'Hello with user credential!',
       thread: {

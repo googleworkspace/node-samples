@@ -15,15 +15,15 @@
  */
 
 // [START slides_copy_presentation]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Copys a Google Slide presentation.
  * @param {string} presentationId The presentation to copy.
  * @param {string} copyTitle The new title.
  */
 async function copyPresentation(presentationId, copyTitle) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });

@@ -15,6 +15,9 @@
  */
 
 // [START sheets_batch_update_values]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Batch Updates values in a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
@@ -29,9 +32,6 @@ async function batchUpdateValues(
     valueInputOption,
     _values,
 ) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });

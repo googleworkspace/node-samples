@@ -15,15 +15,15 @@
  */
 
 // [START slides_create_image]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Adds an image to a presentation.
  * @param {string} presentationId The presentation ID.
  * @param {string} pageId The presentation page ID.
  */
 async function createImage(presentationId, pageId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });

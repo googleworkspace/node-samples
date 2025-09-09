@@ -15,6 +15,9 @@
  */
 
 // [START sheets_update_values]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Updates values in a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
@@ -24,9 +27,6 @@
  * @return {obj} spreadsheet information
  */
 async function updateValues(spreadsheetId, range, valueInputOption, _values) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });

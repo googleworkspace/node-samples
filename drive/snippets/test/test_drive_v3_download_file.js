@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const downloadFile = require('../drive_v3/file_snippets/download_file');
+import {expect} from 'expect';
+import Helpers from './helpers.js';
+import downloadFile from '../drive_v3/file_snippets/download_file.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

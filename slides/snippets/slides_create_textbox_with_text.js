@@ -15,15 +15,15 @@
  */
 
 // [START slides_create_textbox_with_text]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Adds a textbox with text to a slide.
  * @param {string} presentationId The presentation ID.
  * @param {string} pageId The page to add the textbox to.
  */
 async function createTextboxWithText(presentationId, pageId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });

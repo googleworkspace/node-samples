@@ -15,15 +15,15 @@
  */
 
 // [START slides_refresh_sheets_chart]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Refreshes an embedded sheet chart.
  * @param {string} presentationId The presentation ID.
  * @param {string} presentationChartId The presentation's chart ID.
  */
 async function refreshSheetsChart(presentationId, presentationChartId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });

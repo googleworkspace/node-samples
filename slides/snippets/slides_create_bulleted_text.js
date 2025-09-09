@@ -15,15 +15,15 @@
  */
 
 // [START slides_create_bulleted_text]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Creates bulleted text for a presentation.
  * @param {string} presentationId The presentation ID.
  * @param {string} shapeId The shape ID to add bulleted text to.
  */
 async function createBulletedText(presentationId, shapeId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });

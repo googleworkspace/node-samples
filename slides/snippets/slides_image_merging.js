@@ -15,6 +15,9 @@
  */
 
 // [START slides_image_merging]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Add an image to a template presentation.
  * @param {string} templatePresentationId The template presentation ID.
@@ -22,9 +25,6 @@
  * @param {string} customerName A customer name used for the title
  */
 async function imageMerging(templatePresentationId, imageUrl, customerName) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: [
       'https://www.googleapis.com/auth/presentations',

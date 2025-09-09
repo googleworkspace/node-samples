@@ -15,6 +15,9 @@
  */
 
 // [START sheets_batch_get_values]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Batch gets cell values from a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
@@ -22,9 +25,6 @@
  * @return {obj} spreadsheet information
  */
 async function batchGetValues(spreadsheetId, _ranges) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });

@@ -12,16 +12,13 @@
 // limitations under the License.
 
 // [START forms_renew_watch]
-'use strict';
-
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {authenticate} from '@google-cloud/local-auth';
 
 const formID = '<YOUR_FORM_ID>';
 const watchID = '<YOUR_FORMS_WATCH_ID>';
 
-async function runSample(query) {
+async function runSample() {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -38,8 +35,7 @@ async function runSample(query) {
   return res.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-export default runSample;
+await runSample();
 // [END forms_renew_watch]
+
+export default runSample;
