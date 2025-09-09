@@ -22,7 +22,7 @@ import {authenticate} from '@google-cloud/local-auth';
 const formID = '<YOUR_FORM_ID>';
 const responseID = '<YOUR_RESPONSE_ID>';
 
-async function runSample(query) {
+async function getSingleResponse() {
   const auth = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/forms.responses.readonly',
@@ -39,9 +39,6 @@ async function runSample(query) {
   return res.data;
 }
 
-if (import.meta.url === `file://${process.argv}`) {
-  runSample().catch(console.error);
-}
 // [END forms_retrieve_single_response]
 
-export {runSample};
+export {getSingleResponse};

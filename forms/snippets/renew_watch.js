@@ -18,7 +18,7 @@ import {authenticate} from '@google-cloud/local-auth';
 const formID = '<YOUR_FORM_ID>';
 const watchID = '<YOUR_FORMS_WATCH_ID>';
 
-async function runSample() {
+async function renewWatch() {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -35,7 +35,6 @@ async function runSample() {
   return res.data;
 }
 
-await runSample();
 // [END forms_renew_watch]
 
-export {runSample};
+export {renewWatch};

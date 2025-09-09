@@ -18,7 +18,7 @@ import path from 'path';
 import {forms as googleForms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
-async function runSample(query) {
+async function updateForm() {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -59,8 +59,5 @@ async function runSample(query) {
   return res.data;
 }
 
-if (import.meta.url === `file://${process.argv}`) {
-  runSample().catch(console.error);
-}
 // [END forms_update_form]
-export {runSample};
+export {updateForm};

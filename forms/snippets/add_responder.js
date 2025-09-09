@@ -12,15 +12,9 @@
 // limitations under the License.
 //
 // [START forms_add_responder]
-'use strict';
-
 import path from 'path';
 import {drive} from '@googleapis/drive';
 import {authenticate} from '@google-cloud/local-auth';
-
-// TODO: Replace with your form ID (fileId) and responder's email
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
-const YOUR_RESPONDER_EMAIL = 'user@example.com';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
@@ -31,11 +25,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
  * @param {string} formId The ID of the form.
  * @param {string} email The email of the responder.
  */
-async function runSample(formId, email) {
-  if (!formId || !email) {
-    console.log('Form ID and responder email are required.');
-    return;
-  }
+async function addResponder(formId, email) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -63,9 +53,6 @@ async function runSample(formId, email) {
   }
 }
 
-if (import.meta.url === `file://${process.argv}`) {
-  runSample(YOUR_FORM_ID, YOUR_RESPONDER_EMAIL).catch(console.error);
-}
 // [END forms_add_responder]
 
-export {runSample};
+export {addResponder};

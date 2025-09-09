@@ -18,9 +18,6 @@ import path from 'path';
 import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
-// TODO: Replace with your Form ID
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
-
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
 
@@ -29,7 +26,7 @@ const SCOPES = 'https://www.googleapis.com/auth/forms.body';
  *
  * @param {string} formIdToPublish The ID of the form to publish.
  */
-async function runSample(formIdToPublish) {
+async function publishForm(formIdToPublish) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -60,9 +57,6 @@ async function runSample(formIdToPublish) {
   }
 }
 
-if (import.meta.url === `file://${process.argv}`) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
 // [END forms_publish_form]
 
-export {runSample};
+export {publishForm};

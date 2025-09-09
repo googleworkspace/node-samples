@@ -18,9 +18,6 @@ import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 import path from 'path';
 
-// TODO: Replace with your form ID
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
-
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
 
@@ -29,7 +26,7 @@ const SCOPES = 'https://www.googleapis.com/auth/forms.body';
  *
  * @param {string} formId The ID of the form.
  */
-async function runSample(formId) {
+async function stopAcceptingResponses(formId) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -60,9 +57,6 @@ async function runSample(formId) {
   }
 }
 
-if (import.meta.url === `file://${process.argv}`) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
 // [END forms_stop_accepting_responses]
 
-export {runSample};
+export {stopAcceptingResponses};

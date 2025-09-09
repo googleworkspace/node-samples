@@ -18,9 +18,6 @@ import path from 'path';
 import {forms} from '@googleapis/forms';
 import {authenticate} from '@google-cloud/local-auth';
 
-// TODO: Replace with your form ID (fileId)
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
-
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
 
@@ -29,7 +26,7 @@ const SCOPES = 'https://www.googleapis.com/auth/forms.body';
  *
  * @param {string} formIdToCheck The ID of the form to check.
  */
-async function runSample(formIdToCheck) {
+async function supportsPublishing(formIdToCheck) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -61,9 +58,6 @@ async function runSample(formIdToCheck) {
   }
 }
 
-if (import.meta.url === `file://${process.argv}`) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
 // [END forms_supports_publishing]
 
-export {runSample};
+export {supportsPublishing};

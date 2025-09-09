@@ -21,7 +21,7 @@ import {authenticate} from '@google-cloud/local-auth';
 const formID = '<YOUR_FORM_ID>';
 const watchID = '<YOUR_FORMS_WATCH_ID>';
 
-async function runSample(query) {
+async function deleteWatch() {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -38,9 +38,6 @@ async function runSample(query) {
   return res.data;
 }
 
-if (import.meta.url === `file://${process.argv}`) {
-  runSample().catch(console.error);
-}
 // [END forms_delete_watch]
 
-export {runSample};
+export {deleteWatch};
