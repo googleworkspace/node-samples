@@ -16,7 +16,7 @@
 
 import {expect} from 'expect';
 import {Helpers} from './helpers.js';
-import {searchFiles} from '../drive_v3/file_snippets/search_file.js';
+import {searchFile} from '../drive_v3/file_snippets/search_file.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -31,7 +31,7 @@ describe('Drive snippets', () => {
 
   it('should search files', async () => {
     await helpers.createTestBlob();
-    const files = await searchFiles();
+    const files = await searchFile();
     expect(files.length).toBeDefined();
   });
 });
