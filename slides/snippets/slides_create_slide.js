@@ -62,4 +62,4 @@ async function createSlide(presentationId, pageId) {
 }
 // [END slides_create_slide]
 
-module.exports = {createSlide};
+export {createSlide};

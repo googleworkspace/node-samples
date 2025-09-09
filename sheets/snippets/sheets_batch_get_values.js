@@ -50,4 +50,4 @@ async function batchGetValues(spreadsheetId, _ranges) {
 }
 // [END sheets_batch_get_values]
 
-module.exports = {batchGetValues};
+export {batchGetValues};

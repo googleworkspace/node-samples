@@ -14,9 +14,9 @@
 // [START forms_supports_publishing]
 'use strict';
 
-const path = require('path');
-const {forms} = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {forms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
 // TODO: Replace with your form ID (fileId)
 const YOUR_FORM_ID = 'YOUR_FORM_ID';
@@ -51,18 +51,18 @@ async function runSample(formIdToCheck) {
     // publishing model.
     if (res.data && res.data.publishSettings !== undefined) {
       console.log(`Form '${formIdToCheck}' (Title: ${
-          formTitle}) is NOT a legacy form (supports publishSettings).`);
+        formTitle}) is NOT a legacy form (supports publishSettings).`);
     } else {
       console.log(`Form '${formIdToCheck}' (Title: ${
-          formTitle}) IS a legacy form (does not have publishSettings field).`);
+        formTitle}) IS a legacy form (does not have publishSettings field).`);
     }
   } catch (err) {
     console.error(`Error getting form metadata for '${formIdToCheck}':`, err);
   }
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID).catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 // [END forms_supports_publishing]

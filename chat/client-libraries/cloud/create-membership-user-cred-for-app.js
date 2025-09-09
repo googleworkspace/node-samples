@@ -35,9 +35,9 @@ async function main() {
         // Member name for app membership, do not change this
         name: 'users/app',
         // User type for the membership
-        type: 'BOT'
-      }
-    }
+        type: 'BOT',
+      },
+    },
   };
 
   // Make the request

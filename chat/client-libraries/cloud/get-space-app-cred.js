@@ -27,7 +27,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME here
-    name: 'spaces/SPACE_NAME'
+    name: 'spaces/SPACE_NAME',
   };
 
   // Make the request

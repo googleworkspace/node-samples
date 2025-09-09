@@ -261,4 +261,4 @@ class Helpers {
   }
 }
 
-module.exports = Helpers;
+export default Helpers;

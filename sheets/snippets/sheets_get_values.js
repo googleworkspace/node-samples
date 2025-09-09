@@ -45,4 +45,4 @@ async function getValues(spreadsheetId, range) {
 }
 // [END sheets_get_values]
 
-module.exports = {getValues};
+export {getValues};

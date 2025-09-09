@@ -19,12 +19,12 @@
  * Retrieve the list of changes for the currently authenticated user.
  * @param {string} savedStartPageToken page token got after executing fetch_start_page_token.js file
  **/
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function fetchChanges(savedStartPageToken) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive.readonly',
@@ -50,4 +50,4 @@ async function fetchChanges(savedStartPageToken) {
 }
 // [END drive_fetch_changes]
 
-module.exports = fetchChanges;
+export default fetchChanges;

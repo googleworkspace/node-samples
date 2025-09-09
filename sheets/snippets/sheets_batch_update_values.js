@@ -71,4 +71,4 @@ async function batchUpdateValues(
 }
 // [END sheets_batch_update_values]
 
-module.exports = {batchUpdateValues};
+export {batchUpdateValues};

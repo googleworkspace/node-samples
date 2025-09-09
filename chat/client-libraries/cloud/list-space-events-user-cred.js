@@ -22,7 +22,7 @@ import {createClientWithUserCredentials} from './authentication-utils.js';
 // Authorization scopes based on the event types
 const USER_AUTH_OAUTH_SCOPES = [
   'https://www.googleapis.com/auth/chat.memberships.readonly',
-  'https://www.googleapis.com/auth/chat.messages.readonly'
+  'https://www.googleapis.com/auth/chat.messages.readonly',
 ];
 
 // This sample shows how to list space events with user credential
@@ -35,7 +35,7 @@ async function main() {
     // Replace SPACE_NAME here
     parent: 'spaces/SPACE_NAME',
     // A required filter. Filters events about new memberships and messages
-    filter: 'eventTypes:"google.workspace.chat.membership.v1.created" OR eventTypes:"google.workspace.chat.message.v1.created"'
+    filter: 'eventTypes:"google.workspace.chat.membership.v1.created" OR eventTypes:"google.workspace.chat.message.v1.created"',
   };
 
   // Make the request

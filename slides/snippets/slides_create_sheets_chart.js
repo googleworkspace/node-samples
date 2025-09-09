@@ -87,4 +87,4 @@ async function createSheetsChart(
 }
 // [END slides_create_sheets_chart]
 
-module.exports = {createSheetsChart};
+export {createSheetsChart};

@@ -95,4 +95,4 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
 }
 // [END slides_image_merging]
 
-module.exports = {imageMerging};
+export {imageMerging};

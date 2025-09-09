@@ -14,9 +14,9 @@
 // [START forms_get_responders]
 'use strict';
 
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {drive} from '@googleapis/drive';
+import {authenticate} from '@google-cloud/local-auth';
 
 // TODO: Replace with your form ID
 const YOUR_FORM_ID = 'YOUR_FORM_ID';
@@ -29,7 +29,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
  *
  * @param {string} formId The ID of the form.
  */
-async function runSample(formId, email) {
+async function runSample(formId) {
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
@@ -59,8 +59,8 @@ async function runSample(formId, email) {
   }
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID).catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 // [END forms_get_responders]

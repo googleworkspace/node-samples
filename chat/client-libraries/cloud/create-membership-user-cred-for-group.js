@@ -33,9 +33,9 @@ async function main() {
     membership: {
       groupMember: {
         // Replace GROUP_NAME here
-        name: 'groups/GROUP_NAME'
-      }
-    }
+        name: 'groups/GROUP_NAME',
+      },
+    },
   };
 
   // Make the request

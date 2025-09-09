@@ -10,26 +10,29 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-module.exports = {
-  'extends': 'google',
-  'parserOptions': {
-    'ecmaVersion': 8,
-    'sourceType': 'module',
-  },
-  'env': {
-    'node': true,
-  },
-  'rules': {
+import google from 'eslint-config-google';
+
+export default {
+  rules: {
+    ...google.rules,
     'require-jsdoc': 'off',
-    'max-len': ['error', {'code': 100}],
-    'camelcase': ['error', {
-      'ignoreDestructuring': true,
-      'ignoreImports': true,
-      'allow': ['access_type', 'redirect_uris'],
-    }],
+    'max-len': ['warn', {code: 100}],
+    'camelcase': [
+      'warn',
+      {
+        ignoreDestructuring: true,
+        ignoreImports: true,
+        allow: [
+          'access_type',
+          'redirect_uris',
+          'client_id',
+          'client_secret',
+          'refresh_token',
+        ],
+      },
+    ],
   },
 };

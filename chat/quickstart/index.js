@@ -16,12 +16,12 @@
 
 // [START chat_quickstart]
 
-const fs = require('fs').promises;
-const path = require('path');
-const process = require('process');
-const {authenticate} = require('@google-cloud/local-auth');
-const {ChatServiceClient} = require('@google-apps/chat');
-const {auth} = require('google-auth-library');
+import {promises as fs} from 'fs';
+import path from 'path';
+import process from 'process';
+import {authenticate} from '@google-cloud/local-auth';
+import {ChatServiceClient} from '@google-apps/chat';
+import {auth} from 'google-auth-library';
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/chat.spaces.readonly'];
@@ -101,7 +101,7 @@ async function listSpaces(authClient) {
   // Initialize request argument(s)
   const request = {
     // Filter spaces by space type (SPACE or GROUP_CHAT or DIRECT_MESSAGE)
-    filter: 'space_type = "SPACE"'
+    filter: 'space_type = "SPACE"',
   };
 
   // Make the request

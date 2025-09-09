@@ -60,4 +60,4 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_append_values]
 
-module.exports = {appendValues};
+export {appendValues};

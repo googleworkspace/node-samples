@@ -43,4 +43,4 @@ async function createPresentation(title) {
 }
 // [END slides_create_presentation]
 
-module.exports = {createPresentation};
+export {createPresentation};

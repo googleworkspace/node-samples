@@ -14,9 +14,9 @@
 // [START forms_add_responder]
 'use strict';
 
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {drive} from '@googleapis/drive';
+import {authenticate} from '@google-cloud/local-auth';
 
 // TODO: Replace with your form ID (fileId) and responder's email
 const YOUR_FORM_ID = 'YOUR_FORM_ID';
@@ -55,7 +55,7 @@ async function runSample(formId, email) {
       fileId: formId,
       requestBody: permissionBody,
       fields: 'id,emailAddress,role,type,view',
-      sendNotificationEmail: false,  // Optional
+      sendNotificationEmail: false, // Optional
     });
     console.log('Responder added:', res.data);
   } catch (err) {
@@ -63,8 +63,8 @@ async function runSample(formId, email) {
   }
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID, YOUR_RESPONDER_EMAIL).catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 // [END forms_add_responder]

@@ -19,10 +19,11 @@
  * Upload file with conversion
  * @return{obj} file Id
  * */
+import fs from 'fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function uploadWithConversion() {
-  const fs = require('fs');
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -53,4 +54,4 @@ async function uploadWithConversion() {
 }
 // [END drive_upload_with_conversion]
 
-module.exports = uploadWithConversion;
+export default uploadWithConversion;

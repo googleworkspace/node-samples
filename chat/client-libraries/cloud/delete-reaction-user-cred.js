@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME, MESSAGE_NAME, and REACTION_NAME here
-    name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME/reactions/REACTION_NAME'
+    name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME/reactions/REACTION_NAME',
   };
 
   // Make the request

@@ -14,9 +14,9 @@
 // [START forms_stop_accepting_responses]
 'use strict';
 
-const {authenticate} = require('@google-cloud/local-auth');
-const {forms} = require('@googleapis/forms');
-const path = require('path');
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
+import path from 'path';
 
 // TODO: Replace with your form ID
 const YOUR_FORM_ID = 'YOUR_FORM_ID';
@@ -43,10 +43,10 @@ async function runSample(formId) {
   const setPublishSettingsRequest = {
     publishSettings: {
       publishState: {
-        isPublished: true,  // Keep it published (or ensure it is if it wasn't)
-        isAcceptingResponses: false,  // Stop accepting responses
+        isPublished: true, // Keep it published (or ensure it is if it wasn't)
+        isAcceptingResponses: false, // Stop accepting responses
       },
-    }
+    },
   };
 
   try {
@@ -60,8 +60,8 @@ async function runSample(formId) {
   }
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID).catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 // [END forms_stop_accepting_responses]

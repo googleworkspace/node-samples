@@ -15,16 +15,16 @@
 
 'use strict';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {forms as googleForms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
 async function runSample(query) {
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+  const forms = googleForms({
     version: 'v1',
     auth: authClient,
   });
@@ -67,9 +67,9 @@ async function runSample(query) {
   return updateResponse.data;
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample().catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 
 // [END forms_add_item]

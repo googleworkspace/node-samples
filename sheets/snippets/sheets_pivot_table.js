@@ -110,4 +110,4 @@ async function pivotTable(spreadsheetId) {
 }
 // [END sheets_pivot_tables]
 
-module.exports = {pivotTable};
+export {pivotTable};

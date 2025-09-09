@@ -19,12 +19,12 @@
  * Create a third party shortcut
  * @return{obj} shortcut Id
  * */
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function createShortcut() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -49,4 +49,4 @@ async function createShortcut() {
 }
 // [END drive_create_shortcut]
 
-module.exports = createShortcut;
+export default createShortcut;

@@ -128,4 +128,4 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
 }
 // [END slides_text_merging]
 
-module.exports = {textMerging};
+export {textMerging};

@@ -60,4 +60,4 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
 }
 // [END sheets_update_values]
 
-module.exports = {updateValues};
+export {updateValues};

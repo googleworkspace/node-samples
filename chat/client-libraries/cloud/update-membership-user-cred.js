@@ -32,12 +32,12 @@ async function main() {
       // Replace SPACE_NAME and MEMBER_NAME here
       name: 'spaces/SPACE_NAME/members/MEMBER_NAME',
       // Replace ROLE_NAME here with ROLE_MEMBER or ROLE_MANAGER
-      role: 'ROLE_NAME'
+      role: 'ROLE_NAME',
     },
     updateMask: {
       // The field paths to update.
-      paths: ['role']
-    }
+      paths: ['role'],
+    },
   };
 
   // Make the request

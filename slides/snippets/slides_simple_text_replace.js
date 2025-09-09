@@ -65,4 +65,4 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
 }
 // [END slides_simple_text_replace]
 
-module.exports = {simpleTextReplace};
+export {simpleTextReplace};

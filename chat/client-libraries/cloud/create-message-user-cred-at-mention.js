@@ -33,8 +33,8 @@ async function main() {
     message: {
       // The user with USER_NAME will be mentioned if they are in the space
       // Replace USER_NAME here
-      text: 'Hello <users/USER_NAME>!'
-    }
+      text: 'Hello <users/USER_NAME>!',
+    },
   };
 
   // Make the request

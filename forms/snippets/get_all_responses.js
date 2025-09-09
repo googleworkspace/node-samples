@@ -15,9 +15,9 @@
 
 'use strict';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {forms as googleForms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
 const formID = '<YOUR_FORM_ID>';
 
@@ -26,7 +26,7 @@ async function runSample(query) {
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/forms.responses.readonly',
   });
-  const forms = google.forms({
+  const forms = googleForms({
     version: 'v1',
     auth: auth,
   });
@@ -37,9 +37,9 @@ async function runSample(query) {
   return res.data;
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample().catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 
 // [END forms_retrieve_all_responses]

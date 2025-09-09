@@ -89,4 +89,4 @@ async function conditionalFormatting(spreadsheetId) {
 }
 // [END sheets_conditional_formatting]
 
-module.exports = {conditionalFormatting};
+export {conditionalFormatting};

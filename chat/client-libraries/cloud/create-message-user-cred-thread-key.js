@@ -39,9 +39,9 @@ async function main() {
       thread: {
         // Thread key specifies a thread and is unique to the chat app
         // that sets it
-        threadKey: 'THREAD_KEY'
-      }
-    }
+        threadKey: 'THREAD_KEY',
+      },
+    },
   };
 
   // Make the request

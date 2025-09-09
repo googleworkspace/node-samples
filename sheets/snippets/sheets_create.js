@@ -48,4 +48,4 @@ async function create(title) {
 }
 // [END sheets_create]
 
-module.exports = {create};
+export {create};

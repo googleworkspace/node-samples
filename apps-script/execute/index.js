@@ -19,11 +19,10 @@
  * folder.
  *
  */
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 async function callAppsScript() {
   const scriptId = '1xGOh6wCm7hlIVSVPKm0y_dL-YqetspS5DEVmMzaxd_6AAvI-_u8DSgBT';
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app

@@ -41,5 +41,5 @@ async function runSample(query) {
 if (module === require.main) {
   runSample().catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 // [END forms_renew_watch]

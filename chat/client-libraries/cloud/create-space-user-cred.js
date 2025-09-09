@@ -31,8 +31,8 @@ async function main() {
     space: {
       spaceType: 'SPACE',
       // Replace DISPLAY_NAME here.
-      displayName: 'DISPLAY_NAME'
-    }
+      displayName: 'DISPLAY_NAME',
+    },
   };
 
   // Make the request

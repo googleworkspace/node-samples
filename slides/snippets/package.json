@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "slides-api-snippets",
   "version": "1.0.0",
   "description": "Code snippets for the Sheets API",

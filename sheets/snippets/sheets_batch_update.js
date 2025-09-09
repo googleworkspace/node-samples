@@ -67,4 +67,4 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
 }
 // [END sheets_batch_update]
 
-module.exports = {batchUpdate};
+export {batchUpdate};

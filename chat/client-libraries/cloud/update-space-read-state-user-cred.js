@@ -34,13 +34,13 @@ async function main() {
       name: 'users/me/spaces/SPACE_NAME/spaceReadState',
       lastReadTime: {
         seconds: Math.floor(timestamp / 1000),
-        nanos: (timestamp % 1000) * 1000000
-      }
+        nanos: (timestamp % 1000) * 1000000,
+      },
     },
     updateMask: {
       // The field paths to update.
-      paths: ['last_read_time']
-    }
+      paths: ['last_read_time'],
+    },
   };
 
   // Make the request

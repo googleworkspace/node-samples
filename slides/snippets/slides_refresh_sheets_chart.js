@@ -57,4 +57,4 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
 }
 // [END slides_refresh_sheets_chart]
 
-module.exports = {refreshSheetsChart};
+export {refreshSheetsChart};

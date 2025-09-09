@@ -60,4 +60,4 @@ async function createBulletedText(presentationId, shapeId) {
 }
 // [END slides_create_bulleted_text]
 
-module.exports = {createBulletedText};
+export {createBulletedText};

@@ -19,12 +19,12 @@
  * Find all shared drives without an organizer and add one.
  * @param{string} userEmail user ID
  * */
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function recoverDrives(userEmail) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -69,4 +69,4 @@ async function recoverDrives(userEmail) {
 }
 // [END drive_recover_drives]
 
-module.exports = recoverDrives;
+export default recoverDrives;

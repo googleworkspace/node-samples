@@ -39,9 +39,9 @@ async function main() {
       thread: {
         // Resource name of a thread that uniquely identify a thread
         // Replace SPACE_NAME and THREAD_NAME here
-        name: 'spaces/SPACE_NAME/threads/THREAD_NAME'
-      }
-    }
+        name: 'spaces/SPACE_NAME/threads/THREAD_NAME',
+      },
+    },
   };
 
   // Make the request

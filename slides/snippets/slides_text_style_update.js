@@ -111,4 +111,4 @@ async function textStyleUpdate(presentationId, shapeId) {
 }
 // [END slides_text_style_update]
 
-module.exports = {textStyleUpdate};
+export {textStyleUpdate};

@@ -21,10 +21,10 @@
  * @param{string} folderId Id of the folder to move
  * @return{obj} file status
  * */
-async function moveFileToFolder(fileId, folderId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
+async function moveFileToFolder(fileId, folderId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -57,4 +57,4 @@ async function moveFileToFolder(fileId, folderId) {
 }
 // [END drive_move_file_to_folder]
 
-module.exports = moveFileToFolder;
+export default moveFileToFolder;

@@ -20,10 +20,10 @@
  * @param{string} fileId file ID
  * @return{obj} file status
  * */
-async function exportPdf(fileId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
+async function exportPdf(fileId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -45,4 +45,4 @@ async function exportPdf(fileId) {
 }
 // [END drive_export_pdf]
 
-module.exports = exportPdf;
+export default exportPdf;

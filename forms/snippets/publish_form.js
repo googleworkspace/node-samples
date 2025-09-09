@@ -14,9 +14,9 @@
 // [START forms_publish_form]
 'use strict';
 
-const path = require('path');
-const {forms} = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {forms} from '@googleapis/forms';
+import {authenticate} from '@google-cloud/local-auth';
 
 // TODO: Replace with your Form ID
 const YOUR_FORM_ID = 'YOUR_FORM_ID';
@@ -46,7 +46,7 @@ async function runSample(formIdToPublish) {
         isPublished: true,
         isAcceptingResponses: true,
       },
-    }
+    },
   };
 
   try {
@@ -60,8 +60,8 @@ async function runSample(formIdToPublish) {
   }
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID).catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 // [END forms_publish_form]

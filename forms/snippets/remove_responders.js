@@ -14,9 +14,9 @@
 // [START forms_remove_responder]
 'use strict';
 
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'path';
+import {drive} from '@googleapis/drive';
+import {authenticate} from '@google-cloud/local-auth';
 
 // TODO: Replace with your form ID (fileId) and responder's email
 const YOUR_FORM_ID = 'YOUR_FORM_ID';
@@ -58,8 +58,7 @@ async function runSample(formId, email) {
         permissionId: permissionId,
       });
       console.log(`Responder with permission ID '${
-          permissionId}' removed successfully.`);
-
+        permissionId}' removed successfully.`);
     } else {
       console.log('Responder not found for the specified form');
     }
@@ -68,8 +67,8 @@ async function runSample(formId, email) {
   }
 }
 
-if (module === require.main) {
+if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID, YOUR_RESPONDER_EMAIL).catch(console.error);
 }
-module.exports = runSample;
+export default runSample;
 // [END forms_remove_responder]

@@ -18,12 +18,12 @@
 /**
  * Retrieve page token for the current state of the account
  * */
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 async function fetchStartPageToken() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
 
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
@@ -40,4 +40,4 @@ async function fetchStartPageToken() {
 }
 // [END drive_fetch_start_page_token]
 
-module.exports = fetchStartPageToken;
+export default fetchStartPageToken;

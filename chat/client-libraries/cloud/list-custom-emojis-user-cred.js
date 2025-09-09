@@ -29,7 +29,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Optional. Replace FILTER here
-    filter: 'FILTER'
+    filter: 'FILTER',
   };
 
   // Make the request

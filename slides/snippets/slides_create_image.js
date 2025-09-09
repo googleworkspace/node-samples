@@ -79,4 +79,4 @@ async function createImage(presentationId, pageId) {
 }
 // [END slides_create_image]
 
-module.exports = {createImage};
+export {createImage};

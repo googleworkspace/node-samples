@@ -82,4 +82,4 @@ async function createTextboxWithText(presentationId, pageId) {
 }
 // [END slides_create_textbox_with_text]
 
-module.exports = {createTextboxWithText};
+export {createTextboxWithText};
