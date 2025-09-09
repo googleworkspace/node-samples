@@ -26,12 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-      - name: Update npm
-        run: |
-          npm install -g npm@latest
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+      - run: npm ci
       - name: Write test credentials
         run: |
           mkdir "${HOME}/secrets"

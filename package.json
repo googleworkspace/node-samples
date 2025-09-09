@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "@gsuite/samples",
+  "name": "@googleworkspace/samples",
   "version": "1.0.0",
   "description": "Node.js samples for [Google Workspace docs](https://developers.google.com/workspace/).",
   "license": "MIT",
