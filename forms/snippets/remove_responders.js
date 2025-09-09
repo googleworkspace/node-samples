@@ -70,5 +70,6 @@ async function runSample(formId, email) {
 if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID, YOUR_RESPONDER_EMAIL).catch(console.error);
 }
-export default runSample;
 // [END forms_remove_responder]
+
+export {runSample};

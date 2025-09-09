@@ -57,4 +57,4 @@ async function moveFileToFolder(fileId, folderId) {
 }
 // [END drive_move_file_to_folder]
 
-export default moveFileToFolder;
+export {moveFileToFolder};

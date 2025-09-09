@@ -63,5 +63,6 @@ async function runSample(formId) {
 if (import.meta.url === `file://${process.argv}`) {
   runSample(YOUR_FORM_ID).catch(console.error);
 }
-export default runSample;
 // [END forms_stop_accepting_responses]
+
+export {runSample};

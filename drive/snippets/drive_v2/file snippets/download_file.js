@@ -46,4 +46,4 @@ async function downloadFile(fileId) {
 }
 // [END drive_download_file]
 
-export default downloadFile;
+export {downloadFile};

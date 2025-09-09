@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import createShortcut from '../drive_v3/file_snippets/create_shortcut.js';
+import {Helpers} from './helpers.js';
+import {createShortcut} from '../drive_v3/file_snippets/create_shortcut.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

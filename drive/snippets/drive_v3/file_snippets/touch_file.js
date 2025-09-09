@@ -50,4 +50,4 @@ async function touchFile(fileId, Timestamp) {
 }
 // [END drive_touch_file]
 
-export default touchFile;
+export {touchFile};

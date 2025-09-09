@@ -69,4 +69,4 @@ async function recoverDrives(userEmail) {
 }
 // [END drive_recover_drives]
 
-export default recoverDrives;
+export {recoverDrives};

@@ -42,6 +42,6 @@ async function runSample(query) {
 if (import.meta.url === `file://${process.argv}`) {
   runSample().catch(console.error);
 }
-export default runSample;
-
 // [END forms_retrieve_single_response]
+
+export {runSample};

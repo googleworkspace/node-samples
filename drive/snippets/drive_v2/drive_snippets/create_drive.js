@@ -50,4 +50,4 @@ async function createDrive() {
 }
 // [END drive_create_drive]
 
-export default createDrive;
+export {createDrive};

@@ -41,5 +41,6 @@ async function runSample(query) {
 if (import.meta.url === `file://${process.argv}`) {
   runSample().catch(console.error);
 }
-export default runSample;
 // [END forms_delete_watch]
+
+export {runSample};

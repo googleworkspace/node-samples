@@ -46,4 +46,4 @@ async function listAppdata() {
 }
 // [END drive_list_appdata]
 
-export default listAppdata;
+export {listAppdata};

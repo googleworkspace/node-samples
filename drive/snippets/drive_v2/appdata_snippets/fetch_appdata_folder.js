@@ -43,4 +43,4 @@ async function fetchAppdataFolder() {
 }
 // [END drive_fetch_appdata_folder]
 
-export default fetchAppdataFolder;
+export {fetchAppdataFolder};

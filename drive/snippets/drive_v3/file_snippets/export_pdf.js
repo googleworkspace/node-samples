@@ -45,4 +45,4 @@ async function exportPdf(fileId) {
 }
 // [END drive_export_pdf]
 
-export default exportPdf;
+export {exportPdf};

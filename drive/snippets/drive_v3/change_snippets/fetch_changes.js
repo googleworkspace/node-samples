@@ -50,4 +50,4 @@ async function fetchChanges(savedStartPageToken) {
 }
 // [END drive_fetch_changes]
 
-export default fetchChanges;
+export {fetchChanges};

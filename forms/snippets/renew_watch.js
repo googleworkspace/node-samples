@@ -38,4 +38,4 @@ async function runSample() {
 await runSample();
 // [END forms_renew_watch]
 
-export default runSample;
+export {runSample};

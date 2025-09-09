@@ -52,4 +52,4 @@ async function uploadBasic() {
 }
 // [END drive_upload_basic]
 
-export default uploadBasic;
+export {uploadBasic};

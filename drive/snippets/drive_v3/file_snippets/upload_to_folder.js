@@ -58,4 +58,4 @@ async function uploadToFolder(folderId) {
 }
 // [END drive_upload_to_folder]
 
-export default uploadToFolder;
+export {uploadToFolder};

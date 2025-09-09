@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import SlidesTextStyleUpdate from '../slides_text_style_update.js';
+import {Helpers} from './helpers.js';
+import {textStyleUpdate} from '../slides_text_style_update.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -29,7 +29,7 @@ describe('Presentation snippets', () => {
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
     const boxId = await helpers.createTestTextbox(presentationId, pageId);
-    const response = await SlidesTextStyleUpdate.textStyleUpdate(
+    const response = await textStyleUpdate(
         presentationId,
         boxId,
     );

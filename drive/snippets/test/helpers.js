@@ -110,4 +110,4 @@ class Helpers {
   }
 }
 
-export default Helpers;
+export {Helpers};

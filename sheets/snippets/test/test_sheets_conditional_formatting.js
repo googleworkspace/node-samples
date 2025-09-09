@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import SheetsConditionalFormatting from '../sheets_conditional_formatting.js';
+import {Helpers} from './helpers.js';
+import {conditionalFormatting} from '../sheets_conditional_formatting.js';
 
 describe('Spreadsheet conditional formatting snippet', () => {
   const helpers = new Helpers();
@@ -28,7 +28,7 @@ describe('Spreadsheet conditional formatting snippet', () => {
   it('should conditionally format', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsConditionalFormatting.conditionalFormatting(
+    const result = await conditionalFormatting(
         spreadsheetId,
     );
     expect(result.data.replies.length).toBe(2);

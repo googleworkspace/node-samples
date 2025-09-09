@@ -47,4 +47,4 @@ async function createFolder() {
 }
 // [END drive_create_folder]
 
-export default createFolder;
+export {createFolder};

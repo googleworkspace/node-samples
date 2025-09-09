@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import SlidesCreateSlide from '../slides_create_slide.js';
+import {Helpers} from './helpers.js';
+import {createSlide} from '../slides_create_slide.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -28,7 +28,7 @@ describe('Presentation snippets', () => {
     const presentationId = await helpers.createTestPresentation();
     await helpers.addSlides(presentationId, 3, 'TITLE_AND_TWO_COLUMNS');
     const pageId = 'my_page_id';
-    const response = await SlidesCreateSlide.createSlide(
+    const response = await createSlide(
         presentationId,
         pageId,
     );

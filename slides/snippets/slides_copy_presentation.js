@@ -48,4 +48,4 @@ async function copyPresentation(presentationId, copyTitle) {
 }
 // [END slides_copy_presentation]
 
-export default copyPresentation;
+export {copyPresentation};

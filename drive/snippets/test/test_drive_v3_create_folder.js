@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import createFolder from '../drive_v3/file_snippets/create_folder.js';
+import {Helpers} from './helpers.js';
+import {createFolder} from '../drive_v3/file_snippets/create_folder.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

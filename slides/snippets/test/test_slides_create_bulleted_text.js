@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import SlidesCreateBulletedText from '../slides_create_bulleted_text.js';
+import {Helpers} from './helpers.js';
+import {createBulletedText} from '../slides_create_bulleted_text.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -29,7 +29,7 @@ describe('Presentation snippets', () => {
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
     const boxId = await helpers.createTestTextbox(presentationId, pageId);
-    const response = await SlidesCreateBulletedText.createBulletedText(
+    const response = await createBulletedText(
         presentationId,
         boxId,
     );

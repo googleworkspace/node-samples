@@ -53,4 +53,4 @@ async function uploadWithConversion() {
   }
 }
 // [END drive_upload_with_conversion]
-export default uploadWithConversion;
+export {uploadWithConversion};

@@ -47,4 +47,4 @@ async function fetchChanges() {
 }
 // [END drive_fetch_changes]
 
-export default fetchChanges;
+export {fetchChanges};

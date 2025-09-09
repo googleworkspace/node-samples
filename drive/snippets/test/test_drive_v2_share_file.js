@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import shareFile from '../drive_v2/file snippets/share_file.js';
+import {Helpers} from './helpers.js';
+import {shareFile} from '../drive_v2/file snippets/share_file.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

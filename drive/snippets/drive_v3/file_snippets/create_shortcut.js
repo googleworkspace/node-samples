@@ -49,4 +49,4 @@ async function createShortcut() {
 }
 // [END drive_create_shortcut]
 
-export default createShortcut;
+export {createShortcut};

@@ -48,4 +48,4 @@ async function searchFile() {
 }
 // [END drive_search_file]
 
-export default searchFile;
+export {searchFile};

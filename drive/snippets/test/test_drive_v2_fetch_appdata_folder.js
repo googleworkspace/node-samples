@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import fetchAppdataFolder from '../drive_v2/appdata_snippets/fetch_appdata_folder.js';
+import {Helpers} from './helpers.js';
+import {fetchAppdataFolder} from '../drive_v2/appdata_snippets/fetch_appdata_folder.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

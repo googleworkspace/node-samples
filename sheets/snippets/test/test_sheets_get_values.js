@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import SheetsGetValues from '../sheets_get_values.js';
+import {Helpers} from './helpers.js';
+import {getValues} from '../sheets_get_values.js';
 
 describe('Spreadsheet get values snippet', () => {
   const helpers = new Helpers();
@@ -28,7 +28,7 @@ describe('Spreadsheet get values snippet', () => {
   it('should get spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsGetValues.getValues(spreadsheetId, 'A1:C2');
+    const result = await getValues(spreadsheetId, 'A1:C2');
     const values = result.data.values;
     expect(values.length).toBe(2);
     expect(values[0].length).toBe(3);

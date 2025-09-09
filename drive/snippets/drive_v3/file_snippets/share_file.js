@@ -68,4 +68,4 @@ async function shareFile(fileId, targetUserEmail, targetDomainName) {
 }
 // [END drive_share_file]
 
-export default shareFile;
+export {shareFile};

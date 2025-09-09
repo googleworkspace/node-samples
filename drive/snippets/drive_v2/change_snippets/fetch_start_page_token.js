@@ -40,4 +40,4 @@ async function fetchStartPageToken() {
 }
 // [END drive_fetch_start_page_token]
 
-export default fetchStartPageToken;
+export {fetchStartPageToken};

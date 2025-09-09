@@ -14,8 +14,8 @@
 // * limitations under the License.
 // */
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import SlidesRefreshSheetsChart from '../slides_refresh_sheets_chart.js';
+import {Helpers} from './helpers.js';
+import {refreshSheetsChart} from '../slides_refresh_sheets_chart.js';
 
 // Replace with your test spreadsheets id and charts id
 const CHART_ID = 1107320627;
@@ -38,7 +38,7 @@ describe('Presentation snippets', () => {
         DATA_SPREADSHEET_ID,
         CHART_ID,
     );
-    const response = await SlidesRefreshSheetsChart.refreshSheetsChart(
+    const response = await refreshSheetsChart(
         presentationId,
         sheetChartId,
     );

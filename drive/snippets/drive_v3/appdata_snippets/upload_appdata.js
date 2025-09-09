@@ -53,4 +53,4 @@ async function uploadAppdata() {
 }
 // [END drive_upload_appdata]
 
-export default uploadAppdata;
+export {uploadAppdata};

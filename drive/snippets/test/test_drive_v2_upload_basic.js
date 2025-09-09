@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import Helpers from './helpers.js';
-import uploadBasic from '../drive_v2/file snippets/upload_basic.js';
+import {Helpers} from './helpers.js';
+import {uploadBasic} from '../drive_v2/file snippets/upload_basic.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
