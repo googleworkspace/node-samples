@@ -4,12 +4,17 @@
   "version": "1.0.0",
   "description": "Code snippets for the Sheets API",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "engines": {
     "node": ">=14"
   },
   "license": "Apache-2.0",
   "dependencies": {
     "googleapis": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
   }
 }

@@ -12,7 +12,10 @@
     "node": ">=14"
   },
   "scripts": {
-    "start": "node ."
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
   },
   "license": "Apache-2.0"
 }

@@ -31,6 +31,7 @@ jobs:
         with:
           cache: 'pnpm'
       - run: pnpm i
+      - run: pnpm check
       - name: Write test credentials
         run: |
           mkdir "${HOME}/secrets"

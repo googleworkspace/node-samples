@@ -8,11 +8,14 @@
     "@google-cloud/local-auth": "catalog:",
     "googleapis": "catalog:"
   },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "start": "node ."
+    "check": "tsc --noEmit"
   },
   "license": "Apache-2.0"
 }

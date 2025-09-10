@@ -1,11 +1,13 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
-    "test": {}
+    "test": { "inputs": ["**/*.ts", "**/*.js"] },
+    "check": { "inputs": ["**/*.ts", "**/*.js", "tsconfig.json"] }
   },
   "globalEnv": [
     "GOOGLE_APPLICATION_CREDENTIALS",
     "SERVICE_ACCOUNT_CREDENTIALS",
     "GOOGLE_CLOUD_PROJECT"
-  ]
+  ],
+  "globalDependencies": ["pnpm-lock.yaml", "tsconfig.*json"]
 }

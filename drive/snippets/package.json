@@ -5,7 +5,8 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "mocha --timeout 60000 test/**"
+    "test": "mocha --timeout 60000 test/**",
+    "check": "tsc --noEmit"
   },
   "license": "Apache-2.0",
   "dependencies": {
@@ -14,5 +15,8 @@
     "googleapis": "catalog:",
     "mocha": "catalog:",
     "uuid": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
   }
 }

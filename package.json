@@ -25,7 +25,8 @@
   "scripts": {
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "check": "turbo run check"
   },
   "eslintIgnore": [
     "getFoldersUnderRoot.js",
