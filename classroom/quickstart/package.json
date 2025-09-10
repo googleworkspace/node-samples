@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "googleapis": "^105.0.0",
-    "@google-cloud/local-auth": "^2.1.0"
+    "@google-cloud/local-auth": "catalog:"
   },
   "engines": {
     "node": ">=14"

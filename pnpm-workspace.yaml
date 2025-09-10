@@ -1,2 +1,17 @@
 packages:
-  - '**/*'
+  - "**/*"
+catalog:
+  "@google-apps/meet": ^0.1.0
+  "@google-cloud/local-auth": ^2.1.0
+  "@grpc/grpc-js": ^1.13.4
+  "@types/jest": ^30.0.0
+  "@types/mocha": ^10.0.10
+  "@types/node": ^24.3.1
+  eslint: ^8.14.0
+  eslint-config-google: ^0.14.0
+  expect: ^29.2.1
+  mocha: ^10.0.0
+  open: ^10.1.2
+  server-destroy: ^1.0.1
+  turbo: ^2.5.6
+  uuid: ^8.3.2

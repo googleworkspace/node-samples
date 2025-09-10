@@ -5,8 +5,8 @@
   "description": "A simple Node.js command-line application that makes requests to the Google Meet API.",
   "private": true,
   "dependencies": {
-    "@google-cloud/local-auth": "^2.1.0",
-    "@google-apps/meet": "^0.1.0"
+    "@google-cloud/local-auth": "catalog:",
+    "@google-apps/meet": "catalog:"
   },
   "devDependencies": {},
   "engines": {
