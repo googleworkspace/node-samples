@@ -5,10 +5,9 @@
     "description": "A simple Node.js command-line application that makes requests to the Google Chat API.",
     "private": true,
     "dependencies": {
-        "@google-cloud/local-auth": "catalog:",
-        "@google-apps/chat": "^0.4.0"
+        "@google-apps/chat": "catalog:",
+        "@google-cloud/local-auth": "catalog:"
     },
-    "devDependencies": {},
     "engines": {
         "node": ">=14"
     },

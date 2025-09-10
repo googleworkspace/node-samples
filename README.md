@@ -21,6 +21,7 @@ This repository contains Node.js samples for Google Workspace APIs.
 1. `pnpm test`
 1. `pnpm lint`
 1. Delete service account file.
+1. `pnpx codemod pnpm/catalog` to add package dependencies to the catalog
 
 ## Contributing
 

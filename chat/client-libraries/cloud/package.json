@@ -4,11 +4,11 @@
   "description": "Samples that use the Cloud client library to call the Google Chat API.",
   "type": "module",
   "dependencies": {
+    "@google-apps/chat": "catalog:",
+    "@grpc/grpc-js": "catalog:",
+    "google-auth-library": "catalog:",
     "open": "catalog:",
-    "server-destroy": "catalog:",
-    "google-auth-library": "^10.1.0",
-    "@google-apps/chat": "^0.16.0",
-    "@grpc/grpc-js": "catalog:"
+    "server-destroy": "catalog:"
   },
   "engines": {
     "node": ">=14"
