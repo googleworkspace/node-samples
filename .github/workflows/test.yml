@@ -41,7 +41,8 @@ jobs:
           DEFAULT_CREDENTIALS: ${{secrets.SNIPPETS_DEFAULT_CREDENTIALS}}
           SERVICE_ACCOUNT_CREDENTIALS: ${{secrets.SNIPPETS_DELEGATED_ADMIN_SERVICE_ACCOUNT}}
           CLIENT_ID_FILE: ${{secrets.SNIPPETS_CLIENT_ID_FILE}}
-      - run: |
+      - name: Run tests
+        run: |
           export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/secrets/default_credentials.json"
           export SERVICE_ACCOUNT_CREDENTIALS="${HOME}/secrets/service_account.json"
           pnpm test
