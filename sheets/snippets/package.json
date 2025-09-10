@@ -1,17 +1,23 @@
 {
-  "type": "module",
   "name": "sheets-api-snippets",
   "version": "1.0.0",
-  "description": "Code snippets for the Sheets API",
   "private": true,
+  "description": "Code snippets for the Sheets API",
+  "license": "Apache-2.0",
+  "type": "module",
   "scripts": {
     "test": "mocha --timeout 60000"
   },
-  "license": "Apache-2.0",
   "dependencies": {
-    "expect": "catalog:",
     "google-auth-library": "catalog:",
-    "googleapis": "catalog:",
-    "mocha": "catalog:"
+    "googleapis": "catalog:"
+  },
+  "devDependencies": {
+    "expect": "catalog:",
+    "mocha": "catalog:",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

@@ -1,15 +1,11 @@
 {
-  "name": "docs-nodejs-quickstart",
+  "name": "drive-snippets-drive-v3-change-snippets",
   "version": "1.0.0",
   "private": true,
-  "description": "A simple Node.js command-line application that makes requests to the Docs API.",
   "license": "Apache-2.0",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "googleapis": "catalog:"
   },
   "devDependencies": {
     "typescript": "catalog:"

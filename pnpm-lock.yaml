@@ -57,9 +57,6 @@ catalogs:
     typescript:
       specifier: ^5.9.2
       version: 5.9.2
-    uuid:
-      specifier: ^8.3.2
-      version: 8.3.2
 
 importers:
 
@@ -123,6 +120,12 @@ importers:
         specifier: 'catalog:'
         version: 5.9.2
 
+  apps-script/execute:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
   apps-script/quickstart:
     dependencies:
       '@google-cloud/local-auth':
@@ -166,6 +169,10 @@ importers:
       server-destroy:
         specifier: 'catalog:'
         version: 1.0.1
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   chat/quickstart:
     dependencies:
@@ -229,23 +236,61 @@ importers:
         specifier: 'catalog:'
         version: 5.9.2
 
-  drive/snippets:
-    dependencies:
-      expect:
+  drive/snippets/drive_v2:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 29.7.0
-      google-auth-library:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/appdata_snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 10.3.0
-      googleapis:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/change_snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 159.0.0
-      mocha:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/drive_snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 10.8.2
-      uuid:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/file snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 8.3.2
+        version: 5.9.2
+
+  drive/snippets/drive_v3/appdata_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/drive_v3/change_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/drive_v3/drive_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/drive_v3/file_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/files:
     devDependencies:
       typescript:
         specifier: 'catalog:'
@@ -315,18 +360,22 @@ importers:
 
   sheets/snippets:
     dependencies:
-      expect:
-        specifier: 'catalog:'
-        version: 29.7.0
       google-auth-library:
         specifier: 'catalog:'
         version: 10.3.0
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      expect:
+        specifier: 'catalog:'
+        version: 29.7.0
       mocha:
         specifier: 'catalog:'
         version: 10.8.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   slides/quickstart:
     dependencies:
@@ -343,18 +392,22 @@ importers:
 
   slides/snippets:
     dependencies:
-      expect:
-        specifier: 'catalog:'
-        version: 29.7.0
       google-auth-library:
         specifier: 'catalog:'
         version: 10.3.0
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      expect:
+        specifier: 'catalog:'
+        version: 29.7.0
       mocha:
         specifier: 'catalog:'
         version: 10.8.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   tasks/quickstart:
     dependencies:
@@ -1509,10 +1562,6 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
-
-  uuid@8.3.2:
-    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
-    hasBin: true
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
@@ -2841,8 +2890,6 @@ snapshots:
   url-template@2.0.8: {}
 
   util-deprecate@1.0.2: {}
-
-  uuid@8.3.2: {}
 
   uuid@9.0.1: {}
 
