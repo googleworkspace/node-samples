@@ -9,9 +9,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "expect": "^29.2.1",
-    "google-auth-library": "^8.2.0",
-    "googleapis": "^105.0.0",
-    "mocha": "^10.0.0"
+    "expect": "catalog:",
+    "google-auth-library": "catalog:",
+    "googleapis": "catalog:",
+    "mocha": "catalog:"
   }
 }

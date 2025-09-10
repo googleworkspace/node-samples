@@ -5,10 +5,9 @@
   "description": "A simple Node.js command-line application that makes requests to the Gmail API.",
   "private": true,
   "dependencies": {
-    "googleapis": "^105.0.0",
-    "@google-cloud/local-auth": "^2.1.0"
+    "@google-cloud/local-auth": "catalog:",
+    "googleapis": "catalog:"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=14"
   },
