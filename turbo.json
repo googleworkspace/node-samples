@@ -1,0 +1,11 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "test": {}
+  },
+  "globalEnv": [
+    "GOOGLE_APPLICATION_CREDENTIALS",
+    "SERVICE_ACCOUNT_CREDENTIALS",
+    "GOOGLE_CLOUD_PROJECT"
+  ]
+}

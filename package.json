@@ -16,14 +16,17 @@
   ],
   "devDependencies": {
     "eslint": "^8.14.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "turbo": "^2.5.6"
   },
   "scripts": {
     "lint": "eslint **/*.js",
-    "lint:fix": "eslint --fix **/*.js"
+    "lint:fix": "eslint --fix **/*.js",
+    "test": "turbo run test"
   },
   "eslintIgnore": [
     "getFoldersUnderRoot.js",
     "**/node_modules/**"
-  ]
+  ],
+  "packageManager": "pnpm@10.15.1"
 }
