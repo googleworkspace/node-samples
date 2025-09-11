@@ -32,7 +32,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 /**
  * Reads previously authorized credentials from the save file.
  *
- * @return {Promise<OAuth2Client|null>}
+ * @return {Promise<import("google-auth-library").AuthClient|null>}
  */
 async function loadSavedCredentialsIfExist() {
   try {
@@ -47,7 +47,7 @@ async function loadSavedCredentialsIfExist() {
 /**
  * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
- * @param {OAuth2Client} client
+ * @param {import("google-auth-library").AuthClient} client
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
@@ -84,7 +84,7 @@ async function authorize() {
 
 /**
  * Lists the next 10 events on the user's primary calendar.
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * @param {import("google-auth-library").AuthClient} auth An authorized OAuth2 client.
  */
 async function listEvents(auth) {
   const calendar = google.calendar({version: 'v3', auth});

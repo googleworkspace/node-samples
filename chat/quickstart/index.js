@@ -35,7 +35,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 /**
  * Reads previously authorized credentials from the save file.
  *
- * @return {Promise<OAuth2Client|null>}
+ * @return {Promise<import("google-auth-library").AuthClient|null>}
  */
 async function loadSavedCredentialsIfExist() {
   try {
@@ -51,7 +51,7 @@ async function loadSavedCredentialsIfExist() {
 /**
  * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
- * @param {OAuth2Client} client
+ * @param {import("google-auth-library").AuthClient} client
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
@@ -70,7 +70,7 @@ async function saveCredentials(client) {
 /**
  * Load or request or authorization to call APIs.
  *
- * @return {Promise<OAuth2Client>}
+ * @return {Promise<import("google-auth-library").AuthClient>}
  */
 async function authorize() {
   let client = await loadSavedCredentialsIfExist();
@@ -89,7 +89,7 @@ async function authorize() {
 
 /**
  * Lists spaces with user credential.
- * @param {OAuth2Client} authClient An authorized OAuth2 client.
+ * @param {import("google-auth-library").AuthClient} authClient An authorized OAuth2 client.
  */
 async function listSpaces(authClient) {
   // Create a client

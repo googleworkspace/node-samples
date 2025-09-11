@@ -32,7 +32,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 /**
  * Reads previously authorized credentials from the save file.
  *
- * @return {Promise<OAuth2Client|null>}
+ * @return {Promise<import("google-auth-library").AuthClient|null>}
  */
 async function loadSavedCredentialsIfExist() {
   try {
@@ -47,7 +47,7 @@ async function loadSavedCredentialsIfExist() {
 /**
  * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
- * @param {OAuth2Client} client
+ * @param {import("google-auth-library").AuthClient} client
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
@@ -85,7 +85,7 @@ async function authorize() {
 /**
  * Prints the names and majors of students in a sample spreadsheet:
  * @see https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
+ * @param {import("google-auth-library").AuthClient} auth The authenticated Google OAuth client.
  */
 async function listMajors(auth) {
   const sheets = google.sheets({version: 'v4', auth});

@@ -32,7 +32,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 /**
  * Reads previously authorized credentials from the save file.
  *
- * @return {Promise<OAuth2Client|null>}
+ * @return {Promise<import("google-auth-library").AuthClient|null>}
  */
 async function loadSavedCredentialsIfExist() {
   try {
@@ -47,7 +47,7 @@ async function loadSavedCredentialsIfExist() {
 /**
  * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
- * @param {OAuth2Client} client
+ * @param {import("google-auth-library").AuthClient} client
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
@@ -85,7 +85,7 @@ async function authorize() {
 /**
  * Prints the number of slides and elements in a sample presentation:
  * https://docs.google.com/presentation/d/1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc/edit
- * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
+ * @param {import("google-auth-library").AuthClient} auth The authenticated Google OAuth client.
  */
 async function listSlides(auth) {
   const slidesApi = google.slides({version: 'v1', auth});

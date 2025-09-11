@@ -32,7 +32,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 /**
  * Reads previously authorized credentials from the save file.
  *
- * @return {Promise<OAuth2Client|null>}
+ * @return {Promise<import("google-auth-library").AuthClient|null>}
  */
 async function loadSavedCredentialsIfExist() {
   try {
@@ -47,7 +47,7 @@ async function loadSavedCredentialsIfExist() {
 /**
  * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
- * @param {OAuth2Client} client
+ * @param {import("google-auth-library").AuthClient} client
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
@@ -85,7 +85,7 @@ async function authorize() {
 /**
  * Lists the first 10 users in the domain.
  *
- * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * @param {import("google-auth-library").AuthClient} auth An authorized OAuth2 client.
  */
 async function listUsers(auth) {
   const service = google.admin({version: 'directory_v1', auth});
