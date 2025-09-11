@@ -30,17 +30,23 @@ async function searchFile() {
   });
   const service = google.drive({version: 'v3', auth});
   const files = [];
+  let pageToken = null;
+
   try {
-    const res = await service.files.list({
-      q: 'mimeType=\'image/jpeg\'',
-      fields: 'nextPageToken, files(id, name)',
-      spaces: 'drive',
-    });
-    Array.prototype.push.apply(files, res.files);
-    res.data.files.forEach(function(file) {
-      console.log('Found file:', file.name, file.id);
-    });
-    return res.data.files;
+    do {
+      const res = await service.files.list({
+        q: 'mimeType=\'image/jpeg\'',
+        fields: 'nextPageToken, files(id, name)',
+        spaces: 'drive',
+        pageToken: pageToken,
+      });
+      res.data.files.forEach(function(file) {
+        console.log('Found file:', file.name, file.id);
+      });
+      Array.prototype.push.apply(files, res.files);
+      pageToken = res.nextPageToken;
+    } while (pageToken);
+    return files;
   } catch (err) {
     // TODO(developer) - Handle error
     throw err;
