@@ -9,11 +9,11 @@
     "test": "mocha --timeout 60000"
   },
   "dependencies": {
-    "google-auth-library": "catalog:",
     "googleapis": "catalog:"
   },
   "devDependencies": {
     "expect": "catalog:",
+    "google-auth-library": "catalog:",
     "mocha": "catalog:",
     "typescript": "catalog:"
   },

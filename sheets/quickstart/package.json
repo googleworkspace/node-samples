@@ -13,6 +13,7 @@
     "googleapis": "catalog:"
   },
   "devDependencies": {
+    "google-auth-library": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {

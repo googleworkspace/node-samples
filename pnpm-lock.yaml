@@ -13,7 +13,7 @@ catalogs:
       specifier: ^0.7.0
       version: 0.7.0
     '@google-cloud/local-auth':
-      specifier: ^3.0.1
+      specifier: 3.0.1
       version: 3.0.1
     '@grpc/grpc-js':
       specifier: ^1.13.4
@@ -37,10 +37,10 @@ catalogs:
       specifier: ^29.2.1
       version: 29.7.0
     google-auth-library:
-      specifier: ^10.3.0
+      specifier: 10.3.0
       version: 10.3.0
     googleapis:
-      specifier: ^159.0.0
+      specifier: 159.0.0
       version: 159.0.0
     mocha:
       specifier: ^10.0.0
@@ -90,6 +90,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -103,6 +106,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -116,12 +122,22 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   apps-script/execute:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -135,6 +151,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -148,6 +167,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -160,9 +182,6 @@ importers:
       '@grpc/grpc-js':
         specifier: 'catalog:'
         version: 1.13.4
-      google-auth-library:
-        specifier: 'catalog:'
-        version: 10.3.0
       open:
         specifier: 'catalog:'
         version: 10.2.0
@@ -170,6 +189,9 @@ importers:
         specifier: 'catalog:'
         version: 1.0.1
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -183,6 +205,9 @@ importers:
         specifier: 'catalog:'
         version: 3.0.1
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -196,16 +221,25 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   docs/quickstart:
     dependencies:
+      '@google-cloud/local-auth':
+        specifier: 'catalog:'
+        version: 3.0.1
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -219,6 +253,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -232,76 +269,121 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v2:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v2/appdata_snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v2/change_snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v2/drive_snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v2/file snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v3/appdata_snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v3/change_snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v3/drive_snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/drive_v3/file_snippets:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   drive/snippets/files:
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   forms/snippets:
     dependencies:
+      '@google-cloud/local-auth':
+        specifier: 'catalog:'
+        version: 3.0.1
+      '@googleapis/drive':
+        specifier: ^15.0.0
+        version: 15.0.0
+      '@googleapis/forms':
+        specifier: ^4.0.1
+        version: 4.0.1
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -315,6 +397,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -328,6 +413,9 @@ importers:
         specifier: 'catalog:'
         version: 3.0.1
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -341,6 +429,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -354,15 +445,15 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   sheets/snippets:
     dependencies:
-      google-auth-library:
-        specifier: 'catalog:'
-        version: 10.3.0
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
@@ -370,6 +461,9 @@ importers:
       expect:
         specifier: 'catalog:'
         version: 29.7.0
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       mocha:
         specifier: 'catalog:'
         version: 10.8.2
@@ -386,15 +480,15 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
 
   slides/snippets:
     dependencies:
-      google-auth-library:
-        specifier: 'catalog:'
-        version: 10.3.0
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
@@ -402,6 +496,9 @@ importers:
       expect:
         specifier: 'catalog:'
         version: 29.7.0
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       mocha:
         specifier: 'catalog:'
         version: 10.8.2
@@ -418,6 +515,9 @@ importers:
         specifier: 'catalog:'
         version: 159.0.0
     devDependencies:
+      google-auth-library:
+        specifier: 'catalog:'
+        version: 10.3.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -461,6 +561,14 @@ packages:
   '@google-cloud/local-auth@3.0.1':
     resolution: {integrity: sha512-YJ3GFbksfHyEarbVHPSCzhKpjbnlAhdzg2SEf79l6ODukrSM1qUOqfopY232Xkw26huKSndyzmJz+A6b2WYn7Q==}
     engines: {node: '>=14.0.0'}
+
+  '@googleapis/drive@15.0.0':
+    resolution: {integrity: sha512-PGuhTZMrS8HCJnFpYRhCU92GXgWEszku6XA517rYv1ohNB3nJFrVvjdMvzr/QOD4Q8R4Kg3fFLl6ULpKewLc0A==}
+    engines: {node: '>=12.0.0'}
+
+  '@googleapis/forms@4.0.1':
+    resolution: {integrity: sha512-SuBTmkdCv9gzbzGK71VP98o7I6ESeZRBdcJQT0r3sYFhAL2kZHXJj4Y2+KxZ4FoPVi4cVR/jpAInNof6xh7S1Q==}
+    engines: {node: '>=12.0.0'}
 
   '@grpc/grpc-js@1.13.4':
     resolution: {integrity: sha512-GsFaMXCkMqkKIvwCQjCrwH+GHbPKBjhwo/8ZuUkWHqbI73Kky9I+pQltrlT0+MWpedCoosda53lgjYfyEPgxBg==}
@@ -1012,6 +1120,10 @@ packages:
 
   googleapis-common@8.0.0:
     resolution: {integrity: sha512-66if47It7y+Sab3HMkwEXx1kCq9qUC9px8ZXoj1CMrmLmUw81GpbnsNlXnlyZyGbGPGcj+tDD9XsZ23m7GLaJQ==}
+    engines: {node: '>=18.0.0'}
+
+  googleapis-common@8.0.2-rc.0:
+    resolution: {integrity: sha512-JTcxRvmFa9Ec1uyfMEimEMeeKq1sHNZX3vn2qmoUMtnvixXXvcqTcbDZvEZXkEWpGlPlOf4joyep6/qs0BrLyg==}
     engines: {node: '>=18.0.0'}
 
   googleapis@159.0.0:
@@ -1683,6 +1795,18 @@ snapshots:
       - encoding
       - supports-color
 
+  '@googleapis/drive@15.0.0':
+    dependencies:
+      googleapis-common: 8.0.2-rc.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@googleapis/forms@4.0.1':
+    dependencies:
+      googleapis-common: 8.0.2-rc.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@grpc/grpc-js@1.13.4':
     dependencies:
       '@grpc/proto-loader': 0.7.15
@@ -2304,6 +2428,16 @@ snapshots:
   google-logging-utils@1.1.1: {}
 
   googleapis-common@8.0.0:
+    dependencies:
+      extend: 3.0.2
+      gaxios: 7.1.1
+      google-auth-library: 10.3.0
+      qs: 6.14.0
+      url-template: 2.0.8
+    transitivePeerDependencies:
+      - supports-color
+
+  googleapis-common@8.0.2-rc.0:
     dependencies:
       extend: 3.0.2
       gaxios: 7.1.1

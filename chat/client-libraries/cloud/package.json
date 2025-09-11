@@ -57,11 +57,11 @@
   "dependencies": {
     "@google-apps/chat": "catalog:",
     "@grpc/grpc-js": "catalog:",
-    "google-auth-library": "catalog:",
     "open": "catalog:",
     "server-destroy": "catalog:"
   },
   "devDependencies": {
+    "google-auth-library": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {
