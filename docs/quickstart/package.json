@@ -9,9 +9,11 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "catalog:",
     "googleapis": "catalog:"
   },
   "devDependencies": {
+    "google-auth-library": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {

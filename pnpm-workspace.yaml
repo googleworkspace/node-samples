@@ -4,7 +4,7 @@ packages:
 catalog:
   '@google-apps/chat': ^0.19.0
   '@google-apps/meet': ^0.7.0
-  '@google-cloud/local-auth': ^3.0.1
+  '@google-cloud/local-auth': 3.0.1
   '@grpc/grpc-js': ^1.13.4
   '@types/jest': ^30.0.0
   '@types/mocha': ^10.0.10
@@ -12,8 +12,8 @@ catalog:
   eslint: ^8.57.1
   eslint-config-google: ^0.14.0
   expect: ^29.2.1
-  google-auth-library: ^10.3.0
-  googleapis: ^159.0.0
+  google-auth-library: 10.3.0
+  googleapis: 159.0.0
   mocha: ^10.0.0
   open: ^10.1.2
   server-destroy: ^1.0.1

@@ -9,9 +9,13 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
+    "@google-cloud/local-auth": "catalog:",
+    "@googleapis/drive": "^15.0.0",
+    "@googleapis/forms": "^4.0.1",
     "googleapis": "catalog:"
   },
   "devDependencies": {
+    "google-auth-library": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {

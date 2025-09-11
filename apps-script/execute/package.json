@@ -8,9 +8,13 @@
     "check": "tsc --noEmit"
   },
   "devDependencies": {
+    "google-auth-library": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "googleapis": "catalog:"
   }
 }
