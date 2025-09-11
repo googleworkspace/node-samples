@@ -1,13 +1,14 @@
 packages:
-  - "**/*"
+  - '**/*'
+
 catalog:
-  "@google-apps/chat": ^0.19.0
-  "@google-apps/meet": ^0.7.0
-  "@google-cloud/local-auth": ^3.0.1
-  "@grpc/grpc-js": ^1.13.4
-  "@types/jest": ^30.0.0
-  "@types/mocha": ^10.0.10
-  "@types/node": ^24.3.1
+  '@google-apps/chat': ^0.19.0
+  '@google-apps/meet': ^0.7.0
+  '@google-cloud/local-auth': ^3.0.1
+  '@grpc/grpc-js': ^1.13.4
+  '@types/jest': ^30.0.0
+  '@types/mocha': ^10.0.10
+  '@types/node': ^24.3.1
   eslint: ^8.57.1
   eslint-config-google: ^0.14.0
   expect: ^29.2.1
@@ -17,4 +18,5 @@ catalog:
   open: ^10.1.2
   server-destroy: ^1.0.1
   turbo: ^2.5.6
+  typescript: ^5.9.2
   uuid: ^8.3.2

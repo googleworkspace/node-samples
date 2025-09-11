@@ -1,19 +1,21 @@
 {
-  "type": "module",
   "name": "google-meet-nodejs-quickstart",
   "version": "1.0.0",
-  "description": "A simple Node.js command-line application that makes requests to the Google Meet API.",
   "private": true,
-  "dependencies": {
-    "@google-cloud/local-auth": "catalog:",
-    "@google-apps/meet": "catalog:"
-  },
-  "devDependencies": {},
-  "engines": {
-    "node": ">=14"
-  },
+  "description": "A simple Node.js command-line application that makes requests to the Google Meet API.",
+  "license": "Apache-2.0",
+  "type": "module",
   "scripts": {
-    "start": "node ."
+    "check": "tsc --noEmit"
   },
-  "license": "Apache-2.0"
+  "dependencies": {
+    "@google-apps/meet": "catalog:",
+    "@google-cloud/local-auth": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=20"
+  }
 }

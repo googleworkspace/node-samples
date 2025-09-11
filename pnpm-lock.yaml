@@ -54,9 +54,9 @@ catalogs:
     turbo:
       specifier: ^2.5.6
       version: 2.5.6
-    uuid:
-      specifier: ^8.3.2
-      version: 8.3.2
+    typescript:
+      specifier: ^5.9.2
+      version: 5.9.2
 
 importers:
 
@@ -89,6 +89,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   adminSDK/reports:
     dependencies:
@@ -98,6 +102,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   adminSDK/reseller:
     dependencies:
@@ -107,6 +115,16 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  apps-script/execute:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   apps-script/quickstart:
     dependencies:
@@ -116,6 +134,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   calendar/quickstart:
     dependencies:
@@ -125,6 +147,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   chat/client-libraries/cloud:
     dependencies:
@@ -143,6 +169,10 @@ importers:
       server-destroy:
         specifier: 'catalog:'
         version: 1.0.1
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   chat/quickstart:
     dependencies:
@@ -152,6 +182,10 @@ importers:
       '@google-cloud/local-auth':
         specifier: 'catalog:'
         version: 3.0.1
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   classroom/quickstart:
     dependencies:
@@ -161,12 +195,20 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   docs/quickstart:
     dependencies:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   drive/activity-v2:
     dependencies:
@@ -176,6 +218,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   drive/quickstart:
     dependencies:
@@ -185,30 +231,80 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
-  drive/snippets:
-    dependencies:
-      expect:
+  drive/snippets/drive_v2:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 29.7.0
-      google-auth-library:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/appdata_snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 10.3.0
-      googleapis:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/change_snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 159.0.0
-      mocha:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/drive_snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 10.8.2
-      uuid:
+        version: 5.9.2
+
+  drive/snippets/drive_v2/file snippets:
+    devDependencies:
+      typescript:
         specifier: 'catalog:'
-        version: 8.3.2
+        version: 5.9.2
+
+  drive/snippets/drive_v3/appdata_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/drive_v3/change_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/drive_v3/drive_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/drive_v3/file_snippets:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  drive/snippets/files:
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   forms/snippets:
     dependencies:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   gmail/quickstart:
     dependencies:
@@ -218,6 +314,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   meet/quickstart:
     dependencies:
@@ -227,6 +327,10 @@ importers:
       '@google-cloud/local-auth':
         specifier: 'catalog:'
         version: 3.0.1
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   people/quickstart:
     dependencies:
@@ -236,6 +340,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   sheets/quickstart:
     dependencies:
@@ -245,21 +353,29 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   sheets/snippets:
     dependencies:
-      expect:
-        specifier: 'catalog:'
-        version: 29.7.0
       google-auth-library:
         specifier: 'catalog:'
         version: 10.3.0
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      expect:
+        specifier: 'catalog:'
+        version: 29.7.0
       mocha:
         specifier: 'catalog:'
         version: 10.8.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   slides/quickstart:
     dependencies:
@@ -269,21 +385,29 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   slides/snippets:
     dependencies:
-      expect:
-        specifier: 'catalog:'
-        version: 29.7.0
       google-auth-library:
         specifier: 'catalog:'
         version: 10.3.0
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      expect:
+        specifier: 'catalog:'
+        version: 29.7.0
       mocha:
         specifier: 'catalog:'
         version: 10.8.2
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
   tasks/quickstart:
     dependencies:
@@ -293,6 +417,10 @@ importers:
       googleapis:
         specifier: 'catalog:'
         version: 159.0.0
+    devDependencies:
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
 
 packages:
 
@@ -1418,6 +1546,11 @@ packages:
     resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
     engines: {node: '>=10'}
 
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   undici-types@7.10.0:
     resolution: {integrity: sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==}
 
@@ -1429,10 +1562,6 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
-
-  uuid@8.3.2:
-    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
-    hasBin: true
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
@@ -2750,6 +2879,8 @@ snapshots:
 
   type-fest@0.20.2: {}
 
+  typescript@5.9.2: {}
+
   undici-types@7.10.0: {}
 
   uri-js@4.4.1:
@@ -2759,8 +2890,6 @@ snapshots:
   url-template@2.0.8: {}
 
   util-deprecate@1.0.2: {}
-
-  uuid@8.3.2: {}
 
   uuid@9.0.1: {}
 

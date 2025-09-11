@@ -1,17 +1,20 @@
 {
-  "type": "module",
   "name": "docs-nodejs-quickstart",
   "version": "1.0.0",
-  "description": "A simple Node.js command-line application that makes requests to the Docs API.",
   "private": true,
+  "description": "A simple Node.js command-line application that makes requests to the Docs API.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "googleapis": "catalog:"
   },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
   "engines": {
-    "node": ">=14"
-  },
-  "scripts": {
-    "start": "node ."
-  },
-  "license": "Apache-2.0"
+    "node": ">=20"
+  }
 }

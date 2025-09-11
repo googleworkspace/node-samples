@@ -2,17 +2,8 @@
   "name": "google-chat-cloud-client-library-samples",
   "version": "0.0.1",
   "description": "Samples that use the Cloud client library to call the Google Chat API.",
+  "license": "Apache-2.0",
   "type": "module",
-  "dependencies": {
-    "@google-apps/chat": "catalog:",
-    "@grpc/grpc-js": "catalog:",
-    "google-auth-library": "catalog:",
-    "open": "catalog:",
-    "server-destroy": "catalog:"
-  },
-  "engines": {
-    "node": ">=14"
-  },
   "scripts": {
     "create-custom-emoji-user-cred.js": "node ./create-custom-emoji-user-cred.js",
     "create-membership-user-cred-for-app.js": "node ./create-membership-user-cred-for-app.js",
@@ -44,16 +35,9 @@
     "get-space-app-cred.js": "node ./get-space-app-cred.js",
     "get-space-event-user-cred.js": "node ./get-space-event-user-cred.js",
     "get-space-notification-setting-user-cred.js": "node ./get-space-notification-setting-user-cred.js",
-    "get-space-user-cred.js": "node ./get-space-user-cred.js",
     "get-space-read-state-user-cred.js": "node ./get-space-read-state-user-cred.js",
+    "get-space-user-cred.js": "node ./get-space-user-cred.js",
     "get-thread-read-state-user-cred.js": "node ./get-thread-read-state-user-cred.js",
-    "set-up-space-user-cred.js": "node ./set-up-space-user-cred.js",
-    "update-membership-user-cred.js": "node ./update-membership-user-cred.js",
-    "update-message-app-cred.js": "node ./update-message-app-cred.js",
-    "update-message-user-cred.js": "node ./update-message-user-cred.js",
-    "update-space-notification-setting-user-cred.js": "node ./update-space-notification-setting-user-cred.js",
-    "update-space-read-state-user-cred.js": "node ./update-space-read-state-user-cred.js",
-    "update-space-user-cred.js": "node ./update-space-user-cred.js",
     "list-custom-emojis-user-cred.js": "node ./list-custom-emojis-user-cred.js",
     "list-memberships-app-cred.js": "node ./list-memberships-app-cred.js",
     "list-memberships-user-cred.js": "node ./list-memberships-user-cred.js",
@@ -61,7 +45,26 @@
     "list-reactions-user-cred.js": "node ./list-reactions-user-cred.js",
     "list-space-events-user-cred.js": "node ./list-space-events-user-cred.js",
     "list-spaces-app-cred.js": "node ./list-spaces-app-cred.js",
-    "list-spaces-user-cred.js": "node ./list-spaces-user-cred.js"
+    "list-spaces-user-cred.js": "node ./list-spaces-user-cred.js",
+    "set-up-space-user-cred.js": "node ./set-up-space-user-cred.js",
+    "update-membership-user-cred.js": "node ./update-membership-user-cred.js",
+    "update-message-app-cred.js": "node ./update-message-app-cred.js",
+    "update-message-user-cred.js": "node ./update-message-user-cred.js",
+    "update-space-notification-setting-user-cred.js": "node ./update-space-notification-setting-user-cred.js",
+    "update-space-read-state-user-cred.js": "node ./update-space-read-state-user-cred.js",
+    "update-space-user-cred.js": "node ./update-space-user-cred.js"
   },
-  "license": "Apache-2.0"
+  "dependencies": {
+    "@google-apps/chat": "catalog:",
+    "@grpc/grpc-js": "catalog:",
+    "google-auth-library": "catalog:",
+    "open": "catalog:",
+    "server-destroy": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=20"
+  }
 }

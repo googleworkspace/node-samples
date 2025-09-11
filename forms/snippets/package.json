@@ -1,15 +1,20 @@
 {
-  "type": "module",
   "name": "forms-api-snippets",
   "version": "1.0.0",
-  "description": "Code snippets for the Sheets API",
   "private": true,
-  "scripts": {},
-  "engines": {
-    "node": ">=14"
-  },
+  "description": "Code snippets for the Sheets API",
   "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
     "googleapis": "catalog:"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
