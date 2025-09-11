@@ -13,19 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// It may require modifications to work in your environment.
 
 // [START chat_create_custom_emoji_user_cred]
 
+import fs from 'node:fs';
 import {createClientWithUserCredentials} from './authentication-utils.js';
-import fs from 'fs';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.customemojis'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.customemojis',
+];
 
 // This sample shows how to create custom emoji with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+      USER_AUTH_OAUTH_SCOPES,
+  );
 
   // TODO(developer) Replace FILENAME here.
   const filename = 'FILENAME';
@@ -39,7 +42,7 @@ async function main() {
       emoji_name: 'EMOJI_NAME',
       payload: {
         file_content: fileContent,
-        filename: filename,
+        filename,
       },
     },
   };
@@ -51,6 +54,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_create_custom_emoji_user_cred]

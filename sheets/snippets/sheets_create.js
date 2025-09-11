@@ -34,17 +34,12 @@ async function create(title) {
       title,
     },
   };
-  try {
-    const spreadsheet = await service.spreadsheets.create({
-      resource,
-      fields: 'spreadsheetId',
-    });
-    console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
-    return spreadsheet.data.spreadsheetId;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const spreadsheet = await service.spreadsheets.create({
+    resource,
+    fields: 'spreadsheetId',
+  });
+  console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
+  return spreadsheet.data.spreadsheetId;
 }
 // [END sheets_create]
 

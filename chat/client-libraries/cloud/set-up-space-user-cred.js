@@ -19,13 +19,17 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.spaces.create'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.spaces.create',
+];
 
 // This sample shows how to set up a named space with one initial member
 // with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+      USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
@@ -34,13 +38,15 @@ async function main() {
       // Replace DISPLAY_NAME here.
       displayName: 'DISPLAY_NAME',
     },
-    memberships: [{
-      member: {
-        // Replace USER_NAME here.
-        name: 'users/USER_NAME',
-        type: 'HUMAN',
+    memberships: [
+      {
+        member: {
+          // Replace USER_NAME here.
+          name: 'users/USER_NAME',
+          type: 'HUMAN',
+        },
       },
-    }],
+    ],
   };
 
   // Make the request
@@ -50,6 +56,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_set_up_space_user_cred]

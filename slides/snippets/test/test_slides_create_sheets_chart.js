@@ -14,8 +14,8 @@
 // * limitations under the License.
 // */
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {createSheetsChart} from '../slides_create_sheets_chart.js';
+import {Helpers} from './helpers.js';
 
 // Replace with your test spreadsheets id and charts id
 const CHART_ID = 1107320627;

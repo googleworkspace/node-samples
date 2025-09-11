@@ -47,6 +47,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_update_space_notification_setting_user_cred]

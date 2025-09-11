@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_retrieve_single_response]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const formID = '<YOUR_FORM_ID>';
 const responseID = '<YOUR_RESPONSE_ID>';
@@ -26,14 +27,14 @@ async function getSingleResponse() {
   });
   const formsClient = forms({
     version: 'v1',
-    auth: auth,
+    auth,
   });
-  const res = await formsClient.forms.responses.get({
+  const result = await formsClient.forms.responses.get({
     formId: formID,
     responseId: responseID,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_retrieve_single_response]

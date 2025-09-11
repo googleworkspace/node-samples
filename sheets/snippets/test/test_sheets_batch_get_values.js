@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {batchGetValues} from '../sheets_batch_get_values.js';
+import {Helpers} from './helpers.js';
 
 describe('Spreadsheet batch get values snippet', () => {
   const helpers = new Helpers();
@@ -28,10 +28,7 @@ describe('Spreadsheet batch get values snippet', () => {
   it('should batch get spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await batchGetValues(spreadsheetId, [
-      'A1:A3',
-      'B1:C1',
-    ]);
+    const result = await batchGetValues(spreadsheetId, ['A1:A3', 'B1:C1']);
     const valueRanges = result.data.valueRanges;
     expect(valueRanges.length).toBe(2);
     const values = valueRanges[0].values;

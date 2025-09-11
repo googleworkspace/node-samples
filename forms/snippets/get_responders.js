@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_get_responders]
-import path from 'path';
-import {drive} from '@googleapis/drive';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {drive} from '@googleapis/drive';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
@@ -33,12 +34,12 @@ async function getResponders(formId) {
   const driveService = drive({version: 'v3', auth: authClient});
 
   try {
-    const res = await driveService.permissions.list({
+    const result = await driveService.permissions.list({
       fileId: formId,
       includePermissionsForView: 'published',
       fields: 'permissions(id,emailAddress,type,role,view)',
     });
-    const permissions = res.data.permissions || [];
+    const permissions = result.data.permissions || [];
     if (permissions.length === 0) {
       console.log(`No permissions found for form ID: ${formId}`);
     } else {

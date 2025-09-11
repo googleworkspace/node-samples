@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {updateValues} from '../sheets_update_values.js';
+import {Helpers} from './helpers.js';
 
 describe('Spreadsheet update values snippet', () => {
   const helpers = new Helpers();
@@ -27,15 +27,10 @@ describe('Spreadsheet update values snippet', () => {
 
   it('should update spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
-    const result = await updateValues(
-        spreadsheetId,
-        'A1:B2',
-        'USER_ENTERED',
-        [
-          ['A', 'B'],
-          ['C', 'D'],
-        ],
-    );
+    const result = await updateValues(spreadsheetId, 'A1:B2', 'USER_ENTERED', [
+      ['A', 'B'],
+      ['C', 'D'],
+    ]);
     expect(result.data.updatedRows).toBe(2);
     expect(result.data.updatedColumns).toBe(2);
     expect(result.data.updatedCells).toBe(4);

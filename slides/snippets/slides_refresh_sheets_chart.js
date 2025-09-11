@@ -37,23 +37,16 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
       },
     },
   ];
-
-  // Execute the request.
-  try {
-    const batchUpdateResponse = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(
-        `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
-    );
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const batchUpdateResponse = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(
+      `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
+  );
+  return batchUpdateResponse.data;
 }
 // [END slides_refresh_sheets_chart]
 

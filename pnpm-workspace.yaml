@@ -14,6 +14,7 @@ catalog:
   expect: ^29.2.1
   google-auth-library: 10.3.0
   googleapis: 159.0.0
+  googleapis-common: 8.0.0
   mocha: ^10.0.0
   open: ^10.1.2
   server-destroy: ^1.0.1

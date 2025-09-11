@@ -40,6 +40,6 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_list_spaces_app_cred]

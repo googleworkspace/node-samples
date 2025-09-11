@@ -15,9 +15,9 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
-import {recoverDrives} from '../drive_v2/drive_snippets/recover_drives.js';
 import {createDrive} from '../drive_v2/drive_snippets/create_drive.js';
+import {recoverDrives} from '../drive_v2/drive_snippets/recover_drives.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

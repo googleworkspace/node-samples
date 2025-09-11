@@ -49,7 +49,7 @@ async function createSheetsChart(
     {
       createSheetsChart: {
         objectId: presentationChartId,
-        spreadsheetId: spreadsheetId,
+        spreadsheetId,
         chartId: sheetChartId,
         linkingMode: 'LINKED',
         elementProperties: {
@@ -69,21 +69,14 @@ async function createSheetsChart(
       },
     },
   ];
-
-  // Execute the request.
-  try {
-    const batchUpdateResponse = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(`Added a linked Sheets chart with ID: ${presentationChartId}`);
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const batchUpdateResponse = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(`Added a linked Sheets chart with ID: ${presentationChartId}`);
+  return batchUpdateResponse.data;
 }
 // [END slides_create_sheets_chart]
 

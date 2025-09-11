@@ -19,6 +19,7 @@ export default {
   rules: {
     ...google.rules,
     'require-jsdoc': 'off',
+    'valid-jsdoc': 'off',
     'max-len': ['warn', {code: 100}],
     'camelcase': [
       'warn',

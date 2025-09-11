@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_share_file]
+
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Download a Document file in PDF format
  * @param{string} fileId file ID
  * @param{string} targetUser username
  * @param{string} targetDomain domain
- * */
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
-
+ */
 async function shareFile(fileId, targetUser, targetDomain) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -54,8 +55,8 @@ async function shareFile(fileId, targetUser, targetDomain) {
   for (const permission of permissions) {
     try {
       const result = await service.permissions.insert({
-        resource: permission,
-        fileId: fileId,
+        requestBody: permission,
+        fileId,
         fields: 'id',
       });
       permissionIds.push(result.data.id);

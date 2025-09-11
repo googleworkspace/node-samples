@@ -11,10 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import path from 'node:path';
 // [START forms_stop_accepting_responses]
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
-import path from 'path';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
@@ -46,7 +46,7 @@ async function stopAcceptingResponses(formId) {
 
   try {
     const res = await formsClient.forms.setPublishSettings({
-      formId: formId,
+      formId,
       requestBody: setPublishSettingsRequest,
     });
     console.log('Form is no longer accepting responses.', res.data);

@@ -57,17 +57,12 @@ async function batchUpdateValues(
     data,
     valueInputOption,
   };
-  try {
-    const result = await service.spreadsheets.values.batchUpdate({
-      spreadsheetId,
-      resource,
-    });
-    console.log('%d cells updated.', result.data.totalUpdatedCells);
-    return result;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const result = await service.spreadsheets.values.batchUpdate({
+    spreadsheetId,
+    resource,
+  });
+  console.log('%d cells updated.', result.data.totalUpdatedCells);
+  return result;
 }
 // [END sheets_batch_update_values]
 

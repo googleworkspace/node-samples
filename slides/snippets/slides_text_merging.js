@@ -39,91 +39,80 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
   // Use the Sheets API to load data, one record per row.
   const responses = [];
   const dataRangeNotation = 'A2:M6';
+  const sheetsResponse = await sheetsService.spreadsheets.values.get({
+    spreadsheetId: dataSpreadsheetId,
+    range: dataRangeNotation,
+  });
+  const values = sheetsResponse.data.values;
 
-  try {
-    const sheetsResponse = await sheetsService.spreadsheets.values.get({
-      spreadsheetId: dataSpreadsheetId,
-      range: dataRangeNotation,
+  // For each record, create a new merged presentation.
+  for (let i = 0; i < values.length; ++i) {
+    const row = values[i];
+    const customerName = row[2]; // name in column 3
+    const caseDescription = row[5]; // case description in column 6
+    const totalPortfolio = row[11]; // total portfolio in column 12
+
+    // Duplicate the template presentation using the Drive API.
+    const title = `${customerName} presentation`;
+
+    const driveResponse = await driveService.files.copy({
+      fileId: templatePresentationId,
+      requestBody: {
+        title,
+      },
     });
-    const values = sheetsResponse.data.values;
 
-    // For each record, create a new merged presentation.
-    for (let i = 0; i < values.length; ++i) {
-      const row = values[i];
-      const customerName = row[2]; // name in column 3
-      const caseDescription = row[5]; // case description in column 6
-      const totalPortfolio = row[11]; // total portfolio in column 12
-
-      // Duplicate the template presentation using the Drive API.
-      const copyTitle = customerName + ' presentation';
-      let requests = {
-        name: copyTitle,
-      };
-
-      const driveResponse = await driveService.files.copy({
-        fileId: templatePresentationId,
+    const presentationCopyId = driveResponse.data.id;
+    // Create the text merge (replaceAllText) requests for this presentation.
+    requests = [
+      {
+        replaceAllText: {
+          containsText: {
+            text: '{{customer-name}}',
+            matchCase: true,
+          },
+          replaceText: customerName,
+        },
+      },
+      {
+        replaceAllText: {
+          containsText: {
+            text: '{{case-description}}',
+            matchCase: true,
+          },
+          replaceText: caseDescription,
+        },
+      },
+      {
+        replaceAllText: {
+          containsText: {
+            text: '{{total-portfolio}}',
+            matchCase: true,
+          },
+          replaceText: totalPortfolio,
+        },
+      },
+    ];
+    // Execute the requests for this presentation.
+    const batchUpdateResponse = await slidesService.presentations.batchUpdate({
+      presentationId: presentationCopyId,
+      requestBody: {
         requests,
-      });
-
-      const presentationCopyId = driveResponse.data.id;
-      // Create the text merge (replaceAllText) requests for this presentation.
-      requests = [
-        {
-          replaceAllText: {
-            containsText: {
-              text: '{{customer-name}}',
-              matchCase: true,
-            },
-            replaceText: customerName,
-          },
-        },
-        {
-          replaceAllText: {
-            containsText: {
-              text: '{{case-description}}',
-              matchCase: true,
-            },
-            replaceText: caseDescription,
-          },
-        },
-        {
-          replaceAllText: {
-            containsText: {
-              text: '{{total-portfolio}}',
-              matchCase: true,
-            },
-            replaceText: totalPortfolio,
-          },
-        },
-      ];
-      // Execute the requests for this presentation.
-      const batchUpdateResponse = await slidesService.presentations.batchUpdate(
-          {
-            presentationId: presentationCopyId,
-            resource: {
-              requests,
-            },
-          },
-      );
-      const result = batchUpdateResponse.data;
-      // [START_EXCLUDE silent]
-      responses.push(result.replies);
-      // [END_EXCLUDE]
-      // Count the total number of replacements made.
-      let numReplacements = 0;
-      for (let i = 0; i < result.replies.length; ++i) {
-        numReplacements += result.replies[i].replaceAllText.occurrencesChanged;
-      }
-      console.log(
-          `Created presentation for ${customerName} with ID: ` +
-          presentationCopyId,
-      );
-      console.log(`Replaced ${numReplacements} text instances`);
-      return result;
+      },
+    });
+    const result = batchUpdateResponse.data;
+    // [START_EXCLUDE silent]
+    responses.push(result.replies);
+    // [END_EXCLUDE]
+    // Count the total number of replacements made.
+    let numReplacements = 0;
+    for (let i = 0; i < result.replies.length; ++i) {
+      numReplacements += result.replies[i].replaceAllText.occurrencesChanged;
     }
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
+    console.log(
+        `Created presentation for ${customerName} with ID: ${presentationCopyId}`,
+    );
+    console.log(`Replaced ${numReplacements} text instances`);
   }
 }
 // [END slides_text_merging]

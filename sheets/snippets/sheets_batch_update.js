@@ -52,18 +52,13 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
   });
   // Add additional requests (operations) ...
   const batchUpdateRequest = {requests};
-  try {
-    const response = await service.spreadsheets.batchUpdate({
-      spreadsheetId,
-      resource: batchUpdateRequest,
-    });
-    const findReplaceResponse = response.data.replies[1].findReplace;
-    console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
-    return response;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const response = await service.spreadsheets.batchUpdate({
+    spreadsheetId,
+    requestBody: batchUpdateRequest,
+  });
+  const findReplaceResponse = response.data.replies[1].findReplace;
+  console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
+  return response;
 }
 // [END sheets_batch_update]
 

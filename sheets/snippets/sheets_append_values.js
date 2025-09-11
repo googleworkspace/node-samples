@@ -44,19 +44,14 @@ async function appendValues(spreadsheetId, range, valueInputOption, _values) {
   const resource = {
     values,
   };
-  try {
-    const result = await service.spreadsheets.values.append({
-      spreadsheetId,
-      range,
-      valueInputOption,
-      resource,
-    });
-    console.log(`${result.data.updates.updatedCells} cells appended.`);
-    return result;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const result = await service.spreadsheets.values.append({
+    spreadsheetId,
+    range,
+    valueInputOption,
+    resource,
+  });
+  console.log(`${result.data.updates.updatedCells} cells appended.`);
+  return result;
 }
 // [END sheets_append_values]
 

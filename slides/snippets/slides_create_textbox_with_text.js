@@ -64,21 +64,16 @@ async function createTextboxWithText(presentationId, pageId) {
       },
     },
   ];
-  // Execute the request.
-  try {
-    const createTextboxWithTextResponse =
-      await service.presentations.batchUpdate({
+  const createTextboxWithTextResponse = await service.presentations.batchUpdate(
+      {
         presentationId,
-        resource: {requests},
-      });
-    const createShapeResponse =
-      createTextboxWithTextResponse.data.replies[0].createShape;
-    console.log(`Created textbox with ID: ${createShapeResponse.objectId}`);
-    return createTextboxWithTextResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+        requestBody: {requests},
+      },
+  );
+  const createShapeResponse =
+    createTextboxWithTextResponse.data.replies[0].createShape;
+  console.log(`Created textbox with ID: ${createShapeResponse.objectId}`);
+  return createTextboxWithTextResponse.data;
 }
 // [END slides_create_textbox_with_text]
 

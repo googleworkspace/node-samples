@@ -35,18 +35,12 @@ async function batchGetValues(spreadsheetId, _ranges) {
   ];
   // [START_EXCLUDE silent]
   ranges = _ranges;
-  // [END_EXCLUDE]
-  try {
-    const result = await service.spreadsheets.values.batchGet({
-      spreadsheetId,
-      ranges,
-    });
-    console.log(`${result.data.valueRanges.length} ranges retrieved.`);
-    return result;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const result = await service.spreadsheets.values.batchGet({
+    spreadsheetId,
+    ranges,
+  });
+  console.log(`${result.data.valueRanges.length} ranges retrieved.`);
+  return result;
 }
 // [END sheets_batch_get_values]
 

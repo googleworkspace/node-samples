@@ -60,22 +60,15 @@ async function createImage(presentationId, pageId) {
       },
     },
   ];
-
-  // Execute the request.
-  try {
-    const response = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {requests},
-    });
-    const createImageResponse = response.data.replies;
-    console.log(
-        `Created image with ID: ${createImageResponse[0].createImage.objectId}`,
-    );
-    return createImageResponse;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const response = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {requests},
+  });
+  const createImageResponse = response.data.replies;
+  console.log(
+      `Created image with ID: ${createImageResponse[0].createImage.objectId}`,
+  );
+  return createImageResponse;
 }
 // [END slides_create_image]
 

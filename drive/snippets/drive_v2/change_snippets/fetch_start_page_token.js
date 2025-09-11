@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_fetch_start_page_token]
 
-/**
- * Retrieve page token for the current state of the account
- * */
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
+/**
+ * Retrieve page token for the current state of the account
+ */
 async function fetchStartPageToken() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -29,14 +30,9 @@ async function fetchStartPageToken() {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const service = google.drive({version: 'v2', auth});
-  try {
-    const res = await service.changes.getStartPageToken();
-    console.log('Start token:', res.data.startPageToken);
-    return res.data.startPageToken;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const result = await service.changes.getStartPageToken();
+  console.log('Start token:', result.data.startPageToken);
+  return result.data.startPageToken;
 }
 // [END drive_fetch_start_page_token]
 

@@ -26,7 +26,7 @@
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js",
     "test": "turbo run test",
-    "check": "turbo run check --continue"
+    "check": "turbo run check"
   },
   "eslintIgnore": [
     "getFoldersUnderRoot.js",
@@ -38,6 +38,7 @@
   },
   "pnpm": {
     "overrides": {
+      "googleapis-common": "catalog:",
       "google-auth-library": "catalog:"
     }
   }

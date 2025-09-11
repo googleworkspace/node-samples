@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_create_form]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 async function createForm() {
   const authClient = await authenticate({
@@ -30,11 +31,11 @@ async function createForm() {
       title: 'Creating a new form in Node',
     },
   };
-  const res = await formsClient.forms.create({
+  const result = await formsClient.forms.create({
     requestBody: newForm,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_create_form]

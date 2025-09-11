@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_create_shortcut]
 
-/**
- * Create a third party shortcut
- * @return{obj} shortcut Id
- * */
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
+/**
+ * Create a third party shortcut
+ * @return{Promise<string|null|undefined>} shortcut Id
+ */
 async function createShortcut() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -34,18 +35,12 @@ async function createShortcut() {
     name: 'Project plan',
     mimeType: 'application/vnd.google-apps.drive-sdk',
   };
-
-  try {
-    const file = await service.files.create({
-      requestBody: fileMetadata,
-      fields: 'id',
-    });
-    console.log('File Id:', file.data.id);
-    return file.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const file = await service.files.create({
+    requestBody: fileMetadata,
+    fields: 'id',
+  });
+  console.log('File Id:', file.data.id);
+  return file.data.id;
 }
 // [END drive_create_shortcut]
 

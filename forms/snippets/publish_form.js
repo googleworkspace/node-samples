@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_publish_form]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
@@ -45,11 +46,11 @@ async function publishForm(formIdToPublish) {
   };
 
   try {
-    const res = await formsClient.forms.setPublishSettings({
+    const result = await formsClient.forms.setPublishSettings({
       formId: formIdToPublish,
       requestBody: setPublishSettingsRequest,
     });
-    console.log('Form publish settings updated:', res.data);
+    console.log('Form publish settings updated:', result.data);
   } catch (err) {
     console.error('Error setting publish settings:', err);
   }

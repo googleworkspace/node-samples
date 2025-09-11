@@ -16,13 +16,13 @@
 
 // [START chat_authentication_utils]
 
-import http from 'http';
-import url from 'url';
+import {readFile} from 'node:fs/promises';
+import http from 'node:http';
+import url from 'node:url';
+import {ChatServiceClient} from '@google-apps/chat';
+import {OAuth2Client} from 'google-auth-library';
 import open from 'open';
 import destroyer from 'server-destroy';
-import {readFile} from 'fs/promises';
-import {import("google-auth-library").AuthClient} from 'google-auth-library';
-import {ChatServiceClient} from '@google-apps/chat';
 
 // Application authentication
 const SERVICE_ACCOUNT_FILE = './service_account.json';
@@ -31,7 +31,7 @@ const APP_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.bot'];
 // User authentication
 const CLIENT_SECRETS_FILE = './credentials.json';
 const CLIENT_SECRETS = JSON.parse(
-    await readFile(new URL(CLIENT_SECRETS_FILE, import.meta.url)),
+    await readFile(new URL(CLIENT_SECRETS_FILE, import.meta.url), 'utf8'),
 ).web;
 
 /**
@@ -59,7 +59,7 @@ export async function createClientWithUserCredentials(scopes) {
   // https://developers.google.com/workspace/chat/authenticate-authorize-chat-user
   return new ChatServiceClient({
     authClient: await getAuthenticatedUserOAuth2Client(scopes),
-    scopes: scopes,
+    scopes,
   });
 }
 
@@ -67,7 +67,7 @@ export async function createClientWithUserCredentials(scopes) {
  * Create a new OAuth2 client and go through the OAuth2 flow.
  *
  * @param {Array<string>} scopes Required scopes for the desired API requests
- * @return {Promise<import("google-auth-library").AuthClient>} The resulting Google OAuth2 client
+ * @return {Promise<OAuth2Client>} The resulting Google OAuth2 client
  */
 function getAuthenticatedUserOAuth2Client(scopes) {
   return new Promise((resolve, reject) => {

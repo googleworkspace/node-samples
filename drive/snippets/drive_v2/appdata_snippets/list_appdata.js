@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_list_appdata]
 
-/**
- * List all files inserted in the application data folder
- * */
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
+/**
+ * List all files inserted in the application data folder
+ */
 async function listAppdata() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -29,20 +30,17 @@ async function listAppdata() {
     scopes: 'https://www.googleapis.com/auth/drive.appdata',
   });
   const service = google.drive({version: 'v2', auth});
-  try {
-    const res = await service.files.list({
-      spaces: 'appDataFolder',
-      fields: 'nextPageToken, items(id, title)',
-      pageSize: 100,
-    });
-    res.data.items.forEach(function(file) {
-      console.log('Found file:', file.title, file.id);
-    });
-    return res.data.items;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const result = await service.files.list({
+    spaces: 'appDataFolder',
+    fields: 'nextPageToken, items(id, title)',
+    maxResults: 100,
+  });
+
+  (result.data.items ?? []).forEach((file) => {
+    console.log('Found file:', file.title, file.id);
+  });
+
+  return result.data.items;
 }
 // [END drive_list_appdata]
 

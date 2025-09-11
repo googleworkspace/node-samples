@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_create_drive]
 
-/**
- * Create a drive.
- * */
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 import {v4 as uuid} from 'uuid';
 
+/**
+ * Create a drive.
+ */
 async function createDrive() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -35,18 +36,13 @@ async function createDrive() {
     name: 'Project resources',
   };
   const requestId = uuid();
-  try {
-    const Drive = await service.drives.create({
-      resource: driveMetadata,
-      requestId: requestId,
-      fields: 'id',
-    });
-    console.log('Drive Id:', Drive.data.id);
-    return Drive.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const Drive = await service.drives.create({
+    requestBody: driveMetadata,
+    requestId,
+    fields: 'id',
+  });
+  console.log('Drive Id:', Drive.data.id);
+  return Drive.data.id;
 }
 // [END drive_create_drive]
 
