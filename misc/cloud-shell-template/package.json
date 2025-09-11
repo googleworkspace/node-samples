@@ -1,0 +1,16 @@
+{
+  "name": "cloud-shell-template",
+  "version": "1.0.0",
+  "description": "A template for NodeJS samples in Google Cloud Shell.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "googleapis": "^113.0.0"
+  }
+}
