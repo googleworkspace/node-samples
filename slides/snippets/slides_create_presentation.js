@@ -28,18 +28,13 @@ async function createPresentation(title) {
   });
 
   const service = google.slides({version: 'v1', auth});
-  try {
-    const presentation = await service.presentations.create({
-      title,
-    });
-    console.log(
-        `Created presentation with ID: ${presentation.data.presentationId}`,
-    );
-    return presentation;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const presentation = await service.presentations.create({
+    title,
+  });
+  console.log(
+      `Created presentation with ID: ${presentation.data.presentationId}`,
+  );
+  return presentation;
 }
 // [END slides_create_presentation]
 

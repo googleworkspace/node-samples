@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START apps_script_api_execute]
+
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Call an Apps Script function to list the folders in the user's root Drive
  * folder.
- *
  */
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
 async function callAppsScript() {
   const scriptId = '1xGOh6wCm7hlIVSVPKm0y_dL-YqetspS5DEVmMzaxd_6AAvI-_u8DSgBT';
 
@@ -30,51 +32,47 @@ async function callAppsScript() {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const script = google.script({version: 'v1', auth});
+  // Make the API request. The request object is included here as 'resource'.
+  const resp = await script.scripts.run({
+    auth,
+    requestBody: {
+      function: 'getFoldersUnderRoot',
+    },
+    scriptId,
+  });
 
-  try {
-    // Make the API request. The request object is included here as 'resource'.
-    const resp = await script.scripts.run({
-      auth: auth,
-      resource: {
-        function: 'getFoldersUnderRoot',
-      },
-      scriptId: scriptId,
-    });
-    if (resp.error) {
-      // The API executed, but the script returned an error.
+  if (resp.data.error?.details?.[0]) {
+    // The API executed, but the script returned an error.
 
-      // Extract the first (and only) set of error details. The values of this
-      // object are the script's 'errorMessage' and 'errorType', and an array
-      // of stack trace elements.
-      const error = resp.error.details[0];
-      console.log('Script error message: ' + error.errorMessage);
-      console.log('Script error stacktrace:');
+    // Extract the first (and only) set of error details. The values of this
+    // object are the script's 'errorMessage' and 'errorType', and an array
+    // of stack trace elements.
+    const error = resp.data.error.details[0];
 
-      if (error.scriptStackTraceElements) {
-        // There may not be a stacktrace if the script didn't start executing.
-        for (let i = 0; i < error.scriptStackTraceElements.length; i++) {
-          const trace = error.scriptStackTraceElements[i];
-          console.log('\t%s: %s', trace.function, trace.lineNumber);
-        }
-      }
-    } else {
-      // The structure of the result will depend upon what the Apps Script
-      // function returns. Here, the function returns an Apps Script Object
-      // with String keys and values, and so the result is treated as a
-      // Node.js object (folderSet).
-      const folderSet = resp.response.result;
-      if (Object.keys(folderSet).length == 0) {
-        console.log('No folders returned!');
-      } else {
-        console.log('Folders under your root folder:');
-        Object.keys(folderSet).forEach(function(id) {
-          console.log('\t%s (%s)', folderSet[id], id);
-        });
+    console.log(`Script error message: ${error.errorMessage}`);
+    console.log('Script error stacktrace:');
+
+    if (error.scriptStackTraceElements) {
+      // There may not be a stacktrace if the script didn't start executing.
+      for (let i = 0; i < error.scriptStackTraceElements.length; i++) {
+        const trace = error.scriptStackTraceElements[i];
+        console.log('\t%s: %s', trace.function, trace.lineNumber);
       }
     }
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+  } else {
+    // The structure of the result will depend upon what the Apps Script
+    // function returns. Here, the function returns an Apps Script Object
+    // with String keys and values, and so the result is treated as a
+    // Node.js object (folderSet).
+    const folderSet = resp.data.response ?? {};
+    if (Object.keys(folderSet).length === 0) {
+      console.log('No folders returned!');
+    } else {
+      console.log('Folders under your root folder:');
+      Object.keys(folderSet).forEach((id) => {
+        console.log('\t%s (%s)', folderSet[id], id);
+      });
+    }
   }
 }
 // [END apps_script_api_execute]

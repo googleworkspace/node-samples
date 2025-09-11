@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// It may require modifications to work in your environment.
 
 // [START chat_get_space_event_user_cred]
 
@@ -25,7 +24,9 @@ const USER_AUTH_OAUTH_SCOPES = ['SCOPE_NAME'];
 // This sample shows how to get space event with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+      USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
@@ -40,6 +41,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_get_space_event_user_cred]

@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_update_form]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 async function updateForm() {
   const authClient = await authenticate({
@@ -33,7 +34,10 @@ async function updateForm() {
   const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
-  console.log('New formId was: ' + createResponse.data.formId);
+
+  if (!createResponse.data.formId) throw new Error('Form ID not returned.');
+
+  console.log(`New formId was: ${createResponse.data.formId}`);
 
   // Request body to add description to a Form
   const update = {
@@ -49,12 +53,12 @@ async function updateForm() {
       },
     ],
   };
-  const res = await formsClient.forms.batchUpdate({
+  const result = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: update,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_update_form]

@@ -30,10 +30,17 @@ async function main() {
       // Replace SPACE_NAME and MESSAGE_NAME here
       name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME',
       text: 'Text updated with app credential!',
-      cardsV2: [{card: {header: {
-        title: 'Card updated with app credential!',
-        imageUrl: 'https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/info/default/24px.svg',
-      }}}],
+      cardsV2: [
+        {
+          card: {
+            header: {
+              title: 'Card updated with app credential!',
+              imageUrl:
+                'https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/info/default/24px.svg',
+            },
+          },
+        },
+      ],
     },
     // The field paths to update. Separate multiple values with commas or use
     // `*` to update all field paths.
@@ -50,6 +57,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_update_message_app_cred]

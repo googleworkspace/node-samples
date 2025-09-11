@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {uploadWithConversion} from '../drive_v2/file snippets/upload_with_conversion.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

@@ -56,6 +56,7 @@ catalogs:
       version: 5.9.2
 
 overrides:
+  googleapis-common: 8.0.0
   google-auth-library: 10.3.0
 
 importers:
@@ -305,6 +306,9 @@ importers:
 
   drive/snippets/drive_v2/drive_snippets:
     devDependencies:
+      '@types/uuid':
+        specifier: ^10.0.0
+        version: 10.0.0
       google-auth-library:
         specifier: 10.3.0
         version: 10.3.0
@@ -341,6 +345,9 @@ importers:
 
   drive/snippets/drive_v3/drive_snippets:
     devDependencies:
+      '@types/uuid':
+        specifier: ^10.0.0
+        version: 10.0.0
       google-auth-library:
         specifier: 10.3.0
         version: 10.3.0
@@ -699,6 +706,9 @@ packages:
 
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
+
+  '@types/uuid@10.0.0':
+    resolution: {integrity: sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -1095,10 +1105,6 @@ packages:
 
   googleapis-common@8.0.0:
     resolution: {integrity: sha512-66if47It7y+Sab3HMkwEXx1kCq9qUC9px8ZXoj1CMrmLmUw81GpbnsNlXnlyZyGbGPGcj+tDD9XsZ23m7GLaJQ==}
-    engines: {node: '>=18.0.0'}
-
-  googleapis-common@8.0.2-rc.0:
-    resolution: {integrity: sha512-JTcxRvmFa9Ec1uyfMEimEMeeKq1sHNZX3vn2qmoUMtnvixXXvcqTcbDZvEZXkEWpGlPlOf4joyep6/qs0BrLyg==}
     engines: {node: '>=18.0.0'}
 
   googleapis@159.0.0:
@@ -1741,13 +1747,13 @@ snapshots:
 
   '@googleapis/drive@15.0.0':
     dependencies:
-      googleapis-common: 8.0.2-rc.0
+      googleapis-common: 8.0.0
     transitivePeerDependencies:
       - supports-color
 
   '@googleapis/forms@4.0.1':
     dependencies:
-      googleapis-common: 8.0.2-rc.0
+      googleapis-common: 8.0.0
     transitivePeerDependencies:
       - supports-color
 
@@ -1891,6 +1897,8 @@ snapshots:
       undici-types: 7.10.0
 
   '@types/stack-utils@2.0.3': {}
+
+  '@types/uuid@10.0.0': {}
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -2338,16 +2346,6 @@ snapshots:
   google-logging-utils@1.1.1: {}
 
   googleapis-common@8.0.0:
-    dependencies:
-      extend: 3.0.2
-      gaxios: 7.1.1
-      google-auth-library: 10.3.0
-      qs: 6.14.0
-      url-template: 2.0.8
-    transitivePeerDependencies:
-      - supports-color
-
-  googleapis-common@8.0.2-rc.0:
     dependencies:
       extend: 3.0.2
       gaxios: 7.1.1

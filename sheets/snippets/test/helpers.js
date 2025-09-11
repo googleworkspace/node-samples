@@ -68,16 +68,16 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   async createTestSpreadsheet() {
-    const res = await this.sheetsService.spreadsheets.create({
-      resource: {
+    const result = await this.sheetsService.spreadsheets.create({
+      requestBody: {
         properties: {
           title: 'Test Spreadsheet',
         },
       },
       fields: 'spreadsheetId',
     });
-    this.deleteFileOnCleanup(res.data.spreadsheetId);
-    return res.data.spreadsheetId;
+    this.deleteFileOnCleanup(result.data.spreadsheetId);
+    return result.data.spreadsheetId;
   }
 
   /**
@@ -88,7 +88,7 @@ class Helpers {
   async populateValues(spreadsheetId) {
     await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
-      resource: {
+      requestBody: {
         requests: [
           {
             repeatCell: {

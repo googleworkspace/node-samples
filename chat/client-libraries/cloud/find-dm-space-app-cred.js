@@ -37,6 +37,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_find_dm_space_app_cred]

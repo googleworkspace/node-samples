@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {textMerging} from '../slides_text_merging.js';
+import {Helpers} from './helpers.js';
 
 const TEMPLATE_PRESENTATION_ID = '1MmTR712m7U_kgeweE57POWwkEyWAV17AVAWjpmltmIg';
 
@@ -29,10 +29,7 @@ describe('Presentation snippets', () => {
   it('should merge text', async () => {
     let sheetId = await helpers.createTestSpreadsheet();
     sheetId = await helpers.populateValues(sheetId);
-    const responses = await textMerging(
-        TEMPLATE_PRESENTATION_ID,
-        sheetId,
-    );
+    const responses = await textMerging(TEMPLATE_PRESENTATION_ID, sheetId);
     // console.log(responses);
     expect(3).toEqual(responses.replies.length);
     let numReplacements = 0;

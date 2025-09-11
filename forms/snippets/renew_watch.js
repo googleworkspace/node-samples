@@ -12,7 +12,8 @@
 // limitations under the License.
 
 // [START forms_renew_watch]
-import path from 'path';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 
@@ -28,12 +29,12 @@ async function renewWatch() {
     version: 'v1',
     auth: authClient,
   });
-  const res = await formsClient.forms.watches.renew({
+  const result = await formsClient.forms.watches.renew({
     formId: formID,
     watchId: watchID,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_renew_watch]

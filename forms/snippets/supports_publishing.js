@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_supports_publishing]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
@@ -36,20 +37,26 @@ async function supportsPublishing(formIdToCheck) {
   });
 
   try {
-    const res = await formsClient.forms.get({
+    const result = await formsClient.forms.get({
       formId: formIdToCheck,
     });
 
-    const formTitle = res.data.info.title;
+    const formTitle = result.data.info?.title;
 
     // If 'publishSettings' field exists (even if empty), it supports the new
     // publishing model.
-    if (res.data && res.data.publishSettings !== undefined) {
-      console.log(`Form '${formIdToCheck}' (Title: ${
-        formTitle}) is NOT a legacy form (supports publishSettings).`);
+    if (result.data && result.data.publishSettings !== undefined) {
+      console.log(
+          `Form '${formIdToCheck}' (Title: ${
+            formTitle
+          }) is NOT a legacy form (supports publishSettings).`,
+      );
     } else {
-      console.log(`Form '${formIdToCheck}' (Title: ${
-        formTitle}) IS a legacy form (does not have publishSettings field).`);
+      console.log(
+          `Form '${formIdToCheck}' (Title: ${
+            formTitle
+          }) IS a legacy form (does not have publishSettings field).`,
+      );
     }
   } catch (err) {
     console.error(`Error getting form metadata for '${formIdToCheck}':`, err);

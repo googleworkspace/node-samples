@@ -19,26 +19,31 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.messages.create'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.messages.create',
+];
 
 // This sample shows how to create message with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+      USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME here.
     parent: 'spaces/SPACE_NAME',
     message: {
-      text: '👋🌎 Hello world!' +
-            'Text messages can contain things like:\n\n' +
-            '* Hyperlinks 🔗\n' +
-            '* Emojis 😄🎉\n' +
-            '* Mentions of other Chat users `@` \n\n' +
-            'For details, see the ' +
-            '<https://developers.google.com/workspace/chat/format-messages' +
-            '|Chat API developer documentation>.',
+      text:
+        '👋🌎 Hello world!' +
+        'Text messages can contain things like:\n\n' +
+        '* Hyperlinks 🔗\n' +
+        '* Emojis 😄🎉\n' +
+        '* Mentions of other Chat users `@` \n\n' +
+        'For details, see the ' +
+        '<https://developers.google.com/workspace/chat/format-messages' +
+        '|Chat API developer documentation>.',
     },
   };
 
@@ -49,6 +54,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_create_message_user_cred]

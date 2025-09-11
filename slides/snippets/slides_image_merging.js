@@ -38,60 +38,55 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
   const customerGraphicUrl = imageUrl;
 
   // Duplicate the template presentation using the Drive API.
-  const copyTitle = customerName + ' presentation';
-  try {
-    const driveResponse = await driveService.files.copy({
-      fileId: templatePresentationId,
-      resource: {
-        name: copyTitle,
-      },
-    });
-    const presentationCopyId = driveResponse.data.id;
+  const copyTitle = `${customerName} presentation`;
+  const driveResponse = await driveService.files.copy({
+    fileId: templatePresentationId,
+    requestBody: {
+      name: copyTitle,
+    },
+  });
+  const presentationCopyId = driveResponse.data.id;
 
-    // Create the image merge (replaceAllShapesWithImage) requests.
-    const requests = [
-      {
-        replaceAllShapesWithImage: {
-          imageUrl: logoUrl,
-          replaceMethod: 'CENTER_INSIDE',
-          containsText: {
-            text: '{{company-logo}}',
-            matchCase: true,
-          },
+  // Create the image merge (replaceAllShapesWithImage) requests.
+  const requests = [
+    {
+      replaceAllShapesWithImage: {
+        imageUrl: logoUrl,
+        replaceMethod: 'CENTER_INSIDE',
+        containsText: {
+          text: '{{company-logo}}',
+          matchCase: true,
         },
       },
-      {
-        replaceAllShapesWithImage: {
-          imageUrl: customerGraphicUrl,
-          replaceMethod: 'CENTER_INSIDE',
-          containsText: {
-            text: '{{customer-graphic}}',
-            matchCase: true,
-          },
+    },
+    {
+      replaceAllShapesWithImage: {
+        imageUrl: customerGraphicUrl,
+        replaceMethod: 'CENTER_INSIDE',
+        containsText: {
+          text: '{{customer-graphic}}',
+          matchCase: true,
         },
       },
-    ];
+    },
+  ];
 
-    // Execute the requests for this presentation.
-    const batchUpdateResponse = await slidesService.presentations.batchUpdate({
-      presentationId: presentationCopyId,
-      resource: {
-        requests,
-      },
-    });
-    let numReplacements = 0;
-    for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
-      numReplacements +=
-        batchUpdateResponse.data.replies[i].replaceAllShapesWithImage
-            .occurrencesChanged;
-    }
-    console.log(`Created merged presentation with ID: ${presentationCopyId}`);
-    console.log(`Replaced ${numReplacements} shapes with images.`);
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
+  // Execute the requests for this presentation.
+  const batchUpdateResponse = await slidesService.presentations.batchUpdate({
+    presentationId: presentationCopyId,
+    requestBody: {
+      requests,
+    },
+  });
+  let numReplacements = 0;
+  for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
+    numReplacements +=
+      batchUpdateResponse.data.replies[i].replaceAllShapesWithImage
+          .occurrencesChanged;
   }
+  console.log(`Created merged presentation with ID: ${presentationCopyId}`);
+  console.log(`Replaced ${numReplacements} shapes with images.`);
+  return batchUpdateResponse.data;
 }
 // [END slides_image_merging]
 

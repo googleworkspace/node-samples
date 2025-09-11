@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_create_folder]
 
-/**
- * Create a folder and prints the folder ID
- * @return{obj} folder Id
- * */
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
+/**
+ * Create a folder and prints the folder ID
+ * @return{Promise<string|null|undefined>} folder Id
+ */
 async function createFolder() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -34,17 +35,12 @@ async function createFolder() {
     name: 'Invoices',
     mimeType: 'application/vnd.google-apps.folder',
   };
-  try {
-    const file = await service.files.create({
-      requestBody: fileMetadata,
-      fields: 'id',
-    });
-    console.log('Folder Id:', file.data.id);
-    return file.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const file = await service.files.create({
+    requestBody: fileMetadata,
+    fields: 'id',
+  });
+  console.log('Folder Id:', file.data.id);
+  return file.data.id;
 }
 // [END drive_create_folder]
 

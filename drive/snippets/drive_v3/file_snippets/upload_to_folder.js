@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_upload_to_folder]
+
+import fs from 'node:fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Upload a file to the specified folder
  * @param{string} folderId folder ID
- * @return{obj} file Id
- * */
-import fs from 'fs';
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
-
+ */
 async function uploadToFolder(folderId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -34,7 +34,7 @@ async function uploadToFolder(folderId) {
 
   // TODO(developer): set folder Id
   // folderId = '1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7';
-  const fileMetadata = {
+  const requestBody = {
     name: 'photo.jpg',
     parents: [folderId],
   };
@@ -43,18 +43,14 @@ async function uploadToFolder(folderId) {
     body: fs.createReadStream('files/photo.jpg'),
   };
 
-  try {
-    const file = await service.files.create({
-      requestBody: fileMetadata,
-      media: media,
-      fields: 'id',
-    });
-    console.log('File Id:', file.data.id);
-    return file.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const file = await service.files.create({
+    requestBody,
+    media,
+    fields: 'id',
+  });
+
+  console.log('File Id:', file.data.id);
+  return file.data.id;
 }
 // [END drive_upload_to_folder]
 

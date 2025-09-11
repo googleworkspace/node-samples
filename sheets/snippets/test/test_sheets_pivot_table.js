@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {pivotTable} from '../sheets_pivot_table.js';
+import {Helpers} from './helpers.js';
 
 describe('Spreadsheet pivot table snippet', () => {
   const helpers = new Helpers();

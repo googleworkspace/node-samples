@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_download_file]
+
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Downloads a file
  * @param{string} fileId file ID
- * @return{obj} file status
- * */
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
-
+ * @return{Promise<number>} file status
+ */
 async function downloadFile(fileId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -31,18 +32,12 @@ async function downloadFile(fileId) {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const service = google.drive({version: 'v2', auth});
-
-  try {
-    const file = await service.files.get({
-      fileId: fileId,
-      alt: 'media',
-    });
-    console.log(file.status);
-    return file.status;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const file = await service.files.get({
+    fileId,
+    alt: 'media',
+  });
+  console.log(file.status);
+  return file.status;
 }
 // [END drive_download_file]
 

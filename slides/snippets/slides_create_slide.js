@@ -40,25 +40,16 @@ async function createSlide(presentationId, pageId) {
       },
     },
   ];
-  // If you wish to populate the slide with elements, add element create requests here,
-  // using the pageId.
-
-  // Execute the request.
-  try {
-    const res = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(
-        `Created slide with ID: ${res.data.replies[0].createSlide.objectId}`,
-    );
-    return res;
-  } catch (err) {
-    // TODO (developer) - handle exception
-    throw err;
-  }
+  const result = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(
+      `Created slide with ID: ${result.data.replies[0].createSlide.objectId}`,
+  );
+  return res;
 }
 // [END slides_create_slide]
 

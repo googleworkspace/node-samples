@@ -75,17 +75,12 @@ async function conditionalFormatting(spreadsheetId) {
   const resource = {
     requests,
   };
-  try {
-    const response = await service.spreadsheets.batchUpdate({
-      spreadsheetId,
-      resource,
-    });
-    console.log(`${response.data.replies.length} cells updated.`);
-    return response;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const response = await service.spreadsheets.batchUpdate({
+    spreadsheetId,
+    resource,
+  });
+  console.log(`${response.data.replies.length} cells updated.`);
+  return response;
 }
 // [END sheets_conditional_formatting]
 

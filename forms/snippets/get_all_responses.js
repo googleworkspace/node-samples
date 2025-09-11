@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_retrieve_all_responses]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const formID = '<YOUR_FORM_ID>';
 
@@ -25,13 +26,13 @@ async function getAllResponses() {
   });
   const formsClient = forms({
     version: 'v1',
-    auth: auth,
+    auth,
   });
-  const res = await formsClient.forms.responses.list({
+  const result = await formsClient.forms.responses.list({
     formId: formID,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_retrieve_all_responses]

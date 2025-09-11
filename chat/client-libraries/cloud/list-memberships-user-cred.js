@@ -19,12 +19,16 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.memberships.readonly'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.memberships.readonly',
+];
 
 // This sample shows how to list memberships with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+      USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
@@ -45,6 +49,6 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_list_memberships_user_cred]

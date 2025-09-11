@@ -93,21 +93,14 @@ async function textStyleUpdate(presentationId, shapeId) {
       },
     },
   ];
-
-  // Execute the requests.
-  try {
-    const batchUpdateResponse = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(`Updated the text style for shape with ID: ${shapeId}`);
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exceptions
-    throw err;
-  }
+  const batchUpdateResponse = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(`Updated the text style for shape with ID: ${shapeId}`);
+  return batchUpdateResponse.data;
 }
 // [END slides_text_style_update]
 

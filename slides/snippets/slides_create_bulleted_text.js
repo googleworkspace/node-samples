@@ -42,21 +42,14 @@ async function createBulletedText(presentationId, shapeId) {
       },
     },
   ];
-
-  // Execute the requests.
-  try {
-    const batchUpdateResponse = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(`Added bullets to text in shape with ID: ${shapeId}`);
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  const batchUpdateResponse = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(`Added bullets to text in shape with ID: ${shapeId}`);
+  return batchUpdateResponse.data;
 }
 // [END slides_create_bulleted_text]
 

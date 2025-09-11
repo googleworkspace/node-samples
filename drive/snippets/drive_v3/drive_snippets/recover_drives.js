@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_recover_drives]
+
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Find all shared drives without an organizer and add one.
  * @param{string} userEmail user ID to assign ownership to
- * */
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
-
+ */
 async function recoverDrives(userEmail) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -30,42 +31,33 @@ async function recoverDrives(userEmail) {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const service = google.drive({version: 'v3', auth});
-  const drives = [];
   const newOrganizerPermission = {
     type: 'user',
     role: 'organizer',
     emailAddress: userEmail, // Example: 'user@example.com'
   };
 
-  let pageToken = null;
-  try {
-    const res = await service.drives.list({
-      q: 'organizerCount = 0',
-      fields: 'nextPageToken, drives(id, name)',
-      useDomainAdminAccess: true,
-      pageToken: pageToken,
-    });
-    Array.prototype.push.apply(drives, res.data.items);
-    for (const drive of res.data.drives) {
-      console.log(
-          'Found shared drive without organizer:',
-          drive.name,
-          drive.id,
-      );
-      await service.permissions.create({
-        resource: newOrganizerPermission,
-        fileId: drive.id,
-        useDomainAdminAccess: true,
-        supportsAllDrives: true,
-        fields: 'id',
-      });
+  const result = await service.drives.list({
+    q: 'organizerCount = 0',
+    fields: 'nextPageToken, drives(id, name)',
+    useDomainAdminAccess: true,
+  });
+
+  for (const drive of result.data.drives ?? []) {
+    if (!drive.id) {
+      continue;
     }
-    pageToken = res.nextPageToken;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+
+    console.log('Found shared drive without organizer:', drive.name, drive.id);
+    await service.permissions.create({
+      requestBody: newOrganizerPermission,
+      fileId: drive.id,
+      useDomainAdminAccess: true,
+      supportsAllDrives: true,
+      fields: 'id',
+    });
   }
-  return drives;
+  return result.data.drives;
 }
 // [END drive_recover_drives]
 

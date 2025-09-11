@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_add_item]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 async function addItem() {
   const authClient = await authenticate({
@@ -33,7 +34,12 @@ async function addItem() {
   const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
-  console.log('New formId was: ' + createResponse.data.formId);
+
+  if (!createResponse.data.formId) {
+    throw new Error('Form ID not returned.');
+  }
+
+  console.log(`New formId was: ${createResponse.data.formId}`);
 
   // Request body to add video item to a Form
   const update = {

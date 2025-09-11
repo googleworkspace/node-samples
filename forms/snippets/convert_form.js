@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_convert_form]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 async function convertForm() {
   const authClient = await authenticate({
@@ -33,7 +34,12 @@ async function convertForm() {
   const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
-  console.log('New formId was: ' + createResponse.data.formId);
+
+  if (!createResponse.data.formId) {
+    throw new Error('Failed to create form.');
+  }
+
+  console.log(`New formId was: ${createResponse.data.formId}`);
 
   // Request body to convert form to a quiz
   const updateRequest = {
@@ -50,12 +56,13 @@ async function convertForm() {
       },
     ],
   };
-  const res = await formsClient.forms.batchUpdate({
+
+  const result = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: updateRequest,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_convert_form]

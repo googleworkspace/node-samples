@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {google} from 'googleapis';
+
 import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Helper functions for Google Slides
@@ -69,11 +70,11 @@ class Helpers {
    * @return {Promise<string>} A promise to return the presentation ID.
    */
   async createTestPresentation() {
-    const res = await this.slidesService.presentations.create({
+    const result = await this.slidesService.presentations.create({
       title: 'Test Preso',
     });
-    this.deleteFileOnCleanup(res.data.presentationId);
-    return res.data.presentationId;
+    this.deleteFileOnCleanup(result.data.presentationId);
+    return result.data.presentationId;
   }
 
   /**
@@ -99,7 +100,7 @@ class Helpers {
     }
     await this.slidesService.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
@@ -147,13 +148,13 @@ class Helpers {
         },
       },
     ];
-    const res = await this.slidesService.presentations.batchUpdate({
+    const result = await this.slidesService.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
-    return res.data.replies[0].createShape.objectId;
+    return result.data.replies[0].createShape.objectId;
   }
 
   /**
@@ -179,7 +180,7 @@ class Helpers {
       {
         createSheetsChart: {
           objectId: chartId,
-          spreadsheetId: spreadsheetId,
+          spreadsheetId,
           chartId: sheetChartId,
           linkingMode: 'LINKED',
           elementProperties: {
@@ -200,13 +201,13 @@ class Helpers {
       },
     ];
 
-    const res = await this.slidesService.presentations.batchUpdate({
+    const result = await this.slidesService.presentations.batchUpdate({
       presentationId,
-      resource: {
+      requestBody: {
         requests,
       },
     });
-    return res.data.replies[0].createSheetsChart.objectId;
+    return result.data.replies[0].createSheetsChart.objectId;
   }
 
   /**
@@ -214,8 +215,8 @@ class Helpers {
    * @return {Promise} A promise to return the Google API service.
    */
   async createTestSpreadsheet() {
-    const res = await this.sheetsService.spreadsheets.create({
-      resource: {
+    const result = await this.sheetsService.spreadsheets.create({
+      requestBody: {
         properties: {
           title: 'Test Spreadsheet',
         },
@@ -223,8 +224,8 @@ class Helpers {
       fields: 'spreadsheetId',
     });
 
-    this.deleteFileOnCleanup(res.data.spreadsheetId);
-    return res.data.spreadsheetId;
+    this.deleteFileOnCleanup(result.data.spreadsheetId);
+    return result.data.spreadsheetId;
   }
 
   /**
@@ -235,7 +236,7 @@ class Helpers {
   async populateValues(spreadsheetId) {
     await this.sheetsService.spreadsheets.batchUpdate({
       spreadsheetId,
-      resource: {
+      requestBody: {
         requests: [
           {
             repeatCell: {

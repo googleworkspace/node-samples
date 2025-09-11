@@ -43,6 +43,6 @@ async function main() {
   }
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_list_memberships_app_cred]

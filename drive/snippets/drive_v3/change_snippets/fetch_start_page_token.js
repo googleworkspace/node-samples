@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_fetch_start_page_token]
 
 /**
@@ -29,15 +30,10 @@ async function fetchStartPageToken() {
     scopes: 'https://www.googleapis.com/auth/drive.appdata',
   });
   const service = google.drive({version: 'v3', auth});
-  try {
-    const res = await service.changes.getStartPageToken({});
-    const token = res.data.startPageToken;
-    console.log('start token: ', token);
-    return token;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const res = await service.changes.getStartPageToken({});
+  const token = res.data.startPageToken;
+  console.log('start token: ', token);
+  return token;
 }
 // [END drive_fetch_start_page_token]
 

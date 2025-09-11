@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_touch_file]
+
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Change the file's modification timestamp.
  * @param{string} fileId ID of the file to change modified time
  * @param{string} Timestamp Timestamp to override Modified date time of the file
- * @return{obj} modified Timestamp
+ * @return{Promise<string|null|undefined>} modified Timestamp
  **/
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
-
 async function touchFile(fileId, Timestamp) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -35,18 +36,13 @@ async function touchFile(fileId, Timestamp) {
     modifiedTime: new Date().toISOString(),
   };
   fileMetadata.modifiedTime = Timestamp;
-  try {
-    const file = await service.files.update({
-      fileId: fileId,
-      requestBody: fileMetadata,
-      fields: 'id, modifiedTime',
-    });
-    console.log('Modified time:', file.data.modifiedTime);
-    return file.data.modifiedTime;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const file = await service.files.update({
+    fileId,
+    requestBody: fileMetadata,
+    fields: 'id, modifiedTime',
+  });
+  console.log('Modified time:', file.data.modifiedTime);
+  return file.data.modifiedTime;
 }
 // [END drive_touch_file]
 

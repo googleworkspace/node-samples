@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {create} from '../sheets_create.js';
+import {Helpers} from './helpers.js';
 
 describe('Spreadsheet create snippet', () => {
   const helpers = new Helpers();

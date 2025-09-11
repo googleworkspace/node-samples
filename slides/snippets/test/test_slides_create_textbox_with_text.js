@@ -15,8 +15,8 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
 import {createTextboxWithText} from '../slides_create_textbox_with_text.js';
+import {Helpers} from './helpers.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -29,10 +29,7 @@ describe('Presentation snippets', () => {
     const presentationId = await helpers.createTestPresentation();
     const ids = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = ids[0];
-    const response = await createTextboxWithText(
-        presentationId,
-        pageId,
-    );
+    const response = await createTextboxWithText(presentationId, pageId);
     expect(response.replies.length).toEqual(2);
     const boxId = response.replies[0].createShape.objectId;
     expect(boxId).toBeDefined();

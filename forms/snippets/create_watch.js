@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_create_watch]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const formID = '<YOUR_FORM_ID>';
 
@@ -37,12 +38,12 @@ async function createWatch() {
       eventType: 'RESPONSES',
     },
   };
-  const res = await formsClient.forms.watches.create({
+  const result = await formsClient.forms.watches.create({
     formId: formID,
     requestBody: watchRequest,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_create_watch]

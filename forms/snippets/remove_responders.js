@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_remove_responder]
-import path from 'path';
-import {drive} from '@googleapis/drive';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {drive} from '@googleapis/drive';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
@@ -34,25 +35,29 @@ async function removeResponders(formId, email) {
   const driveService = drive({version: 'v3', auth: authClient});
 
   try {
-    const res = await driveService.permissions.list({
+    const result = await driveService.permissions.list({
       fileId: formId,
       includePermissionsForView: 'published',
       fields: 'permissions(id,emailAddress,type,role,view)',
     });
 
-    const permissions = res.data.permissions || [];
+    const permissions = result.data.permissions || [];
     const responderToRemove = permissions.find(
-        (permission) => permission.view === 'published' &&
-            permission.role === 'reader' && permission.emailAddress === email);
+        (permission) =>
+          permission.view === 'published' &&
+        permission.role === 'reader' &&
+        permission.emailAddress === email,
+    );
 
-    if (responderToRemove) {
+    if (responderToRemove?.id) {
       const permissionId = responderToRemove.id;
       await driveService.permissions.delete({
         fileId: formId,
-        permissionId: permissionId,
+        permissionId: responderToRemove.id,
       });
-      console.log(`Responder with permission ID '${
-        permissionId}' removed successfully.`);
+      console.log(
+          `Responder with permission ID '${permissionId}' removed successfully.`,
+      );
     } else {
       console.log('Responder not found for the specified form');
     }

@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_export_pdf]
+
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Download a Document file in PDF format
  * @param{string} fileId file ID
- * @return{obj} file status
- * */
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
-
+ * @return{Promise<number>} file status
+ */
 async function exportPdf(fileId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -30,18 +31,12 @@ async function exportPdf(fileId) {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const service = google.drive({version: 'v3', auth});
-
-  try {
-    const result = await service.files.export({
-      fileId: fileId,
-      mimeType: 'application/pdf',
-    });
-    console.log(result.status);
-    return result;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const result = await service.files.export({
+    fileId,
+    mimeType: 'application/pdf',
+  });
+  console.log(result.status);
+  return result.status;
 }
 // [END drive_export_pdf]
 

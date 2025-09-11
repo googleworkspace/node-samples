@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_add_responder]
-import path from 'path';
-import {drive} from '@googleapis/drive';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {drive} from '@googleapis/drive';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
@@ -41,13 +42,13 @@ async function addResponder(formId, email) {
   };
 
   try {
-    const res = await driveService.permissions.create({
+    const result = await driveService.permissions.create({
       fileId: formId,
       requestBody: permissionBody,
       fields: 'id,emailAddress,role,type,view',
       sendNotificationEmail: false, // Optional
     });
-    console.log('Responder added:', res.data);
+    console.log('Responder added:', result.data);
   } catch (err) {
     console.error('Error adding responder:', err);
   }

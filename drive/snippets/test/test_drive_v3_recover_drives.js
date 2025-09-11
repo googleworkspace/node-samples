@@ -15,9 +15,9 @@
  */
 
 import {expect} from 'expect';
-import {Helpers} from './helpers.js';
-import {recoverDrives} from '../drive_v3/drive_snippets/recover_drives.js';
 import {createDrive} from '../drive_v3/drive_snippets/create_drive.js';
+import {recoverDrives} from '../drive_v3/drive_snippets/recover_drives.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -40,11 +40,11 @@ describe('Drive snippets', () => {
    */
   async function createOrphanedTeamDrive() {
     const fileId = await createDrive();
-    const res = await helpers.service.permissions.list({
+    const result = await helpers.service.permissions.list({
       fileId,
       supportsTeamDrives: true,
     });
-    res.data.permissions.forEach((permission) => {
+    result.data.permissions.forEach((permission) => {
       helpers.service.permissions.delete({
         fileId,
         permissionId: permission.id,

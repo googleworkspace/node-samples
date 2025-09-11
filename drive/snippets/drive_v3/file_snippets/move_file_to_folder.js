@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_move_file_to_folder]
+
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Change the file's modification timestamp.
  * @param{string} fileId Id of the file to move
  * @param{string} folderId Id of the folder to move
- * @return{obj} file status
- * */
-import {GoogleAuth} from 'google-auth-library';
-import {google} from 'googleapis';
-
+ * @return{Promise<number>} result status
+ */
 async function moveFileToFolder(fileId, folderId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -31,29 +32,22 @@ async function moveFileToFolder(fileId, folderId) {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const service = google.drive({version: 'v3', auth});
+  // Retrieve the existing parents to remove
+  const file = await service.files.get({
+    fileId,
+    fields: 'parents',
+  });
 
-  try {
-    // Retrieve the existing parents to remove
-    const file = await service.files.get({
-      fileId: fileId,
-      fields: 'parents',
-    });
-
-    // Move the file to the new folder
-    const previousParents = file.data.parents
-        .join(',');
-    const files = await service.files.update({
-      fileId: fileId,
-      addParents: folderId,
-      removeParents: previousParents,
-      fields: 'id, parents',
-    });
-    console.log(files.status);
-    return files.status;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  // Move the file to the new folder
+  const previousParents = (file.data.parents ?? []).join(',');
+  const result = await service.files.update({
+    fileId,
+    addParents: folderId,
+    removeParents: previousParents,
+    fields: 'id, parents',
+  });
+  console.log(result.status);
+  return result.status;
 }
 // [END drive_move_file_to_folder]
 

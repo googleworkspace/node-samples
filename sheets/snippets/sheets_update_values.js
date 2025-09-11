@@ -44,19 +44,14 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
   const resource = {
     values,
   };
-  try {
-    const result = await service.spreadsheets.values.update({
-      spreadsheetId,
-      range,
-      valueInputOption,
-      resource,
-    });
-    console.log('%d cells updated.', result.data.updatedCells);
-    return result;
-  } catch (err) {
-    // TODO (Developer) - Handle exception
-    throw err;
-  }
+  const result = await service.spreadsheets.values.update({
+    spreadsheetId,
+    range,
+    valueInputOption,
+    resource,
+  });
+  console.log('%d cells updated.', result.data.updatedCells);
+  return result;
 }
 // [END sheets_update_values]
 

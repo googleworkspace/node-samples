@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import fs from 'node:fs';
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
-import fs from 'fs';
 
 /**
  * Helper functions for Google Drive
@@ -65,7 +66,7 @@ class Helpers {
    */
   async createFile(fileMetadata, media) {
     const file = await this.service.files.create({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       media,
       fields: 'id',
     });

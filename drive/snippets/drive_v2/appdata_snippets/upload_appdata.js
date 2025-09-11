@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_upload_appdata]
 
-/**
- * Insert a file in the application data folder and prints file Id.
- * */
-import fs from 'fs';
+import fs from 'node:fs';
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
+/**
+ * Insert a file in the application data folder and prints file Id.
+ */
 async function uploadAppdata() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -42,18 +43,13 @@ async function uploadAppdata() {
     mimeType: 'application/json',
     body: fs.createReadStream('files/config.json'),
   };
-  try {
-    const file = await service.files.insert({
-      resource: fileMetadata,
-      media: media,
-      fields: 'id',
-    });
-    console.log('File Id:', file.data.id);
-    return file.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  const file = await service.files.insert({
+    requestBody: fileMetadata,
+    media,
+    fields: 'id',
+  });
+  console.log('File Id:', file.data.id);
+  return file.data.id;
 }
 // [END drive_upload_appdata]
 

@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_search_file]
 
-/**
- * Search file in drive location
- * */
 import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
+/**
+ * Search file in drive location
+ */
 async function searchFile() {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
@@ -29,23 +30,18 @@ async function searchFile() {
     scopes: 'https://www.googleapis.com/auth/drive',
   });
   const service = google.drive({version: 'v2', auth});
-  const files = [];
-  const pageToken = null;
-  try {
-    const res = await service.files.list({
-      q: 'mimeType=\'image/jpeg\'',
-      fields: 'nextPageToken, items(id, title)',
-      spaces: 'drive',
-      pageToken: pageToken,
-    });
-    Array.prototype.push.apply(files, res.items);
-    res.data.items.forEach(function(file) {
-      console.log('Found file:', file.title, file.id);
-    });
-    return res.data.items;
-  } catch (err) {
-    throw err;
-  }
+
+  const pageToken = undefined;
+  const result = await service.files.list({
+    q: 'mimeType=\'image/jpeg\'',
+    fields: 'nextPageToken, items(id, title)',
+    spaces: 'drive',
+    pageToken,
+  });
+  (result.data.items ?? []).forEach((file) => {
+    console.log('Found file:', file.title, file.id);
+  });
+  return result.data.items;
 }
 // [END drive_search_file]
 

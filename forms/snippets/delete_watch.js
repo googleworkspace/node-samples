@@ -12,9 +12,10 @@
 // limitations under the License.
 
 // [START forms_delete_watch]
-import path from 'path';
-import {forms} from '@googleapis/forms';
+
+import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const formID = '<YOUR_FORM_ID>';
 const watchID = '<YOUR_FORMS_WATCH_ID>';
@@ -28,12 +29,12 @@ async function deleteWatch() {
     version: 'v1',
     auth: authClient,
   });
-  const res = await formsClient.forms.watches.delete({
+  const result = await formsClient.forms.watches.delete({
     formId: formID,
     watchId: watchID,
   });
-  console.log(res.data);
-  return res.data;
+  console.log(result.data);
+  return result.data;
 }
 
 // [END forms_delete_watch]
