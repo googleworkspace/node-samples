@@ -10,9 +10,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
   },
-  "include": [
-    "**/*.js"
-  ],
   "exclude": [
     "node_modules",
     "dist"
