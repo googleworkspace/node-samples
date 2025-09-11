@@ -11,6 +11,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// [START forms_is_anyone_with_link_responder_js]
+
 import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {drive} from '@googleapis/drive';
@@ -18,7 +20,6 @@ import {drive} from '@googleapis/drive';
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
-// [START forms_is_anyone_with_link_responder_js]
 /**
  * Checks if anyone with the link is a responder for the form.
  *
