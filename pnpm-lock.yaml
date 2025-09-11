@@ -277,16 +277,11 @@ importers:
         specifier: 'catalog:'
         version: 5.9.2
 
-  drive/snippets/drive_v2:
-    devDependencies:
-      google-auth-library:
-        specifier: 10.3.0
-        version: 10.3.0
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.2
-
   drive/snippets/drive_v2/appdata_snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       google-auth-library:
         specifier: 10.3.0
@@ -296,6 +291,10 @@ importers:
         version: 5.9.2
 
   drive/snippets/drive_v2/change_snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       google-auth-library:
         specifier: 10.3.0
@@ -305,6 +304,10 @@ importers:
         version: 5.9.2
 
   drive/snippets/drive_v2/drive_snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       '@types/uuid':
         specifier: ^10.0.0
@@ -317,6 +320,10 @@ importers:
         version: 5.9.2
 
   drive/snippets/drive_v2/file snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       google-auth-library:
         specifier: 10.3.0
@@ -326,6 +333,10 @@ importers:
         version: 5.9.2
 
   drive/snippets/drive_v3/appdata_snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       google-auth-library:
         specifier: 10.3.0
@@ -335,6 +346,10 @@ importers:
         version: 5.9.2
 
   drive/snippets/drive_v3/change_snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       google-auth-library:
         specifier: 10.3.0
@@ -344,6 +359,10 @@ importers:
         version: 5.9.2
 
   drive/snippets/drive_v3/drive_snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       '@types/uuid':
         specifier: ^10.0.0
@@ -356,6 +375,10 @@ importers:
         version: 5.9.2
 
   drive/snippets/drive_v3/file_snippets:
+    dependencies:
+      googleapis:
+        specifier: 'catalog:'
+        version: 159.0.0
     devDependencies:
       google-auth-library:
         specifier: 10.3.0

@@ -14,5 +14,8 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "googleapis": "catalog:"
   }
 }
