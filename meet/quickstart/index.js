@@ -34,7 +34,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 /**
  * Reads previously authorized credentials from the save file.
  *
- * @return {Promise<OAuth2Client|null>}
+ * @return {Promise<import("google-auth-library").AuthClient|null>}
  */
 async function loadSavedCredentialsIfExist() {
   try {
@@ -50,7 +50,7 @@ async function loadSavedCredentialsIfExist() {
 /**
  * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
  *
- * @param {OAuth2Client} client
+ * @param {import("google-auth-library").AuthClient} client
  * @return {Promise<void>}
  */
 async function saveCredentials(client) {
@@ -87,7 +87,7 @@ async function authorize() {
 
 /**
  * Creates a new meeting space.
- * @param {OAuth2Client} authClient An authorized OAuth2 client.
+ * @param {import("google-auth-library").AuthClient} authClient An authorized OAuth2 client.
  */
 async function createSpace(authClient) {
   const meetClient = new SpacesServiceClient({

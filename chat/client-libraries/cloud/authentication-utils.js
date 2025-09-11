@@ -21,7 +21,7 @@ import url from 'url';
 import open from 'open';
 import destroyer from 'server-destroy';
 import {readFile} from 'fs/promises';
-import {OAuth2Client} from 'google-auth-library';
+import {import("google-auth-library").AuthClient} from 'google-auth-library';
 import {ChatServiceClient} from '@google-apps/chat';
 
 // Application authentication
@@ -67,7 +67,7 @@ export async function createClientWithUserCredentials(scopes) {
  * Create a new OAuth2 client and go through the OAuth2 flow.
  *
  * @param {Array<string>} scopes Required scopes for the desired API requests
- * @return {Promise<OAuth2Client>} The resulting Google OAuth2 client
+ * @return {Promise<import("google-auth-library").AuthClient>} The resulting Google OAuth2 client
  */
 function getAuthenticatedUserOAuth2Client(scopes) {
   return new Promise((resolve, reject) => {

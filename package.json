@@ -35,5 +35,10 @@
   "packageManager": "pnpm@10.15.1",
   "engines": {
     "node": ">=20"
+  },
+  "pnpm": {
+    "overrides": {
+      "google-auth-library": "catalog:"
+    }
   }
 }
