@@ -23,7 +23,8 @@ const USER_AUTH_OAUTH_SCOPES = [
   'https://www.googleapis.com/auth/chat.users.readstate.readonly',
 ];
 
-// This sample shows how to get the thread read state for a space and calling user
+// This sample shows how to get the thread read state for a space and calling
+// user
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(

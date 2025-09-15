@@ -45,8 +45,8 @@ async function callAppsScript() {
     // The API executed, but the script returned an error.
 
     // Extract the first (and only) set of error details. The values of this
-    // object are the script's 'errorMessage' and 'errorType', and an array
-    // of stack trace elements.
+    // object are the script's 'errorMessage' and 'errorType', and an array of
+    // stack trace elements.
     const error = resp.data.error.details[0];
 
     console.log(`Script error message: ${error.errorMessage}`);
@@ -60,10 +60,9 @@ async function callAppsScript() {
       }
     }
   } else {
-    // The structure of the result will depend upon what the Apps Script
-    // function returns. Here, the function returns an Apps Script Object
-    // with String keys and values, and so the result is treated as a
-    // Node.js object (folderSet).
+    // The structure of the result depends on the Apps Script function's return value.
+    // Here, the function returns an object with string keys and values, which is
+    // treated as a Node.js object (folderSet).
     const folderSet = resp.data.response ?? {};
     if (Object.keys(folderSet).length === 0) {
       console.log('No folders returned!');

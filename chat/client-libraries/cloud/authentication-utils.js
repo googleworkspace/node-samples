@@ -84,7 +84,7 @@ function getAuthenticatedUserOAuth2Client(scopes) {
       scope: scopes,
     });
 
-    // Open an HTTP server to accept the OAuth2 callback
+    // Creates and starts an HTTP server to accept the OAuth2 callback.
     const server = http
       .createServer(async (request, response) => {
         try {
@@ -108,7 +108,7 @@ function getAuthenticatedUserOAuth2Client(scopes) {
         }
       })
       .listen(3000, () => {
-        // Open default browser and start the flow
+        // Opens the default browser to start the OAuth2 flow.
         open(authorizeUrl, {wait: false}).then((cp) => cp.unref());
       });
     destroyer(server);

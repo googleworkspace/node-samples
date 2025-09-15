@@ -21,7 +21,7 @@ import {google} from 'googleapis';
 /**
  * Adds a pivot table to a spreadsheet.
  * @param {string} spreadsheetId The Spreadsheet to add the pivot table to.
- * @return {obj} spreadsheet information
+ * @return {Promise<object>} A promise that resolves to the response from the batch update.
  */
 async function pivotTable(spreadsheetId) {
   const auth = new GoogleAuth({

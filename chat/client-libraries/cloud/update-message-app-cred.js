@@ -42,8 +42,8 @@ async function main() {
         },
       ],
     },
-    // The field paths to update. Separate multiple values with commas or use
-    // `*` to update all field paths.
+    // The field paths to update. Separate multiple values with commas or use `*`
+    // to update all field paths.
     updateMask: {
       // The field paths to update.
       paths: ['text', 'cards_v2'],

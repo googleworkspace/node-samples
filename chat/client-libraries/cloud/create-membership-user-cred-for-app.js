@@ -23,7 +23,7 @@ const USER_AUTH_OAUTH_SCOPES = [
   'https://www.googleapis.com/auth/chat.memberships.app',
 ];
 
-// This sample shows how to create membership with app credential for an app
+// This sample shows how to create an app membership.
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(

@@ -35,8 +35,8 @@ async function main() {
       name: 'spaces/SPACE_NAME',
       displayName: 'New space display name',
     },
-    // The field paths to update. Separate multiple values with commas or use
-    // `*` to update all field paths.
+    // The field paths to update. Separate multiple values with commas or use `*`
+    // to update all field paths.
     updateMask: {
       // The field paths to update.
       paths: ['display_name'],

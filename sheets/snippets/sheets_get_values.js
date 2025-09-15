@@ -22,7 +22,7 @@ import {google} from 'googleapis';
  * Gets cell values from a Spreadsheet.
  * @param {string} spreadsheetId The spreadsheet ID.
  * @param {string} range The sheet range.
- * @return {obj} spreadsheet information
+ * @return {Promise<object>} A promise that resolves to the response from the get.
  */
 async function getValues(spreadsheetId, range) {
   const auth = new GoogleAuth({

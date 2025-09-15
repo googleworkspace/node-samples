@@ -20,7 +20,7 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Search file in drive location
+ * Searches for files in Google Drive.
  */
 async function searchFile() {
   // Get credentials and build service

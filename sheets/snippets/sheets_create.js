@@ -19,9 +19,9 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Create a google spreadsheet
- * @param {string} title Spreadsheets title
- * @return {string} Created spreadsheets ID
+ * Creates a Google Spreadsheet.
+ * @param {string} title The spreadsheet's title.
+ * @return {string} The ID of the created spreadsheet.
  */
 async function create(title) {
   const auth = new GoogleAuth({

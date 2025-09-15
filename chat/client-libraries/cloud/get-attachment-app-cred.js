@@ -19,7 +19,8 @@
 
 import {createClientWithAppCredentials} from './authentication-utils.js';
 
-// This sample shows how to get attachment metadata with app credential
+// This sample shows how to get attachment metadata with app
+// credential
 async function main() {
   // Create a client
   const chatClient = createClientWithAppCredentials();

@@ -21,10 +21,10 @@ import {google} from 'googleapis';
 
 /**
  * Downloads a file
- * @param{string} realFileId file ID
+ * @param{string} fileId file ID
  * @return{Promise<number>} file status
  */
-async function downloadFile(realFileId) {
+async function downloadFile(fileId) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
 
@@ -33,9 +33,8 @@ async function downloadFile(realFileId) {
   });
   const service = google.drive({version: 'v3', auth});
 
-  const fileId = realFileId;
   const file = await service.files.get({
-    fileId,
+    fileId: fileId,
     alt: 'media',
   });
   console.log(file.status);

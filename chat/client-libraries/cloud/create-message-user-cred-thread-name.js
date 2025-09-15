@@ -24,7 +24,8 @@ const USER_AUTH_OAUTH_SCOPES = [
   'https://www.googleapis.com/auth/chat.messages.create',
 ];
 
-// This sample shows how to create message with user credential with thread name
+// This sample shows how to create a message with user credentials in a named
+// thread
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(
@@ -35,8 +36,8 @@ async function main() {
   const request = {
     // Replace SPACE_NAME here.
     parent: 'spaces/SPACE_NAME',
-    // Creates the message as a reply to the thread specified by thread.name
-    // If it fails, the message starts a new thread instead
+    // Creates the message as a reply to the thread specified by thread.name.
+    // If it fails, the message starts a new thread instead.
     messageReplyOption:
       protos.google.chat.v1.CreateMessageRequest.MessageReplyOption
         .REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD,

@@ -37,9 +37,9 @@ async function createSheetsChart(
 
   const service = google.slides({version: 'v1', auth});
 
-  // Embed a Sheets chart (indicated by the spreadsheetId and sheetChartId) onto
-  // a page in the presentation. Setting the linking mode as "LINKED" allows the
-  // chart to be refreshed if the Sheets version is updated.
+  // Embed a Sheets chart (indicated by the spreadsheetId and sheetChartId)
+  // onto a page in the presentation. Setting the linking mode as "LINKED"
+  // allows the chart to be refreshed if the Sheets version is updated.
   const emu4M = {
     magnitude: 4000000,
     unit: 'EMU',

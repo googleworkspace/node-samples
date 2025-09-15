@@ -21,7 +21,8 @@ import {google} from 'googleapis';
 
 /**
  * Retrieve the list of changes for the currently authenticated user.
- * @param {string} savedStartPageToken page token got after executing fetch_start_page_token.js file
+ * @param {string} savedStartPageToken page token got after executing
+ * fetch_start_page_token.js file
  **/
 async function fetchChanges(savedStartPageToken) {
   // Get credentials and build service

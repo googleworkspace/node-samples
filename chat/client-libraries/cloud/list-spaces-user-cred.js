@@ -39,8 +39,8 @@ async function main() {
   // Make the request
   const pageResult = chatClient.listSpacesAsync(request);
 
-  // Handle the response. Iterating over pageResult will yield results and
-  // resolve additional pages automatically.
+  // Handle the response. Iterating over pageResult will yield results
+  // and resolve additional pages automatically.
   for await (const response of pageResult) {
     console.log(response);
   }

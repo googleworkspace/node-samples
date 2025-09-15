@@ -49,7 +49,7 @@ async function createSlide(presentationId, pageId) {
   console.log(
     `Created slide with ID: ${result.data.replies[0].createSlide.objectId}`,
   );
-  return res;
+  return result;
 }
 // [END slides_create_slide]
 

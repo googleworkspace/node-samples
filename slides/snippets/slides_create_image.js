@@ -32,7 +32,8 @@ async function createImage(presentationId, pageId) {
 
   const imageUrl =
     'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
-  // Create a new image, using the supplied object ID, with content downloaded from imageUrl.
+  // Create a new image, using the supplied object ID, with content
+  // downloaded from imageUrl.
   const imageId = 'MyImage_01';
   const emu4M = {
     magnitude: 4000000,

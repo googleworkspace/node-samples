@@ -20,8 +20,8 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Create a folder and prints the folder ID
- * @return{Promise<string|null|undefined>} folder Id
+ * Create a folder and return the folder ID.
+ * @return{Promise<string|null|undefined>} The folder ID.
  */
 async function createFolder() {
   // Get credentials and build service

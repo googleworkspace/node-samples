@@ -21,11 +21,11 @@ import {google} from 'googleapis';
 
 /**
  * Change the file's modification timestamp.
- * @param{string} fileId ID of the file to change modified time
- * @param{string} Timestamp Timestamp to override Modified date time of the file
- * @return{Promise<string|null|undefined>} modified Timestamp
+ * @param{string} fileId ID of the file to change modified time.
+ * @param{string} timestamp Timestamp to override the modification timestamp of the file.
+ * @return{Promise<string|null|undefined>} The modified timestamp.
  **/
-async function touchFile(fileId, Timestamp) {
+async function touchFile(fileId, timestamp) {
   // Get credentials and build service
   // TODO (developer) - Use appropriate auth mechanism for your app
   const auth = new GoogleAuth({
@@ -35,7 +35,7 @@ async function touchFile(fileId, Timestamp) {
   const fileMetadata = {
     modifiedTime: new Date().toISOString(),
   };
-  fileMetadata.modifiedTime = Timestamp;
+  fileMetadata.modifiedTime = timestamp;
   const file = await service.files.update({
     fileId,
     requestBody: fileMetadata,

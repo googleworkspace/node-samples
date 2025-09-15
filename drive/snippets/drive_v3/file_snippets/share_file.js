@@ -20,12 +20,11 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Batch permission modification
- *
- * @param{string} fileId file ID
- * @param{string} targetUserEmail username
- * @param{string} targetDomainName domain
- * @return{Promise<Array<string>>} permission id
+ * Share a file with a user and a domain.
+ * @param{string} fileId The ID of the file to share.
+ * @param{string} targetUserEmail The email address of the user to share with.
+ * @param{string} targetDomainName The domain to share with.
+ * @return{Promise<Array<string>>} A promise that resolves to an array of permission IDs.
  */
 async function shareFile(fileId, targetUserEmail, targetDomainName) {
   // Get credentials and build service

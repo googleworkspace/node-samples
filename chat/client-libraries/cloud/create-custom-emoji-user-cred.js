@@ -32,7 +32,7 @@ async function main() {
 
   // TODO(developer) Replace FILENAME here.
   const filename = 'FILENAME';
-  // Read Custom emoji file content into base64 encoded string
+  // Read custom emoji file content into a base64 encoded string.
   const fileContent = fs.readFileSync(filename, {encoding: 'base64'});
 
   // Initialize request argument(s)

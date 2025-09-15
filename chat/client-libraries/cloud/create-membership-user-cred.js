@@ -23,7 +23,8 @@ const USER_AUTH_OAUTH_SCOPES = [
   'https://www.googleapis.com/auth/chat.memberships',
 ];
 
-// This sample shows how to create membership with user credential for a human user
+// This sample shows how to create membership with user credential for a human
+// user
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(

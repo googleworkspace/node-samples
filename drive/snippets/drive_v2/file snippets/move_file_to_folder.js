@@ -20,7 +20,7 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Change the file's modification timestamp.
+ * Moves a file to a folder.
  * @param{string} fileId Id of the file to move
  * @param{string} folderId Id of the folder to move
  * @return{Promise<number>} file status
