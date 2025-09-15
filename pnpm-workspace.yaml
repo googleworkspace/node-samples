@@ -23,4 +23,4 @@ catalog:
   server-destroy: ^1.0.1
   turbo: ^2.5.6
   typescript: ^5.9.2
-  uuid: ^8.3.2
+  uuid: ^13.0.0
