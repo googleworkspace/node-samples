@@ -31,7 +31,7 @@ async function main() {
     message: {
       text:
         '👋🌎 Hello world! I created this message by calling ' +
-        'the Chat API\'s `messages.create()` method.',
+        "the Chat API's `messages.create()` method.",
       cardsV2: [
         {
           card: {
@@ -69,19 +69,19 @@ async function main() {
                 ],
               },
               {
-                header: 'What\'s next',
+                header: "What's next",
                 collapsible: true,
                 widgets: [
                   {
                     textParagraph: {
-                      text: '❤️ <a href=\'https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.reactions/create\'>Add a reaction</a>.',
+                      text: "❤️ <a href='https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages.reactions/create'>Add a reaction</a>.",
                     },
                   },
                   {
                     textParagraph: {
                       text:
-                        '🔄 <a href=\'https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages/patch\'>Update</a> ' +
-                        'or ❌ <a href=\'https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages/delete\'>delete</a> ' +
+                        "🔄 <a href='https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages/patch'>Update</a> " +
+                        "or ❌ <a href='https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.messages/delete'>delete</a> " +
                         'the message.',
                     },
                   },

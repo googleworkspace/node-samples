@@ -26,10 +26,10 @@ import {google} from 'googleapis';
  * @param {string} sheetChartId The sheet's chart ID.
  */
 async function createSheetsChart(
-    presentationId,
-    pageId,
-    spreadsheetId,
-    sheetChartId,
+  presentationId,
+  pageId,
+  spreadsheetId,
+  sheetChartId,
 ) {
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',

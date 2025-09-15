@@ -28,8 +28,8 @@ describe('Presentation snippets', () => {
   it('should copy a presentation', async () => {
     const presentationId = await helpers.createTestPresentation();
     const copyId = await copyPresentation(
-        presentationId,
-        'My' + ' Duplicate, Presentation',
+      presentationId,
+      'My' + ' Duplicate, Presentation',
     );
     expect(copyId).toBeDefined();
     helpers.deleteFileOnCleanup(copyId.data.id);

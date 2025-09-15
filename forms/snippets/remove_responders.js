@@ -43,8 +43,8 @@ async function removeResponders(formId, email) {
 
     const permissions = result.data.permissions || [];
     const responderToRemove = permissions.find(
-        (permission) =>
-          permission.view === 'published' &&
+      (permission) =>
+        permission.view === 'published' &&
         permission.role === 'reader' &&
         permission.emailAddress === email,
     );
@@ -56,7 +56,7 @@ async function removeResponders(formId, email) {
         permissionId: responderToRemove.id,
       });
       console.log(
-          `Responder with permission ID '${permissionId}' removed successfully.`,
+        `Responder with permission ID '${permissionId}' removed successfully.`,
       );
     } else {
       console.log('Responder not found for the specified form');

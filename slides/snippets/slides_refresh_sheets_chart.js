@@ -44,7 +44,7 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
     },
   });
   console.log(
-      `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
+    `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
   );
   return batchUpdateResponse.data;
 }

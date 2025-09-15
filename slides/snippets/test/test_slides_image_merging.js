@@ -31,9 +31,9 @@ describe('Presentation snippets', () => {
 
   it('should ImageMerging', async () => {
     const response = await imageMerging(
-        TEMPLATE_PRESENTATION_ID,
-        IMAGE_URL,
-        CUSTOMER_NAME,
+      TEMPLATE_PRESENTATION_ID,
+      IMAGE_URL,
+      CUSTOMER_NAME,
     );
     const presentationId = response.presentationId;
     expect(presentationId).toBeDefined();

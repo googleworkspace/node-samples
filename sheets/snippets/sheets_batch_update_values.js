@@ -27,10 +27,10 @@ import {google} from 'googleapis';
  * @return {obj} spreadsheet information
  */
 async function batchUpdateValues(
-    spreadsheetId,
-    range,
-    valueInputOption,
-    _values,
+  spreadsheetId,
+  range,
+  valueInputOption,
+  _values,
 ) {
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',

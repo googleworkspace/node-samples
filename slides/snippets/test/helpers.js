@@ -59,9 +59,9 @@ class Helpers {
    */
   cleanup() {
     return Promise.all(
-        this.filesToDelete.map((fileId) =>
-          this.driveService.files.delete({fileId}),
-        ),
+      this.filesToDelete.map((fileId) =>
+        this.driveService.files.delete({fileId}),
+      ),
     );
   }
 
@@ -166,10 +166,10 @@ class Helpers {
    * @return {Promise<string>} The chart's object ID
    */
   async createTestSheetsChart(
-      presentationId,
-      pageId,
-      spreadsheetId,
-      sheetChartId,
+    presentationId,
+    pageId,
+    spreadsheetId,
+    sheetChartId,
   ) {
     const chartId = 'MyChart_01';
     const emu4M = {

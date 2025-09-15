@@ -28,7 +28,7 @@ const USER_AUTH_OAUTH_SCOPES = [
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(
-      USER_AUTH_OAUTH_SCOPES,
+    USER_AUTH_OAUTH_SCOPES,
   );
 
   // Initialize request argument(s)
@@ -39,7 +39,7 @@ async function main() {
     // If it fails, the message starts a new thread instead
     messageReplyOption:
       protos.google.chat.v1.CreateMessageRequest.MessageReplyOption
-          .REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD,
+        .REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD,
     message: {
       text: 'Hello with user credential!',
       thread: {

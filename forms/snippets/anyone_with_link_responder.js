@@ -59,11 +59,11 @@ async function isAnyoneWithLinkResponder(formId) {
 
     if (anyoneWithLinkResponder) {
       console.log(
-          `Form '${formId}' IS configured for 'Anyone with the link' to respond.`,
+        `Form '${formId}' IS configured for 'Anyone with the link' to respond.`,
       );
     } else {
       console.log(
-          `Form '${formId}' is NOT configured for 'Anyone with the link' to respond.`,
+        `Form '${formId}' is NOT configured for 'Anyone with the link' to respond.`,
       );
     }
   } catch (e) {
@@ -99,7 +99,7 @@ async function setAnyoneWithLinkResponder(formId) {
       fields: 'id', // Request only needed fields
     });
     console.log(
-        `'Anyone with the link can respond' permission set for form '${formId}'. Permission ID: ${result.data.id}`,
+      `'Anyone with the link can respond' permission set for form '${formId}'. Permission ID: ${result.data.id}`,
     );
   } catch (e) {
     console.error(`Error setting "anyone with link" permission: ${e}`);
@@ -147,11 +147,11 @@ async function removeAnyoneWithLinkResponder(formId) {
         permissionId: permissionIdToDelete,
       });
       console.log(
-          `Successfully removed 'Anyone with the link' permission (ID: ${permissionIdToDelete}) from form '${formId}'.`,
+        `Successfully removed 'Anyone with the link' permission (ID: ${permissionIdToDelete}) from form '${formId}'.`,
       );
     } else {
       console.log(
-          `'Anyone with the link can respond' permission not found for form '${formId}'. Nothing to remove.`,
+        `'Anyone with the link can respond' permission not found for form '${formId}'. Nothing to remove.`,
       );
     }
   } catch (e) {

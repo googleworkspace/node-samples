@@ -46,9 +46,9 @@ async function listSlides() {
   console.log('The presentation contains %s slides:', slides.length);
   (result.data.slides ?? []).forEach((slide, i) => {
     console.log(
-        `- Slide #${i + 1} contains ${
-          slide?.pageElements?.length ?? 0
-        }} elements.`,
+      `- Slide #${i + 1} contains ${
+        slide?.pageElements?.length ?? 0
+      }} elements.`,
     );
   });
 }

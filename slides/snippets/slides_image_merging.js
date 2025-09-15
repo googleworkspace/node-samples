@@ -82,7 +82,7 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
   for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
     numReplacements +=
       batchUpdateResponse.data.replies[i].replaceAllShapesWithImage
-          .occurrencesChanged;
+        .occurrencesChanged;
   }
   console.log(`Created merged presentation with ID: ${presentationCopyId}`);
   console.log(`Replaced ${numReplacements} shapes with images.`);

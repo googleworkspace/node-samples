@@ -33,10 +33,10 @@ describe('Presentation snippets', () => {
     const pageIds = await helpers.addSlides(presentationId, 1, 'BLANK');
     const pageId = pageIds[0];
     const response = await createSheetsChart(
-        presentationId,
-        pageId,
-        DATA_SPREADSHEET_ID,
-        CHART_ID,
+      presentationId,
+      pageId,
+      DATA_SPREADSHEET_ID,
+      CHART_ID,
     );
     expect(1).toEqual(response.replies.length);
     const chartId = response.replies[0].createSheetsChart.objectId;

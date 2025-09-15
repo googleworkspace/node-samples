@@ -31,7 +31,7 @@ async function searchFile() {
   const service = google.drive({version: 'v3', auth});
 
   const result = await service.files.list({
-    q: 'mimeType=\'image/jpeg\'',
+    q: "mimeType='image/jpeg'",
     fields: 'nextPageToken, files(id, name)',
     spaces: 'drive',
   });

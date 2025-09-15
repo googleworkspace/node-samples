@@ -28,7 +28,9 @@ async function listWatches() {
     version: 'v1',
     auth,
   });
-  const result = await formsClient.forms.watches.list({formId: formID});
+  const result = await formsClient.forms.watches.list({
+    formId: formID,
+  });
   console.log(result.data);
   return result.data;
 }
