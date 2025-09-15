@@ -26,16 +26,19 @@ const SCOPES = 'https://www.googleapis.com/auth/forms.body';
  * @param {string} formIdToUnpublish The ID of the form to unpublish.
  */
 async function unpublishForm(formIdToUnpublish) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
 
+  // The request body to unpublish the form.
   const setPublishSettingsRequest = {
     publishSettings: {
       publishState: {
@@ -45,6 +48,7 @@ async function unpublishForm(formIdToUnpublish) {
   };
 
   try {
+    // Send the request to unpublish the form.
     const res = await formsClient.forms.setPublishSettings({
       formId: formIdToUnpublish,
       requestBody: setPublishSettingsRequest,

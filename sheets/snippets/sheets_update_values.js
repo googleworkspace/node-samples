@@ -19,19 +19,23 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Updates values in a Spreadsheet.
- * @param {string} spreadsheetId The spreadsheet ID.
- * @param {string} range The range of values to update.
- * @param {object} valueInputOption Value update options.
- * @param {(string[])[]} _values A 2d array of values to update.
- * @return {obj} spreadsheet information
+ * Updates values in a spreadsheet.
+ * @param {string} spreadsheetId The ID of the spreadsheet to update.
+ * @param {string} range The range of cells to update.
+ * @param {string} valueInputOption How the input data should be interpreted.
+ * @param {(string[])[]} _values A 2D array of values to update.
+ * @return {Promise<object>} The response from the update request.
  */
 async function updateValues(spreadsheetId, range, valueInputOption, _values) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+
+  // The values to update in the spreadsheet.
   let values = [
     [
       // Cell values ...
@@ -41,15 +45,21 @@ async function updateValues(spreadsheetId, range, valueInputOption, _values) {
   // [START_EXCLUDE silent]
   values = _values;
   // [END_EXCLUDE]
+
+  // Create the request body.
   const resource = {
     values,
   };
+
+  // Update the values in the spreadsheet.
   const result = await service.spreadsheets.values.update({
     spreadsheetId,
     range,
     valueInputOption,
     resource,
   });
+
+  // Log the number of updated cells.
   console.log('%d cells updated.', result.data.updatedCells);
   return result;
 }

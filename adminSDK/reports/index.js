@@ -21,18 +21,24 @@ import process from 'node:process';
 import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
+// The scope for the Admin SDK Reports API.
 const SCOPES = ['https://www.googleapis.com/auth/admin.reports.audit.readonly'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Lists the last 10 login events for the domain.
  */
 async function listLoginEvents() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
+
+  // Create a new Admin SDK Reports API client.
   const service = google.admin({version: 'reports_v1', auth});
+  // Get the list of login events.
   const result = await service.activities.list({
     userKey: 'all',
     applicationName: 'login',
@@ -44,6 +50,7 @@ async function listLoginEvents() {
     return;
   }
 
+  // Print the time, email, and event name of each login event.
   console.log('Logins:');
   activities.forEach((activity) => {
     console.log(

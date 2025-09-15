@@ -20,29 +20,35 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Find all shared drives without an organizer and add one.
- * @param{string} userEmail user ID to assign ownership to
+ * Finds all shared drives without an organizer and adds one.
+ * @param {string} userEmail The email of the user to assign ownership to.
+ * @return {Promise<object[]>} A list of the recovered drives.
  */
 async function recoverDrives(userEmail) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
+
+  // The permission to add to the shared drive.
   const newOrganizerPermission = {
     type: 'user',
     role: 'organizer',
-    emailAddress: userEmail, // Example: 'user@example.com'
+    emailAddress: userEmail, // e.g., 'user@example.com'
   };
 
+  // List all shared drives with no organizers.
   const result = await service.drives.list({
     q: 'organizerCount = 0',
     fields: 'nextPageToken, drives(id, name)',
     useDomainAdminAccess: true,
   });
 
+  // Add the new organizer to each found shared drive.
   for (const drive of result.data.drives ?? []) {
     if (!drive.id) {
       continue;
@@ -57,7 +63,7 @@ async function recoverDrives(userEmail) {
       fields: 'id',
     });
   }
-  return result.data.drives;
+  return result.data.drives ?? [];
 }
 // [END drive_recover_drives]
 

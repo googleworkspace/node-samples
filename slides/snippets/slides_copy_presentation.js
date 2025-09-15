@@ -19,23 +19,32 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Copies a Google Slide presentation.
- * @param {string} presentationId The presentation to copy.
- * @param {string} copyTitle The new title.
+ * Copies a presentation.
+ * @param {string} presentationId The ID of the presentation to copy.
+ * @param {string} copyTitle The title for the copied presentation.
+ * @return {Promise<object>} The response from the copy request.
  */
 async function copyPresentation(presentationId, copyTitle) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
 
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // The request to copy the presentation.
   const request = {
     name: copyTitle,
   };
+
+  // Copy the presentation.
   const driveResponse = await service.files.copy({
     fileId: presentationId,
     requestBody: request,
   });
+
+  // Log the ID of the copied presentation.
   const presentationCopyId = driveResponse.data.id;
   console.log(`Created copied presentation with ID: ${presentationCopyId}`);
   return driveResponse;

@@ -21,7 +21,9 @@ import process from 'node:process';
 import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
+// The scope for reading Google Docs.
 const SCOPES = ['https://www.googleapis.com/auth/documents.readonly'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
@@ -29,14 +31,19 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
  * https://docs.google.com/document/d/195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE/edit
  */
 async function printDocTitle() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
+
+  // Create a new Docs API client.
   const docs = google.docs({version: 'v1', auth});
+  // Get the document.
   const result = await docs.documents.get({
     documentId: '195j9eDD3ccgjQRttHhJPymLJUCOUjs-jmwTrekvdjFE',
   });
+  // Print the title of the document.
   console.log(`The title of the document is: ${result.data.title}`);
 }
 

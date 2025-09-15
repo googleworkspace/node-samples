@@ -21,30 +21,43 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Insert a file in the application data folder and prints file Id
+ * Uploads a file to the application data folder.
+ * @return {Promise<string>} The ID of the uploaded file.
  */
 async function uploadAppdata() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive.appdata',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
+
+  // The metadata for the file to be uploaded.
   const fileMetadata = {
     name: 'config.json',
     parents: ['appDataFolder'],
   };
+
+  // The media content to be uploaded.
   const media = {
     mimeType: 'application/json',
     body: fs.createReadStream('files/config.json'),
   };
+
+  // Upload the file to the application data folder.
   const file = await service.files.create({
     requestBody: fileMetadata,
     media,
     fields: 'id',
   });
+
+  // Print the ID of the uploaded file.
   console.log('File Id:', file.data.id);
+  if (!file.data.id) {
+    throw new Error('File ID not found.');
+  }
   return file.data.id;
 }
 // [END drive_upload_appdata]

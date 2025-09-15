@@ -20,21 +20,27 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Download a Document file in PDF format
- * @param{string} fileId file ID
- * @return{Promise<number>} The status of the export request.
+ * Exports a Google Doc as a PDF.
+ * @param {string} fileId The ID of the file to export.
+ * @return {Promise<number>} The status of the export request.
  */
 async function exportPdf(fileId) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
+
+  // Export the file as a PDF.
   const result = await service.files.export({
     fileId,
     mimeType: 'application/pdf',
   });
+
+  // Print the status of the export.
   console.log(result.status);
   return result.status;
 }

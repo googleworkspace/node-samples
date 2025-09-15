@@ -20,21 +20,30 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * List out application data folder and prints folder ID
+ * Fetches the ID of the application data folder.
+ * @return {Promise<string>} The ID of the application data folder.
  */
 async function fetchAppdataFolder() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive.appdata',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // Get the application data folder.
   const file = await service.files.get({
     fileId: 'appDataFolder',
     fields: 'id',
   });
+
+  // Print the folder ID.
   console.log('File Id:', file.data.id);
+  if (!file.data.id) {
+    throw new Error('File ID not found.');
+  }
   return file.data.id;
 }
 // [END drive_fetch_appdata_folder]

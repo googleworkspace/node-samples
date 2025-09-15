@@ -19,26 +19,34 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Adds an image to a presentation.
- * @param {string} presentationId The presentation ID.
- * @param {string} pageId The presentation page ID.
+ * Adds an image to a slide in a presentation.
+ * @param {string} presentationId The ID of the presentation.
+ * @param {string} pageId The ID of the page to add the image to.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function createImage(presentationId, pageId) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
 
+  // The URL of the image to add.
   const imageUrl =
     'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
-  // Create a new image, using the supplied object ID, with content
-  // downloaded from imageUrl.
+
+  // The ID to use for the new image.
   const imageId = 'MyImage_01';
+
+  // The size of the new image in English Metric Units (EMUs).
   const emu4M = {
     magnitude: 4000000,
     unit: 'EMU',
   };
+
+  // The request to create a new image.
   const requests = [
     {
       createImage: {
@@ -61,6 +69,8 @@ async function createImage(presentationId, pageId) {
       },
     },
   ];
+
+  // Execute the batch update request to create the image.
   const response = await service.presentations.batchUpdate({
     presentationId,
     requestBody: {requests},

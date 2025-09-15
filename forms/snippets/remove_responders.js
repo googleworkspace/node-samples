@@ -21,48 +21,50 @@ const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
 /**
- * Remove a responder to the form.
+ * Remove a responder from a form.
+ * This is done by removing the corresponding permission from the form in Google Drive.
  *
  * @param {string} formId The ID of the form.
- * @param {string} email The email of the responder.
+ * @param {string} email The email of the responder to remove.
  */
 async function removeResponders(formId, email) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Drive API client.
   const driveService = drive({version: 'v3', auth: authClient});
 
-  try {
-    const result = await driveService.permissions.list({
+  // List the permissions for the form.
+  const result = await driveService.permissions.list({
+    fileId: formId,
+    includePermissionsForView: 'published',
+    fields: 'permissions(id,emailAddress,type,role,view)',
+  });
+
+  const permissions = result.data.permissions || [];
+  // Find the permission that corresponds to the responder to be removed.
+  const responderToRemove = permissions.find(
+    (permission) =>
+      permission.view === 'published' &&
+      permission.role === 'reader' &&
+      permission.emailAddress === email,
+  );
+
+  if (responderToRemove?.id) {
+    const permissionId = responderToRemove.id;
+    // Delete the permission.
+    await driveService.permissions.delete({
       fileId: formId,
-      includePermissionsForView: 'published',
-      fields: 'permissions(id,emailAddress,type,role,view)',
+      permissionId: responderToRemove.id,
     });
-
-    const permissions = result.data.permissions || [];
-    const responderToRemove = permissions.find(
-      (permission) =>
-        permission.view === 'published' &&
-        permission.role === 'reader' &&
-        permission.emailAddress === email,
+    console.log(
+      `Responder with permission ID '${permissionId}' removed successfully.`,
     );
-
-    if (responderToRemove?.id) {
-      const permissionId = responderToRemove.id;
-      await driveService.permissions.delete({
-        fileId: formId,
-        permissionId: responderToRemove.id,
-      });
-      console.log(
-        `Responder with permission ID '${permissionId}' removed successfully.`,
-      );
-    } else {
-      console.log('Responder not found for the specified form');
-    }
-  } catch (err) {
-    console.error('Error removing responder:', err);
+  } else {
+    console.log('Responder not found for the specified form');
   }
 }
 

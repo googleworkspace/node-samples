@@ -21,30 +21,33 @@ const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
 
 /**
- * Checks if the form supports publishing.
+ * Checks if a form supports the `publishSettings` field, which indicates it is not a legacy form.
  *
  * @param {string} formIdToCheck The ID of the form to check.
  */
 async function supportsPublishing(formIdToCheck) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
 
   try {
+    // Get the form metadata.
     const result = await formsClient.forms.get({
       formId: formIdToCheck,
     });
 
     const formTitle = result.data.info?.title;
 
-    // If 'publishSettings' field exists (even if empty), it supports the new
-    // publishing model.
+    // If the 'publishSettings' field exists (even if empty), the form supports the new
+    // publishing model and is not a legacy form.
     if (result.data && result.data.publishSettings !== undefined) {
       console.log(
         `Form '${formIdToCheck}' (Title: ${

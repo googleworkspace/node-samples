@@ -21,20 +21,25 @@ import process from 'node:process';
 import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
+// The scope for reading presentations.
 const SCOPES = ['https://www.googleapis.com/auth/presentations.readonly'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
- * Prints the number of slides and elements in a sample presentation:
- * https://docs.google.com/presentation/d/1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc/edit
+ * Prints the number of slides and elements in a sample presentation.
+ * @see https://docs.google.com/presentation/d/1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc/edit
  */
 async function listSlides() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
 
+  // Create a new Slides API client.
   const slidesApi = google.slides({version: 'v1', auth});
+  // Get the presentation data.
   const result = await slidesApi.presentations.get({
     presentationId: '1EAYk18WDjIG-zp_0vLm3CsfQh_i8eXc67Jo2O9C6Vuc',
   });
@@ -43,7 +48,9 @@ async function listSlides() {
     console.log('No slides found.');
     return;
   }
+  // Print the number of slides.
   console.log('The presentation contains %s slides:', slides.length);
+  // Print the number of elements in each slide.
   (result.data.slides ?? []).forEach((slide, i) => {
     console.log(
       `- Slide #${i + 1} contains ${

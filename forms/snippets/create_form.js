@@ -17,23 +17,34 @@ import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 
+/**
+ * Creates a new form.
+ */
 async function createForm() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The request body to create a new form.
   const newForm = {
     info: {
       title: 'Creating a new form in Node',
     },
   };
+
+  // Send the request to create the form.
   const result = await formsClient.forms.create({
     requestBody: newForm,
   });
+
   console.log(result.data);
   return result.data;
 }

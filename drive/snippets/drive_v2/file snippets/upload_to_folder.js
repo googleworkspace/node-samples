@@ -21,31 +21,44 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Upload a file to the specified folder and prints file ID, folder ID
- * @param{string} folderId folder ID
+ * Uploads a file to a specific folder in Google Drive.
+ * @param {string} folderId The ID of the folder to upload the file to.
+ * @return {Promise<string>} The ID of the uploaded file.
  */
 async function uploadToFolder(folderId) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // The metadata for the file to be uploaded.
   const fileMetadata = {
     title: 'photo.jpg',
     parents: [{id: folderId}],
   };
+
+  // The media content to be uploaded.
   const media = {
     mimeType: 'image/jpeg',
     body: fs.createReadStream('files/photo.jpg'),
   };
+
+  // Upload the file to the specified folder.
   const file = await service.files.insert({
     requestBody: fileMetadata,
     media,
     fields: 'id',
   });
+
+  // Print the ID of the uploaded file.
   console.log('File Id:', file.data.id);
+  if (!file.data.id) {
+    throw new Error('File ID not found.');
+  }
   return file.data.id;
 }
 // [END drive_upload_to_folder]

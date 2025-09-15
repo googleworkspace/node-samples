@@ -17,22 +17,33 @@ import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 
+// TODO: Replace with a valid form ID.
 const formID = '<YOUR_FORM_ID>';
+// TODO: Replace with a valid watch ID.
 const watchID = '<YOUR_FORMS_WATCH_ID>';
 
+/**
+ * Renews a watch on a form.
+ */
 async function renewWatch() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // Send the request to renew the watch.
   const result = await formsClient.forms.watches.renew({
     formId: formID,
     watchId: watchID,
   });
+
   console.log(result.data);
   return result.data;
 }

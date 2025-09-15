@@ -20,25 +20,36 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Create a folder and prints the folder ID
+ * Creates a new folder in Google Drive.
+ * @return {Promise<string>} The ID of the created folder.
  */
 async function createFolder() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // The metadata for the new folder.
   const fileMetadata = {
     title: 'Invoices',
     mimeType: 'application/vnd.google-apps.folder',
   };
+
+  // Create the new folder.
   const file = await service.files.insert({
     requestBody: fileMetadata,
     fields: 'id',
   });
+
+  // Print the ID of the new folder.
   console.log('Folder Id:', file.data.id);
+  if (!file.data.id) {
+    throw new Error('File ID not found.');
+  }
   return file.data.id;
 }
 // [END drive_create_folder]

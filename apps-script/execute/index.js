@@ -20,22 +20,25 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Call an Apps Script function to list the folders in the user's root Drive
- * folder.
+ * Calls an Apps Script function to list the folders in the user's root Drive folder.
  */
 async function callAppsScript() {
+  // The ID of the Apps Script project to call.
   const scriptId = '1xGOh6wCm7hlIVSVPKm0y_dL-YqetspS5DEVmMzaxd_6AAvI-_u8DSgBT';
 
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Apps Script API client.
   const script = google.script({version: 'v1', auth});
-  // Make the API request. The request object is included here as 'resource'.
+
   const resp = await script.scripts.run({
     auth,
     requestBody: {
+      // The name of the function to call in the Apps Script project.
       function: 'getFoldersUnderRoot',
     },
     scriptId,
@@ -43,26 +46,21 @@ async function callAppsScript() {
 
   if (resp.data.error?.details?.[0]) {
     // The API executed, but the script returned an error.
-
-    // Extract the first (and only) set of error details. The values of this
-    // object are the script's 'errorMessage' and 'errorType', and an array of
-    // stack trace elements.
+    // Extract the error details.
     const error = resp.data.error.details[0];
-
     console.log(`Script error message: ${error.errorMessage}`);
     console.log('Script error stacktrace:');
 
     if (error.scriptStackTraceElements) {
-      // There may not be a stacktrace if the script didn't start executing.
+      // Log the stack trace.
       for (let i = 0; i < error.scriptStackTraceElements.length; i++) {
         const trace = error.scriptStackTraceElements[i];
         console.log('\t%s: %s', trace.function, trace.lineNumber);
       }
     }
   } else {
-    // The structure of the result depends on the Apps Script function's return value.
-    // Here, the function returns an object with string keys and values, which is
-    // treated as a Node.js object (folderSet).
+    // The script executed successfully.
+    // The structure of the response depends on the Apps Script function's return value.
     const folderSet = resp.data.response ?? {};
     if (Object.keys(folderSet).length === 0) {
       console.log('No folders returned!');

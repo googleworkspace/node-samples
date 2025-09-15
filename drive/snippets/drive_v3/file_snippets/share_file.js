@@ -20,35 +20,40 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Share a file with a user and a domain.
- * @param{string} fileId The ID of the file to share.
- * @param{string} targetUserEmail The email address of the user to share with.
- * @param{string} targetDomainName The domain to share with.
- * @return{Promise<Array<string>>} A promise that resolves to an array of permission IDs.
+ * Shares a file with a user and a domain.
+ * @param {string} fileId The ID of the file to share.
+ * @param {string} targetUserEmail The email address of the user to share with.
+ * @param {string} targetDomainName The domain to share with.
+ * @return {Promise<Array<string>>} A promise that resolves to an array of permission IDs.
  */
 async function shareFile(fileId, targetUserEmail, targetDomainName) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
+
   /** @type {Array<string>} */
   const permissionIds = [];
 
+  // The permissions to create.
   const permissions = [
     {
       type: 'user',
       role: 'writer',
-      emailAddress: targetUserEmail, // 'user@partner.com',
+      emailAddress: targetUserEmail, // e.g., 'user@partner.com'
     },
     {
       type: 'domain',
       role: 'writer',
-      domain: targetDomainName, // 'example.com',
+      domain: targetDomainName, // e.g., 'example.com'
     },
   ];
 
+  // Iterate through the permissions and create them one by one.
   for (const permission of permissions) {
     const result = await service.permissions.create({
       requestBody: permission,

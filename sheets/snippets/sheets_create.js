@@ -19,25 +19,33 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Creates a Google Spreadsheet.
- * @param {string} title The spreadsheet's title.
+ * Creates a new Google Spreadsheet.
+ * @param {string} title The title of the new spreadsheet.
  * @return {string} The ID of the created spreadsheet.
  */
 async function create(title) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+
+  // The resource body for creating a new spreadsheet.
   const resource = {
     properties: {
       title,
     },
   };
+
+  // Create the new spreadsheet.
   const spreadsheet = await service.spreadsheets.create({
     resource,
     fields: 'spreadsheetId',
   });
+
+  // Log the ID of the new spreadsheet.
   console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
   return spreadsheet.data.spreadsheetId;
 }

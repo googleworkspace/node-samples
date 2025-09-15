@@ -19,12 +19,14 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Add an image to a template presentation.
- * @param {string} templatePresentationId The template presentation ID.
- * @param {string} imageUrl The image URL
- * @param {string} customerName A customer name used for the title
+ * Replaces shapes in a presentation with images.
+ * @param {string} templatePresentationId The ID of the template presentation.
+ * @param {string} imageUrl The URL of the image to use.
+ * @param {string} customerName The name of the customer for the new presentation title.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function imageMerging(templatePresentationId, imageUrl, customerName) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: [
       'https://www.googleapis.com/auth/presentations',
@@ -32,12 +34,14 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     ],
   });
 
+  // Create new clients for Slides and Drive APIs.
   const slidesService = google.slides({version: 'v1', auth});
   const driveService = google.drive({version: 'v2', auth});
+
   const logoUrl = imageUrl;
   const customerGraphicUrl = imageUrl;
 
-  // Duplicate the template presentation using the Drive API.
+  // Duplicate the template presentation.
   const copyTitle = `${customerName} presentation`;
   const driveResponse = await driveService.files.copy({
     fileId: templatePresentationId,
@@ -47,7 +51,7 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
   });
   const presentationCopyId = driveResponse.data.id;
 
-  // Create the image merge (replaceAllShapesWithImage) requests.
+  // Create the image merge requests.
   const requests = [
     {
       replaceAllShapesWithImage: {
@@ -71,13 +75,15 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     },
   ];
 
-  // Execute the requests for this presentation.
+  // Execute the requests to replace the shapes with images.
   const batchUpdateResponse = await slidesService.presentations.batchUpdate({
     presentationId: presentationCopyId,
     requestBody: {
       requests,
     },
   });
+
+  // Count the total number of replacements made.
   let numReplacements = 0;
   for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
     numReplacements +=
