@@ -61,12 +61,12 @@ async function shareFile(fileId, targetUserEmail, targetDomainName) {
       fields: 'id',
     });
 
-    if (!result.data.id) {
+    if (result.data.id) {
+      permissionIds.push(result.data.id);
+      console.log(`Inserted permission id: ${result.data.id}`);
+    } else {
       throw new Error('Failed to create permission');
     }
-
-    permissionIds.push(result.data.id);
-    console.log(`Inserted permission id: ${result.data.id}`);
   }
   return permissionIds;
 }

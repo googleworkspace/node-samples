@@ -54,18 +54,17 @@ async function shareFile(fileId, targetUser, targetDomain) {
   // Note: The client library does not currently support batch requests for permissions.
   // When possible, use batch requests to insert multiple permissions on the same item.
   for (const permission of permissions) {
-    try {
-      // Insert the permission.
-      const result = await service.permissions.insert({
-        requestBody: permission,
-        fileId,
-        fields: 'id',
-      });
+    // Insert the permission.
+    const result = await service.permissions.insert({
+      requestBody: permission,
+      fileId,
+      fields: 'id',
+    });
+    if (result.data.id) {
       permissionIds.push(result.data.id);
       console.log(`Inserted permission id: ${result.data.id}`);
-    } catch (err) {
-      // TODO(developer): Handle failed permissions
-      console.error(err);
+    } else {
+      throw new Error('Failed to create permission');
     }
   }
   return permissionIds;
