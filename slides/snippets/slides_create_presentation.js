@@ -19,18 +19,25 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Creates a Google Slide presentation.
- * @param {string} title The presentation title.
+ * Creates a new Google Slides presentation.
+ * @param {string} title The title for the new presentation.
+ * @return {Promise<object>} The created presentation.
  */
 async function createPresentation(title) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
+
+  // Create a new presentation with the specified title.
   const presentation = await service.presentations.create({
     title,
   });
+
+  // Log the ID of the new presentation.
   console.log(
     `Created presentation with ID: ${presentation.data.presentationId}`,
   );

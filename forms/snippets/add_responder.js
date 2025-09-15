@@ -21,19 +21,23 @@ const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
 /**
- * Adds a responder to the form.
+ * Adds a responder to a form.
+ * This is done by adding a permission to the form in Google Drive.
  *
  * @param {string} formId The ID of the form.
- * @param {string} email The email of the responder.
+ * @param {string} email The email of the responder to add.
  */
 async function addResponder(formId, email) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Drive API client.
   const driveService = drive({version: 'v3', auth: authClient});
 
+  // The permission body to add a responder.
   const permissionBody = {
     role: 'reader',
     type: 'user',
@@ -42,11 +46,12 @@ async function addResponder(formId, email) {
   };
 
   try {
+    // Create the permission.
     const result = await driveService.permissions.create({
       fileId: formId,
       requestBody: permissionBody,
       fields: 'id,emailAddress,role,type,view',
-      sendNotificationEmail: false, // Optional
+      sendNotificationEmail: false, // Optional: whether to send a notification email.
     });
     console.log('Responder added:', result.data);
   } catch (err) {

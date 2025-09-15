@@ -20,39 +20,42 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Share a file with a user and a domain.
- * @param{string} fileId The ID of the file to share.
- * @param{string} targetUser The email address of the user to share with.
- * @param{string} targetDomain The domain to share with.
+ * Shares a file with a user and a domain.
+ * @param {string} fileId The ID of the file to share.
+ * @param {string} targetUser The email address of the user to share with.
+ * @param {string} targetDomain The domain to share with.
+ * @return {Promise<string[]>} A list of the inserted permission IDs.
  */
 async function shareFile(fileId, targetUser, targetDomain) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
 
   const permissionIds = [];
+  // The permissions to insert.
   const permissions = [
     {
       type: 'user',
       role: 'writer',
-      value: targetUser, // Example: 'user@example.com',
+      value: targetUser, // e.g., 'user@example.com'
     },
     {
       type: 'domain',
       role: 'writer',
-      value: targetDomain, // Example: 'example.com',
+      value: targetDomain, // e.g., 'example.com'
     },
   ];
 
-  // Note: Client library does not currently support HTTP batch requests. When
-  // possible, use batched requests when inserting multiple permissions on the
-  // same item. For this sample, permissions are inserted serially.
+  // Note: The client library does not currently support batch requests for permissions.
+  // When possible, use batch requests to insert multiple permissions on the same item.
   for (const permission of permissions) {
     try {
+      // Insert the permission.
       const result = await service.permissions.insert({
         requestBody: permission,
         fileId,

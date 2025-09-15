@@ -19,17 +19,20 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Gets cell values from a Spreadsheet.
- * @param {string} spreadsheetId The spreadsheet ID.
- * @param {string} range The sheet range.
- * @return {Promise<object>} A promise that resolves to the response from the get.
+ * Gets cell values from a spreadsheet.
+ * @param {string} spreadsheetId The ID of the spreadsheet.
+ * @param {string} range The range of cells to retrieve.
+ * @return {Promise<object>} The response from the get request.
  */
 async function getValues(spreadsheetId, range) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+  // Get the values from the specified range.
   const result = await service.spreadsheets.values.get({
     spreadsheetId,
     range,

@@ -19,18 +19,21 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Creates bulleted text for a presentation.
- * @param {string} presentationId The presentation ID.
- * @param {string} shapeId The shape ID to add bulleted text to.
+ * Adds bullet points to text in a shape.
+ * @param {string} presentationId The ID of the presentation.
+ * @param {string} shapeId The ID of the shape to add bullets to.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function createBulletedText(presentationId, shapeId) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
 
-  // Add arrow-diamond-disc bullets to all text in the shape.
+  // The request to add bullet points to the text.
   const requests = [
     {
       createParagraphBullets: {
@@ -42,6 +45,8 @@ async function createBulletedText(presentationId, shapeId) {
       },
     },
   ];
+
+  // Execute the batch update request.
   const batchUpdateResponse = await service.presentations.batchUpdate({
     presentationId,
     requestBody: {

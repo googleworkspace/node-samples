@@ -22,19 +22,23 @@ const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
 /**
  * Checks if anyone with the link is a responder for the form.
+ * This is determined by checking the form's permissions in Google Drive.
  *
  * @param {string} formId The ID of the Google Form.
  */
 async function isAnyoneWithLinkResponder(formId) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Drive API client.
   const driveService = drive({version: 'v3', auth: authClient});
   let anyoneWithLinkResponder = false;
 
   try {
+    // List the permissions for the form.
     const result = await driveService.permissions.list({
       fileId: formId,
       fields: 'permissions(id,type,role,view)',
@@ -45,6 +49,8 @@ async function isAnyoneWithLinkResponder(formId) {
     if (permissions.length === 0) {
       console.log(`No permissions found for form ID: ${formId}`);
     } else {
+      // Check if there is a permission that allows anyone with the link to respond.
+      // This is indicated by a permission with type 'anyone', view 'published', and role 'reader'.
       for (const permission of permissions) {
         if (
           permission.type === 'anyone' &&
@@ -75,17 +81,21 @@ async function isAnyoneWithLinkResponder(formId) {
 // [START forms_set_anyone_with_link_responder_js]
 /**
  * Sets anyone with the link to be a responder for the form.
+ * This is done by adding a permission to the form in Google Drive.
  *
  * @param {string} formId The ID of the Google Form.
  */
 async function setAnyoneWithLinkResponder(formId) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Drive API client.
   const driveService = drive({version: 'v3', auth: authClient});
 
+  // The permission body to allow anyone with the link to respond.
   const permissionBody = {
     type: 'anyone',
     view: 'published', // Key for making it a responder setting
@@ -93,6 +103,7 @@ async function setAnyoneWithLinkResponder(formId) {
   };
 
   try {
+    // Create the permission for the form.
     const result = await driveService.permissions.create({
       fileId: formId,
       requestBody: permissionBody,
@@ -111,19 +122,23 @@ async function setAnyoneWithLinkResponder(formId) {
 // [START forms_remove_anyone_with_link_responder_js]
 /**
  * Removes anyone with the link as a responder for the form.
+ * This is done by removing the corresponding permission from the form in Google Drive.
  *
  * @param {string} formId The ID of the Google Form.
  */
 async function removeAnyoneWithLinkResponder(formId) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Drive API client.
   const driveService = drive({version: 'v3', auth: authClient});
   let permissionIdToDelete = null;
 
   try {
+    // List the permissions for the form to find the one to delete.
     const result = await driveService.permissions.list({
       fileId: formId,
       fields: 'permissions(id,type,role,view)',
@@ -131,6 +146,7 @@ async function removeAnyoneWithLinkResponder(formId) {
     });
 
     const permissions = result.data.permissions || [];
+    // Find the permission that allows anyone with the link to respond.
     for (const permission of permissions) {
       if (
         permission.type === 'anyone' &&
@@ -143,6 +159,7 @@ async function removeAnyoneWithLinkResponder(formId) {
     }
 
     if (permissionIdToDelete) {
+      // Delete the permission.
       await driveService.permissions.delete({
         fileId: formId,
         permissionId: permissionIdToDelete,

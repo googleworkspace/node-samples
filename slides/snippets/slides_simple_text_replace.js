@@ -19,18 +19,22 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Replaces text in the provided shape ID.
- * @param {string} presentationId The presentation ID.
- * @param {string} shapeId The shape ID to delete existing text and insert new text into.
- * @param {string} replacementText The new replacement text.
+ * Replaces all text in a shape with new text.
+ * @param {string} presentationId The ID of the presentation.
+ * @param {string} shapeId The ID of the shape to update.
+ * @param {string} replacementText The text to replace with.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function simpleTextReplace(presentationId, shapeId, replacementText) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
-  // Remove existing text in the shape, then insert new text.
+
+  // The requests to delete the existing text and insert the new text.
   const requests = [
     {
       deleteText: {
@@ -48,6 +52,8 @@ async function simpleTextReplace(presentationId, shapeId, replacementText) {
       },
     },
   ];
+
+  // Execute the batch update request.
   const batchUpdateResponse = await service.presentations.batchUpdate({
     presentationId,
     requestBody: {

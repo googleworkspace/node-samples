@@ -17,20 +17,30 @@ import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 
+/**
+ * Creates a new form and adds a video item to it.
+ */
 async function addItem() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The initial form to be created.
   const newForm = {
     info: {
       title: 'Creating a new form for batchUpdate in Node',
     },
   };
+
+  // Create the new form.
   const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
@@ -41,7 +51,7 @@ async function addItem() {
 
   console.log(`New formId was: ${createResponse.data.formId}`);
 
-  // Request body to add video item to a Form
+  // Request body to add a video item to the form.
   const update = {
     requests: [
       {
@@ -55,6 +65,7 @@ async function addItem() {
               },
             },
           },
+          // The location to insert the new item.
           location: {
             index: 0,
           },
@@ -62,10 +73,13 @@ async function addItem() {
       },
     ],
   };
+
+  // Send the batch update request to add the item to the form.
   const updateResponse = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: update,
   });
+
   console.log(updateResponse.data);
   return updateResponse.data;
 }

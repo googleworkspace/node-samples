@@ -20,26 +20,34 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Retrieve the list of changes for the currently authenticated user
+ * Fetches the list of changes for the currently authenticated user.
+ * @return {Promise<object[]>} A list of changes.
  */
 async function fetchChanges() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // The page token for the next page of changes. If not set, the first page is retrieved.
   let pageToken;
+
+  // Fetch the list of changes.
   const result = await service.changes.list({
     pageToken,
     fields: '*',
   });
-  // Process changes
+
+  // Process the changes.
   (result.data.items ?? []).forEach((change) => {
     console.log('Change found for file:', change.fileId);
   });
-  return result.data.items;
+
+  return result.data.items ?? [];
 }
 // [END drive_fetch_changes]
 

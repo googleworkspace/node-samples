@@ -17,20 +17,30 @@ import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 
+/**
+ * Creates a new form and then converts it into a quiz.
+ */
 async function convertForm() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The initial form to be created.
   const newForm = {
     info: {
       title: 'Creating a new form for batchUpdate in Node',
     },
   };
+
+  // Create the new form.
   const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
@@ -41,7 +51,7 @@ async function convertForm() {
 
   console.log(`New formId was: ${createResponse.data.formId}`);
 
-  // Request body to convert form to a quiz
+  // Request body to convert the form to a quiz.
   const updateRequest = {
     requests: [
       {
@@ -51,16 +61,19 @@ async function convertForm() {
               isQuiz: true,
             },
           },
+          // The updateMask specifies which fields to update.
           updateMask: 'quizSettings.isQuiz',
         },
       },
     ],
   };
 
+  // Send the batch update request to convert the form to a quiz.
   const result = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: updateRequest,
   });
+
   console.log(result.data);
   return result.data;
 }

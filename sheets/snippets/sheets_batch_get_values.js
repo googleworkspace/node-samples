@@ -19,22 +19,29 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Batch gets cell values from a Spreadsheet.
- * @param {string} spreadsheetId The spreadsheet ID.
- * @param {string} _ranges The mock sheet range.
- * @return {obj} spreadsheet information
+ * Batch gets cell values from a spreadsheet.
+ * @param {string} spreadsheetId The ID of the spreadsheet.
+ * @param {string} _ranges The ranges of cells to retrieve.
+ * @return {obj} The spreadsheet information.
  */
 async function batchGetValues(spreadsheetId, _ranges) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+
+  // The ranges to retrieve from the spreadsheet.
   let ranges = [
-    // Range names ...
+    // e.g., 'Sheet1!A1:C5',
+    // 'Sheet2!A1:B3'
   ];
   // [START_EXCLUDE silent]
   ranges = _ranges;
+  // [END_EXCLUDE silent]
+  // Get the values from the specified ranges.
   const result = await service.spreadsheets.values.batchGet({
     spreadsheetId,
     ranges,

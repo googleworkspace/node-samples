@@ -26,16 +26,19 @@ const SCOPES = 'https://www.googleapis.com/auth/forms.body';
  * @param {string} formIdToPublish The ID of the form to publish.
  */
 async function publishForm(formIdToPublish) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
 
+  // The request body to publish the form and start accepting responses.
   const setPublishSettingsRequest = {
     publishSettings: {
       publishState: {
@@ -46,6 +49,7 @@ async function publishForm(formIdToPublish) {
   };
 
   try {
+    // Send the request to update the form's publish settings.
     const result = await formsClient.forms.setPublishSettings({
       formId: formIdToPublish,
       requestBody: setPublishSettingsRequest,

@@ -21,25 +21,31 @@ import process from 'node:process';
 import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
+// The scope for reading tasks.
 const SCOPES = ['https://www.googleapis.com/auth/tasks.readonly'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Lists the user's first 10 task lists.
  */
 async function listTaskLists() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
 
+  // Create a new Tasks API client.
   const service = google.tasks({version: 'v1', auth});
+  // Get the list of task lists.
   const result = await service.tasklists.list({
     maxResults: 10,
   });
   const taskLists = result.data.items;
   if (taskLists?.length) {
     console.log('Task lists:');
+    // Print the title and ID of each task list.
     taskLists.forEach((taskList) => {
       console.log(`${taskList.title} (${taskList.id})`);
     });

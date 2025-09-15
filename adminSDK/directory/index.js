@@ -21,19 +21,24 @@ import process from 'node:process';
 import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
+// The scope for the Admin SDK Directory API.
 const SCOPES = ['https://www.googleapis.com/auth/admin.directory.user'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Lists the first 10 users in the domain.
  */
 async function listUsers() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
 
+  // Create a new Admin SDK Directory API client.
   const service = google.admin({version: 'directory_v1', auth});
+  // Get the list of users.
   const result = await service.users.list({
     customer: 'my_customer',
     maxResults: 10,
@@ -46,6 +51,7 @@ async function listUsers() {
     return;
   }
 
+  // Print the primary email and full name of each user.
   console.log('Users:');
   users.forEach((user) => {
     console.log(`${user.primaryEmail} (${user.name?.fullName})`);

@@ -21,24 +21,31 @@ import {google} from 'googleapis';
 
 /**
  * Searches for files in Google Drive.
+ * @return {Promise<object[]>} A list of files.
  */
 async function searchFile() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
 
+  // Search for files with the specified query.
   const result = await service.files.list({
     q: "mimeType='image/jpeg'",
     fields: 'nextPageToken, files(id, name)',
     spaces: 'drive',
   });
+
+  // Print the name and ID of each found file.
   (result.data.files ?? []).forEach((file) => {
     console.log('Found file:', file.name, file.id);
   });
-  return result.data.files;
+
+  return result.data.files ?? [];
 }
 // [END drive_search_file]
 

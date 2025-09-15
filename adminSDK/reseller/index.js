@@ -21,19 +21,24 @@ import process from 'node:process';
 import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
+// The scope for the Admin SDK Reseller API.
 const SCOPES = ['https://www.googleapis.com/auth/apps.order'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Lists the first 10 subscriptions you manage.
  */
 async function listSubscriptions() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
 
+  // Create a new Admin SDK Reseller API client.
   const service = google.reseller({version: 'v1', auth});
+  // Get the list of subscriptions.
   const result = await service.subscriptions.list({
     maxResults: 10,
   });
@@ -43,6 +48,7 @@ async function listSubscriptions() {
     return;
   }
 
+  // Print the customer ID, SKU ID, and plan name of each subscription.
   console.log('Subscriptions:');
   subscriptions.forEach(({customerId, skuId, plan}) => {
     console.log(`${customerId} (${skuId}, ${plan?.planName})`);

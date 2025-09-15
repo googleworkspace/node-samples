@@ -17,31 +17,45 @@ import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 
+// TODO: Replace with a valid form ID.
 const formID = '<YOUR_FORM_ID>';
 
+/**
+ * Creates a watch on a form to get notifications for new responses.
+ */
 async function createWatch() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The request body to create a watch.
   const watchRequest = {
     watch: {
       target: {
         topic: {
+          // TODO: Replace with a valid Cloud Pub/Sub topic name.
           topicName: 'projects/<YOUR_TOPIC_PATH>',
         },
       },
+      // The event type to watch for. 'RESPONSES' is the only supported type.
       eventType: 'RESPONSES',
     },
   };
+
+  // Send the request to create the watch.
   const result = await formsClient.forms.watches.create({
     formId: formID,
     requestBody: watchRequest,
   });
+
   console.log(result.data);
   return result.data;
 }

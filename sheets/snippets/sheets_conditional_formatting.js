@@ -19,16 +19,20 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Conditionally formats a Spreadsheet.
- * @param {string} spreadsheetId A Spreadsheet ID.
- * @return {obj} spreadsheet information
+ * Applies conditional formatting to a spreadsheet.
+ * @param {string} spreadsheetId The ID of the spreadsheet.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function conditionalFormatting(spreadsheetId) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+
+  // The range to apply the conditional formatting to.
   const myRange = {
     sheetId: 0,
     startRowIndex: 1,
@@ -36,6 +40,8 @@ async function conditionalFormatting(spreadsheetId) {
     startColumnIndex: 0,
     endColumnIndex: 4,
   };
+
+  // The requests to apply conditional formatting.
   const requests = [
     {
       addConditionalFormatRule: {
@@ -72,9 +78,13 @@ async function conditionalFormatting(spreadsheetId) {
       },
     },
   ];
+
+  // Create the batch update request.
   const resource = {
     requests,
   };
+
+  // Execute the batch update request.
   const response = await service.spreadsheets.batchUpdate({
     spreadsheetId,
     resource,

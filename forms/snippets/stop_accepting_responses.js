@@ -21,31 +21,35 @@ const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
 
 /**
- * Stops accepting responses to the form.
+ * Stops a form from accepting new responses.
  *
  * @param {string} formId The ID of the form.
  */
 async function stopAcceptingResponses(formId) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
 
+  // The request body to stop accepting responses.
   const setPublishSettingsRequest = {
     publishSettings: {
       publishState: {
-        isPublished: true, // Keep it published (or ensure it is if it wasn't)
-        isAcceptingResponses: false, // Stop accepting responses
+        isPublished: true, // Keep the form published.
+        isAcceptingResponses: false, // Stop accepting new responses.
       },
     },
   };
 
   try {
+    // Send the request to update the form's settings.
     const res = await formsClient.forms.setPublishSettings({
       formId,
       requestBody: setPublishSettingsRequest,

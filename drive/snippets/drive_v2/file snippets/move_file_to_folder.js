@@ -20,35 +20,41 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Moves a file to a folder.
- * @param{string} fileId Id of the file to move
- * @param{string} folderId Id of the folder to move
- * @return{Promise<number>} file status
+ * Moves a file to a new folder in Google Drive.
+ * @param {string} fileId The ID of the file to move.
+ * @param {string} folderId The ID of the folder to move the file to.
+ * @return {Promise<number>} The status of the move operation.
  */
 async function moveFileToFolder(fileId, folderId) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
-  // Retrieve the existing parents to remove
+
+  // Get the file's metadata to retrieve its current parents.
   const file = await service.files.get({
     fileId,
     fields: 'parents',
   });
 
-  // Move the file to the new folder
+  // Get the current parents as a comma-separated string.
   const previousParents = (file.data.parents ?? [])
     .map((parent) => parent.id)
     .join(',');
+
+  // Move the file to the new folder.
   const files = await service.files.update({
     fileId,
     addParents: folderId,
     removeParents: previousParents,
     fields: 'id, parents',
   });
+
+  // Print the status of the move operation.
   console.log(files.status);
   return files.status;
 }

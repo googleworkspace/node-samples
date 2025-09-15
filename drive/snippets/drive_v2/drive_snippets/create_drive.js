@@ -21,27 +21,39 @@ import {google} from 'googleapis';
 import {v4 as uuid} from 'uuid';
 
 /**
- * Create a drive.
+ * Creates a new shared drive.
+ * @return {Promise<string>} The ID of the created shared drive.
  */
 async function createDrive() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
 
+  // The metadata for the new shared drive.
   const driveMetadata = {
     name: 'Project resources',
   };
+
+  // A unique request ID to avoid creating duplicate shared drives.
   const requestId = uuid();
+
+  // Create the new shared drive.
   const Drive = await service.drives.insert({
     requestBody: driveMetadata,
     requestId,
     fields: 'id',
   });
+
+  // Print the ID of the new shared drive.
   console.log('Drive Id:', Drive.data.id);
+  if (!Drive.data.id) {
+    throw new Error('Drive ID not found.');
+  }
   return Drive.data.id;
 }
 // [END drive_create_drive]

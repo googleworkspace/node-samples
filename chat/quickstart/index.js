@@ -21,35 +21,38 @@ import process from 'node:process';
 import {ChatServiceClient} from '@google-apps/chat';
 import {authenticate} from '@google-cloud/local-auth';
 
+// The scope for reading Chat spaces.
 const SCOPES = ['https://www.googleapis.com/auth/chat.spaces.readonly'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
- * Lists spaces with user credential.
+ * Lists the spaces that the user is a member of.
  */
 async function listSpaces() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
 
-  // Create a client
+  // Create a new Chat API client.
   const chatClient = new ChatServiceClient({
     authClient,
     scopes: SCOPES,
   });
 
-  // Initialize request argument(s)
+  // The request to list spaces.
   const request = {
-    // Filter spaces by space type (SPACE or GROUP_CHAT or DIRECT_MESSAGE)
+    // Filter spaces by type. In this case, we are only interested in "SPACE" type.
     filter: 'space_type = "SPACE"',
   };
 
-  // Make the request
+  // Make the API request.
   const pageResult = chatClient.listSpacesAsync(request);
 
-  // Handle the response. Iterating over pageResult will yield results
-  // and resolve additional pages automatically.
+  // Process the response.
+  // The `pageResult` is an async iterable that will yield each space.
   for await (const response of pageResult) {
     console.log(response);
   }

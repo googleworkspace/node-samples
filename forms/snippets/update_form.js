@@ -17,20 +17,30 @@ import path from 'node:path';
 import {authenticate} from '@google-cloud/local-auth';
 import {forms} from '@googleapis/forms';
 
+/**
+ * Creates a new form and then updates it to add a description.
+ */
 async function updateForm() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The initial form to be created.
   const newForm = {
     info: {
       title: 'Creating a new form for batchUpdate in Node',
     },
   };
+
+  // Create the new form.
   const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
@@ -39,7 +49,7 @@ async function updateForm() {
 
   console.log(`New formId was: ${createResponse.data.formId}`);
 
-  // Request body to add description to a Form
+  // Request body to add a description to the form.
   const update = {
     requests: [
       {
@@ -48,15 +58,19 @@ async function updateForm() {
             description:
               "Please complete this quiz based on this week's readings for class.",
           },
+          // The updateMask specifies which fields to update.
           updateMask: 'description',
         },
       },
     ],
   };
+
+  // Send the batch update request to update the form.
   const result = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: update,
   });
+
   console.log(result.data);
   return result.data;
 }

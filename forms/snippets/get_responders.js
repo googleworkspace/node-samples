@@ -21,29 +21,35 @@ const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 
 /**
- * Gets the responders to the form.
+ * Gets the responders of a form.
+ * This is done by listing the permissions of the form in Google Drive.
  *
  * @param {string} formId The ID of the form.
  */
 async function getResponders(formId) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Drive API client.
   const driveService = drive({version: 'v3', auth: authClient});
 
   try {
+    // List the permissions for the form.
     const result = await driveService.permissions.list({
       fileId: formId,
       includePermissionsForView: 'published',
       fields: 'permissions(id,emailAddress,type,role,view)',
     });
+
     const permissions = result.data.permissions || [];
     if (permissions.length === 0) {
       console.log(`No permissions found for form ID: ${formId}`);
     } else {
       console.log('Responders for this form:');
+      // A responder is a permission with view='published' and role='reader'.
       for (const permission of permissions) {
         if (permission.view === 'published' && permission.role === 'reader') {
           console.log(`Responder:`, permission);

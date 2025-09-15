@@ -21,21 +21,30 @@ import process from 'node:process';
 import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
+// The scope for reading Drive activity.
 const SCOPES = ['https://www.googleapis.com/auth/drive.activity.readonly'];
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
  * Lists the recent activity in your Google Drive.
  */
 async function listDriveActivity() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
+
+  // Create a new Drive Activity API client.
   const service = google.driveactivity({version: 'v2', auth});
+
+  // The parameters for the activity query.
   const params = {
     pageSize: 10,
   };
+
+  // Query for recent activity.
   const result = await service.activity.query({requestBody: params});
   const activities = result.data.activities;
   if (!activities || activities.length === 0) {
@@ -43,7 +52,7 @@ async function listDriveActivity() {
     return;
   }
   console.log('Recent activity:');
-
+  // Print the recent activity.
   console.log(JSON.stringify(activities, null, 2));
 }
 

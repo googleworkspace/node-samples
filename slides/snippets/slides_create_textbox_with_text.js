@@ -19,21 +19,30 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Adds a textbox with text to a slide.
- * @param {string} presentationId The presentation ID.
- * @param {string} pageId The page to add the textbox to.
+ * Creates a textbox with text on a slide.
+ * @param {string} presentationId The ID of the presentation.
+ * @param {string} pageId The ID of the page to add the textbox to.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function createTextboxWithText(presentationId, pageId) {
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
+
+  // The ID to use for the new textbox.
   const elementId = 'MyTextBox_01';
+
+  // The size of the new textbox, in points.
   const pt350 = {
     magnitude: 350,
     unit: 'PT',
   };
+
+  // The requests to create a textbox and add text to it.
   const requests = [
     {
       createShape: {
@@ -55,7 +64,7 @@ async function createTextboxWithText(presentationId, pageId) {
         },
       },
     },
-    // Insert text into the box, using the supplied element ID.
+    // Insert text into the new textbox.
     {
       insertText: {
         objectId: elementId,
@@ -64,6 +73,8 @@ async function createTextboxWithText(presentationId, pageId) {
       },
     },
   ];
+
+  // Execute the batch update request.
   const createTextboxWithTextResponse = await service.presentations.batchUpdate(
     {
       presentationId,

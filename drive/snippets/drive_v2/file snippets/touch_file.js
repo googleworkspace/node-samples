@@ -20,31 +20,36 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Change the file's modification timestamp.
- * @param{string} fileId ID of the file to change modified time.
- * @param{string} timestamp Timestamp to override the modification timestamp of the file.
- * @return{Promise<string|null|undefined>} The modified timestamp.
+ * Updates the modification timestamp of a file.
+ * @param {string} fileId The ID of the file to update.
+ * @param {string} timestamp The new modification timestamp.
+ * @return {Promise<string|null|undefined>} The updated modification timestamp.
  */
 async function touchFile(fileId, timestamp) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
 
+  // The metadata to update.
   const fileMetadata = {
     modifiedDate: new Date().toISOString(),
     modifiedTime: timestamp,
   };
 
+  // Update the file's modification timestamp.
   const file = await service.files.update({
     fileId,
     setModifiedDate: true,
     requestBody: fileMetadata,
     fields: 'id, modifiedDate',
   });
+
+  // Print the new modification timestamp.
   console.log('Modified time:', file.data.modifiedDate);
   return file.data.modifiedDate;
 }
