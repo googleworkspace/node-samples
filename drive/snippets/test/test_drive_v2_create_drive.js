@@ -25,9 +25,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  // Note, you must enable creating Team Drives for your service account.
+  // Note, you must enable creating shared drives for your service account.
   // https://support.google.com/a/answer/7337635?hl=en
-  it('should create a team drive', async () => {
+  it('should create a shared drive', async () => {
     const id = await createDrive();
     expect(id).toBeDefined();
     await helpers.service.teamdrives.delete({teamDriveId: id});

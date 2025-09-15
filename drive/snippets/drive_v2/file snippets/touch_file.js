@@ -21,9 +21,9 @@ import {google} from 'googleapis';
 
 /**
  * Change the file's modification timestamp.
- * @param{string} fileId ID of the file to change modified time
- * @param{string} timestamp Timestamp to override Modified date time of the file
- * @return{Promise<string|null|undefined>} modified timestamp
+ * @param{string} fileId ID of the file to change modified time.
+ * @param{string} timestamp Timestamp to override the modification timestamp of the file.
+ * @return{Promise<string|null|undefined>} The modified timestamp.
  */
 async function touchFile(fileId, timestamp) {
   // Get credentials and build service

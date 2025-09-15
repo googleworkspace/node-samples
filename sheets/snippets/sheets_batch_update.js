@@ -24,7 +24,7 @@ import {google} from 'googleapis';
  * @param {string} title The new Spreadsheet title
  * @param {string} find The text to find
  * @param {string} replacement The text to replace
- * @return {obj} holding the information regarding the replacement of strings
+ * @return {Promise<object>} A promise that resolves to the response from the batch update.
  */
 async function batchUpdate(spreadsheetId, title, find, replacement) {
   const auth = new GoogleAuth({

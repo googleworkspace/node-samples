@@ -23,7 +23,8 @@ const USER_AUTH_OAUTH_SCOPES = [
   'https://www.googleapis.com/auth/chat.messages.create',
 ];
 
-// This sample shows how to create message with user credential with message id
+// This sample shows how to create a message with user credentials and a custom
+// message id
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(

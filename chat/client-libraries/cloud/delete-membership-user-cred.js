@@ -23,7 +23,8 @@ const USER_AUTH_OAUTH_SCOPES = [
   'https://www.googleapis.com/auth/chat.memberships',
 ];
 
-// This sample shows how to delete a membership of type HUMAN with user credential
+// This sample shows how to delete a membership of type HUMAN with user
+// credential
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(

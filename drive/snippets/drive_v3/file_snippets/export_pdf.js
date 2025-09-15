@@ -22,7 +22,7 @@ import {google} from 'googleapis';
 /**
  * Download a Document file in PDF format
  * @param{string} fileId file ID
- * @return{Promise<number>} file status
+ * @return{Promise<number>} The status of the export request.
  */
 async function exportPdf(fileId) {
   // Get credentials and build service

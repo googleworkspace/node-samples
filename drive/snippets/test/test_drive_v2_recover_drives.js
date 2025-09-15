@@ -26,7 +26,7 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  // Note, you must enable creating Team Drives for your service account.
+  // Note, you must enable creating shared drives for your service account.
   // https://support.google.com/a/answer/7337635?hl=en
   it('should recover team drives', async () => {
     await createOrphanedTeamDrive();
@@ -35,8 +35,8 @@ describe('Drive snippets', () => {
   });
 
   /**
-   * Creates a standalone Team Drive.
-   * @return {fileId} The id of the new Team Drive.
+   * Creates a standalone shared drive.
+   * @return {fileId} The id of the new shared drive.
    */
   async function createOrphanedTeamDrive() {
     const fileId = await createDrive();

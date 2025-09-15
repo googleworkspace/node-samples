@@ -36,7 +36,7 @@ async function main() {
   const request = {
     // Replace SPACE_NAME here
     parent: 'spaces/SPACE_NAME',
-    // A required filter. Filters events about new memberships and messages
+    // A required filter. Filters events about new memberships and messages.
     filter:
       'eventTypes:"google.workspace.chat.membership.v1.created" OR eventTypes:"google.workspace.chat.message.v1.created"',
   };

@@ -20,8 +20,8 @@ import {GoogleAuth} from 'google-auth-library';
 import {google} from 'googleapis';
 
 /**
- * Create a third party shortcut
- * @return{Promise<string|null|undefined>} shortcut Id
+ * Create a shortcut.
+ * @return{Promise<string|null|undefined>} The shortcut ID.
  */
 async function createShortcut() {
   // Get credentials and build service

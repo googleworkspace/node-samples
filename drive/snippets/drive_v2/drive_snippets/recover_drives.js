@@ -21,7 +21,7 @@ import {google} from 'googleapis';
 
 /**
  * Find all shared drives without an organizer and add one.
- * @param{string} userEmail user ID
+ * @param{string} userEmail The email of the user to transfer ownership to.
  */
 async function recoverDrives(userEmail) {
   // Get credentials and build service

@@ -99,7 +99,8 @@ async function setAnyoneWithLinkResponder(formId) {
       fields: 'id', // Request only needed fields
     });
     console.log(
-      `'Anyone with the link can respond' permission set for form '${formId}'. Permission ID: ${result.data.id}`,
+      `'Anyone with the link can respond' permission set for form '${formId}'.` +
+        ` Permission ID: ${result.data.id}`,
     );
   } catch (e) {
     console.error(`Error setting "anyone with link" permission: ${e}`);
@@ -147,12 +148,11 @@ async function removeAnyoneWithLinkResponder(formId) {
         permissionId: permissionIdToDelete,
       });
       console.log(
-        `Successfully removed 'Anyone with the link' permission (ID: ${permissionIdToDelete}) from form '${formId}'.`,
+        `Successfully removed permission (ID: ${permissionIdToDelete})` +
+          ` from form '${formId}'.`,
       );
     } else {
-      console.log(
-        `'Anyone with the link can respond' permission not found for form '${formId}'. Nothing to remove.`,
-      );
+      console.log(`Permission not found for form '${formId}'.`);
     }
   } catch (e) {
     console.error(`Error removing "anyone with link" permission: ${e}`);
