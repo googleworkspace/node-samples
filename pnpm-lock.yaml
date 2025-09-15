@@ -43,7 +43,7 @@ catalogs:
       specifier: ^10.0.0
       version: 10.8.2
     open:
-      specifier: ^10.1.2
+      specifier: ^10.2.0
       version: 10.2.0
     server-destroy:
       specifier: ^1.0.1

@@ -16,7 +16,7 @@ catalog:
   googleapis: 159.0.0
   googleapis-common: 8.0.0
   mocha: ^10.0.0
-  open: ^10.1.2
+  open: ^10.2.0
   server-destroy: ^1.0.1
   turbo: ^2.5.6
   typescript: ^5.9.2
