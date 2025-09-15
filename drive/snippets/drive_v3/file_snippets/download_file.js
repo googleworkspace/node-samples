@@ -34,7 +34,7 @@ async function downloadFile(fileId) {
   const service = google.drive({version: 'v3', auth});
 
   const file = await service.files.get({
-  fileId,
+    fileId,
     alt: 'media',
   });
   console.log(file.status);
