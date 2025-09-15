@@ -33,7 +33,7 @@ async function searchFile() {
 
   const pageToken = undefined;
   const result = await service.files.list({
-    q: 'mimeType=\'image/jpeg\'',
+    q: "mimeType='image/jpeg'",
     fields: 'nextPageToken, items(id, title)',
     spaces: 'drive',
     pageToken,

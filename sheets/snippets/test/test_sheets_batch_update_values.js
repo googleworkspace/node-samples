@@ -27,13 +27,13 @@ describe('Spreadsheet batch update values snippet', () => {
   it('should batch update spreadsheet values', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     const result = await batchUpdateValues(
-        spreadsheetId,
-        'A1:B2',
-        'USER_ENTERED',
-        [
-          ['A', 'B'],
-          ['C', 'D'],
-        ],
+      spreadsheetId,
+      'A1:B2',
+      'USER_ENTERED',
+      [
+        ['A', 'B'],
+        ['C', 'D'],
+      ],
     );
     const responses = result.data.responses;
     expect(responses.length).toBe(1);

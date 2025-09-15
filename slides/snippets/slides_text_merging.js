@@ -110,7 +110,7 @@ async function textMerging(templatePresentationId, dataSpreadsheetId) {
       numReplacements += result.replies[i].replaceAllText.occurrencesChanged;
     }
     console.log(
-        `Created presentation for ${customerName} with ID: ${presentationCopyId}`,
+      `Created presentation for ${customerName} with ID: ${presentationCopyId}`,
     );
     console.log(`Replaced ${numReplacements} text instances`);
   }

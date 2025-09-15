@@ -32,9 +32,9 @@ describe('Drive snippets', () => {
   it('should share files', async () => {
     const file = await helpers.createTestBlob();
     const ids = await shareFile(
-        file.data.id,
-        'xyz@workspacesamples.dev',
-        'workspacesamples.dev',
+      file.data.id,
+      'xyz@workspacesamples.dev',
+      'workspacesamples.dev',
     );
     expect(ids.length).toEqual(2);
   });

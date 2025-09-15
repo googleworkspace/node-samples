@@ -57,9 +57,9 @@ class Helpers {
    */
   cleanup() {
     return Promise.all(
-        this.filesToDelete.map((fileId) =>
-          this.driveService.files.delete({fileId}),
-        ),
+      this.filesToDelete.map((fileId) =>
+        this.driveService.files.delete({fileId}),
+      ),
     );
   }
 

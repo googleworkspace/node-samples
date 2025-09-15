@@ -47,15 +47,15 @@ async function supportsPublishing(formIdToCheck) {
     // publishing model.
     if (result.data && result.data.publishSettings !== undefined) {
       console.log(
-          `Form '${formIdToCheck}' (Title: ${
-            formTitle
-          }) is NOT a legacy form (supports publishSettings).`,
+        `Form '${formIdToCheck}' (Title: ${
+          formTitle
+        }) is NOT a legacy form (supports publishSettings).`,
       );
     } else {
       console.log(
-          `Form '${formIdToCheck}' (Title: ${
-            formTitle
-          }) IS a legacy form (does not have publishSettings field).`,
+        `Form '${formIdToCheck}' (Title: ${
+          formTitle
+        }) IS a legacy form (does not have publishSettings field).`,
       );
     }
   } catch (err) {

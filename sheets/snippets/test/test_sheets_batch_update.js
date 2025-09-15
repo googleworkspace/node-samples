@@ -29,10 +29,10 @@ describe('Spreadsheet batch update snippet', () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
     const result = await batchUpdate(
-        spreadsheetId,
-        'New Title',
-        'Hello',
-        'Goodbye',
+      spreadsheetId,
+      'New Title',
+      'Hello',
+      'Goodbye',
     );
     const replies = result.data.replies;
     expect(replies.length).toBe(2);

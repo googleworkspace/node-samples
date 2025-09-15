@@ -46,7 +46,7 @@ async function updateForm() {
         updateFormInfo: {
           info: {
             description:
-              'Please complete this quiz based on this week\'s readings for class.',
+              "Please complete this quiz based on this week's readings for class.",
           },
           updateMask: 'description',
         },

@@ -25,7 +25,7 @@ const USER_AUTH_OAUTH_SCOPES = ['SCOPE_NAME'];
 async function main() {
   // Create a client
   const chatClient = await createClientWithUserCredentials(
-      USER_AUTH_OAUTH_SCOPES,
+    USER_AUTH_OAUTH_SCOPES,
   );
 
   // Initialize request argument(s)

@@ -65,10 +65,10 @@ async function createTextboxWithText(presentationId, pageId) {
     },
   ];
   const createTextboxWithTextResponse = await service.presentations.batchUpdate(
-      {
-        presentationId,
-        requestBody: {requests},
-      },
+    {
+      presentationId,
+      requestBody: {requests},
+    },
   );
   const createShapeResponse =
     createTextboxWithTextResponse.data.replies[0].createShape;

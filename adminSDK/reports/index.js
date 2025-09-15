@@ -47,7 +47,7 @@ async function listLoginEvents() {
   console.log('Logins:');
   activities.forEach((activity) => {
     console.log(
-        `${activity.id?.time}: ${activity.actor?.email} (${activity.events?.[0]?.name})`,
+      `${activity.id?.time}: ${activity.actor?.email} (${activity.events?.[0]?.name})`,
     );
   });
 }

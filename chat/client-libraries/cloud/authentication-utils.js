@@ -31,7 +31,7 @@ const APP_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.bot'];
 // User authentication
 const CLIENT_SECRETS_FILE = './credentials.json';
 const CLIENT_SECRETS = JSON.parse(
-    await readFile(new URL(CLIENT_SECRETS_FILE, import.meta.url), 'utf8'),
+  await readFile(new URL(CLIENT_SECRETS_FILE, import.meta.url), 'utf8'),
 ).web;
 
 /**
@@ -73,9 +73,9 @@ function getAuthenticatedUserOAuth2Client(scopes) {
   return new Promise((resolve, reject) => {
     // Create a client based on client secrets
     const oAuth2Client = new OAuth2Client(
-        CLIENT_SECRETS.client_id,
-        CLIENT_SECRETS.client_secret,
-        CLIENT_SECRETS.redirect_uris[0],
+      CLIENT_SECRETS.client_id,
+      CLIENT_SECRETS.client_secret,
+      CLIENT_SECRETS.redirect_uris[0],
     );
 
     // Generate the URL to use for consent
@@ -86,31 +86,31 @@ function getAuthenticatedUserOAuth2Client(scopes) {
 
     // Open an HTTP server to accept the OAuth2 callback
     const server = http
-        .createServer(async (request, response) => {
-          try {
-            if (request.url.indexOf('/oauth2callback') > -1) {
+      .createServer(async (request, response) => {
+        try {
+          if (request.url.indexOf('/oauth2callback') > -1) {
             // Acquire the code and close the server.
-              const queryString = new url.URL(
-                  request.url,
-                  'http://localhost:3000',
-              ).searchParams;
-              const code = queryString.get('code');
-              response.end('Done!');
-              server.destroy();
-              // Acquire the tokens
-              const r = await oAuth2Client.getToken(code);
-              // Update credentials of the OAuth2 client.
-              oAuth2Client.setCredentials(r.tokens);
-              resolve(oAuth2Client);
-            }
-          } catch (e) {
-            reject(e);
+            const queryString = new url.URL(
+              request.url,
+              'http://localhost:3000',
+            ).searchParams;
+            const code = queryString.get('code');
+            response.end('Done!');
+            server.destroy();
+            // Acquire the tokens
+            const r = await oAuth2Client.getToken(code);
+            // Update credentials of the OAuth2 client.
+            oAuth2Client.setCredentials(r.tokens);
+            resolve(oAuth2Client);
           }
-        })
-        .listen(3000, () => {
+        } catch (e) {
+          reject(e);
+        }
+      })
+      .listen(3000, () => {
         // Open default browser and start the flow
-          open(authorizeUrl, {wait: false}).then((cp) => cp.unref());
-        });
+        open(authorizeUrl, {wait: false}).then((cp) => cp.unref());
+      });
     destroyer(server);
   });
 }

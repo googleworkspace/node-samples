@@ -30,9 +30,9 @@ describe('Presentation snippets', () => {
     const pageId = pageIds[0];
     const boxId = await helpers.createTestTextbox(presentationId, pageId);
     const response = await simpleTextReplace(
-        presentationId,
-        boxId,
-        'MY NEW TEXT',
+      presentationId,
+      boxId,
+      'MY NEW TEXT',
     );
     expect(2).toEqual(response.replies.length);
   });

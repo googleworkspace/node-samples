@@ -66,7 +66,7 @@ async function createImage(presentationId, pageId) {
   });
   const createImageResponse = response.data.replies;
   console.log(
-      `Created image with ID: ${createImageResponse[0].createImage.objectId}`,
+    `Created image with ID: ${createImageResponse[0].createImage.objectId}`,
   );
   return createImageResponse;
 }

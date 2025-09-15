@@ -32,7 +32,7 @@ async function createPresentation(title) {
     title,
   });
   console.log(
-      `Created presentation with ID: ${presentation.data.presentationId}`,
+    `Created presentation with ID: ${presentation.data.presentationId}`,
   );
   return presentation;
 }

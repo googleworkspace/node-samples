@@ -41,8 +41,8 @@ async function moveFileToFolder(fileId, folderId) {
 
   // Move the file to the new folder
   const previousParents = (file.data.parents ?? [])
-      .map((parent) => parent.id)
-      .join(',');
+    .map((parent) => parent.id)
+    .join(',');
   const files = await service.files.update({
     fileId,
     addParents: folderId,
