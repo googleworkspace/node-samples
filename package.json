@@ -15,23 +15,18 @@
     "API"
   ],
   "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
     "@types/jest": "catalog:",
     "@types/mocha": "catalog:",
     "@types/node": "catalog:",
-    "eslint": "catalog:",
-    "eslint-config-google": "catalog:",
     "turbo": "catalog:"
   },
   "scripts": {
-    "lint": "eslint **/*.js",
-    "lint:fix": "eslint --fix **/*.js",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write",
     "test": "turbo run test",
     "check": "turbo run check"
   },
-  "eslintIgnore": [
-    "getFoldersUnderRoot.js",
-    "**/node_modules/**"
-  ],
   "packageManager": "pnpm@10.15.1",
   "engines": {
     "node": ">=20"
