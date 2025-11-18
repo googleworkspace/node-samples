@@ -38,9 +38,9 @@ async function batchGetValues(spreadsheetId, _ranges) {
     // e.g., 'Sheet1!A1:C5',
     // 'Sheet2!A1:B3'
   ];
-  // [START_EXCLUDE silent]
+  // [START_EXCLUDE]
   ranges = _ranges;
-  // [END_EXCLUDE silent]
+  // [END_EXCLUDE]
   // Get the values from the specified ranges.
   const result = await service.spreadsheets.values.batchGet({
     spreadsheetId,
