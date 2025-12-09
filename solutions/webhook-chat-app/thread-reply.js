@@ -27,7 +27,9 @@ async function webhook() {
     headers: {"Content-Type": "application/json; charset=UTF-8"},
     body: JSON.stringify({
       text: "Hello from a Node script!",
-      thread: {threadKey: "THREAD_KEY_VALUE"}
+      thread: {
+        threadKey: "THREAD_KEY_VALUE"
+      }
     })
   });
   return await res.json();
