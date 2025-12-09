@@ -1,0 +1,12 @@
+{
+  "name": "webhook-chat-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "license": "Apache-2.0"
+}
