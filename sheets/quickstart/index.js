@@ -18,7 +18,6 @@
 
 import path from 'node:path';
 import process from 'node:process';
-import {authenticate} from '@google-cloud/local-auth';
 import {google} from 'googleapis';
 
 // The scope for reading spreadsheets.
@@ -32,9 +31,9 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
  */
 async function listMajors() {
   // Authenticate with Google and get an authorized client.
-  const auth = await authenticate({
+  const auth = new google.auth.GoogleAuth({
     scopes: SCOPES,
-    keyfilePath: CREDENTIALS_PATH,
+    keyFile: CREDENTIALS_PATH,
   });
 
   // Create a new Sheets API client.
