@@ -12,34 +12,42 @@
 // limitations under the License.
 
 // [START forms_delete_watch]
-'use strict';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
+// TODO: Replace with a valid form ID.
 const formID = '<YOUR_FORM_ID>';
+// TODO: Replace with a valid watch ID.
 const watchID = '<YOUR_FORMS_WATCH_ID>';
 
-async function runSample(query) {
+/**
+ * Deletes a watch from a form.
+ */
+async function deleteWatch() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+
+  // Create a new Forms API client.
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
-  const res = await forms.forms.watches.delete({
+
+  // Send the request to delete the watch.
+  const result = await formsClient.forms.watches.delete({
     formId: formID,
     watchId: watchID,
   });
-  console.log(res.data);
-  return res.data;
+
+  console.log(result.data);
+  return result.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-module.exports = runSample;
 // [END forms_delete_watch]
+
+export {deleteWatch};

@@ -10,59 +10,62 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_supports_publishing]
-'use strict';
 
-const path = require('path');
-const {forms} = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
-
-// TODO: Replace with your form ID (fileId)
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
 
 /**
- * Checks if the form supports publishing.
+ * Checks if a form supports the `publishSettings` field, which indicates it is not a legacy form.
  *
  * @param {string} formIdToCheck The ID of the form to check.
  */
-async function runSample(formIdToCheck) {
+async function supportsPublishing(formIdToCheck) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
 
   try {
-    const res = await formsClient.forms.get({
+    // Get the form metadata.
+    const result = await formsClient.forms.get({
       formId: formIdToCheck,
     });
 
-    const formTitle = res.data.info.title;
+    const formTitle = result.data.info?.title;
 
-    // If 'publishSettings' field exists (even if empty), it supports the new
-    // publishing model.
-    if (res.data && res.data.publishSettings !== undefined) {
-      console.log(`Form '${formIdToCheck}' (Title: ${
-          formTitle}) is NOT a legacy form (supports publishSettings).`);
+    // If the 'publishSettings' field exists (even if empty), the form supports the new
+    // publishing model and is not a legacy form.
+    if (result.data && result.data.publishSettings !== undefined) {
+      console.log(
+        `Form '${formIdToCheck}' (Title: ${
+          formTitle
+        }) is NOT a legacy form (supports publishSettings).`,
+      );
     } else {
-      console.log(`Form '${formIdToCheck}' (Title: ${
-          formTitle}) IS a legacy form (does not have publishSettings field).`);
+      console.log(
+        `Form '${formIdToCheck}' (Title: ${
+          formTitle
+        }) IS a legacy form (does not have publishSettings field).`,
+      );
     }
   } catch (err) {
     console.error(`Error getting form metadata for '${formIdToCheck}':`, err);
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_supports_publishing]
+
+export {supportsPublishing};

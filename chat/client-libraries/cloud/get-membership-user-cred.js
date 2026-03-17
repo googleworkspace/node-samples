@@ -19,17 +19,21 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.memberships.readonly'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.memberships.readonly',
+];
 
 // This sample shows how to get membership with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME and MEMBER_NAME here
-    name: 'spaces/SPACE_NAME/members/MEMBER_NAME'
+    name: 'spaces/SPACE_NAME/members/MEMBER_NAME',
   };
 
   // Make the request
@@ -39,6 +43,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_get_membership_user_cred]

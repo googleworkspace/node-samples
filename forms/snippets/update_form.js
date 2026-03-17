@@ -10,58 +10,70 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_update_form]
-'use strict';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
-async function runSample(query) {
+/**
+ * Creates a new form and then updates it to add a description.
+ */
+async function updateForm() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+
+  // Create a new Forms API client.
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The initial form to be created.
   const newForm = {
     info: {
       title: 'Creating a new form for batchUpdate in Node',
     },
   };
-  const createResponse = await forms.forms.create({
+
+  // Create the new form.
+  const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
-  console.log('New formId was: ' + createResponse.data.formId);
 
-  // Request body to add description to a Form
+  if (!createResponse.data.formId) throw new Error('Form ID not returned.');
+
+  console.log(`New formId was: ${createResponse.data.formId}`);
+
+  // Request body to add a description to the form.
   const update = {
     requests: [
       {
         updateFormInfo: {
           info: {
             description:
-              'Please complete this quiz based on this week\'s readings for class.',
+              "Please complete this quiz based on this week's readings for class.",
           },
+          // The updateMask specifies which fields to update.
           updateMask: 'description',
         },
       },
     ],
   };
-  const res = await forms.forms.batchUpdate({
+
+  // Send the batch update request to update the form.
+  const result = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: update,
   });
-  console.log(res.data);
-  return res.data;
-}
 
-if (module === require.main) {
-  runSample().catch(console.error);
+  console.log(result.data);
+  return result.data;
 }
-module.exports = runSample;
 
 // [END forms_update_form]
+export {updateForm};

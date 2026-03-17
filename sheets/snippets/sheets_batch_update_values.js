@@ -15,28 +15,32 @@
  */
 
 // [START sheets_batch_update_values]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Batch Updates values in a Spreadsheet.
- * @param {string} spreadsheetId The spreadsheet ID.
- * @param {string} range The range of values to update.
- * @param {object} valueInputOption Value update options.
- * @param {(string[])[]} _values A 2d array of values to update.
- * @return {obj} spreadsheet information
+ * Batch updates values in a spreadsheet.
+ * @param {string} spreadsheetId The ID of the spreadsheet to update.
+ * @param {string} range The range of cells to update.
+ * @param {string} valueInputOption How the input data should be interpreted.
+ * @param {(string[])[]} _values A 2D array of values to update.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function batchUpdateValues(
-    spreadsheetId,
-    range,
-    valueInputOption,
-    _values,
+  spreadsheetId,
+  range,
+  valueInputOption,
+  _values,
 ) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+
+  // The values to update in the spreadsheet.
   let values = [
     [
       // Cell values ...
@@ -46,29 +50,33 @@ async function batchUpdateValues(
   // [START_EXCLUDE silent]
   values = _values;
   // [END_EXCLUDE]
+
+  // The data to be updated.
   const data = [
     {
       range,
       values,
     },
   ];
-  // Additional ranges to update ...
+
+  // Additional ranges to update can be added here.
+
+  // Create the batch update request.
   const resource = {
     data,
     valueInputOption,
   };
-  try {
-    const result = await service.spreadsheets.values.batchUpdate({
-      spreadsheetId,
-      resource,
-    });
-    console.log('%d cells updated.', result.data.totalUpdatedCells);
-    return result;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+
+  // Execute the batch update request.
+  const result = await service.spreadsheets.values.batchUpdate({
+    spreadsheetId,
+    resource,
+  });
+
+  // Log the number of updated cells.
+  console.log('%d cells updated.', result.data.totalUpdatedCells);
+  return result;
 }
 // [END sheets_batch_update_values]
 
-module.exports = {batchUpdateValues};
+export {batchUpdateValues};

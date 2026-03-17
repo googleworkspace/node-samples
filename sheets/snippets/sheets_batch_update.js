@@ -15,25 +15,31 @@
  */
 
 // [START sheets_batch_update]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Updates the Spreadsheet title. Finds and replaces a string in the sheets.
- * @param {string} spreadsheetId The Spreadsheet to update
- * @param {string} title The new Spreadsheet title
- * @param {string} find The text to find
- * @param {string} replacement The text to replace
- * @return {obj} holding the information regarding the replacement of strings
+ * Performs a batch update on a spreadsheet.
+ * Updates the spreadsheet title and finds and replaces a string.
+ * @param {string} spreadsheetId The ID of the spreadsheet to update.
+ * @param {string} title The new title for the spreadsheet.
+ * @param {string} find The string to find.
+ * @param {string} replacement The string to replace the found string with.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function batchUpdate(spreadsheetId, title, find, replacement) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+
+  // Create a list of requests to be executed in the batch update.
   const requests = [];
-  // Change the spreadsheet's title.
+
+  // Request to change the spreadsheet's title.
   requests.push({
     updateSpreadsheetProperties: {
       properties: {
@@ -42,7 +48,8 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
       fields: 'title',
     },
   });
-  // Find and replace text.
+
+  // Request to find and replace text.
   requests.push({
     findReplace: {
       find,
@@ -50,21 +57,23 @@ async function batchUpdate(spreadsheetId, title, find, replacement) {
       allSheets: true,
     },
   });
-  // Add additional requests (operations) ...
+
+  // Add more requests here if needed.
+
+  // Create the batch update request.
   const batchUpdateRequest = {requests};
-  try {
-    const response = await service.spreadsheets.batchUpdate({
-      spreadsheetId,
-      resource: batchUpdateRequest,
-    });
-    const findReplaceResponse = response.data.replies[1].findReplace;
-    console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
-    return response;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+
+  // Execute the batch update request.
+  const response = await service.spreadsheets.batchUpdate({
+    spreadsheetId,
+    requestBody: batchUpdateRequest,
+  });
+
+  // Get the response from the find and replace request and log the number of occurrences.
+  const findReplaceResponse = response.data.replies[1].findReplace;
+  console.log(`${findReplaceResponse.occurrencesChanged} replacements made.`);
+  return response;
 }
 // [END sheets_batch_update]
 
-module.exports = {batchUpdate};
+export {batchUpdate};

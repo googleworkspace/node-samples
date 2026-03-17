@@ -27,7 +27,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME and MEMBER_NAME here
-    name: 'spaces/SPACE_NAME/members/MEMBER_NAME'
+    name: 'spaces/SPACE_NAME/members/MEMBER_NAME',
   };
 
   // Make the request
@@ -37,6 +37,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_get_membership_app_cred]

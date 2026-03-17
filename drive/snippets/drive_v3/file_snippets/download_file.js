@@ -13,38 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_download_file]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Downloads a file
- * @param{string} realFileId file ID
- * @return{obj} file status
- * */
-async function downloadFile(realFileId) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+ * Downloads a file from Google Drive.
+ * @param {string} fileId The ID of the file to download.
+ * @return {Promise<number>} The status of the download.
+ */
+async function downloadFile(fileId) {
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
 
-  fileId = realFileId;
-  try {
-    const file = await service.files.get({
-      fileId: fileId,
-      alt: 'media',
-    });
-    console.log(file.status);
-    return file.status;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  // Download the file.
+  const file = await service.files.get({
+    fileId,
+    alt: 'media',
+  });
+
+  // Print the status of the download.
+  console.log(file.status);
+  return file.status;
 }
 // [END drive_download_file]
 
-module.exports = downloadFile;
+export {downloadFile};

@@ -19,12 +19,17 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.messages.create'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.messages.create',
+];
 
-// This sample shows how to create message with user credential with message id
+// This sample shows how to create a message with user credentials and a custom
+// message id
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
@@ -33,7 +38,7 @@ async function main() {
     // Message id lets chat apps get, update or delete a message without needing
     // to store the system assigned ID in the message's resource name
     messageId: 'client-MESSAGE-ID',
-    message: { text: 'Hello with user credential!' }
+    message: {text: 'Hello with user credential!'},
   };
 
   // Make the request
@@ -43,6 +48,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_create_message_user_cred_message_id]

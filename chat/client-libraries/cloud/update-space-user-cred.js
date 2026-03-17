@@ -24,21 +24,23 @@ const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.spaces'];
 // This sample shows how to update a space with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
     space: {
       // Replace SPACE_NAME here
       name: 'spaces/SPACE_NAME',
-      displayName: 'New space display name'
+      displayName: 'New space display name',
     },
-    // The field paths to update. Separate multiple values with commas or use
-    // `*` to update all field paths.
+    // The field paths to update. Separate multiple values with commas or use `*`
+    // to update all field paths.
     updateMask: {
       // The field paths to update.
-      paths: ['display_name']
-    }
+      paths: ['display_name'],
+    },
   };
 
   // Make the request
@@ -48,6 +50,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_update_space_user_cred]

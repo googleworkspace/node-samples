@@ -15,16 +15,18 @@
  */
 
 // [START slides_image_merging]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Add an image to a template presentation.
- * @param {string} templatePresentationId The template presentation ID.
- * @param {string} imageUrl The image URL
- * @param {string} customerName A customer name used for the title
+ * Replaces shapes in a presentation with images.
+ * @param {string} templatePresentationId The ID of the template presentation.
+ * @param {string} imageUrl The URL of the image to use.
+ * @param {string} customerName The name of the customer for the new presentation title.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function imageMerging(templatePresentationId, imageUrl, customerName) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: [
       'https://www.googleapis.com/auth/presentations',
@@ -32,67 +34,66 @@ async function imageMerging(templatePresentationId, imageUrl, customerName) {
     ],
   });
 
+  // Create new clients for Slides and Drive APIs.
   const slidesService = google.slides({version: 'v1', auth});
   const driveService = google.drive({version: 'v2', auth});
+
   const logoUrl = imageUrl;
   const customerGraphicUrl = imageUrl;
 
-  // Duplicate the template presentation using the Drive API.
-  const copyTitle = customerName + ' presentation';
-  try {
-    const driveResponse = await driveService.files.copy({
-      fileId: templatePresentationId,
-      resource: {
-        name: copyTitle,
-      },
-    });
-    const presentationCopyId = driveResponse.data.id;
+  // Duplicate the template presentation.
+  const copyTitle = `${customerName} presentation`;
+  const driveResponse = await driveService.files.copy({
+    fileId: templatePresentationId,
+    requestBody: {
+      name: copyTitle,
+    },
+  });
+  const presentationCopyId = driveResponse.data.id;
 
-    // Create the image merge (replaceAllShapesWithImage) requests.
-    const requests = [
-      {
-        replaceAllShapesWithImage: {
-          imageUrl: logoUrl,
-          replaceMethod: 'CENTER_INSIDE',
-          containsText: {
-            text: '{{company-logo}}',
-            matchCase: true,
-          },
+  // Create the image merge requests.
+  const requests = [
+    {
+      replaceAllShapesWithImage: {
+        imageUrl: logoUrl,
+        replaceMethod: 'CENTER_INSIDE',
+        containsText: {
+          text: '{{company-logo}}',
+          matchCase: true,
         },
       },
-      {
-        replaceAllShapesWithImage: {
-          imageUrl: customerGraphicUrl,
-          replaceMethod: 'CENTER_INSIDE',
-          containsText: {
-            text: '{{customer-graphic}}',
-            matchCase: true,
-          },
+    },
+    {
+      replaceAllShapesWithImage: {
+        imageUrl: customerGraphicUrl,
+        replaceMethod: 'CENTER_INSIDE',
+        containsText: {
+          text: '{{customer-graphic}}',
+          matchCase: true,
         },
       },
-    ];
+    },
+  ];
 
-    // Execute the requests for this presentation.
-    const batchUpdateResponse = await slidesService.presentations.batchUpdate({
-      presentationId: presentationCopyId,
-      resource: {
-        requests,
-      },
-    });
-    let numReplacements = 0;
-    for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
-      numReplacements +=
-        batchUpdateResponse.data.replies[i].replaceAllShapesWithImage
-            .occurrencesChanged;
-    }
-    console.log(`Created merged presentation with ID: ${presentationCopyId}`);
-    console.log(`Replaced ${numReplacements} shapes with images.`);
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
+  // Execute the requests to replace the shapes with images.
+  const batchUpdateResponse = await slidesService.presentations.batchUpdate({
+    presentationId: presentationCopyId,
+    requestBody: {
+      requests,
+    },
+  });
+
+  // Count the total number of replacements made.
+  let numReplacements = 0;
+  for (let i = 0; i < batchUpdateResponse.data.replies.length; ++i) {
+    numReplacements +=
+      batchUpdateResponse.data.replies[i].replaceAllShapesWithImage
+        .occurrencesChanged;
   }
+  console.log(`Created merged presentation with ID: ${presentationCopyId}`);
+  console.log(`Replaced ${numReplacements} shapes with images.`);
+  return batchUpdateResponse.data;
 }
 // [END slides_image_merging]
 
-module.exports = {imageMerging};
+export {imageMerging};

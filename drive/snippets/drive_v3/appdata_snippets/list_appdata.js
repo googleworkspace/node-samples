@@ -13,37 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_list_appdata]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * List all files inserted in the application data folder
- * */
+ * Lists all files in the application data folder.
+ * @return {Promise<object[]>} A list of files.
+ */
 async function listAppdata() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive.appdata',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
-  try {
-    const res = await service.files.list({
-      spaces: 'appDataFolder',
-      fields: 'nextPageToken, files(id, name)',
-      pageSize: 100,
-    });
-    res.data.files.forEach(function(file) {
-      console.log('Found file:', file.name, file.id);
-    });
-    return res.data.files;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+
+  // List the files in the application data folder.
+  const result = await service.files.list({
+    spaces: 'appDataFolder',
+    fields: 'nextPageToken, files(id, name)',
+    pageSize: 100,
+  });
+
+  // Print the name and ID of each file.
+  (result.data.files ?? []).forEach((file) => {
+    console.log('Found file:', file.name, file.id);
+  });
+
+  return result.data.files ?? [];
 }
 // [END drive_list_appdata]
 
-module.exports = listAppdata;
+export {listAppdata};

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCreateSlide = require('../slides_create_slide');
+import {expect} from 'expect';
+import {createSlide} from '../slides_create_slide.js';
+import {Helpers} from './helpers.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -28,10 +28,7 @@ describe('Presentation snippets', () => {
     const presentationId = await helpers.createTestPresentation();
     await helpers.addSlides(presentationId, 3, 'TITLE_AND_TWO_COLUMNS');
     const pageId = 'my_page_id';
-    const response = await SlidesCreateSlide.createSlide(
-        presentationId,
-        pageId,
-    );
+    const response = await createSlide(presentationId, pageId);
     expect(pageId).toEqual(response.data.replies[0].createSlide.objectId);
   });
 });

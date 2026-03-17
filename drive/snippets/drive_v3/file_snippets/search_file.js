@@ -13,39 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_search_file]
 
-/**
- * Search file in drive location
- * @return{obj} data file
- * */
-async function searchFile() {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
+/**
+ * Searches for files in Google Drive.
+ * @return {Promise<object[]>} A list of files.
+ */
+async function searchFile() {
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
-  const files = [];
-  try {
-    const res = await service.files.list({
-      q: 'mimeType=\'image/jpeg\'',
-      fields: 'nextPageToken, files(id, name)',
-      spaces: 'drive',
-    });
-    Array.prototype.push.apply(files, res.files);
-    res.data.files.forEach(function(file) {
-      console.log('Found file:', file.name, file.id);
-    });
-    return res.data.files;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+
+  // Search for files with the specified query.
+  const result = await service.files.list({
+    q: "mimeType='image/jpeg'",
+    fields: 'nextPageToken, files(id, name)',
+    spaces: 'drive',
+  });
+
+  // Print the name and ID of each found file.
+  (result.data.files ?? []).forEach((file) => {
+    console.log('Found file:', file.name, file.id);
+  });
+
+  return result.data.files ?? [];
 }
 // [END drive_search_file]
 
-module.exports = searchFile;
+export {searchFile};

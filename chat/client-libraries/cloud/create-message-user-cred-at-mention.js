@@ -19,12 +19,17 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.messages.create'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.messages.create',
+];
 
-// This sample shows how to create message with user credential with a user mention
+// This sample shows how to create message with user credential with a user
+// mention
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
@@ -33,8 +38,8 @@ async function main() {
     message: {
       // The user with USER_NAME will be mentioned if they are in the space
       // Replace USER_NAME here
-      text: 'Hello <users/USER_NAME>!'
-    }
+      text: 'Hello <users/USER_NAME>!',
+    },
   };
 
   // Make the request
@@ -44,6 +49,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_create_message_user_cred_at_mention]

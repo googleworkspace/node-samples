@@ -13,48 +13,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_upload_to_folder]
 
+import fs from 'node:fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Upload a file to the specified folder
- * @param{string} folderId folder ID
- * @return{obj} file Id
- * */
+ * Uploads a file to the specified folder.
+ * @param {string} folderId The ID of the folder to upload the file to.
+ * @return {Promise<string>} The ID of the uploaded file.
+ */
 async function uploadToFolder(folderId) {
-  const fs = require('fs');
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
 
-  // TODO(developer): set folder Id
-  // folderId = '1lWo8HghUBd-3mN4s98ArNFMdqmhqCXH7';
-  const fileMetadata = {
+  // The request body for the file to be uploaded.
+  const requestBody = {
     name: 'photo.jpg',
     parents: [folderId],
   };
+
+  // The media content to be uploaded.
   const media = {
     mimeType: 'image/jpeg',
     body: fs.createReadStream('files/photo.jpg'),
   };
 
-  try {
-    const file = await service.files.create({
-      requestBody: fileMetadata,
-      media: media,
-      fields: 'id',
-    });
-    console.log('File Id:', file.data.id);
-    return file.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+  // Upload the file to the specified folder.
+  const file = await service.files.create({
+    requestBody,
+    media,
+    fields: 'id',
+  });
+
+  // Print the ID of the uploaded file.
+  console.log('File Id:', file.data.id);
+  if (!file.data.id) {
+    throw new Error('File ID not found.');
   }
+  return file.data.id;
 }
 // [END drive_upload_to_folder]
 
-module.exports = uploadToFolder;
+export {uploadToFolder};

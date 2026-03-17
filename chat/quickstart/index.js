@@ -16,104 +16,48 @@
 
 // [START chat_quickstart]
 
-const fs = require('fs').promises;
-const path = require('path');
-const process = require('process');
-const {authenticate} = require('@google-cloud/local-auth');
-const {ChatServiceClient} = require('@google-apps/chat');
-const {auth} = require('google-auth-library');
+import path from 'node:path';
+import process from 'node:process';
+import {ChatServiceClient} from '@google-apps/chat';
+import {authenticate} from '@google-cloud/local-auth';
 
-// If modifying these scopes, delete token.json.
+// The scope for reading Chat spaces.
 const SCOPES = ['https://www.googleapis.com/auth/chat.spaces.readonly'];
-
-// The file token.json stores the user's access and refresh tokens, and is
-// created automatically when the authorization flow completes for the first
-// time.
-const TOKEN_PATH = path.join(process.cwd(), 'token.json');
+// The path to the credentials file.
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 /**
- * Reads previously authorized credentials from the save file.
- *
- * @return {Promise<OAuth2Client|null>}
+ * Lists the spaces that the user is a member of.
  */
-async function loadSavedCredentialsIfExist() {
-  try {
-    const content = await fs.readFile(TOKEN_PATH);
-    const credentials = JSON.parse(content);
-    return auth.fromJSON(credentials);
-  } catch (err) {
-    console.log(err);
-    return null;
-  }
-}
-
-/**
- * Serializes credentials to a file compatible with GoogleAuth.fromJSON.
- *
- * @param {OAuth2Client} client
- * @return {Promise<void>}
- */
-async function saveCredentials(client) {
-  const content = await fs.readFile(CREDENTIALS_PATH);
-  const keys = JSON.parse(content);
-  const key = keys.installed || keys.web;
-  const payload = JSON.stringify({
-    type: 'authorized_user',
-    client_id: key.client_id,
-    client_secret: key.client_secret,
-    refresh_token: client.credentials.refresh_token,
-  });
-  await fs.writeFile(TOKEN_PATH, payload);
-}
-
-/**
- * Load or request or authorization to call APIs.
- *
- * @return {Promise<OAuth2Client>}
- */
-async function authorize() {
-  let client = await loadSavedCredentialsIfExist();
-  if (client) {
-    return client;
-  }
-  client = await authenticate({
+async function listSpaces() {
+  // Authenticate with Google and get an authorized client.
+  const authClient = await authenticate({
     scopes: SCOPES,
     keyfilePath: CREDENTIALS_PATH,
   });
-  if (client.credentials) {
-    await saveCredentials(client);
-  }
-  return client;
-}
 
-/**
- * Lists spaces with user credential.
- * @param {OAuth2Client} authClient An authorized OAuth2 client.
- */
-async function listSpaces(authClient) {
-  // Create a client
+  // Create a new Chat API client.
   const chatClient = new ChatServiceClient({
-    authClient: authClient,
+    authClient,
     scopes: SCOPES,
   });
 
-  // Initialize request argument(s)
+  // The request to list spaces.
   const request = {
-    // Filter spaces by space type (SPACE or GROUP_CHAT or DIRECT_MESSAGE)
-    filter: 'space_type = "SPACE"'
+    // Filter spaces by type. In this case, we are only interested in "SPACE" type.
+    filter: 'space_type = "SPACE"',
   };
 
-  // Make the request
+  // Make the API request.
   const pageResult = chatClient.listSpacesAsync(request);
 
-  // Handle the response. Iterating over pageResult will yield results and
-  // resolve additional pages automatically.
+  // Process the response.
+  // The `pageResult` is an async iterable that will yield each space.
   for await (const response of pageResult) {
     console.log(response);
   }
 }
 
-authorize().then(listSpaces).catch(console.error);
+await listSpaces();
 
 // [END chat_quickstart]

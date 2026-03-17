@@ -13,39 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_create_shortcut]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Create a third party shortcut
- * */
+ * Creates a shortcut to a third-party resource.
+ * @return {Promise<string>} The ID of the created shortcut.
+ */
 async function createShortcut() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // The metadata for the new shortcut.
   const fileMetadata = {
     title: 'Project plan',
     mimeType: 'application/vnd.google-apps.drive-sdk',
   };
 
-  try {
-    const file = await service.files.insert({
-      resource: fileMetadata,
-      fields: 'id',
-    });
-    console.log('File Id:', file.data.id);
-    return file.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+  // Create the new shortcut.
+  const file = await service.files.insert({
+    requestBody: fileMetadata,
+    fields: 'id',
+  });
+
+  // Print the ID of the new shortcut.
+  console.log('File Id:', file.data.id);
+  if (!file.data.id) {
+    throw new Error('File ID not found.');
   }
+  return file.data.id;
 }
 // [END drive_create_shortcut]
 
-module.exports = createShortcut;
+export {createShortcut};

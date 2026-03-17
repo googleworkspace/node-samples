@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const recoverDrives = require('../drive_v3/drive_snippets/recover_drives');
-const createDrive = require('../drive_v3/drive_snippets/create_drive');
+import {expect} from 'expect';
+import {createDrive} from '../drive_v3/drive_snippets/create_drive.js';
+import {recoverDrives} from '../drive_v3/drive_snippets/recover_drives.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -26,7 +26,7 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  // Note, you must enable creating Team Drives for your service account.
+  // Note, you must enable creating shared drives for your service account.
   // https://support.google.com/a/answer/7337635?hl=en
   it('should recover team drives', async () => {
     await createOrphanedTeamDrive();
@@ -35,16 +35,16 @@ describe('Drive snippets', () => {
   });
 
   /**
-   * Creates a standalone Team Drive.
-   * @return {fileId} The id of the new Team Drive.
+   * Creates a standalone shared drive.
+   * @return {fileId} The id of the new shared drive.
    */
   async function createOrphanedTeamDrive() {
     const fileId = await createDrive();
-    const res = await helpers.service.permissions.list({
+    const result = await helpers.service.permissions.list({
       fileId,
       supportsTeamDrives: true,
     });
-    res.data.permissions.forEach((permission) => {
+    result.data.permissions.forEach((permission) => {
       helpers.service.permissions.delete({
         fileId,
         permissionId: permission.id,

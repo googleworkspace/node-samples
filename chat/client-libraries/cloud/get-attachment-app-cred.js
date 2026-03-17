@@ -19,7 +19,8 @@
 
 import {createClientWithAppCredentials} from './authentication-utils.js';
 
-// This sample shows how to get attachment metadata with app credential
+// This sample shows how to get attachment metadata with app
+// credential
 async function main() {
   // Create a client
   const chatClient = createClientWithAppCredentials();
@@ -27,7 +28,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME, MESSAGE_NAME, and ATTACHMENT_NAME here
-    name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME/attachments/ATTACHMENT_NAME'
+    name: 'spaces/SPACE_NAME/messages/MESSAGE_NAME/attachments/ATTACHMENT_NAME',
   };
 
   // Make the request
@@ -37,6 +38,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_get_attachment_app_cred]

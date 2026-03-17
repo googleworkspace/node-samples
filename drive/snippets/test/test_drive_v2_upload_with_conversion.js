@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const uploadWithConversion = require('../drive_v2/file snippets/upload_with_conversion');
+import {expect} from 'expect';
+import {uploadWithConversion} from '../drive_v2/file snippets/upload_with_conversion.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

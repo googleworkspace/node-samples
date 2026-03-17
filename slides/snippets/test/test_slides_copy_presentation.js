@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SlidesCopyPresentation = require('../slides_copy_presentation');
+import {expect} from 'expect';
+import {copyPresentation} from '../slides_copy_presentation.js';
+import {Helpers} from './helpers.js';
 
 describe('Presentation snippets', () => {
   const helpers = new Helpers();
@@ -27,9 +27,9 @@ describe('Presentation snippets', () => {
 
   it('should copy a presentation', async () => {
     const presentationId = await helpers.createTestPresentation();
-    const copyId = await SlidesCopyPresentation.copyPresentation(
-        presentationId,
-        'My' + ' Duplicate, Presentation',
+    const copyId = await copyPresentation(
+      presentationId,
+      'My' + ' Duplicate, Presentation',
     );
     expect(copyId).toBeDefined();
     helpers.deleteFileOnCleanup(copyId.data.id);

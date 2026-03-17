@@ -13,60 +13,62 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_share_file]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Download a Document file in PDF format
- * @param{string} fileId file ID
- * @param{string} targetUser username
- * @param{string} targetDomain domain
- * */
+ * Shares a file with a user and a domain.
+ * @param {string} fileId The ID of the file to share.
+ * @param {string} targetUser The email address of the user to share with.
+ * @param {string} targetDomain The domain to share with.
+ * @return {Promise<string[]>} A list of the inserted permission IDs.
+ */
 async function shareFile(fileId, targetUser, targetDomain) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
 
   const permissionIds = [];
+  // The permissions to insert.
   const permissions = [
     {
       type: 'user',
       role: 'writer',
-      value: targetUser, // Example: 'user@example.com',
+      value: targetUser, // e.g., 'user@example.com'
     },
     {
       type: 'domain',
       role: 'writer',
-      value: targetDomain, // Example: 'example.com',
+      value: targetDomain, // e.g., 'example.com'
     },
   ];
 
-  // Note: Client library does not currently support HTTP batch
-  // requests. When possible, use batched requests when inserting
-  // multiple permissions on the same item. For this sample,
-  // permissions are inserted serially.
+  // Note: The client library does not currently support batch requests for permissions.
+  // When possible, use batch requests to insert multiple permissions on the same item.
   for (const permission of permissions) {
-    try {
-      const result = await service.permissions.insert({
-        resource: permission,
-        fileId: fileId,
-        fields: 'id',
-      });
+    // Insert the permission.
+    const result = await service.permissions.insert({
+      requestBody: permission,
+      fileId,
+      fields: 'id',
+    });
+    if (result.data.id) {
       permissionIds.push(result.data.id);
       console.log(`Inserted permission id: ${result.data.id}`);
-    } catch (err) {
-      // TODO(developer): Handle failed permissions
-      console.error(err);
+    } else {
+      throw new Error('Failed to create permission');
     }
   }
   return permissionIds;
 }
 // [END drive_share_file]
 
-module.exports = shareFile;
+export {shareFile};

@@ -27,19 +27,19 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Filter spaces by space type (SPACE or GROUP_CHAT or DIRECT_MESSAGE)
-    filter: 'space_type = "SPACE"'
+    filter: 'space_type = "SPACE"',
   };
 
   // Make the request
   const pageResult = chatClient.listSpacesAsync(request);
 
-  // Handle the response. Iterating over pageResult will yield results and
-  // resolve additional pages automatically.
+  // Handle the response. Iterating over pageResult will yield results
+  // and resolve additional pages automatically.
   for await (const response of pageResult) {
     console.log(response);
   }
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_list_spaces_app_cred]

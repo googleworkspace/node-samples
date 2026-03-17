@@ -13,52 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_move_file_to_folder]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Change the file's modification timestamp.
- * @param{string} fileId Id of the file to move
- * @param{string} folderId Id of the folder to move
- * @return{obj} file status
- * */
+ * Moves a file to a new folder in Google Drive.
+ * @param {string} fileId The ID of the file to move.
+ * @param {string} folderId The ID of the folder to move the file to.
+ * @return {Promise<number>} The status of the move operation.
+ */
 async function moveFileToFolder(fileId, folderId) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
 
-  try {
-    // Retrieve the existing parents to remove
-    const file = await service.files.get({
-      fileId: fileId,
-      fields: 'parents',
-    });
+  // Get the file's metadata to retrieve its current parents.
+  const file = await service.files.get({
+    fileId,
+    fields: 'parents',
+  });
 
-    // Move the file to the new folder
-    const previousParents = file.data.parents
-        .map(function(parent) {
-          return parent.id;
-        })
-        .join(',');
-    const files = await service.files.update({
-      fileId: fileId,
-      addParents: folderId,
-      removeParents: previousParents,
-      fields: 'id, parents',
-    });
-    console.log(files.status);
-    return files.status;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  // Get the current parents as a comma-separated string.
+  const previousParents = (file.data.parents ?? [])
+    .map((parent) => parent.id)
+    .join(',');
+
+  // Move the file to the new folder.
+  const files = await service.files.update({
+    fileId,
+    addParents: folderId,
+    removeParents: previousParents,
+    fields: 'id, parents',
+  });
+
+  // Print the status of the move operation.
+  console.log(files.status);
+  return files.status;
 }
 // [END drive_move_file_to_folder]
 
-module.exports = moveFileToFolder;
+export {moveFileToFolder};

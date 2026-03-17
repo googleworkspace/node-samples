@@ -19,12 +19,17 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.memberships'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.memberships',
+];
 
-// This sample shows how to create membership with user credential for a human user
+// This sample shows how to create membership with user credential for a human
+// user
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
@@ -35,9 +40,9 @@ async function main() {
         // Replace USER_NAME here
         name: 'users/USER_NAME',
         // User type for the membership
-        type: 'HUMAN'
-      }
-    }
+        type: 'HUMAN',
+      },
+    },
   };
 
   // Make the request
@@ -47,6 +52,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_create_membership_user_cred]

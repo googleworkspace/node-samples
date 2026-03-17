@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsBatchUpdate = require('../sheets_batch_update');
+import {expect} from 'expect';
+import {batchUpdate} from '../sheets_batch_update.js';
+import {Helpers} from './helpers.js';
 
 describe('Spreadsheet batch update snippet', () => {
   const helpers = new Helpers();
@@ -28,11 +28,11 @@ describe('Spreadsheet batch update snippet', () => {
   it('should batch update a spreadsheet', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsBatchUpdate.batchUpdate(
-        spreadsheetId,
-        'New Title',
-        'Hello',
-        'Goodbye',
+    const result = await batchUpdate(
+      spreadsheetId,
+      'New Title',
+      'Hello',
+      'Goodbye',
     );
     const replies = result.data.replies;
     expect(replies.length).toBe(2);

@@ -15,25 +15,27 @@
  */
 
 // [START slides_text_style_update]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Updates text style for a specific presentation's shape ID.
- * @param {string} presentationId The presentation ID.
- * @param {string} shapeId The shape ID.
+ * Updates the text style of a shape in a presentation.
+ * @param {string} presentationId The ID of the presentation.
+ * @param {string} shapeId The ID of the shape to update.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function textStyleUpdate(presentationId, shapeId) {
-  // Update the text style so that the first 5 characters are bolded
-  // and italicized, the next 5 are displayed in blue 14 pt Times
-  // New Roman font, and the next 5 are hyperlinked.
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
 
+  // The requests to update the text style.
   const requests = [
+    // Bold and italicize the first 5 characters.
     {
       updateTextStyle: {
         objectId: shapeId,
@@ -49,6 +51,7 @@ async function textStyleUpdate(presentationId, shapeId) {
         fields: 'bold,italic',
       },
     },
+    // Set the next 5 characters to 14pt Times New Roman, and blue.
     {
       updateTextStyle: {
         objectId: shapeId,
@@ -76,6 +79,7 @@ async function textStyleUpdate(presentationId, shapeId) {
         fields: 'foregroundColor,fontFamily,fontSize',
       },
     },
+    // Hyperlink the next 5 characters.
     {
       updateTextStyle: {
         objectId: shapeId,
@@ -94,21 +98,16 @@ async function textStyleUpdate(presentationId, shapeId) {
     },
   ];
 
-  // Execute the requests.
-  try {
-    const batchUpdateResponse = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(`Updated the text style for shape with ID: ${shapeId}`);
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exceptions
-    throw err;
-  }
+  // Execute the batch update request.
+  const batchUpdateResponse = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(`Updated the text style for shape with ID: ${shapeId}`);
+  return batchUpdateResponse.data;
 }
 // [END slides_text_style_update]
 
-module.exports = {textStyleUpdate};
+export {textStyleUpdate};

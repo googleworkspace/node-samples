@@ -27,7 +27,7 @@ async function main() {
   // Initialize request argument(s)
   const request = {
     // Replace USER_NAME here
-    name: 'users/USER_NAME'
+    name: 'users/USER_NAME',
   };
 
   // Make the request
@@ -37,6 +37,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_find_dm_space_app_cred]

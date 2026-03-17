@@ -19,29 +19,33 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.spaces.readonly'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.spaces.readonly',
+];
 
 // This sample shows how to list spaces with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
     // Filter spaces by space type (SPACE or GROUP_CHAT or DIRECT_MESSAGE)
-    filter: 'space_type = "SPACE"'
+    filter: 'space_type = "SPACE"',
   };
 
   // Make the request
   const pageResult = chatClient.listSpacesAsync(request);
 
-  // Handle the response. Iterating over pageResult will yield results and
-  // resolve additional pages automatically.
+  // Handle the response. Iterating over pageResult will yield results
+  // and resolve additional pages automatically.
   for await (const response of pageResult) {
     console.log(response);
   }
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_list_spaces_user_cred]

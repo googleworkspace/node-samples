@@ -15,20 +15,25 @@
  */
 
 // [START slides_create_slide]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
  * Creates a new slide in a presentation.
- * @param {string} presentationId The presentation ID.
+ * @param {string} presentationId The ID of the presentation.
  * @param {string} pageId The object ID for the new slide.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function createSlide(presentationId, pageId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
+
+  // The request to create a new slide.
   const requests = [
     {
       createSlide: {
@@ -40,26 +45,19 @@ async function createSlide(presentationId, pageId) {
       },
     },
   ];
-  // If you wish to populate the slide with elements, add element create requests here,
-  // using the pageId.
 
-  // Execute the request.
-  try {
-    const res = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(
-        `Created slide with ID: ${res.data.replies[0].createSlide.objectId}`,
-    );
-    return res;
-  } catch (err) {
-    // TODO (developer) - handle exception
-    throw err;
-  }
+  // Execute the batch update request to create the slide.
+  const result = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(
+    `Created slide with ID: ${result.data.replies[0].createSlide.objectId}`,
+  );
+  return result;
 }
 // [END slides_create_slide]
 
-module.exports = {createSlide};
+export {createSlide};

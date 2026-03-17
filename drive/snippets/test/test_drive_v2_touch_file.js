@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const touchFile = require('../drive_v2/file snippets/touch_file');
+import {expect} from 'expect';
+import {touchFile} from '../drive_v2/file snippets/touch_file.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

@@ -15,21 +15,25 @@
  */
 
 // [START slides_refresh_sheets_chart]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Refreshes an embedded sheet chart.
- * @param {string} presentationId The presentation ID.
- * @param {string} presentationChartId The presentation's chart ID.
+ * Refreshes an embedded Sheets chart in a presentation.
+ * @param {string} presentationId The ID of the presentation.
+ * @param {string} presentationChartId The ID of the chart to refresh.
+ * @return {Promise<object>} The response from the batch update.
  */
 async function refreshSheetsChart(presentationId, presentationChartId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/presentations',
   });
 
+  // Create a new Slides API client.
   const service = google.slides({version: 'v1', auth});
 
+  // The request to refresh the chart.
   const requests = [
     {
       refreshSheetsChart: {
@@ -38,23 +42,18 @@ async function refreshSheetsChart(presentationId, presentationChartId) {
     },
   ];
 
-  // Execute the request.
-  try {
-    const batchUpdateResponse = await service.presentations.batchUpdate({
-      presentationId,
-      resource: {
-        requests,
-      },
-    });
-    console.log(
-        `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
-    );
-    return batchUpdateResponse.data;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+  // Execute the batch update request to refresh the chart.
+  const batchUpdateResponse = await service.presentations.batchUpdate({
+    presentationId,
+    requestBody: {
+      requests,
+    },
+  });
+  console.log(
+    `Refreshed a linked Sheets chart with ID: ${presentationChartId}`,
+  );
+  return batchUpdateResponse.data;
 }
 // [END slides_refresh_sheets_chart]
 
-module.exports = {refreshSheetsChart};
+export {refreshSheetsChart};

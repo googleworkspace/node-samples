@@ -13,43 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_touch_file]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Change the file's modification timestamp.
- * @param{string} fileId ID of the file to change modified time
- * @param{string} timestamp Timestamp to override Modified date time of the file
- * @return{obj} modified timestamp
- * */
+ * Updates the modification timestamp of a file.
+ * @param {string} fileId The ID of the file to update.
+ * @param {string} timestamp The new modification timestamp.
+ * @return {Promise<string|null|undefined>} The updated modification timestamp.
+ */
 async function touchFile(fileId, timestamp) {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // The metadata to update.
   const fileMetadata = {
     modifiedDate: new Date().toISOString(),
+    modifiedTime: timestamp,
   };
-  fileMetadata.modifiedTime = timestamp;
-  try {
-    const file = await service.files.update({
-      fileId: fileId,
-      setModifiedDate: true,
-      resource: fileMetadata,
-      fields: 'id, modifiedDate',
-    });
-    console.log('Modified time:', file.data.modifiedDate);
-    return file.data.modifiedDate;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+
+  // Update the file's modification timestamp.
+  const file = await service.files.update({
+    fileId,
+    setModifiedDate: true,
+    requestBody: fileMetadata,
+    fields: 'id, modifiedDate',
+  });
+
+  // Print the new modification timestamp.
+  console.log('Modified time:', file.data.modifiedDate);
+  return file.data.modifiedDate;
 }
 // [END drive_touch_file]
 
-module.exports = touchFile;
+export {touchFile};

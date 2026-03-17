@@ -10,35 +10,48 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_add_item]
 
-'use strict';
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
-
-async function runSample(query) {
+/**
+ * Creates a new form and adds a video item to it.
+ */
+async function addItem() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+
+  // Create a new Forms API client.
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The initial form to be created.
   const newForm = {
     info: {
       title: 'Creating a new form for batchUpdate in Node',
     },
   };
-  const createResponse = await forms.forms.create({
+
+  // Create the new form.
+  const createResponse = await formsClient.forms.create({
     requestBody: newForm,
   });
-  console.log('New formId was: ' + createResponse.data.formId);
 
-  // Request body to add video item to a Form
+  if (!createResponse.data.formId) {
+    throw new Error('Form ID not returned.');
+  }
+
+  console.log(`New formId was: ${createResponse.data.formId}`);
+
+  // Request body to add a video item to the form.
   const update = {
     requests: [
       {
@@ -52,6 +65,7 @@ async function runSample(query) {
               },
             },
           },
+          // The location to insert the new item.
           location: {
             index: 0,
           },
@@ -59,17 +73,17 @@ async function runSample(query) {
       },
     ],
   };
-  const updateResponse = await forms.forms.batchUpdate({
+
+  // Send the batch update request to add the item to the form.
+  const updateResponse = await formsClient.forms.batchUpdate({
     formId: createResponse.data.formId,
     requestBody: update,
   });
+
   console.log(updateResponse.data);
   return updateResponse.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-module.exports = runSample;
-
 // [END forms_add_item]
+
+export {addItem};

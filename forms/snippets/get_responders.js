@@ -10,44 +10,46 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_get_responders]
-'use strict';
 
-const path = require('path');
-const {drive} = require('@googleapis/drive');
-const {authenticate} = require('@google-cloud/local-auth');
-
-// TODO: Replace with your form ID
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {drive} from '@googleapis/drive';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 
 /**
- * Gets the responders to the form.
+ * Gets the responders of a form.
+ * This is done by listing the permissions of the form in Google Drive.
  *
  * @param {string} formId The ID of the form.
  */
-async function runSample(formId, email) {
+async function getResponders(formId) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Drive API client.
   const driveService = drive({version: 'v3', auth: authClient});
 
   try {
-    const res = await driveService.permissions.list({
+    // List the permissions for the form.
+    const result = await driveService.permissions.list({
       fileId: formId,
       includePermissionsForView: 'published',
       fields: 'permissions(id,emailAddress,type,role,view)',
     });
-    const permissions = res.data.permissions || [];
+
+    const permissions = result.data.permissions || [];
     if (permissions.length === 0) {
       console.log(`No permissions found for form ID: ${formId}`);
     } else {
       console.log('Responders for this form:');
+      // A responder is a permission with view='published' and role='reader'.
       for (const permission of permissions) {
         if (permission.view === 'published' && permission.role === 'reader') {
           console.log(`Responder:`, permission);
@@ -59,8 +61,6 @@ async function runSample(formId, email) {
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_get_responders]
+
+export {getResponders};

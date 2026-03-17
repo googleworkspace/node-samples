@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const uploadAppdata = require('../drive_v2/appdata_snippets/upload_appdata');
+import {expect} from 'expect';
+import {uploadAppdata} from '../drive_v2/appdata_snippets/upload_appdata.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

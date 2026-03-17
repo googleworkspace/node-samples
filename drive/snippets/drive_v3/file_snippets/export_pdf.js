@@ -13,36 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_export_pdf]
 
-/**
- * Download a Document file in PDF format
- * @param{string} fileId file ID
- * @return{obj} file status
- * */
-async function exportPdf(fileId) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
+/**
+ * Exports a Google Doc as a PDF.
+ * @param {string} fileId The ID of the file to export.
+ * @return {Promise<number>} The status of the export request.
+ */
+async function exportPdf(fileId) {
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
 
-  try {
-    const result = await service.files.export({
-      fileId: fileId,
-      mimeType: 'application/pdf',
-    });
-    console.log(result.status);
-    return result;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
-  }
+  // Export the file as a PDF.
+  const result = await service.files.export({
+    fileId,
+    mimeType: 'application/pdf',
+  });
+
+  // Print the status of the export.
+  console.log(result.status);
+  return result.status;
 }
 // [END drive_export_pdf]
 
-module.exports = exportPdf;
+export {exportPdf};

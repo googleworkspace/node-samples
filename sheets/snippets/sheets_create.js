@@ -15,37 +15,40 @@
  */
 
 // [START sheets_create]
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Create a google spreadsheet
- * @param {string} title Spreadsheets title
- * @return {string} Created spreadsheets ID
+ * Creates a new Google Spreadsheet.
+ * @param {string} title The title of the new spreadsheet.
+ * @return {string} The ID of the created spreadsheet.
  */
 async function create(title) {
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
+  // Create a new Sheets API client.
   const service = google.sheets({version: 'v4', auth});
+
+  // The resource body for creating a new spreadsheet.
   const resource = {
     properties: {
       title,
     },
   };
-  try {
-    const spreadsheet = await service.spreadsheets.create({
-      resource,
-      fields: 'spreadsheetId',
-    });
-    console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
-    return spreadsheet.data.spreadsheetId;
-  } catch (err) {
-    // TODO (developer) - Handle exception
-    throw err;
-  }
+
+  // Create the new spreadsheet.
+  const spreadsheet = await service.spreadsheets.create({
+    resource,
+    fields: 'spreadsheetId',
+  });
+
+  // Log the ID of the new spreadsheet.
+  console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
+  return spreadsheet.data.spreadsheetId;
 }
 // [END sheets_create]
 
-module.exports = {create};
+export {create};

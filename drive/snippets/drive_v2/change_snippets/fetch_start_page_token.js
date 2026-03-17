@@ -13,31 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_fetch_start_page_token]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Retrieve page token for the current state of the account
- * */
+ * Fetches the start page token for the current state of the user's account.
+ * @return {Promise<string>} The start page token.
+ */
 async function fetchStartPageToken() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
-  try {
-    const res = await service.changes.getStartPageToken();
-    console.log('Start token:', res.data.startPageToken);
-    return res.data.startPageToken;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+
+  // Fetch the start page token.
+  const result = await service.changes.getStartPageToken();
+  console.log('Start token:', result.data.startPageToken);
+  if (!result.data.startPageToken) {
+    throw new Error('Start page token not found.');
   }
+  return result.data.startPageToken;
 }
 // [END drive_fetch_start_page_token]
 
-module.exports = fetchStartPageToken;
+export {fetchStartPageToken};

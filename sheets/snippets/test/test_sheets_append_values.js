@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const SheetsAppendValues = require('../sheets_append_values');
+import {expect} from 'expect';
+import {appendValues} from '../sheets_append_values.js';
+import {Helpers} from './helpers.js';
 
 describe('Spreadsheet append values snippet', () => {
   const helpers = new Helpers();
@@ -28,15 +28,10 @@ describe('Spreadsheet append values snippet', () => {
   it('should append values to a spreadsheet', async () => {
     const spreadsheetId = await helpers.createTestSpreadsheet();
     await helpers.populateValues(spreadsheetId);
-    const result = await SheetsAppendValues.appendValues(
-        spreadsheetId,
-        'Sheet1',
-        'USER_ENTERED',
-        [
-          ['A', 'B'],
-          ['C', 'D'],
-        ],
-    );
+    const result = await appendValues(spreadsheetId, 'Sheet1', 'USER_ENTERED', [
+      ['A', 'B'],
+      ['C', 'D'],
+    ]);
     expect(result.data.tableRange).toBe('Sheet1!A1:J10');
     const updates = result.data.updates;
     expect(updates.updatedRows).toBe(2);

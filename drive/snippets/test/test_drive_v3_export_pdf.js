@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const exportPdf = require('../drive_v3/file_snippets/export_pdf');
+import {expect} from 'expect';
+import {exportPdf} from '../drive_v3/file_snippets/export_pdf.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();

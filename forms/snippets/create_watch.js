@@ -12,43 +12,54 @@
 // limitations under the License.
 
 // [START forms_create_watch]
-'use strict';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
+// TODO: Replace with a valid form ID.
 const formID = '<YOUR_FORM_ID>';
 
-async function runSample(query) {
+/**
+ * Creates a watch on a form to get notifications for new responses.
+ */
+async function createWatch() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+
+  // Create a new Forms API client.
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The request body to create a watch.
   const watchRequest = {
     watch: {
       target: {
         topic: {
+          // TODO: Replace with a valid Cloud Pub/Sub topic name.
           topicName: 'projects/<YOUR_TOPIC_PATH>',
         },
       },
+      // The event type to watch for. 'RESPONSES' is the only supported type.
       eventType: 'RESPONSES',
     },
   };
-  const res = await forms.forms.watches.create({
+
+  // Send the request to create the watch.
+  const result = await formsClient.forms.watches.create({
     formId: formID,
     requestBody: watchRequest,
   });
-  console.log(res.data);
-  return res.data;
+
+  console.log(result.data);
+  return result.data;
 }
 
-if (module === require.main) {
-  runSample().catch(console.error);
-}
-module.exports = runSample;
 // [END forms_create_watch]
+
+export {createWatch};

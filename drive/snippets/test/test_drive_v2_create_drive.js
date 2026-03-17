@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const createDrive = require('../drive_v2/drive_snippets/create_drive');
+import {expect} from 'expect';
+import {createDrive} from '../drive_v2/drive_snippets/create_drive.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -25,9 +25,9 @@ describe('Drive snippets', () => {
     return helpers.cleanup();
   });
 
-  // Note, you must enable creating Team Drives for your service account.
+  // Note, you must enable creating shared drives for your service account.
   // https://support.google.com/a/answer/7337635?hl=en
-  it('should create a team drive', async () => {
+  it('should create a shared drive', async () => {
     const id = await createDrive();
     expect(id).toBeDefined();
     await helpers.service.teamdrives.delete({teamDriveId: id});

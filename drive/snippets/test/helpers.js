@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const {GoogleAuth} = require('google-auth-library');
-const {google} = require('googleapis');
-const fs = require('fs');
+
+import fs from 'node:fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
 
 /**
  * Helper functions for Google Drive
@@ -53,7 +54,7 @@ class Helpers {
    */
   cleanup() {
     return Promise.all(
-        this.filesToDelete.map((fileId) => this.service.files.delete({fileId})),
+      this.filesToDelete.map((fileId) => this.service.files.delete({fileId})),
     );
   }
 
@@ -65,7 +66,7 @@ class Helpers {
    */
   async createFile(fileMetadata, media) {
     const file = await this.service.files.create({
-      resource: fileMetadata,
+      requestBody: fileMetadata,
       media,
       fields: 'id',
     });
@@ -80,14 +81,14 @@ class Helpers {
    */
   createTestDocument() {
     return this.createFile(
-        {
-          name: 'Test Document',
-          mimeType: 'application/vnd.google-apps.document',
-        },
-        {
-          mimeType: 'text/plain',
-          body: fs.createReadStream('files/document.txt'),
-        },
+      {
+        name: 'Test Document',
+        mimeType: 'application/vnd.google-apps.document',
+      },
+      {
+        mimeType: 'text/plain',
+        body: fs.createReadStream('files/document.txt'),
+      },
     );
   }
 
@@ -97,17 +98,17 @@ class Helpers {
    */
   async createTestBlob() {
     const file = await this.createFile(
-        {
-          name: 'photo.jpg',
-        },
-        {
-          mimeType: 'image/jpeg',
-          body: fs.createReadStream('files/photo.jpg'),
-        },
+      {
+        name: 'photo.jpg',
+      },
+      {
+        mimeType: 'image/jpeg',
+        body: fs.createReadStream('files/photo.jpg'),
+      },
     );
 
     return file;
   }
 }
 
-module.exports = Helpers;
+export {Helpers};

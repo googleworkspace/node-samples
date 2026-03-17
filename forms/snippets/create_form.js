@@ -10,39 +10,45 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_create_form]
 
-'use strict';
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
-
-async function runSample(query) {
+/**
+ * Creates a new form.
+ */
+async function createForm() {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/drive',
   });
-  const forms = google.forms({
+
+  // Create a new Forms API client.
+  const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
+
+  // The request body to create a new form.
   const newForm = {
     info: {
       title: 'Creating a new form in Node',
     },
   };
-  const res = await forms.forms.create({
+
+  // Send the request to create the form.
+  const result = await formsClient.forms.create({
     requestBody: newForm,
   });
-  console.log(res.data);
-  return res.data;
-}
 
-if (module === require.main) {
-  runSample().catch(console.error);
+  console.log(result.data);
+  return result.data;
 }
-module.exports = runSample;
 
 // [END forms_create_form]
+
+export {createForm};

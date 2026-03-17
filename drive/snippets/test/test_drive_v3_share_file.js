@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const {expect} = require('expect');
-const Helpers = require('./helpers');
-const shareFile = require('../drive_v3/file_snippets/share_file');
+import {expect} from 'expect';
+import {shareFile} from '../drive_v3/file_snippets/share_file.js';
+import {Helpers} from './helpers.js';
 
 describe('Drive snippets', () => {
   const helpers = new Helpers();
@@ -32,9 +32,9 @@ describe('Drive snippets', () => {
   it('should share files', async () => {
     const file = await helpers.createTestBlob();
     const ids = await shareFile(
-        file.data.id,
-        'xyz@workspacesamples.dev',
-        'workspacesamples.dev',
+      file.data.id,
+      'xyz@workspacesamples.dev',
+      'workspacesamples.dev',
     );
     expect(ids.length).toEqual(2);
   });

@@ -19,12 +19,16 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.memberships'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.memberships',
+];
 
 // This sample shows how to update a membership with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
@@ -32,12 +36,12 @@ async function main() {
       // Replace SPACE_NAME and MEMBER_NAME here
       name: 'spaces/SPACE_NAME/members/MEMBER_NAME',
       // Replace ROLE_NAME here with ROLE_MEMBER or ROLE_MANAGER
-      role: 'ROLE_NAME'
+      role: 'ROLE_NAME',
     },
     updateMask: {
       // The field paths to update.
-      paths: ['role']
-    }
+      paths: ['role'],
+    },
   };
 
   // Make the request
@@ -47,6 +51,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_update_membership_user_cred]

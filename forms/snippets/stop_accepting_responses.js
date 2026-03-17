@@ -10,48 +10,48 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_stop_accepting_responses]
-'use strict';
 
-const {authenticate} = require('@google-cloud/local-auth');
-const {forms} = require('@googleapis/forms');
-const path = require('path');
-
-// TODO: Replace with your form ID
-const YOUR_FORM_ID = 'YOUR_FORM_ID';
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
 const CREDENTIALS_PATH = path.join(__dirname, 'credentials.json');
 const SCOPES = 'https://www.googleapis.com/auth/forms.body';
 
 /**
- * Stops accepting responses to the form.
+ * Stops a form from accepting new responses.
  *
  * @param {string} formId The ID of the form.
  */
-async function runSample(formId) {
+async function stopAcceptingResponses(formId) {
+  // Authenticate with Google and get an authorized client.
   const authClient = await authenticate({
     keyfilePath: CREDENTIALS_PATH,
     scopes: SCOPES,
   });
 
+  // Create a new Forms API client.
   const formsClient = forms({
     version: 'v1',
     auth: authClient,
   });
 
+  // The request body to stop accepting responses.
   const setPublishSettingsRequest = {
     publishSettings: {
       publishState: {
-        isPublished: true,  // Keep it published (or ensure it is if it wasn't)
-        isAcceptingResponses: false,  // Stop accepting responses
+        isPublished: true, // Keep the form published.
+        isAcceptingResponses: false, // Stop accepting new responses.
       },
-    }
+    },
   };
 
   try {
+    // Send the request to update the form's settings.
     const res = await formsClient.forms.setPublishSettings({
-      formId: formId,
+      formId,
       requestBody: setPublishSettingsRequest,
     });
     console.log('Form is no longer accepting responses.', res.data);
@@ -60,8 +60,6 @@ async function runSample(formId) {
   }
 }
 
-if (module === require.main) {
-  runSample(YOUR_FORM_ID).catch(console.error);
-}
-module.exports = runSample;
 // [END forms_stop_accepting_responses]
+
+export {stopAcceptingResponses};

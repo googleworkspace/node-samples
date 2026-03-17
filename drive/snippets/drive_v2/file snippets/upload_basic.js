@@ -13,43 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_upload_basic]
 
+import fs from 'node:fs';
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+
 /**
- * Insert new file.
- * */
+ * Uploads a file to Google Drive.
+ * @return {Promise<string>} The ID of the uploaded file.
+ */
 async function uploadBasic() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const fs = require('fs');
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client.
   const service = google.drive({version: 'v2', auth});
+
+  // The metadata for the file to be uploaded.
   const fileMetadata = {
     title: 'photo.jpg',
   };
+
+  // The media content to be uploaded.
   const media = {
     mimeType: 'image/jpeg',
     body: fs.createReadStream('files/photo.jpg'),
   };
-  try {
-    const file = await service.files.insert({
-      resource: fileMetadata,
-      media: media,
-      fields: 'id',
-    });
-    console.log('File Id:', file.data.id);
-    return file.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+
+  // Upload the file.
+  const file = await service.files.insert({
+    requestBody: fileMetadata,
+    media,
+    fields: 'id',
+  });
+
+  // Print the ID of the uploaded file.
+  console.log('File Id:', file.data.id);
+  if (!file.data.id) {
+    throw new Error('File ID not found.');
   }
+  return file.data.id;
 }
 // [END drive_upload_basic]
 
-module.exports = uploadBasic;
+export {uploadBasic};

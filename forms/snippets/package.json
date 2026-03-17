@@ -1,14 +1,24 @@
 {
-  "name": "sheets-api-snippets",
+  "name": "forms-api-snippets",
   "version": "1.0.0",
-  "description": "Code snippets for the Sheets API",
   "private": true,
-  "scripts": {},
-  "engines": {
-    "node": ">=14"
-  },
+  "description": "Code snippets for the Sheets API",
   "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
   "dependencies": {
-    "googleapis": "^105.0.0"
+    "@google-cloud/local-auth": "catalog:",
+    "@googleapis/drive": "catalog:",
+    "@googleapis/forms": "catalog:",
+    "googleapis": "catalog:"
+  },
+  "devDependencies": {
+    "google-auth-library": "catalog:",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

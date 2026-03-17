@@ -10,34 +10,39 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
 // [START forms_retrieve_contents]
 
-'use strict';
+import path from 'node:path';
+import {authenticate} from '@google-cloud/local-auth';
+import {forms} from '@googleapis/forms';
 
-const path = require('path');
-const google = require('@googleapis/forms');
-const {authenticate} = require('@google-cloud/local-auth');
-
+// TODO: Replace with a valid form ID.
 const formID = '<YOUR_FORM_ID>';
 
-async function runSample(query) {
+/**
+ * Retrieves the content of a form.
+ */
+async function getForm() {
+  // Authenticate with Google and get an authorized client.
   const auth = await authenticate({
     keyfilePath: path.join(__dirname, 'credentials.json'),
     scopes: 'https://www.googleapis.com/auth/forms.body.readonly',
   });
-  const forms = google.forms({
-    version: 'v1',
-    auth: auth,
-  });
-  const res = await forms.forms.get({formId: formID});
-  console.log(res.data);
-  return res.data;
-}
 
-if (module === require.main) {
-  runSample().catch(console.error);
+  // Create a new Forms API client.
+  const formsClient = forms({
+    version: 'v1',
+    auth,
+  });
+
+  // Get the form content.
+  const result = await formsClient.forms.get({formId: formID});
+
+  console.log(result.data);
+  return result.data;
 }
-module.exports = runSample;
 
 // [END forms_retrieve_contents]
+
+export {getForm};

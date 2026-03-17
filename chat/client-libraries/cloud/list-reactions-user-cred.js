@@ -19,29 +19,33 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.messages.reactions.readonly'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.messages.reactions.readonly',
+];
 
 // This sample shows how to list reactions to a message with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
     // Replace SPACE_NAME and MESSAGE_NAME here.
-    parent: 'spaces/SPACE_NAME/messages/MESSAGE_NAME'
+    parent: 'spaces/SPACE_NAME/messages/MESSAGE_NAME',
   };
 
   // Make the request
   const pageResult = chatClient.listReactionsAsync(request);
 
-  // Handle the response. Iterating over pageResult will yield results and
-  // resolve additional pages automatically.
+  // Handle the response. Iterating over pageResult will yield results
+  // and resolve additional pages automatically.
   for await (const response of pageResult) {
     console.log(response);
   }
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_list_reactions_user_cred]

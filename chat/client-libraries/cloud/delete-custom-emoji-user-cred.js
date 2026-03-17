@@ -19,17 +19,21 @@
 
 import {createClientWithUserCredentials} from './authentication-utils.js';
 
-const USER_AUTH_OAUTH_SCOPES = ['https://www.googleapis.com/auth/chat.customemojis'];
+const USER_AUTH_OAUTH_SCOPES = [
+  'https://www.googleapis.com/auth/chat.customemojis',
+];
 
 // This sample shows how to delete a custom emoji with user credential
 async function main() {
   // Create a client
-  const chatClient = await createClientWithUserCredentials(USER_AUTH_OAUTH_SCOPES);
+  const chatClient = await createClientWithUserCredentials(
+    USER_AUTH_OAUTH_SCOPES,
+  );
 
   // Initialize request argument(s)
   const request = {
     // TODO(developer): Replace EMOJI_NAME here.
-    name: 'customEmojis/EMOJI_NAME'
+    name: 'customEmojis/EMOJI_NAME',
   };
 
   // Make the request
@@ -39,6 +43,6 @@ async function main() {
   console.log(response);
 }
 
-main().catch(console.error);
+await main();
 
 // [END chat_delete_custom_emoji_user_cred]

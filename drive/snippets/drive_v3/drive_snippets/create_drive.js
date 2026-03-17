@@ -13,41 +13,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 // [START drive_create_drive]
 
+import {GoogleAuth} from 'google-auth-library';
+import {google} from 'googleapis';
+import {v4 as uuid} from 'uuid';
+
 /**
- * Create a drive.
- * */
+ * Creates a new shared drive.
+ * @return {Promise<string>} The ID of the created shared drive.
+ */
 async function createDrive() {
-  // Get credentials and build service
-  // TODO (developer) - Use appropriate auth mechanism for your app
-
-  const {GoogleAuth} = require('google-auth-library');
-  const {google} = require('googleapis');
-  const uuid = require('uuid');
-
+  // Authenticate with Google and get an authorized client.
+  // TODO (developer): Use an appropriate auth mechanism for your app.
   const auth = new GoogleAuth({
     scopes: 'https://www.googleapis.com/auth/drive',
   });
+
+  // Create a new Drive API client (v3).
   const service = google.drive({version: 'v3', auth});
 
+  // The metadata for the new shared drive.
   const driveMetadata = {
     name: 'Project resources',
   };
-  const requestId = uuid.v4();
-  try {
-    const Drive = await service.drives.create({
-      resource: driveMetadata,
-      requestId: requestId,
-      fields: 'id',
-    });
-    console.log('Drive Id:', Drive.data.id);
-    return Drive.data.id;
-  } catch (err) {
-    // TODO(developer) - Handle error
-    throw err;
+
+  // A unique request ID to avoid creating duplicate shared drives.
+  const requestId = uuid();
+
+  // Create the new shared drive.
+  const Drive = await service.drives.create({
+    requestBody: driveMetadata,
+    requestId,
+    fields: 'id',
+  });
+
+  // Print the ID of the new shared drive.
+  console.log('Drive Id:', Drive.data.id);
+  if (!Drive.data.id) {
+    throw new Error('Drive ID not found.');
   }
+  return Drive.data.id;
 }
 // [END drive_create_drive]
 
-module.exports = createDrive;
+export {createDrive};
