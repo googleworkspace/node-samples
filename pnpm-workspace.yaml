@@ -21,6 +21,6 @@ catalog:
   mocha: ^11.7.2
   open: ^10.2.0
   server-destroy: ^1.0.1
-  turbo: ^2.5.6
+  turbo: ^2.9.14
   typescript: ^5.9.2
   uuid: ^8.3.2
