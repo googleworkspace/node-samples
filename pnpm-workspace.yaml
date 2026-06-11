@@ -7,7 +7,7 @@ catalog:
   '@google-cloud/local-auth': 3.0.1
   '@googleapis/drive': ^15.0.0
   '@googleapis/forms': ^4.0.1
-  '@grpc/grpc-js': ^1.13.4
+  '@grpc/grpc-js': ^1.13.5
   '@types/jest': ^30.0.0
   '@types/mocha': ^10.0.10
   '@types/node': ^24.4.0
